@@ -1,0 +1,114 @@
+$primary: #111111;
+$primary-light: #beffd9;
+$white: #fff;
+$black: #000;
+$gray-1: #111;
+$gray-2: #222;
+$gray-3: #333;
+$gray-4: #444;
+$gray-5: #555;
+$gray-6: #666;
+$gray-7: #777;
+$gray-8: #888;
+$gray-9: #999;
+$gray-10: #aaa;
+$gray-11: #bbb;
+$gray-12: #ccc;
+$gray-13: #ddd;
+$gray-14: #eee;
+$gray-15: #f6f6f6;
+
+@mixin flex($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings: "liga" 1, "calt" 1; /* fix for Chrome */
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
+
+body {
+  font-size: 1rem;
+  line-height: 1;
+  overflow: hidden;
+}
+
+.page {
+  @include flex(row, flex-start, flex-start);
+  width: 100% !important;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding-top: calc(2.2rem + 4.5rem + 3rem);
+  height: 100vh;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.btn {
+  padding: 0.6rem 0.9rem;
+  border: none;
+  background-color: $white;
+  color: $black;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  @include flex(row, center, center);
+  font-weight: 500;
+  border-radius: 0.15rem;
+
+  svg {
+    margin-right: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: $black;
+  }
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+
+  &.black {
+    background-color: $black;
+    color: $white;
+    font-weight: 500;
+
+    &:hover {
+      background-color: $gray-3;
+    }
+
+    svg {
+      color: $white;
+    }
+  }
+
+  @media screen and (max-width: 1600px) {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.8rem;
+
+    svg {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+}

@@ -39,7 +39,6 @@ export const authOptions = {
           throw new Error("Incorrect password");
         }
 
-        console.log("User authenticated:", user);
         return {
           id: user.id,
           email: user.email,
@@ -53,14 +52,10 @@ export const authOptions = {
   session: {
     strategy: "jwt",
   },
+  pages: {
+    signIn: "/signin",
+  },
   callbacks: {
-    signIn({ user }) {
-      // Any logic you want to add before the redirect
-      return true;
-    },
-    redirect({ url, baseUrl }) {
-      return `${baseUrl}/dashboard`;
-    },
     session: ({ session, token }) => {
       return {
         ...session,
