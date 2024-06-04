@@ -1,7 +1,6 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-import logo from "@/images/logo.png";
 import "@/styles/loginForm.scss";
 import NextImage from "next/image";
 
@@ -27,10 +26,7 @@ export default function LoginForm() {
   return (
     <div onSubmit={handleSubmit} className="login-form">
       {" "}
-      <div className="logo">
-        <NextImage src={logo} alt="Logo" />
-      </div>
-      <h3>Dobro došli u admin aplikaciju.</h3>
+      <h2>Dobro došli u admin aplikaciju.</h2>
       <p>
         Molimo unesite korisničko ime i lozinku kako biste nastavili. Ukoliko
         nemate račun kontaktirajte administratora.
@@ -54,6 +50,7 @@ export default function LoginForm() {
           Prijavi se
         </button>
       </form>
+      <div className="note"></div>
       <div className="forgot-password">
         <a href="/forgot-password">Zaboravili ste lozinku?</a>
       </div>

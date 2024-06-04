@@ -1,5 +1,10 @@
-import { Providers } from "./providers";
+import DashboardHeader from "@/components/DashboardHeader";
 
 export default function DashboardLayout({ children }) {
-  return <Providers>{children}</Providers>;
+  return (
+    <>
+      <DashboardHeader />
+      {children}
+    </>
+  );
 }
