@@ -5,16 +5,11 @@ import "@/styles/DashboardNavbar.scss";
 export default function DashboardNavbar() {
   const [activeLinkHover, setActiveLinkHover] = useState(3);
   const location = usePathname();
-  const borderBottom = [
-    { width: "4.1rem", left: "2.3rem" },
-    { width: "6.5rem", left: "7.8rem" },
-    { width: "5rem", left: "15.5rem" },
-  ];
 
   const reactangleBackground = [
-    { width: "4.1rem", left: "2.3rem" },
-    { width: "6.5rem", left: "7.8rem" },
-    { width: "5rem", left: "15.5rem" },
+    { width: "4.2rem", left: "1.7rem" },
+    { width: "6.5rem", left: "6rem" },
+    { width: "3.8rem", left: "12.5rem" },
     { display: "none" },
   ];
   const getActiveIndex = (path) => {
@@ -38,8 +33,8 @@ export default function DashboardNavbar() {
   return (
     <nav onMouseLeave={() => setActiveLinkHover(3)}>
       <div
-        className="border-bottom-line-active"
-        style={borderBottom[activeIndex]}
+        className="rectangle-background"
+        style={reactangleBackground[activeIndex]}
       ></div>
       <div
         className="rectangle-background-active"
@@ -48,23 +43,23 @@ export default function DashboardNavbar() {
       <a
         onMouseEnter={() => setActiveLinkHover(0)}
         href="/dashboard"
-        className={activeLinkHover === 0 || activeIndex === 0 ? "active" : ""}
+        className={activeIndex === 0 ? "active" : ""}
       >
         <span>Home</span>
       </a>
       <a
         onMouseEnter={() => setActiveLinkHover(1)}
         href="/dashboard/radionice"
-        className={activeLinkHover === 1 || activeIndex === 1 ? "active" : ""}
+        className={activeIndex === 1 ? "active" : ""}
       >
         <span>Radionice</span>
       </a>
       <a
         onMouseEnter={() => setActiveLinkHover(2)}
         href="/dashboard/blog"
-        className={activeLinkHover === 2 || activeIndex === 2 ? "active" : ""}
+        className={activeIndex === 2 ? "active" : ""}
       >
-        <span>Novosti</span>
+        <span>Blog</span>
       </a>
     </nav>
   );

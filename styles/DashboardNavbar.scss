@@ -9,26 +9,31 @@ nav {
   padding-left: 2rem;
   border-top: 1px solid $gray-2;
 
-  .border-bottom-line-active {
+  .rectangle-background {
     position: absolute;
-    bottom: -0.14rem;
+    bottom: 0rem;
     left: 0;
     width: 100%;
-    height: 0.14rem;
-    background-color: $white;
+    height: 100%;
     width: 5rem;
     transition: all 0.3s ease;
+    background-color: $gray-3;
+    color: $gray-13;
+    border-right: 1px solid $gray-4;
+    border-left: 1px solid $gray-4;
+    z-index: 1;
   }
 
   .rectangle-background-active {
     position: absolute;
-    bottom: 0.45rem;
+    bottom: 0rem;
     left: 0;
     width: 100%;
-    height: 2rem;
+    height: 100%;
     background-color: $gray-2;
+    border-right: 1px solid $gray-3;
+    border-left: 1px solid $gray-3;
     width: 5rem;
-    border-radius: 0.3rem;
     transition: all 0.3s ease;
   }
 
@@ -37,10 +42,12 @@ nav {
     font-size: 0.93rem;
     font-weight: 300;
     text-decoration: none;
-    padding: 0.9rem 1rem;
+    padding: 0.9rem 0.5rem;
     margin-right: 1rem;
     border-bottom: 1px solid transparent;
     z-index: 2;
+    @include flex(row, center, center);
+    text-align: center;
 
     &.active {
       color: $white;

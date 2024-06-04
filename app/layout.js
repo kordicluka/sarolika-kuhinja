@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import { Caveat } from "next/font/google";
 import "@/styles/globals.scss";
+import { AppWrapper } from "./context";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -51,7 +52,9 @@ export default function RootLayout({ children }) {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <link rel="mstile" href="/mstile-150x150.png" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <AppWrapper>{children}</AppWrapper>
+      </body>
     </html>
   );
 }

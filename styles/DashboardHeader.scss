@@ -128,57 +128,9 @@ header {
     }
 
     .header-right {
-      padding: 1rem 2rem;
+      padding: 0 2rem;
       @include flex(column, flex-end, flex-end);
       height: 100%;
-
-      .user {
-        @include flex(row, center, center);
-        gap: 1rem;
-        cursor: pointer;
-        position: relative;
-
-        .user-info {
-          gap: 0.7rem;
-          @include flex(row, center, center);
-
-          .user-image {
-            width: 2rem;
-            height: 2rem;
-            border-radius: 50%;
-            overflow: hidden;
-            padding: 0.4rem;
-            background-color: $gray-3;
-            @include flex(row, center, center);
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-            }
-
-            svg {
-              width: 100%;
-              height: 100%;
-              color: $gray-14;
-            }
-          }
-
-          .user-name {
-            color: $white;
-            font-size: 0.85rem;
-            font-weight: 300;
-          }
-
-          .user-role {
-            color: $white;
-            font-size: 0.8rem;
-            font-weight: 300;
-            background-color: $gray-3;
-            padding: 0.35rem 0.8rem;
-            border-radius: 0.2rem;
-          }
-        }
-      }
     }
   }
 }
