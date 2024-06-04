@@ -15,14 +15,18 @@ export default function page() {
     formData.set("file", file);
 
     try {
-      const response = await fetch("/api/upload", {
+      const result = await fetch("/api/upload", {
         method: "POST",
         body: formData,
       });
 
-      if (response?.status === 200) {
-        console.log("File uploaded successfully");
-        console.log(response?.body);
+      const response = await result.json();
+
+      if (response.status === 200) {
+        console.log(response.body.message);
+      } else if (response.status === 400) {
+        alert(response.body.message);
+        console.error(response.body.message);
       }
     } catch (error) {
       console.error(error);

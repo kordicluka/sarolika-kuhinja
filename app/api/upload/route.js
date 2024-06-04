@@ -9,7 +9,7 @@ export async function POST(request) {
   if (!file) {
     return NextResponse.json({
       status: 400,
-      body: { message: "No file uploaded" },
+      body: { message: "Niste uploadali datoteku." },
     });
   }
 
@@ -20,7 +20,7 @@ export async function POST(request) {
   if (!allowedTypes.includes(file.type)) {
     return NextResponse.json({
       status: 400,
-      body: { message: "Invalid file type" },
+      body: { message: "Krivi tip datoteke." },
     });
   }
 
@@ -29,6 +29,6 @@ export async function POST(request) {
 
   return NextResponse.json({
     status: 200,
-    body: { message: "File uploaded successfully", path },
+    body: { message: "Datoteka uspješno uploadana." },
   });
 }
