@@ -13,97 +13,10 @@ header {
     @include flex(row, space-between, center);
     width: 100%;
     height: 2.2rem;
-    background-color: $gray-1;
+    background-color: $primary-dashboard;
     border-bottom: 1px solid $gray-2;
     padding: 0 2rem;
     z-index: 3;
-
-    .dropdowns {
-      @include flex(row, center, center);
-      height: 100%;
-      transform: translateX(-0.75rem);
-      .dropdown {
-        position: relative;
-        @include flex(row, center, center);
-
-        .dropdown-button {
-          background-color: transparent;
-          text-decoration: none;
-          border: none;
-          outline: none;
-          color: $gray-12;
-          font-size: 0.78rem;
-          font-weight: 300;
-          cursor: pointer;
-          padding: 0.34rem 0.7rem;
-          display: block;
-          border-radius: 0.2rem;
-          z-index: 2;
-
-          &:hover {
-            background-color: $gray-2;
-          }
-        }
-
-        .dropdown-content {
-          @include flex(column, flex-start, flex-start);
-          position: absolute;
-          background-color: $white;
-          min-width: 10rem;
-          box-shadow: 0 0.5rem 1rem rgba($black, 0.1);
-          z-index: 1;
-          border: 1px solid $gray-13;
-          top: 2.3rem;
-          left: 0;
-          border-radius: 0.2rem;
-          display: none;
-          z-index: 2;
-
-          &.active {
-            display: flex;
-          }
-
-          a,
-          button {
-            color: $gray-3;
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            border: none;
-            outline: none;
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 300;
-            border-bottom: 1px solid $gray-13;
-            width: 100%;
-            text-align: left;
-            color: $gray-3;
-            font-weight: 400;
-
-            &:last-child {
-              border-bottom: none;
-            }
-
-            &:hover {
-              background-color: $gray-14;
-            }
-          }
-        }
-
-        .close {
-          position: absolute;
-          top: 2.5rem;
-          left: -10vw;
-          width: 130vw;
-          height: 130vh;
-          display: none;
-          z-index: 0;
-
-          &.active {
-            display: block;
-          }
-        }
-      }
-    }
 
     .time-and-made-by {
       @include flex(row, center, center);
@@ -117,7 +30,7 @@ header {
       }
 
       .made-by {
-        @include flex(row, center, center);
+        @include flex(row, flex-start, flex-start);
         height: 100%;
         gap: 0.5rem;
         padding-left: 1rem;
@@ -126,12 +39,16 @@ header {
           color: $gray-13;
           font-size: 0.78rem;
           font-weight: 300;
+          height: 100%;
+          @include flex(row, center, center);
         }
 
         a {
           color: $gray-13;
           font-size: 0.8rem;
           font-weight: 500;
+          height: 100%;
+          @include flex(row, center, center);
 
           &:hover {
             color: $gray-15;
@@ -144,7 +61,7 @@ header {
   .header {
     width: 100%;
     @include flex(row, space-between, center);
-    background-color: $gray-1;
+    background-color: $primary-dashboard;
     height: 4.7rem;
 
     .header-left {
@@ -157,10 +74,12 @@ header {
         @include flex(row, flex-end, flex-end);
         height: 100%;
         gap: 1rem;
-        padding: 0.25rem 0;
+        padding: 0.75rem 0;
 
         p {
-          color: $gray-13;
+          color: $gray-14;
+          padding-bottom: 0.4rem;
+          font-weight: 300;
         }
 
         h3 {
@@ -170,7 +89,7 @@ header {
       .search {
         @include flex(row, center, center);
         gap: 1rem;
-        background-color: $gray-3;
+        background-color: $gray-2;
         border-radius: 0.1rem;
         border: 1px solid $gray-4;
         height: 2.3rem;
@@ -220,8 +139,8 @@ header {
         position: relative;
 
         .user-info {
-          @include flex(row, center, center);
           gap: 0.7rem;
+          @include flex(row, center, center);
 
           .user-image {
             width: 2rem;
@@ -231,7 +150,6 @@ header {
             padding: 0.4rem;
             background-color: $gray-3;
             @include flex(row, center, center);
-
             img {
               width: 100%;
               height: 100%;
@@ -246,7 +164,7 @@ header {
           }
 
           .user-name {
-            color: $gray-14;
+            color: $white;
             font-size: 0.85rem;
             font-weight: 300;
           }
@@ -262,64 +180,5 @@ header {
         }
       }
     }
-  }
-
-  nav {
-    position: relative;
-    @include flex(row, flex-start, flex-start);
-    height: 2.9rem;
-    width: 100%;
-    background-color: $gray-1;
-    padding-left: 2rem;
-    border-top: 1px solid $gray-2;
-
-    .border-bottom-line-active {
-      position: absolute;
-      bottom: -0.14rem;
-      left: 0;
-      width: 100%;
-      height: 0.14rem;
-      background-color: $white;
-      width: 5rem;
-      transition: all 0.3s ease;
-    }
-
-    .rectangle-background-active {
-      position: absolute;
-      bottom: 0.45rem;
-      left: 0;
-      width: 100%;
-      height: 2rem;
-      background-color: $gray-2;
-      width: 5rem;
-      border-radius: 0.3rem;
-      transition: all 0.3s ease;
-    }
-
-    a {
-      color: $gray-13;
-      font-size: 0.93rem;
-      font-weight: 300;
-      text-decoration: none;
-      padding: 0.9rem 1rem;
-      margin-right: 1rem;
-      border-bottom: 1px solid transparent;
-      z-index: 2;
-
-      &.active {
-        color: $white;
-      }
-    }
-  }
-}
-
-@keyframes dropDown {
-  from {
-    opacity: 0;
-    transform: translateY(0rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0.5rem);
   }
 }

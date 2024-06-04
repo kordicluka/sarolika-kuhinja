@@ -1,6 +1,7 @@
 $primary: #405b62;
 $secondary: #557780;
-$primary-light: #b11b1b;
+$primary-dashboard: #0e0e0e;
+$primary-dashboard-light: #b11b1b;
 $white: #fff;
 $black: #000;
 $gray-1: #111;
@@ -119,7 +120,6 @@ h1 {
   font-size: 4.5rem;
   font-weight: 600;
   color: $black;
-  margin-bottom: 0.5rem;
   line-height: 1.2;
 
   @media (max-width: 1600px) {
@@ -135,7 +135,6 @@ h2 {
   font-size: 3.5rem;
   font-weight: 600;
   color: $black;
-  margin-bottom: 0.5rem;
   line-height: 1.2;
 
   @media (max-width: 1600px) {
@@ -151,7 +150,6 @@ h3 {
   font-size: 2.5rem;
   font-weight: 600;
   color: $black;
-  margin-bottom: 0.5rem;
   line-height: 1.2;
 
   @media (max-width: 1600px) {
@@ -167,7 +165,6 @@ h4 {
   font-size: 2rem;
   font-weight: 700;
   color: $black;
-  margin-bottom: 0.5rem;
   line-height: 1.2;
 
   @media (max-width: 1600px) {
@@ -183,7 +180,6 @@ h5 {
   font-size: 1.8rem;
   font-weight: 600;
   color: $black;
-  margin-bottom: 0.5rem;
   line-height: 1.2;
 
   @media (max-width: 1600px) {
@@ -199,7 +195,6 @@ h6 {
   font-size: 1.6rem;
   font-weight: 600;
   color: $black;
-  margin-bottom: 0.5rem;
   line-height: 1.2;
 
   @media (max-width: 1600px) {
@@ -215,5 +210,4 @@ p {
   font-size: 1rem;
   color: $gray-7;
   line-height: 1.3;
-  margin-bottom: 1rem;
 }
