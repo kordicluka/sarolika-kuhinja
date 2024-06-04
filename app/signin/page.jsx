@@ -1,5 +1,5 @@
 import LoginForm from "@/components/LoginForm";
-import hero from "@/images/hero.webp";
+import hero from "@/public/images/hero.webp";
 import "@/styles/loginPage.scss";
 import { getServerSession } from "next-auth";
 import NextImage from "next/image";
