@@ -2,6 +2,7 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import "@/styles/LoginForm.scss";
+import { redirect } from "next/dist/server/api-utils";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -16,7 +17,7 @@ export default function LoginForm() {
     });
 
     if (result?.ok) {
-      window.location.href = "/dashboard";
+      redirect("/dashboard");
     } else {
       alert(result?.error || "Sign-in failed");
     }
