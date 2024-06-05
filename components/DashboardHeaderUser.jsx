@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import "@/styles/DashboardHeaderUser.scss";
 import { signOut } from "next-auth/react";
+import NextImage from "next/image";
 
 function DashboardHeaderUser({ session }) {
   const [activeDropdown, setActiveDropdown] = useState(false);
@@ -22,7 +23,12 @@ function DashboardHeaderUser({ session }) {
                 : null}
             </span>
           ) : (
-            <img src={session.user.image} alt={session.user.name} />
+            <NextImage
+              src={session.user.image}
+              alt="User image"
+              width={40}
+              height={40}
+            />
           )}
         </div>
         <p className="user-name">{session.user.name}</p>

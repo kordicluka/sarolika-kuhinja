@@ -1,45 +1,45 @@
-"use client";
-import React, { useState } from "react";
+// "use client";
+// import React, { useState } from "react";
 
 export default function page() {
-  const [files, setFiles] = useState([]);
-  const [fileNames, setFileNames] = useState([]);
+  // const [files, setFiles] = useState([]);
+  // const [fileNames, setFileNames] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    if (files.length === 0) {
-      return;
-    }
+  //   if (files.length === 0) {
+  //     return;
+  //   }
 
-    const formData = new FormData();
-    files.forEach((file) => {
-      formData.append("files", file);
-    });
+  //   const formData = new FormData();
+  //   files.forEach((file) => {
+  //     formData.append("files", file);
+  //   });
 
-    try {
-      const result = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
+  //   try {
+  //     const result = await fetch("/api/upload", {
+  //       method: "POST",
+  //       body: formData,
+  //     });
 
-      const response = await result.json();
+  //     const response = await result.json();
 
-      if (response.status === 200) {
-        console.log(response.body.message);
-        setFileNames(response.body.keys);
-      } else if (response.status === 400) {
-        alert(response.body.message);
-        console.error(response.body.message);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //     if (response.status === 200) {
+  //       console.log(response.body.message);
+  //       setFileNames(response.body.keys);
+  //     } else if (response.status === 400) {
+  //       alert(response.body.message);
+  //       console.error(response.body.message);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <main>
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}>
         <input
           type="file"
           onChange={(e) => setFiles(Array.from(e.target.files))}
@@ -57,7 +57,7 @@ export default function page() {
             </ul>
           </div>
         )}
-      </form>
+      </form> */}
     </main>
   );
 }
