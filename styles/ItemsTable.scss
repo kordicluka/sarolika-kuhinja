@@ -1,0 +1,120 @@
+@import "./globals.scss";
+
+.items-table {
+  @include flex(column, flex-start, flex-start);
+
+  background-color: $gray-15;
+
+  .items-table-header {
+    @include flex(row, flex-start, flex-start);
+    width: 100%;
+    background-color: $gray-15;
+
+    .items-table-header-item {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: $gray-1;
+      height: 2rem;
+      padding-left: 0.5rem;
+      @include flex(row, flex-start, center);
+      background-color: $gray-14;
+      border: 0.12rem solid $gray-12;
+      border-top: 0.12rem solid $gray-13;
+      border-left: 0.12rem solid $gray-13;
+    }
+  }
+
+  .items-table-row {
+    @include flex(row, flex-start, flex-start);
+    width: 100%;
+
+    .items-table-row-item {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: $gray-1;
+      height: 3rem;
+      padding-left: 0.5rem;
+      @include flex(row, flex-start, center);
+      border: 0.12rem solid $gray-12;
+      border-top: 0.12rem solid $gray-13;
+      border-left: 0.12rem solid $gray-13;
+
+      .items-table-image-placeholder {
+        width: 2.9rem;
+        height: 2.9rem;
+        background-color: $gray-14;
+        @include flex(row, center, center);
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      img {
+        width: 100%;
+        height: 2.9rem;
+        object-fit: contain;
+        background-color: $gray-14;
+      }
+
+      .items-table-actions-button {
+        width: 100%;
+        height: 100%;
+        @include flex(row, center, center);
+        gap: 0.2rem;
+        position: relative;
+
+        .items-table-actions-dot {
+          width: 5px;
+          height: 5px;
+          background-color: $gray-4;
+          border-radius: 100%;
+        }
+
+        .items-table-actions-dropdown {
+          position: absolute;
+          left: 50%;
+          top: 95%;
+          transform: translateX(-50%);
+          width: 10rem;
+          background-color: $white;
+          @include flex(column, flex-start, flex-start);
+          display: none;
+          border-radius: 0.3rem;
+          border: 1px solid $gray-12;
+          overflow: hidden;
+
+          z-index: 3;
+
+          button,
+          a {
+            text-decoration: none;
+            width: 100%;
+            height: 2rem;
+            padding-left: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: $gray-1;
+            background-color: $white;
+            border: none;
+            outline: none;
+            @include flex(row, center, center);
+            border-bottom: 1px solid $gray-12;
+
+            &:hover {
+              background-color: $gray-14;
+            }
+
+            &:last-child {
+              border-bottom: none;
+            }
+          }
+        }
+
+        &:hover {
+          .items-table-actions-dropdown {
+            display: flex;
+          }
+        }
+      }
+    }
+  }
+}

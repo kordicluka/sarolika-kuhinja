@@ -2,17 +2,20 @@
 import React, { useState } from "react";
 
 export default function page() {
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
+  const [fileNames, setFileNames] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!file) {
+    if (files.length === 0) {
       return;
     }
 
     const formData = new FormData();
-    formData.set("file", file);
+    files.forEach((file) => {
+      formData.append("files", file);
+    });
 
     try {
       const result = await fetch("/api/upload", {
@@ -24,6 +27,7 @@ export default function page() {
 
       if (response.status === 200) {
         console.log(response.body.message);
+        setFileNames(response.body.keys);
       } else if (response.status === 400) {
         alert(response.body.message);
         console.error(response.body.message);
@@ -36,8 +40,23 @@ export default function page() {
   return (
     <main>
       <form onSubmit={handleSubmit}>
-        <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-        <button type="submit">Upload</button>
+        <input
+          type="file"
+          onChange={(e) => setFiles(Array.from(e.target.files))}
+          multiple
+        />
+        <button type="submit">Upload multiple</button>
+
+        {fileNames.length > 0 && (
+          <div>
+            <h2>Uploaded files:</h2>
+            <ul>
+              {fileNames.map((fileName) => (
+                <li key={fileName}>{fileName}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </form>
     </main>
   );

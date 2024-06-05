@@ -8,8 +8,10 @@ export default function DashboardNavbar() {
 
   const reactangleBackground = [
     { width: "4.2rem", left: "1.7rem" },
-    { width: "6.5rem", left: "6rem" },
+    { width: "6.4rem", left: "6rem" },
     { width: "3.8rem", left: "12.5rem" },
+    { width: "5.4rem", left: "16.45rem" },
+    { width: "3.9rem", left: "22rem" },
     { display: "none" },
   ];
   const getActiveIndex = (path) => {
@@ -20,18 +22,22 @@ export default function DashboardNavbar() {
         return 1;
       case "/dashboard/blog":
         return 2;
-      default:
+      case "/dashboard/auth":
         return 3;
+      case "/dashboard/jela":
+        return 4;
+      default:
+        return 5;
     }
   };
 
   useEffect(() => {
-    setActiveLinkHover(3);
+    setActiveLinkHover(5);
   }, [location]);
   const activeIndex = getActiveIndex(location);
 
   return (
-    <nav onMouseLeave={() => setActiveLinkHover(3)}>
+    <nav onMouseLeave={() => setActiveLinkHover(5)}>
       <div
         className="rectangle-background"
         style={reactangleBackground[activeIndex]}
@@ -60,6 +66,20 @@ export default function DashboardNavbar() {
         className={activeIndex === 2 ? "active" : ""}
       >
         <span>Blog</span>
+      </a>
+      <a
+        onMouseEnter={() => setActiveLinkHover(3)}
+        href="/dashboard/auth"
+        className={activeIndex === 3 ? "active" : ""}
+      >
+        <span>Korisnici</span>
+      </a>
+      <a
+        onMouseEnter={() => setActiveLinkHover(4)}
+        href="/dashboard/jela"
+        className={activeIndex === 4 ? "active" : ""}
+      >
+        <span>Jela</span>
       </a>
     </nav>
   );

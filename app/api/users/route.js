@@ -1,6 +1,16 @@
 import prisma from "@/utils/db";
-import { hashPassword } from "@/utils/auth";
 import { NextResponse } from "next/server";
+import { hashPassword } from "@/utils/auth";
+
+// fetch the user data from the database
+export async function GET(request) {
+  const users = await prisma.user.findMany();
+  return NextResponse.json({
+    status: 200,
+    message: "Korisnici uspješno dohvaćeni.",
+    users: users,
+  });
+}
 
 export async function POST(request) {
   const { email, password, name } = await request.json();

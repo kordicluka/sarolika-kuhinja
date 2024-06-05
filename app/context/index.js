@@ -4,9 +4,9 @@ import { createContext, useState, useContext } from "react";
 const AppContext = createContext();
 
 export function AppWrapper({ children }) {
-  const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]);
   return (
-    <AppContext.Provider value={{ user, setUser }}>
+    <AppContext.Provider value={{ users, setUsers }}>
       {children}
     </AppContext.Provider>
   );

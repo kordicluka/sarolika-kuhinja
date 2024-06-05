@@ -1,0 +1,64 @@
+@import "./globals.scss";
+
+.page-title {
+  width: 100%;
+  @include flex(row, space-between, flex-start);
+  padding: 1.8rem 2rem;
+  background-color: $gray-15;
+  border: 0.12rem solid $gray-12;
+  border-top: 0.12rem solid $gray-13;
+  border-left: 0.12rem solid $gray-13;
+
+  .page-title-left {
+    @include flex(column, flex-start, flex-start);
+    gap: 1rem;
+    width: 50%;
+
+    h3 {
+      font-size: 2.5rem;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: $gray-2;
+      line-height: 1.3;
+      width: 90%;
+    }
+  }
+
+  .page-title-right {
+    @include flex(column, flex-end, flex-end);
+    gap: 1rem;
+
+    .search {
+      @include flex(row, space-between, center);
+      gap: 1rem;
+      background-color: $white;
+      border-radius: 0.22rem;
+      border: 1px solid $gray-13;
+      height: 2.2rem;
+
+      input {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        height: 100%;
+        width: 100%;
+        padding: 0 1rem;
+        font-size: 0.9rem;
+        color: $gray-3;
+      }
+
+      svg {
+        width: 2.5rem;
+        height: 1.5rem;
+        color: $gray-7;
+        height: 100%;
+        padding: 0 0.5rem;
+        border-left: 1px solid $gray-13;
+      }
+    }
+  }
+}
