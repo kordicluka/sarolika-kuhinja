@@ -2,7 +2,7 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import "@/styles/LoginForm.scss";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
