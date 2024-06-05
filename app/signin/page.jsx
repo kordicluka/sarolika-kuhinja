@@ -9,9 +9,11 @@ import { redirect } from "next/navigation";
 export default async function SignIn() {
   const session = await getServerSession(authOptions);
 
-  // if (session) {
-  //   redirect("/dashboard");
-  // }
+  console.log(session);
+
+  if (session) {
+    redirect("/dashboard");
+  }
 
   return (
     <main className="login-page">
