@@ -1,7 +1,7 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-import "@/styles/loginForm.scss";
+import "@/styles/LoginForm.scss";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
