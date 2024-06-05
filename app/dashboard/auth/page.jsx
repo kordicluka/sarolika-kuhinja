@@ -3,6 +3,7 @@ import DeleteButton from "@/components/DeleteButton";
 import UsersTableUI from "@/components/UsersTableUI";
 import "@/styles/DashboardPage.scss";
 import prisma from "@/utils/db";
+import NextImage from "next/image";
 
 export default async function page() {
   const items = await prisma.user.findMany();
@@ -15,10 +16,12 @@ export default async function page() {
         getJSX: (index) => {
           // return JSX for image  that will be displayed in the table
           return items[index].image ? (
-            <img
+            <NextImage
               src={items[index].image}
               alt={items[index].name}
               className="items-table-image"
+              width={30}
+              height={30}
             />
           ) : (
             <span className="items-table-image-placeholder">
