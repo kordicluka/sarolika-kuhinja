@@ -12,7 +12,7 @@ export default async function SignIn() {
   console.log(session);
 
   if (session) {
-    redirect("/dashboard");
+    console.log(session);
   }
 
   return (
