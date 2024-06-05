@@ -17,7 +17,8 @@ export default function LoginForm() {
     });
 
     if (result?.ok) {
-      redirect("/dashboard");
+      // redirect("/dashboard");
+      console.log("Sign-in successful");
     } else {
       alert(result?.error || "Sign-in failed");
     }
