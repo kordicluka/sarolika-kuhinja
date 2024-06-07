@@ -86,45 +86,6 @@ header {
           color: $white;
         }
       }
-      .search {
-        @include flex(row, center, center);
-        gap: 1rem;
-        background-color: $gray-2;
-        border-radius: 0.1rem;
-        border: 1px solid $gray-4;
-        height: 2.3rem;
-        padding-right: 1rem;
-
-        input {
-          background-color: transparent;
-          border: none;
-          outline: none;
-          color: $gray-13;
-          font-size: 0.95rem;
-          font-weight: 300;
-          padding: 0 1.3rem;
-          width: calc(100% - 1.2rem);
-          height: 90%;
-          border-right: 1px solid $gray-4;
-          width: 18rem;
-
-          &:focus {
-            width: 22rem;
-          }
-
-          &::placeholder {
-            color: $gray-11;
-            font-size: 0.95rem;
-            font-weight: 300;
-          }
-        }
-
-        svg {
-          color: $gray-13;
-          width: 1.2rem;
-          height: 1.2rem;
-        }
-      }
     }
 
     .header-right {

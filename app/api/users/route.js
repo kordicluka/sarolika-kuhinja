@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { hashPassword } from "@/utils/auth";
 
 // fetch the user data from the database
-export async function GET(request) {
+export async function getUsers() {
   const users = await prisma.user.findMany();
   return NextResponse.json({
     status: 200,
@@ -12,9 +12,7 @@ export async function GET(request) {
   });
 }
 
-export async function POST(request) {
-  const { email, password, name } = await request.json();
-
+export async function createUser({ email, password, name }) {
   if (
     !email ||
     !email.includes("@") ||
@@ -49,4 +47,34 @@ export async function POST(request) {
     status: 200,
     body: { message: "Created user!", user },
   }).redirect("/dashboard/auth/signin");
+}
+
+export async function deleteUser(id) {
+  await prisma.user.delete({
+    where: {
+      id: parseInt(id),
+    },
+  });
+
+  return NextResponse.json({
+    status: 200,
+    message: "Korisnik uspješno obrisan.",
+  });
+}
+
+export async function updateUser(id, data) {
+  const user = await prisma.user.update({
+    where: {
+      id: parseInt(id),
+    },
+    data: {
+      ...data,
+    },
+  });
+
+  return NextResponse.json({
+    status: 200,
+    message: "Korisnik uspješno ažuriran.",
+    user: user,
+  });
 }

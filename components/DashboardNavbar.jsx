@@ -15,16 +15,18 @@ export default function DashboardNavbar() {
     { display: "none" },
   ];
   const getActiveIndex = (path) => {
-    switch (path) {
-      case "/dashboard":
+    const thirdPart = path.split("/")[2];
+
+    switch (thirdPart) {
+      case "":
         return 0;
-      case "/dashboard/radionice":
+      case "radionice":
         return 1;
-      case "/dashboard/blog":
+      case "blog":
         return 2;
-      case "/dashboard/auth":
+      case "auth":
         return 3;
-      case "/dashboard/jela":
+      case "jela":
         return 4;
       default:
         return 5;

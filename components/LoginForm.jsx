@@ -2,11 +2,11 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import "@/styles/LoginForm.scss";
-import { redirect } from "next/navigation";
-
+import { useRouter } from "next/navigation";
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,14 +17,14 @@ export default function LoginForm() {
     });
 
     if (result?.ok) {
-      redirect("/dashboard");
+      router.push("/dashboard");
     } else {
-      alert(result?.error || "Sign-in failed");
+      alert("Pogrešno korisničko ime ili lozinka.");
     }
   };
 
   return (
-    <div onSubmit={handleSubmit} className="login-form">
+    <div className="login-form">
       {" "}
       <h2>Dobro došli u admin aplikaciju.</h2>
       <p>

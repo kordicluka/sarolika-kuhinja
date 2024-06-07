@@ -1,15 +1,10 @@
 @import "./globals.scss";
 
 .dashboard-page {
-  @include flex(row, flex-start, flex-start);
+  @include flex(column, center, center);
   width: 100% !important;
-  overflow-x: hidden;
-  overflow-y: hidden;
   padding-top: calc(2.2rem + 4.5rem + 3rem);
-  height: 100vh;
   .items {
-    width: 50%;
-    height: 100%;
-    box-shadow: 0 0.5rem 1rem rgba($black, 0.1);
+    width: 100%;
   }
 }

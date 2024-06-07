@@ -1,6 +1,6 @@
 import "@/styles/ItemsTable.scss";
 
-export default function UsersTableUI({ items, tableStructure }) {
+export default function ItemsTable({ items, tableStructure }) {
   return (
     <div className="items-table">
       <div className="items-table-header">
