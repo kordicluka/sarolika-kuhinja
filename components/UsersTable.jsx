@@ -1,25 +1,24 @@
-import DeleteButton from "@/components/DeleteButton";
 import NextImage from "next/image";
 import ItemsTable from "./ItemsTable";
-import { getUsers } from "@/app/api/users/route";
+import DeleteUserButton from "./DeleteUserButton";
+import prisma from "@/utils/db";
 
 export default async function UsersTable() {
-  const { users: items } = await getUsers().then((res) => res.json());
+  const items = await prisma.user.findMany();
 
   const tableStructure = {
     rows: [
       {
         title: "Slika",
         width: "10%",
-        getJSX: (index) => {
-          // return JSX for image  that will be displayed in the table
-          return items[index].image ? (
+        getJSX: (index) =>
+          items[index].image ? (
             <NextImage
-              src={items[index].image}
+              src={"/uploads/" + items[index].image}
               alt={items[index].name}
               className="items-table-image"
-              width={30}
-              height={30}
+              width={200}
+              height={200}
             />
           ) : (
             <span className="items-table-image-placeholder">
@@ -28,53 +27,41 @@ export default async function UsersTable() {
                 ? items[index].name.split(" ")[1].charAt(0).toUpperCase()
                 : null}
             </span>
-          );
-        },
+          ),
       },
       {
         title: "Ime",
         width: "25%",
-        getJSX: (index) => {
-          // return JSX for name that will be displayed in the table
-          return <span>{items[index].name}</span>;
-        },
+        getJSX: (index) => <span>{items[index].name}</span>,
       },
       {
         title: "E-mail",
         width: "45%",
-        getJSX: (index) => {
-          // return JSX for email that will be displayed in the table
-          return <span>{items[index].email}</span>;
-        },
+        getJSX: (index) => <span>{items[index].email}</span>,
       },
       {
         title: "Uloga",
         width: "10%",
-        getJSX: (index) => {
-          // return JSX for role that will be displayed in the table
-          return <span>{items[index].role}</span>;
-        },
+        getJSX: (index) => <span>{items[index].role}</span>,
       },
       {
         title: "Akcije",
         width: "10%",
-        getJSX: (index) => {
-          // return JSX for actions that will be displayed in the table
-          return (
-            <div className="items-table-actions-button">
-              <div className="items-table-actions-dot"></div>
-              <div className="items-table-actions-dot"></div>
-              <div className="items-table-actions-dot"></div>
+        getJSX: (index) => (
+          <div className="items-table-actions-button">
+            <div className="items-table-actions-dot"></div>
+            <div className="items-table-actions-dot"></div>
+            <div className="items-table-actions-dot"></div>
 
-              <div className="items-table-actions-dropdown">
-                <a href={`/dashboard/auth/${items[index].id}`}> Uredi </a>
-                <DeleteButton url={`/api/users/${items[index].id}`} />
-              </div>
+            <div className="items-table-actions-dropdown">
+              <a href={`/dashboard/auth/${items[index].id}`}> Uredi </a>
+              <DeleteUserButton id={items[index].id} />
             </div>
-          );
-        },
+          </div>
+        ),
       },
     ],
   };
+
   return <ItemsTable items={items} tableStructure={tableStructure} />;
 }

@@ -15,7 +15,7 @@ function DashboardHeaderUser({ session }) {
     >
       <div className="user-info">
         <div className="user-image">
-          {session.user.image === null ? (
+          {session.user.image === null || session.user.image === "" ? (
             <span>
               {session.user.name.charAt(0).toUpperCase()}
               {session.user.name.split(" ")[1]
