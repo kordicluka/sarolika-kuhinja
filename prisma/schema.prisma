@@ -134,7 +134,7 @@ model Section {
   images             Json
   sectionType        SectionType @relation(fields: [sectionTypeId], references: [id])
   sectionTypeId      String
-  html               String
+  jsxContent         Json
   postId             String?
   post               Post?       @relation(fields: [postId], references: [id])
   mealId             String?
@@ -147,11 +147,11 @@ model Section {
 model SectionType {
   id                 String      @id @default(uuid())
   title              String
-  html                String
   maxImages          Int
   sections           Section[]
   @@unique([title])
 }
+
 
 model Newsletter {
   id                 String      @id @default(uuid())

@@ -11,14 +11,15 @@ export default function DashboardNavbar() {
     { width: "6.4rem", left: "6rem" },
     { width: "3.8rem", left: "12.5rem" },
     { width: "5.4rem", left: "16.45rem" },
-    { width: "3.9rem", left: "22rem" },
+    { width: "3.85rem", left: "22rem" },
+    { width: "7.5rem", left: "26rem" },
     { display: "none" },
   ];
   const getActiveIndex = (path) => {
     const thirdPart = path.split("/")[2];
 
     switch (thirdPart) {
-      case "":
+      case undefined:
         return 0;
       case "radionice":
         return 1;
@@ -28,8 +29,10 @@ export default function DashboardNavbar() {
         return 3;
       case "jela":
         return 4;
-      default:
+      case "sections-types":
         return 5;
+      default:
+        return 6;
     }
   };
 
@@ -76,12 +79,20 @@ export default function DashboardNavbar() {
       >
         <span>Korisnici</span>
       </a>
+
       <a
         onMouseEnter={() => setActiveLinkHover(4)}
         href="/dashboard/jela"
         className={activeIndex === 4 ? "active" : ""}
       >
         <span>Jela</span>
+      </a>
+      <a
+        onMouseEnter={() => setActiveLinkHover(5)}
+        href="/dashboard/sections-types"
+        className={activeIndex === 5 ? "active" : ""}
+      >
+        <span>Tipovi sekcija</span>
       </a>
     </nav>
   );
