@@ -129,10 +129,12 @@ model Application {
 model Section {
   id                 String      @id @default(uuid())
   title              String
+  subtitle           String
   description        String
-  images             String[]
+  images             Json
   sectionType        SectionType @relation(fields: [sectionTypeId], references: [id])
   sectionTypeId      String
+  html               String
   postId             String?
   post               Post?       @relation(fields: [postId], references: [id])
   mealId             String?
@@ -145,8 +147,10 @@ model Section {
 model SectionType {
   id                 String      @id @default(uuid())
   title              String
-  css                String
+  html                String
+  maxImages          Int
   sections           Section[]
+  @@unique([title])
 }
 
 model Newsletter {
