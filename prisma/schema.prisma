@@ -147,7 +147,8 @@ model Section {
 model SectionType {
   id                 String      @id @default(uuid())
   title              String
-  maxImages          Int
+  jsxContent         Json
+  image              String
   sections           Section[]
   @@unique([title])
 }

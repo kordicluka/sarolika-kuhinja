@@ -10,11 +10,11 @@ export default function DashboardUsersLayout({ children }) {
         <DashboardPageNavigation
           links={[
             {
-              href: "/dashboard/auth/",
+              href: "/dashboard/korisnici/",
               title: "Svi korisnici",
             },
             {
-              href: "/dashboard/auth/new-user",
+              href: "/dashboard/korisnici/novi-korisnik",
               title: "Dodaj novog korisnika",
             },
           ]}

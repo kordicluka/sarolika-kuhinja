@@ -8,11 +8,6 @@ const inter = Inter({
   weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
 });
 
-const caveat = Caveat({
-  subsets: ["latin"],
-  weights: [400],
-});
-
 export const metadata = {
   title: "Šarolika Kuhinja - Radionice za djecu",
   description:

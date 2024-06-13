@@ -25,11 +25,11 @@ export default function DashboardNavbar() {
         return 1;
       case "blog":
         return 2;
-      case "auth":
+      case "korisnici":
         return 3;
       case "jela":
         return 4;
-      case "sections-types":
+      case "tipovi-sekcija":
         return 5;
       default:
         return 6;
@@ -42,7 +42,7 @@ export default function DashboardNavbar() {
   const activeIndex = getActiveIndex(location);
 
   return (
-    <nav onMouseLeave={() => setActiveLinkHover(5)}>
+    <nav onMouseLeave={() => setActiveLinkHover(6)}>
       <div
         className="rectangle-background"
         style={reactangleBackground[activeIndex]}
@@ -74,7 +74,7 @@ export default function DashboardNavbar() {
       </a>
       <a
         onMouseEnter={() => setActiveLinkHover(3)}
-        href="/dashboard/auth"
+        href="/dashboard/korisnici"
         className={activeIndex === 3 ? "active" : ""}
       >
         <span>Korisnici</span>
@@ -89,7 +89,7 @@ export default function DashboardNavbar() {
       </a>
       <a
         onMouseEnter={() => setActiveLinkHover(5)}
-        href="/dashboard/sections-types"
+        href="/dashboard/tipovi-sekcija"
         className={activeIndex === 5 ? "active" : ""}
       >
         <span>Tipovi sekcija</span>

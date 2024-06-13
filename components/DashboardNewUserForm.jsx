@@ -60,7 +60,7 @@ export default function DashboardNewUserForm({ user }) {
           password: "",
           image: "",
         });
-        router.push("/dashboard/auth");
+        router.push("/dashboard/korisnici");
       } else {
         alert("Error creating user:", res?.message);
       }
@@ -71,7 +71,7 @@ export default function DashboardNewUserForm({ user }) {
         if (imageToDelete) {
           await deleteImage(imageToDelete);
         }
-        router.push("/dashboard/auth");
+        router.push("/dashboard/korisnici");
       } else {
         console.error("Error editing user:", res?.message);
       }

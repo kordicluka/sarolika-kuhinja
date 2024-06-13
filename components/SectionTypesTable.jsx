@@ -1,16 +1,16 @@
 import NextImage from "next/image";
 import ItemsTable from "./ItemsTable";
-import DeleteUserButton from "./DeleteUserButton";
+import DeleteSectionTypeButton from "./DeleteSectionTypeButton";
 import prisma from "@/utils/db";
 
-export default async function UsersTable() {
-  const items = await prisma.user.findMany();
+export default async function SectionTypesTable() {
+  const items = await prisma.sectionType.findMany();
 
   const tableStructure = {
     columns: [
       {
         title: "Slika",
-        width: "10%",
+        width: "20%",
         getJSX: (index) =>
           items[index].image ? (
             <NextImage
@@ -31,18 +31,8 @@ export default async function UsersTable() {
       },
       {
         title: "Ime",
-        width: "25%",
+        width: "70%",
         getJSX: (index) => <span>{items[index].name}</span>,
-      },
-      {
-        title: "E-mail",
-        width: "45%",
-        getJSX: (index) => <span>{items[index].email}</span>,
-      },
-      {
-        title: "Uloga",
-        width: "10%",
-        getJSX: (index) => <span>{items[index].role}</span>,
       },
       {
         title: "Akcije",
@@ -54,7 +44,7 @@ export default async function UsersTable() {
             <div className="items-table-actions-dot"></div>
 
             <div className="items-table-actions-dropdown">
-              <a href={`/dashboard/korisnici/${items[index].id}`}> Uredi </a>
+              <a href={`/dashboard/auth/${items[index].id}`}> Uredi </a>
               <DeleteUserButton id={items[index].id} />
             </div>
           </div>
