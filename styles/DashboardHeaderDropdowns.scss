@@ -4,6 +4,7 @@
   @include flex(row, center, center);
   height: 100%;
   transform: translateX(-0.75rem);
+
   .dropdown {
     position: relative;
     @include flex(row, center, center);
@@ -13,7 +14,7 @@
       text-decoration: none;
       border: none;
       outline: none;
-      color: $gray-12;
+      color: rgba($color: $white, $alpha: 0.8);
       font-size: 0.78rem;
       font-weight: 300;
       cursor: pointer;
@@ -23,7 +24,7 @@
       z-index: 2;
 
       &:hover {
-        background-color: $gray-2;
+        background-color: rgba($color: $white, $alpha: 0.2);
       }
     }
 
@@ -34,12 +35,12 @@
       min-width: 10rem;
       box-shadow: 0 0.5rem 1rem rgba($black, 0.1);
       z-index: 1;
-      border: 1px solid $gray-13;
       top: 2.3rem;
       left: 0;
       border-radius: 0.2rem;
       display: none;
       z-index: 2;
+      border: 1px solid $gray-13;
 
       &.active {
         display: flex;
@@ -58,7 +59,7 @@
         border-bottom: 1px solid $gray-13;
         width: 100%;
         text-align: left;
-        color: $gray-3;
+        color: $black;
         font-weight: 400;
 
         &:last-child {
@@ -66,7 +67,7 @@
         }
 
         &:hover {
-          background-color: $gray-14;
+          background-color: $gray-15;
         }
       }
     }

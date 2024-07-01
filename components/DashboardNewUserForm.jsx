@@ -79,7 +79,7 @@ export default function DashboardNewUserForm({ user }) {
   };
 
   return (
-    <form className="dashboard-item-form" onSubmit={handleSubmit}>
+    <form className="dashboard-item-form full-width" onSubmit={handleSubmit}>
       <div className="form-row">
         <h5>Osnovne informacije</h5>
       </div>
@@ -192,7 +192,7 @@ export default function DashboardNewUserForm({ user }) {
       <div className="form-row">
         <Button
           type="submit"
-          className="btn black submit"
+          className="btn black full-width submit"
           disabled={uploadingImages}
           label={
             uploadingImages ? (

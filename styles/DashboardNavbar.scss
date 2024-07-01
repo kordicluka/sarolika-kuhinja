@@ -5,9 +5,9 @@ nav {
   @include flex(row, flex-start, flex-start);
   height: 2.9rem;
   width: 100%;
-  background-color: $primary-dashboard;
+  background-color: $primary;
   padding-left: 2rem;
-  border-top: 1px solid $gray-2;
+  border-top: 1px solid rgba($color: $white, $alpha: 0.15);
 
   .rectangle-background {
     position: absolute;
@@ -17,10 +17,11 @@ nav {
     height: 100%;
     width: 5rem;
     transition: all 0.3s ease;
-    background-color: $gray-3;
+    background-color: $primary-light;
     color: $gray-13;
-    border-right: 1px solid $gray-4;
-    border-left: 1px solid $gray-4;
+    border-left: 1px solid rgba($color: $white, $alpha: 0.15);
+    border-right: 1px solid rgba($color: $white, $alpha: 0.15);
+
     z-index: 1;
   }
 
@@ -30,17 +31,17 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: $gray-2;
-    border-right: 1px solid $gray-3;
-    border-left: 1px solid $gray-3;
+    background-color: $primary-light;
+    border-left: 1px solid rgba($color: $white, $alpha: 0.1);
+    border-right: 1px solid rgba($color: $white, $alpha: 0.1);
     width: 5rem;
     transition: all 0.3s ease;
   }
 
   a {
-    color: $gray-13;
+    color: $white;
     font-size: 0.93rem;
-    font-weight: 300;
+    font-weight: 400;
     text-decoration: none;
     padding: 0.9rem 0.5rem;
     margin-right: 1rem;
@@ -48,9 +49,5 @@ nav {
     z-index: 2;
     @include flex(row, center, center);
     text-align: center;
-
-    &.active {
-      color: $white;
-    }
   }
 }

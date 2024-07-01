@@ -12,6 +12,9 @@ export default async function DashboardNewSectionType({ params }) {
     },
   });
 
+  // parse the item.jsxContent
+  item.jsxContent = JSON.parse(item.jsxContent);
+
   return (
     <div className="dashboard-item">
       <div className="dashboard-item-edit">

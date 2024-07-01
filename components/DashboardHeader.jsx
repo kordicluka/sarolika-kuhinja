@@ -15,7 +15,9 @@ export default async function DashboardHeader() {
         <div className="time-and-made-by">
           <div className="made-by">
             <p>Created by: </p>
-            <a href="https://msk.hr/">msk.hr</a>
+            <a href="https://msk.hr/" target="_blank" rel="noreferrer">
+              msk.hr
+            </a>
           </div>
         </div>
       </section>

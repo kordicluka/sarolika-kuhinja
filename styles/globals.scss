@@ -1,7 +1,7 @@
-$primary: #405b62;
-$secondary: #557780;
+$primary: rgb(34, 83, 155);
+$secondary: rgb(28, 41, 66);
 $primary-dashboard: #000000;
-$primary-dashboard-light: #b11b1b;
+$primary-light: rgb(60, 108, 179);
 $white: #fff;
 $black: #000;
 $gray-1: #111;
@@ -93,12 +93,12 @@ button {
   }
 
   &.black {
-    background-color: $black;
+    background-color: $primary;
     color: $white;
     font-weight: 500;
 
     &:hover {
-      background-color: $gray-3;
+      background-color: $primary-light;
     }
 
     svg {

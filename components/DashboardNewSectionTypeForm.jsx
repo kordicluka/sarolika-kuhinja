@@ -162,6 +162,8 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log(item.image);
+
     if (!sectionType?.id) {
       const res = await createSectionType(item);
 
@@ -271,7 +273,10 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
         </div>
 
         <div className="form-row">
-          <label htmlFor="jsxContent">JSX Content</label>
+          <h5>Sadržaj tipa sekcije</h5>
+        </div>
+
+        <div className="form-row">
           <textarea
             id="jsxContent"
             rows="10"
@@ -314,7 +319,7 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth={1.5}
+              strokeWidth={1.4}
               stroke="currentColor"
               className="size-6"
             >
@@ -329,7 +334,7 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth={1.5}
+              strokeWidth={1.4}
               stroke="currentColor"
               className="size-6"
             >

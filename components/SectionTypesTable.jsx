@@ -30,9 +30,9 @@ export default async function SectionTypesTable() {
           ),
       },
       {
-        title: "Ime",
+        title: "Naslov",
         width: "70%",
-        getJSX: (index) => <span>{items[index].name}</span>,
+        getJSX: (index) => <span>{items[index].title}</span>,
       },
       {
         title: "Akcije",
@@ -44,8 +44,11 @@ export default async function SectionTypesTable() {
             <div className="items-table-actions-dot"></div>
 
             <div className="items-table-actions-dropdown">
-              <a href={`/dashboard/auth/${items[index].id}`}> Uredi </a>
-              <DeleteUserButton id={items[index].id} />
+              <a href={`/dashboard/tipovi-sekcija/${items[index].id}`}>
+                {" "}
+                Uredi{" "}
+              </a>
+              <DeleteSectionTypeButton id={items[index].id} />
             </div>
           </div>
         ),

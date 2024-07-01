@@ -7,18 +7,18 @@ import {
   getSectionType as fetchSectionType,
 } from "@/actions/SectionTypesActions";
 
-// Hook to get all section types
-export const useSectionTypes = () => {
-  const [sectionTypes, setSectionTypes] = useState([]);
+const useFetch = (fetchFunction, args = [], defaultValue = null) => {
+  const [data, setData] = useState(defaultValue);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const getAll = async () => {
+  const fetchData = async () => {
     setLoading(true);
+    setError(null);
     try {
-      const response = await fetchSectionTypes();
+      const response = await fetchFunction(...args);
       if (response.ok) {
-        setSectionTypes(response.sectionTypes);
+        setData(response.data || response.sectionType || response.sectionTypes);
       } else {
         setError(response.message);
       }
@@ -30,39 +30,20 @@ export const useSectionTypes = () => {
   };
 
   useEffect(() => {
-    getAll();
-  }, []);
+    fetchData();
+  }, args);
 
-  return { sectionTypes, loading, error, getAll };
+  return { data, loading, error, refetch: fetchData };
+};
+
+// Hook to get all section types
+export const useSectionTypes = () => {
+  return useFetch(fetchSectionTypes, [], []);
 };
 
 // Hook to get a single section type by ID
 export const useSectionType = (id) => {
-  const [sectionType, setSectionType] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const getSectionType = async () => {
-    setLoading(true);
-    try {
-      const response = await fetchSectionType(id);
-      if (response.ok) {
-        setSectionType(response.sectionType);
-      } else {
-        setError(response.message);
-      }
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getSectionType();
-  }, [id]);
-
-  return { sectionType, loading, error, getSectionType };
+  return useFetch(fetchSectionType, [id]);
 };
 
 // Hook to create a new section type
@@ -72,6 +53,7 @@ export const useCreateSectionType = () => {
 
   const create = async (data) => {
     setLoading(true);
+    setError(null);
     try {
       const response = await createSectionType(data);
       if (!response.ok) {
@@ -96,6 +78,7 @@ export const useUpdateSectionType = () => {
 
   const update = async (data) => {
     setLoading(true);
+    setError(null);
     try {
       const response = await updateSectionType(data);
       if (!response.ok) {
@@ -120,6 +103,7 @@ export const useDeleteSectionType = () => {
 
   const remove = async (id) => {
     setLoading(true);
+    setError(null);
     try {
       const response = await deleteSectionType(id);
       if (!response.ok) {

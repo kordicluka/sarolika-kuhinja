@@ -3,35 +3,34 @@
 .dashboard-page-navigation {
   width: 100%;
   @include flex(row, space-between, center);
-  background-color: $gray-12;
-  border-top: 1px solid $gray-11;
-  border-bottom: 2px solid $gray-11;
+  background-color: $gray-13;
   height: 2.4rem;
   z-index: 2;
+  border-bottom: 1px solid $gray-12;
 
   .dashboard-page-navigation-left {
     @include flex(row, flex-end, flex-end);
     height: 100%;
 
     .dashboard-page-navigation-link {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       font-weight: 500;
       color: $gray-3;
       padding: 0.5rem 1rem;
-      background-color: $gray-13;
-      border: 2px solid $gray-11;
-      border-bottom: none;
-      border-right: none;
+      background-color: rgba($color: $black, $alpha: 0.03);
+      border: 1px solid rgba($color: $black, $alpha: 0.2);
+      transform: translateY(2px);
       text-decoration: none;
       height: 100%;
       @include flex(row, center, center);
 
       &:nth-last-child(1) {
-        border-right: 2px solid $gray-11;
+        border: 1px solid rgba($color: $black, $alpha: 0.2);
       }
 
-      &:hover {
-        background-color: $gray-14;
+      &:hover,
+      &.active {
+        background-color: rgba($color: $black, $alpha: 0.1);
       }
     }
   }
@@ -40,40 +39,5 @@
     @include flex(row, flex-end, flex-end);
     gap: 1rem;
     height: 100%;
-
-    .search {
-      @include flex(row, space-between, center);
-      gap: 1rem;
-      background-color: $gray-13;
-      border: 2px solid $gray-11;
-      height: 100%;
-      border-bottom: none;
-
-      input {
-        background-color: transparent;
-        border: none;
-        outline: none;
-        height: 100%;
-        width: 100%;
-        padding: 0 1rem;
-        font-size: 0.9rem;
-        font-weight: 500;
-        color: $gray-3;
-
-        &::placeholder {
-          color: $gray-7;
-          font-weight: 500;
-        }
-      }
-
-      svg {
-        width: 2.7rem;
-        height: 1.8rem;
-        color: $gray-7;
-        height: 100%;
-        padding: 0 0.5rem;
-        border-left: 2px solid $gray-11;
-      }
-    }
   }
 }

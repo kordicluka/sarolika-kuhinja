@@ -17,7 +17,6 @@ export default async function SignIn() {
     <main className="login-page">
       {" "}
       <LoginForm />
-      <NextImage src={hero} alt="Hero" className="background-image" />
     </main>
   );
 }

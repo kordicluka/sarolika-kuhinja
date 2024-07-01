@@ -7,18 +7,19 @@ import {
   getSection as fetchSection,
 } from "@/actions/SectionActions";
 
-// Hook to get all sections
-export const useSections = (filter = {}) => {
-  const [sections, setSections] = useState([]);
+// Custom hook to handle fetch operations
+const useFetch = (fetchFunction, args = [], defaultValue = null) => {
+  const [data, setData] = useState(defaultValue);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const getAll = async () => {
+  const fetchData = async () => {
     setLoading(true);
+    setError(null);
     try {
-      const response = await fetchSections(filter);
+      const response = await fetchFunction(...args);
       if (response.ok) {
-        setSections(response.sections);
+        setData(response.data || response.section || response.sections);
       } else {
         setError(response.message);
       }
@@ -30,39 +31,20 @@ export const useSections = (filter = {}) => {
   };
 
   useEffect(() => {
-    getAll();
-  }, [filter]);
+    fetchData();
+  }, args);
 
-  return { sections, loading, error, getAll };
+  return { data, loading, error, refetch: fetchData };
+};
+
+// Hook to get all sections
+export const useSections = (filter = {}) => {
+  return useFetch(fetchSections, [filter], []);
 };
 
 // Hook to get a single section by ID
 export const useSection = (id) => {
-  const [section, setSection] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const getSection = async () => {
-    setLoading(true);
-    try {
-      const response = await fetchSection(id);
-      if (response.ok) {
-        setSection(response.section);
-      } else {
-        setError(response.message);
-      }
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getSection();
-  }, [id]);
-
-  return { section, loading, error, getSection };
+  return useFetch(fetchSection, [id]);
 };
 
 // Hook to create a new section
@@ -72,6 +54,7 @@ export const useCreateSection = () => {
 
   const create = async (data) => {
     setLoading(true);
+    setError(null);
     try {
       const response = await createSection(data);
       if (!response.ok) {
@@ -96,6 +79,7 @@ export const useUpdateSection = () => {
 
   const update = async (data) => {
     setLoading(true);
+    setError(null);
     try {
       const response = await updateSection(data);
       if (!response.ok) {
@@ -120,6 +104,7 @@ export const useDeleteSection = () => {
 
   const remove = async (id) => {
     setLoading(true);
+    setError(null);
     try {
       const response = await deleteSection(id);
       if (!response.ok) {

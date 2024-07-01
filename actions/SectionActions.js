@@ -1,203 +1,123 @@
-"use server";
-import prisma from "@/utils/db";
-import { revalidatePath } from "next/cache";
+import { useState, useEffect } from "react";
+import {
+  createSection,
+  updateSection,
+  deleteSection,
+  getSections as fetchSections,
+  getSection as fetchSection,
+} from "@/actions/SectionActions";
 
-export async function createSection(data) {
-  try {
-    const {
-      title,
-      subtitle,
-      description,
-      images,
-      sectionTypeId,
-      jsxContent,
-      postId,
-      mealId,
-      workshopId,
-    } = data;
+// Custom hook to handle fetch operations
+const useFetch = (fetchFunction, args = [], defaultValue = null) => {
+  const [data, setData] = useState(defaultValue);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    if (
-      !title ||
-      !subtitle ||
-      !description ||
-      !images ||
-      !sectionTypeId ||
-      !jsxContent
-    ) {
-      return {
-        message:
-          "Invalid input - title, subtitle, description, images, sectionTypeId, and jsxContent are required.",
-        ok: false,
-      };
+  const fetchData = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetchFunction(...args);
+      if (response.ok) {
+        setData(response.data || response.section || response.sections);
+      } else {
+        setError(response.message);
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const section = await prisma.section.create({
-      data: {
-        title,
-        subtitle,
-        description,
-        images: JSON.stringify(images),
-        sectionTypeId,
-        jsxContent: JSON.stringify(jsxContent),
-        postId,
-        mealId,
-        workshopId,
-      },
-    });
+  useEffect(() => {
+    fetchData();
+  }, args);
 
-    revalidatePath("/dashboard/sections");
+  return { data, loading, error, refetch: fetchData };
+};
 
-    return {
-      message: "Created section!",
-      section,
-      ok: true,
-    };
-  } catch (error) {
-    console.error("Error creating section:", error);
-    return {
-      message: "Internal server error.",
-      ok: false,
-    };
-  }
-}
+// Hook to get all sections
+export const useSections = (filter = {}) => {
+  return useFetch(fetchSections, [filter], []);
+};
 
-export async function deleteSection(id) {
-  try {
-    await prisma.section.delete({
-      where: {
-        id: id,
-      },
-    });
+// Hook to get a single section by ID
+export const useSection = (id) => {
+  return useFetch(fetchSection, [id]);
+};
 
-    revalidatePath("/dashboard/sections");
+// Hook to create a new section
+export const useCreateSection = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-    return {
-      message: "Deleted section!",
-      ok: true,
-    };
-  } catch (error) {
-    console.error("Error deleting section:", error);
-    return {
-      message: "Internal server error.",
-      ok: false,
-    };
-  }
-}
-
-export async function updateSection(data) {
-  try {
-    const {
-      id,
-      title,
-      subtitle,
-      description,
-      images,
-      sectionTypeId,
-      jsxContent,
-      postId,
-      mealId,
-      workshopId,
-    } = data;
-
-    if (
-      !id ||
-      !title ||
-      !subtitle ||
-      !description ||
-      !images ||
-      !sectionTypeId ||
-      !jsxContent
-    ) {
-      return {
-        message:
-          "Invalid input - id, title, subtitle, description, images, sectionTypeId, and jsxContent are required.",
-        ok: false,
-      };
+  const create = async (data) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await createSection(data);
+      if (!response.ok) {
+        setError(response.message);
+      }
+      return response;
+    } catch (err) {
+      setError(err.message);
+      return { message: err.message, ok: false };
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const existingSection = await prisma.section.findUnique({
-      where: { id },
-    });
+  return { create, loading, error };
+};
 
-    if (!existingSection) {
-      return {
-        message: "Section does not exist!",
-        ok: false,
-      };
+// Hook to update an existing section
+export const useUpdateSection = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const update = async (data) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await updateSection(data);
+      if (!response.ok) {
+        setError(response.message);
+      }
+      return response;
+    } catch (err) {
+      setError(err.message);
+      return { message: err.message, ok: false };
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const section = await prisma.section.update({
-      where: { id },
-      data: {
-        title,
-        subtitle,
-        description,
-        images: JSON.stringify(images),
-        sectionTypeId,
-        jsxContent: JSON.stringify(jsxContent),
-        postId,
-        mealId,
-        workshopId,
-      },
-    });
+  return { update, loading, error };
+};
 
-    revalidatePath("/dashboard/sections");
+// Hook to delete a section
+export const useDeleteSection = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-    return {
-      message: "Updated section!",
-      section,
-      ok: true,
-    };
-  } catch (error) {
-    console.error("Error updating section:", error);
-    return {
-      message: "Internal server error.",
-      ok: false,
-    };
-  }
-}
-
-export async function getSections() {
-  try {
-    const sections = await prisma.section.findMany();
-
-    return {
-      sections,
-      message: "Got sections!",
-      ok: true,
-    };
-  } catch (error) {
-    console.error("Error getting sections:", error);
-    return {
-      message: "Internal server error.",
-      ok: false,
-    };
-  }
-}
-
-export async function getSection(id) {
-  try {
-    const section = await prisma.section.findUnique({
-      where: { id },
-    });
-
-    if (!section) {
-      return {
-        message: "Section not found!",
-        ok: false,
-      };
+  const remove = async (id) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await deleteSection(id);
+      if (!response.ok) {
+        setError(response.message);
+      }
+      return response;
+    } catch (err) {
+      setError(err.message);
+      return { message: err.message, ok: false };
+    } finally {
+      setLoading(false);
     }
+  };
 
-    return {
-      section,
-      message: "Got section!",
-      ok: true,
-    };
-  } catch (error) {
-    console.error("Error getting section:", error);
-    return {
-      message: "Internal server error.",
-      ok: false,
-    };
-  }
-}
+  return { remove, loading, error };
+};

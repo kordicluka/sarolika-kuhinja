@@ -2,7 +2,6 @@
 
 .items-table {
   @include flex(column, flex-start, flex-start);
-
   background-color: $gray-15;
 
   .items-table-header {
@@ -18,15 +17,24 @@
       padding-left: 0.5rem;
       @include flex(row, flex-start, center);
       background-color: $gray-14;
-      border: 0.12rem solid $gray-12;
-      border-top: 0.12rem solid $gray-13;
-      border-left: 0.12rem solid $gray-13;
+      border: 1px solid $gray-12;
+      border-right: none;
+
+      span {
+        font-weight: 500;
+      }
     }
   }
 
   .items-table-row {
     @include flex(row, flex-start, flex-start);
     width: 100%;
+    border-bottom: 1px solid $gray-13;
+    background-color: $white;
+
+    &:nth-child(odd) {
+      background-color: $gray-15;
+    }
 
     .items-table-row-item {
       font-size: 0.8rem;
@@ -35,9 +43,7 @@
       height: 3rem;
       padding-left: 0.5rem;
       @include flex(row, flex-start, center);
-      border: 0.12rem solid $gray-12;
-      border-top: 0.12rem solid $gray-13;
-      border-left: 0.12rem solid $gray-13;
+      border-left: 1px solid $gray-13;
 
       .items-table-image-placeholder {
         width: 2.9rem;
@@ -61,12 +67,14 @@
         @include flex(row, center, center);
         gap: 0.2rem;
         position: relative;
+        cursor: pointer;
 
         .items-table-actions-dot {
           width: 5px;
           height: 5px;
           background-color: $gray-4;
           border-radius: 100%;
+          cursor: pointer;
         }
 
         .items-table-actions-dropdown {
@@ -81,7 +89,7 @@
           border-radius: 0.3rem;
           border: 1px solid $gray-12;
           overflow: hidden;
-
+          cursor: pointer;
           z-index: 3;
 
           button,
@@ -98,6 +106,7 @@
             outline: none;
             @include flex(row, center, center);
             border-bottom: 1px solid $gray-12;
+            cursor: pointer;
 
             &:hover {
               background-color: $gray-14;

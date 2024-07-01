@@ -4,11 +4,11 @@ import { revalidatePath } from "next/cache";
 
 export async function createSectionType(data) {
   try {
-    const { title, jsxContent } = data;
+    const { title, jsxContent, image } = data;
 
-    if (!title || !jsxContent) {
+    if (!title || !jsxContent || !image) {
       return {
-        message: "Invalid input - title and jsxContent are required.",
+        message: "Invalid input - title, image and jsxContent are required.",
         ok: false,
       };
     }
@@ -25,7 +25,7 @@ export async function createSectionType(data) {
     }
 
     const sectionType = await prisma.sectionType.create({
-      data: { title, jsxContent: JSON.stringify(jsxContent) },
+      data: { title, image, jsxContent: JSON.stringify(jsxContent) },
     });
 
     revalidatePath("/dashboard/section-types");
@@ -69,9 +69,9 @@ export async function deleteSectionType(id) {
 
 export async function updateSectionType(data) {
   try {
-    const { id, title, jsxContent } = data;
+    const { id, title, jsxContent, image } = data;
 
-    if (!id || !title || !jsxContent) {
+    if (!id || !title || !jsxContent || !image) {
       return {
         message: "Invalid input - id, title, and jsxContent are required.",
         ok: false,
@@ -91,7 +91,7 @@ export async function updateSectionType(data) {
 
     const sectionType = await prisma.sectionType.update({
       where: { id },
-      data: { title, jsxContent: JSON.stringify(jsxContent) },
+      data: { title, image, jsxContent: JSON.stringify(jsxContent) },
     });
 
     revalidatePath("/dashboard/section-types");
@@ -115,7 +115,10 @@ export async function getSectionTypes() {
     const sectionTypes = await prisma.sectionType.findMany();
 
     return {
-      sectionTypes,
+      sectionTypes: sectionTypes.map((type) => ({
+        ...type,
+        jsxContent: JSON.parse(type.jsxContent),
+      })),
       message: "Got section types!",
       ok: true,
     };
@@ -142,7 +145,10 @@ export async function getSectionType(id) {
     }
 
     return {
-      sectionType,
+      sectionType: {
+        ...sectionType,
+        jsxContent: JSON.parse(sectionType.jsxContent),
+      },
       message: "Got section type!",
       ok: true,
     };
