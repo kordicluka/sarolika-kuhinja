@@ -1,0 +1,281 @@
+"use client";
+import React, { useState, useEffect, useRef } from "react";
+import { useImageUpload, useImageDelete } from "@/hooks/useImageUpload";
+import Button from "@/components/Button";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import "@/styles/DashboardItem.scss";
+import NextImage from "next/image";
+import { useRouter } from "next/navigation";
+import { useCreatePost, useUpdatePost } from "@/hooks/usePosts";
+import JSXContentRenderer from "./JSXContentRender";
+import DashboardAddNewSection from "./DashboardAddNewSection";
+
+export default function DashboardNewPostForm({ post }) {
+  const router = useRouter();
+  const [addNewSectionActive, setAddNewSectionActive] = useState(false);
+  const [previewFullScreen, setPreviewFullScreen] = useState(false);
+  const [item, setItem] = useState({
+    title: "",
+    description: "",
+    image: "",
+    isVisible: true,
+    sections: [],
+  });
+  const [imageToDelete, setImageToDelete] = useState(null);
+  const {
+    loading: loadingCreatingPost,
+    create: createPost,
+    error: errorCreatingPost,
+  } = useCreatePost();
+  const {
+    loading: loadingUpdatingPost,
+    error: errorUpdatingPost,
+    update,
+  } = useUpdatePost();
+
+  useEffect(() => {
+    if (post) {
+      setItem({
+        ...post,
+        sections: post.sections || [], // Ensure sections is always an array
+      });
+    }
+  }, [post]);
+
+  const { uploadImages, uploadingImages } = useImageUpload();
+  const { deleteImage } = useImageDelete();
+  const inputRef = useRef(null);
+
+  const handleUploadImages = async (e) => {
+    const files = e.target.files;
+    const imageKey = await uploadImages(files);
+
+    setItem({
+      ...item,
+      image: imageKey,
+    });
+  };
+
+  const markImageForDeletion = () => {
+    setImageToDelete(item.image);
+    setItem({
+      ...item,
+      image: "",
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!post?.id) {
+      const res = await createPost(item);
+
+      if (res?.ok) {
+        router.push("/dashboard/blog");
+      } else {
+        alert("Error creating post", res?.message);
+      }
+    } else {
+      const res = await update(item);
+
+      if (res?.ok) {
+        if (imageToDelete) {
+          await deleteImage(imageToDelete);
+        }
+        router.push("/dashboard/blog");
+      } else {
+        console.error("Error editing post:", res?.message);
+      }
+    }
+  };
+
+  return (
+    <>
+      <form className="dashboard-item-form" onSubmit={handleSubmit}>
+        <div className="form-row">
+          <h5>Osnovne informacije</h5>
+        </div>
+        <div className="form-row">
+          <div className="form-row-item">
+            <label htmlFor="title">Naslov</label>
+            <input
+              type="text"
+              id="title"
+              required
+              placeholder="Unesite naslov"
+              value={item.title}
+              onChange={(e) =>
+                setItem({
+                  ...item,
+                  title: e.target.value,
+                })
+              }
+            />
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="form-row-item">
+            <label htmlFor="description">Opis</label>
+            <textarea
+              id="description"
+              required
+              placeholder="Unesite opis"
+              value={item.description}
+              onChange={(e) =>
+                setItem({
+                  ...item,
+                  description: e.target.value,
+                })
+              }
+            />
+          </div>
+        </div>
+        <div className="form-row">
+          <h5>Slika tipa sekcije</h5>
+        </div>
+        <div className="form-row">
+          <div className="form-row-item single-image">
+            <label htmlFor="single-image">Slika tipa sekcije</label>
+            <input
+              type="file"
+              id="single-image"
+              onChange={handleUploadImages}
+              ref={inputRef}
+            />
+          </div>
+          {item.image && (
+            <div className="form-row-item single-image">
+              <div className="form-row-images">
+                <div className="form-row-image">
+                  <NextImage
+                    src={`/uploads/${item.image}`}
+                    alt="Slika tipa sekcije"
+                    style={{ width: "100%" }}
+                    fill="responsive"
+                  />
+                  <Button
+                    className="delete-image-btn"
+                    onClick={markImageForDeletion}
+                    type="button"
+                    label={
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M6 18 18 6M6 6l12 12"
+                        />
+                      </svg>
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {uploadingImages && (
+            <div className="form-row-item floor-plan">
+              <LoadingSpinner />
+            </div>
+          )}
+        </div>
+        <div className="form-row">
+          <h5>Sekcije</h5>
+        </div>
+        {Array.isArray(item.sections) && item.sections.length > 0 ? (
+          <>
+            <div className="form-row">
+              <div className="form-row-item">
+                <label htmlFor="sections">Poredaj sekcije</label>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="form-row">
+            <div className="form-row-item">
+              <p className="form-row-item-msg">
+                Dodajte sekcije kako biste ih mogli poredati.
+              </p>
+            </div>
+          </div>
+        )}
+        <DashboardAddNewSection
+          item={item}
+          setItem={setItem}
+          active={addNewSectionActive}
+          setActive={setAddNewSectionActive}
+        />
+        <div className="form-row">
+          <Button
+            type="submit"
+            className="btn black submit"
+            disabled={uploadingImages}
+            label={
+              uploadingImages ? (
+                <LoadingSpinner />
+              ) : item?.id ? (
+                "Uredi objavu"
+              ) : (
+                "Dodaj objavu"
+              )
+            }
+          />
+        </div>
+      </form>
+      <section className="preview">
+        <button
+          onClick={() => setPreviewFullScreen(!previewFullScreen)}
+          className="preview-fullscreen"
+        >
+          {!previewFullScreen ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.4}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.4}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25"
+              />
+            </svg>
+          )}
+        </button>
+        <h5 className="preview-header">Pretpregled</h5>
+        <div className="preview-content">
+          {Array.isArray(item.sections) && item.sections.length > 0 ? (
+            item.sections.map((section, index) => (
+              <JSXContentRenderer key={index} content={section.jsxContent} />
+            ))
+          ) : (
+            <p className="preview-content-msg">Nema sekcija za prikaz.</p>
+          )}
+        </div>
+      </section>
+    </>
+  );
+}

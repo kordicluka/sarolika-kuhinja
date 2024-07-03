@@ -45,6 +45,7 @@ export default function LoginForm() {
     });
 
     if (result?.ok) {
+      console.log(result);
       router.push("/dashboard");
     } else {
       alert("Pogrešno korisničko ime ili lozinka.");

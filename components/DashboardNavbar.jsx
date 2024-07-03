@@ -37,7 +37,7 @@ export default function DashboardNavbar() {
   };
 
   useEffect(() => {
-    setActiveLinkHover(5);
+    setActiveLinkHover(6);
   }, [location]);
   const activeIndex = getActiveIndex(location);
 

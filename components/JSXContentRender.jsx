@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NextImage from "next/image";
 
 const applyMediaQueries = (style) => {
@@ -29,7 +29,11 @@ const applyMediaQueries = (style) => {
 
 const renderElement = (element) => {
   const { type, style, data, children, className } = element;
-  const finalStyle = applyMediaQueries(style);
+  const [finalStyle, setFinalStyle] = useState(style);
+
+  useEffect(() => {
+    setFinalStyle(applyMediaQueries(style));
+  }, [style]);
 
   switch (type) {
     case "h1":
@@ -43,7 +47,7 @@ const renderElement = (element) => {
     case "img":
       return (
         <NextImage
-          src={data?.src}
+          src={"/uploads/" + data?.src}
           alt={data?.alt}
           style={finalStyle}
           width={500}
@@ -62,11 +66,13 @@ const renderElement = (element) => {
         </ul>
       );
     case "div":
-      <div style={finalStyle} className={className ? className : ""}>
-        {children?.map((child, index) => (
-          <React.Fragment key={index}>{renderElement(child)}</React.Fragment>
-        ))}
-      </div>;
+      return (
+        <div style={finalStyle} className={className ? className : ""}>
+          {children?.map((child, index) => (
+            <React.Fragment key={index}>{renderElement(child)}</React.Fragment>
+          ))}
+        </div>
+      );
     case "section":
       return (
         <section style={finalStyle} className={className ? className : ""}>

@@ -12,8 +12,10 @@ export default async function DashboardNewSectionType({ params }) {
     },
   });
 
-  // parse the item.jsxContent
-  item.jsxContent = JSON.parse(item.jsxContent);
+  // parse the item.jsxContent if exists
+  if (item) {
+    item.jsxContent = JSON.parse(item.jsxContent);
+  }
 
   return (
     <div className="dashboard-item">

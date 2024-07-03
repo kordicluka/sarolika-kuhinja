@@ -30,7 +30,6 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
         gap: "5%",
         "(max-width: 768px)": {
           flexDirection: "column",
-          padding: "1rem 0",
         },
       },
       children: [
@@ -45,6 +44,7 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
             width: "47.5%",
             "(max-width: 768px)": {
               width: "100%",
+              marginBottom: "2rem",
             },
           },
           children: [
@@ -54,10 +54,13 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
                 marginBottom: ".5rem",
                 fontSize: "2.2rem",
                 color: "black",
+                "(max-width: 768px)": {
+                  fontSize: "2rem",
+                },
               },
-
               data: {
                 text: "Subtitle Here",
+                msg: "Podnaslov",
               },
             },
             {
@@ -66,9 +69,13 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
                 marginBottom: "1rem",
                 fontSize: "4rem",
                 color: "black",
+                "(max-width: 768px)": {
+                  fontSize: "2.5rem",
+                },
               },
               data: {
                 text: "Main Title Here",
+                msg: "Naslov",
               },
             },
             {
@@ -78,9 +85,13 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
                 fontSize: ".95rem",
                 lineHeight: "1.5",
                 color: "black",
+                "(max-width: 768px)": {
+                  fontSize: ".9rem",
+                },
               },
               data: {
                 text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                msg: "Opis",
               },
             },
           ],
@@ -94,9 +105,6 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
             alignItems: "center",
             backgroundColor: "gray",
             width: "47.5%",
-            "(max-width: 768px)": {
-              width: "100%",
-            },
           },
           children: [
             {
@@ -104,13 +112,11 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
               style: {
                 width: "100%",
                 height: "auto",
-                "(max-width: 768px)": {
-                  width: "100%",
-                },
               },
               data: {
-                src: "/placeholder-image.svg",
+                src: "placeholder-image.svg",
                 alt: "Example image",
+                msg: "Slika",
               },
             },
           ],
@@ -128,7 +134,7 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
   const {
     loading: loadingUpdatingSectionType,
     error: errorUpdatingSectionType,
-    updateSectionType,
+    update,
   } = useUpdateSectionType();
 
   useEffect(() => {
@@ -162,8 +168,6 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(item.image);
-
     if (!sectionType?.id) {
       const res = await createSectionType(item);
 
@@ -178,7 +182,7 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
         alert("Error creating section type", res?.message);
       }
     } else {
-      const res = await updateSectionType(item);
+      const res = await update(item);
 
       if (res?.ok) {
         if (imageToDelete) {

@@ -1,5 +1,9 @@
-import React from "react";
+import PostsTable from "@/components/PostsTable";
 
-export default function page() {
-  return <div>page</div>;
+export default function DashboardSectionTypesPage() {
+  return (
+    <div className="items">
+      <PostsTable />
+    </div>
+  );
 }

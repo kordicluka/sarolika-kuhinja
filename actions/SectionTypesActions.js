@@ -1,6 +1,8 @@
 "use server";
 import prisma from "@/utils/db";
 import { revalidatePath } from "next/cache";
+import { join } from "path";
+import { unlink } from "fs/promises";
 
 export async function createSectionType(data) {
   try {
@@ -46,6 +48,26 @@ export async function createSectionType(data) {
 
 export async function deleteSectionType(id) {
   try {
+    // get the section type
+    const sectionType = await prisma.sectionType.findUnique({
+      where: { id },
+    });
+
+    // if the section type has image
+    if (sectionType.image) {
+      // delete the image
+
+      const key = sectionType.image;
+
+      const path = join(process.cwd(), "public", "uploads", key);
+
+      try {
+        await unlink(path);
+      } catch (error) {
+        console.error("Error deleting file:", error);
+      }
+    }
+
     await prisma.sectionType.delete({
       where: {
         id: id,
