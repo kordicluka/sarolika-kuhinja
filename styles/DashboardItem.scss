@@ -246,12 +246,15 @@
             border-bottom: none;
             border-right: none;
             height: 2rem;
+
             .form-section-title {
               width: calc(100% - 4rem);
               padding-left: 0.5rem;
               font-size: 0.8rem;
               font-weight: 400;
               color: $gray-1;
+              height: 100%;
+              @include flex(row, flex-start, center);
             }
 
             .form-row-section-actions {
@@ -295,9 +298,9 @@
                 right: -1rem;
                 border-radius: 0.2rem;
                 display: none;
-                z-index: 2;
                 border: 1px solid $gray-13;
                 overflow: hidden;
+                z-index: 10000000000;
 
                 &.active {
                   display: flex;

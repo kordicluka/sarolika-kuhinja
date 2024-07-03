@@ -14,6 +14,7 @@ export default function DashboardNewPostForm({ post }) {
   const router = useRouter();
   const [addNewSectionActive, setAddNewSectionActive] = useState(false);
   const [previewFullScreen, setPreviewFullScreen] = useState(false);
+  const [imagesToDelete, setImagesToDelete] = useState([]);
   const [item, setItem] = useState({
     title: "",
     description: "",
@@ -21,7 +22,6 @@ export default function DashboardNewPostForm({ post }) {
     isVisible: true,
     sections: [],
   });
-  const [imageToDelete, setImageToDelete] = useState(null);
   const {
     loading: loadingCreatingPost,
     create: createPost,
@@ -48,6 +48,12 @@ export default function DashboardNewPostForm({ post }) {
 
   const handleUploadImages = async (e) => {
     const files = e.target.files;
+
+    // If there is an image already, delete it
+    if (item.image) {
+      setImagesToDelete((old) => [...old, item.image]);
+    }
+
     const imageKey = await uploadImages(files);
 
     setItem({
@@ -57,7 +63,7 @@ export default function DashboardNewPostForm({ post }) {
   };
 
   const markImageForDeletion = () => {
-    setImageToDelete(item.image);
+    setImagesToDelete((old) => [...old, item.image]);
     setItem({
       ...item,
       image: "",
@@ -71,6 +77,7 @@ export default function DashboardNewPostForm({ post }) {
       const res = await createPost(item);
 
       if (res?.ok) {
+        deleteImagesThatAreMarkedForDeletion();
         router.push("/dashboard/blog");
       } else {
         alert("Error creating post", res?.message);
@@ -79,14 +86,74 @@ export default function DashboardNewPostForm({ post }) {
       const res = await update(item);
 
       if (res?.ok) {
-        if (imageToDelete) {
-          await deleteImage(imageToDelete);
-        }
+        deleteImagesThatAreMarkedForDeletion();
         router.push("/dashboard/blog");
       } else {
         console.error("Error editing post:", res?.message);
       }
     }
+  };
+
+  const deleteImagesThatAreMarkedForDeletion = async () => {
+    // check if the image is in the item somewhere
+    // if it isn't, delete it
+
+    console.log("imagesToDelete:", imagesToDelete);
+
+    let allImages = item.sections.reduce((acc, section) => {
+      recursivlyIterateOverJSXContent(section.jsxContent, (content) => {
+        if (content.type === "img") {
+          acc.push(content.data.src);
+        }
+      });
+
+      return acc;
+    }, []);
+
+    allImages.push(item.image);
+
+    console.log("allImages:", allImages);
+
+    if (imagesToDelete.length > 0) {
+      imagesToDelete.forEach(async (image) => {
+        if (!allImages.includes(image) && image !== "placeholder-image.svg") {
+          console.log("deleting image:", image);
+          const res = await deleteImage(image);
+          console.log("res:", res);
+        }
+      });
+    }
+  };
+
+  const recursivlyIterateOverJSXContent = (content, callback, imageKey) => {
+    if (content.type === "img" && content.data.src === imageKey) {
+      callback(content);
+    }
+
+    if (content.children) {
+      content.children.forEach((child) => {
+        recursivlyIterateOverJSXContent(child, callback, imageKey);
+      });
+    }
+
+    callback(content);
+  };
+
+  const deleteSection = (s) => {
+    item.sections.forEach((section) => {
+      if (section === s) {
+        recursivlyIterateOverJSXContent(section.jsxContent, (content) => {
+          if (content.type === "img") {
+            setImagesToDelete((old) => [...old, content.data.src]);
+          }
+        });
+      }
+    }, []);
+
+    setItem({
+      ...item,
+      sections: item.sections.filter((section) => section !== s),
+    });
   };
 
   return (
@@ -252,13 +319,9 @@ export default function DashboardNewPostForm({ post }) {
                         <button
                           className="btn"
                           onClick={() => {
-                            setItem({
-                              ...item,
-                              sections: item.sections.filter(
-                                (s, i) => i !== index
-                              ),
-                            });
+                            deleteSection(section);
                           }}
+                          type="button"
                         >
                           Izbriši
                         </button>
@@ -283,6 +346,8 @@ export default function DashboardNewPostForm({ post }) {
           setItem={setItem}
           active={addNewSectionActive}
           setActive={setAddNewSectionActive}
+          imagesToDelete={imagesToDelete}
+          setImagesToDelete={setImagesToDelete}
         />
         <div className="form-row">
           <Button
