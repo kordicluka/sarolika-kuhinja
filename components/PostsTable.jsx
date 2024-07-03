@@ -23,9 +23,9 @@ export default async function SectionTypesTable() {
             />
           ) : (
             <span className="items-table-image-placeholder">
-              {items[index].name.charAt(0).toUpperCase()}
-              {items[index].name.split(" ")[1]
-                ? items[index].name.split(" ")[1].charAt(0).toUpperCase()
+              {items[index].name?.charAt(0).toUpperCase()}
+              {items[index].name?.split(" ")[1]
+                ? items[index].name?.split(" ")[1].charAt(0).toUpperCase()
                 : null}
             </span>
           ),

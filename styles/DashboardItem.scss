@@ -16,6 +16,8 @@
     position: relative;
     border-right: 1px solid $gray-13;
     @include flex(row, flex-start, flex-start);
+    z-index: 100;
+    overflow-x: hidden;
 
     form {
       width: 40%;
@@ -23,6 +25,8 @@
       z-index: 2;
       height: calc(100% - 2.5rem);
       overflow-y: auto;
+      z-index: 2;
+      overflow-x: hidden;
 
       &.full-width {
         width: 100%;
@@ -30,15 +34,50 @@
 
       .dashboard-add-new-section {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 60%;
-        height: 60%;
+        top: 00%;
+        left: 0%;
+        width: 40%;
+        height: 100%;
         background-color: $gray-15;
         border: 1px solid $gray-13;
-        @include flex(column, center, center);
+        @include flex(column, flex-start, flex-start);
         display: none;
+        z-index: 10;
+        transition: all 0.2s ease;
+        animation: slideIn 0.2s ease;
+        padding-bottom: 2.5rem;
+
+        .dashboard-add-new-section-bottom {
+          @include flex(row, flex-end, center);
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 2.5rem;
+          background-color: $gray-14;
+          border-top: 1px solid $gray-13;
+
+          button {
+            width: 100%;
+            height: 100%;
+            background-color: $gray-14;
+            color: $gray-4;
+            border: 1px solid $gray-12;
+            font-size: 0.8rem;
+            height: 2.5rem;
+            font-weight: 500;
+            padding-left: 2rem;
+            text-transform: uppercase;
+
+            &:hover {
+              background-color: $gray-13;
+              color: $gray-1;
+            }
+          }
+        }
+
+        &.active {
+          display: flex;
+        }
       }
 
       .form-row {
@@ -113,6 +152,27 @@
             background-color: $gray-15;
           }
 
+          &.add-section-btn {
+            @include flex(row, flex-start, center);
+            width: 100%;
+            height: 2rem;
+            border-right: none;
+            border-bottom: none;
+            background-color: $gray-15;
+
+            svg {
+              width: 1.2rem;
+              height: 1.2rem;
+              color: $gray-2;
+            }
+
+            span {
+              color: $gray-2;
+              font-size: 0.75rem;
+              font-weight: 500;
+            }
+          }
+
           &.submit {
             background-color: $gray-14;
             color: $gray-4;
@@ -170,6 +230,120 @@
 
             &:hover {
               background-color: $gray-14;
+            }
+          }
+        }
+
+        .form-row-sections {
+          width: 100%;
+          @include flex(column, flex-start, flex-start);
+
+          .form-row-section {
+            width: 100%;
+            @include flex(row, flex-start, flex-start);
+            background-color: $white;
+            border: 1px solid $gray-13;
+            border-bottom: none;
+            border-right: none;
+            height: 2rem;
+            .form-section-title {
+              width: calc(100% - 4rem);
+              padding-left: 0.5rem;
+              font-size: 0.8rem;
+              font-weight: 400;
+              color: $gray-1;
+            }
+
+            .form-row-section-actions {
+              width: 2rem;
+              height: 100%;
+              @include flex(row, center, center);
+              cursor: pointer;
+              position: relative;
+              z-index: 2;
+              border-left: 1px solid $gray-13;
+              background-color: $gray-15;
+
+              .dots {
+                @include flex(row, center, center);
+                width: 2rem;
+                height: 100%;
+                gap: 0.2rem;
+
+                .dot {
+                  width: 0.2rem;
+                  height: 0.2rem;
+                  border-radius: 50%;
+                  background-color: $gray-5;
+                }
+              }
+
+              &:hover {
+                .dropdowns {
+                  display: flex;
+                }
+              }
+
+              .dropdowns {
+                @include flex(column, flex-start, flex-start);
+                position: absolute;
+                background-color: $white;
+                min-width: 10rem;
+                box-shadow: 0 0.5rem 1rem rgba($black, 0.1);
+                z-index: 1;
+                top: 1.8rem;
+                right: -1rem;
+                border-radius: 0.2rem;
+                display: none;
+                z-index: 2;
+                border: 1px solid $gray-13;
+                overflow: hidden;
+
+                &.active {
+                  display: flex;
+                }
+
+                a,
+                button {
+                  color: $gray-3;
+                  padding: 0.5rem 1rem;
+                  text-decoration: none;
+                  border: none;
+                  outline: none;
+                  display: block;
+                  font-size: 0.8rem;
+                  font-weight: 300;
+                  border-bottom: 1px solid $gray-13;
+                  width: 100%;
+                  text-align: left;
+                  color: $black;
+                  font-weight: 400;
+
+                  &:last-child {
+                    border-bottom: none;
+                  }
+
+                  &:hover {
+                    background-color: $gray-15;
+                  }
+                }
+              }
+            }
+
+            .drag-button {
+              width: 2rem;
+              height: 100%;
+              padding: 0.3rem;
+              @include flex(row, center, center);
+              background-color: $gray-15;
+              border-left: 1px solid $gray-13;
+              border-right: 1px solid $gray-13;
+
+              svg {
+                width: 1.2rem;
+                height: 1.2rem;
+                color: $gray-5;
+              }
             }
           }
         }
@@ -408,5 +582,14 @@
         overflow-y: auto;
       }
     }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
   }
 }

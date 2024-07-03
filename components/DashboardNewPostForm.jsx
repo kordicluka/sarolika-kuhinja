@@ -188,11 +188,84 @@ export default function DashboardNewPostForm({ post }) {
         <div className="form-row">
           <h5>Sekcije</h5>
         </div>
+        <div className="form-row">
+          <button
+            className="btn black add-section-btn"
+            onClick={() => setAddNewSectionActive(true)}
+            type="button"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
+
+            <span>Dodaj novu sekciju</span>
+          </button>
+        </div>
         {Array.isArray(item.sections) && item.sections.length > 0 ? (
           <>
             <div className="form-row">
               <div className="form-row-item">
                 <label htmlFor="sections">Poredaj sekcije</label>
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-row-sections">
+                {item.sections.map((section, index) => (
+                  <div key={index} className="form-row-section">
+                    <button className="drag-button">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="size-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                        />
+                      </svg>
+                    </button>
+                    <p className="form-section-title">{section.title}</p>
+                    <div className="form-row-section-actions">
+                      <div className="dots">
+                        <div className="dot"></div>
+                        <div className="dot"></div>
+                        <div className="dot"></div>
+                      </div>
+
+                      <div className="dropdowns">
+                        <button
+                          className="btn"
+                          onClick={() => {
+                            setItem({
+                              ...item,
+                              sections: item.sections.filter(
+                                (s, i) => i !== index
+                              ),
+                            });
+                          }}
+                        >
+                          Izbriši
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}{" "}
               </div>
             </div>
           </>
