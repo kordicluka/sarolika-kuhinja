@@ -13,18 +13,36 @@ export default function DashboardAddNewSection({
   setItem,
   imagesToDelete,
   setImagesToDelete,
+  section,
+  setSection,
+  sectionWithoutUpdates,
+  setSectionWithoutUpdates,
 }) {
-  const [section, setSection] = useState({
-    title: "",
-    jsxContent: {},
-  });
-
   const { data: sectionTypes, loading: loadingSectionTypes } =
     useSectionTypes();
 
   const [choosenSectionType, setChoosenSectionType] = useState(null);
 
   const addSectionToItemJSXContent = (section) => {
+    if (!section.title) {
+      alert("Naslov sekcije je obavezan");
+      return;
+    }
+
+    // check if the section jsxContent is empty
+    if (Object.keys(section.jsxContent).length === 0) {
+      alert("Morate napravit sekciju");
+      return;
+    }
+
+    // how can i here check if the
+    // section index is already taken
+    if (item.sections.some((s) => s.index === section.index)) {
+      alert(
+        "Redni broj sekcije koji ste unijeli već postoji, ali će sekcija biti dodana svejedno. Imajte na umu da se može dogoditi da kada sekcije imaju isti redni broj može doći do neporedanog prikaza na stranici."
+      );
+    }
+
     setItem(
       produce((draft) => {
         draft.sections.push(section);
@@ -33,7 +51,9 @@ export default function DashboardAddNewSection({
     setSection({
       title: "",
       jsxContent: {},
+      index: 0,
     });
+    setChoosenSectionType(null);
     setActive(false);
   };
 
@@ -199,6 +219,20 @@ export default function DashboardAddNewSection({
 
         <div className="form-row">
           <div className="form-row-item">
+            <label htmlFor="sections">Redni broj sekcije</label>
+            <input
+              type="number"
+              value={section.index}
+              onChange={(e) =>
+                setSection({ ...section, index: parseInt(e.target.value) })
+              }
+              placeholder="Unesite redni broj sekcije"
+            />
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-row-item">
             <label htmlFor="sections">Izaberite tip sekcije</label>
             <div className="section-types">
               {loadingSectionTypes ? (
@@ -239,9 +273,7 @@ export default function DashboardAddNewSection({
           </div>
         </div>
 
-        {choosenSectionType && (
-          <>{generateSectionJSXInputs(section.jsxContent)}</>
-        )}
+        {generateSectionJSXInputs(section.jsxContent)}
 
         <div className="dashboard-add-new-section-bottom">
           <button
@@ -251,6 +283,20 @@ export default function DashboardAddNewSection({
               setSection({
                 title: "",
                 jsxContent: {},
+                index: 0,
+              });
+              // add sectionWithoutUpdates to item
+              if (sectionWithoutUpdates.title !== "") {
+                setItem(
+                  produce((draft) => {
+                    draft.sections.push(sectionWithoutUpdates);
+                  })
+                );
+              }
+              setSectionWithoutUpdates({
+                title: "",
+                jsxContent: {},
+                index: 0,
               });
             }}
             type="button"
@@ -261,8 +307,15 @@ export default function DashboardAddNewSection({
             className="btn"
             onClick={() => addSectionToItemJSXContent(section)}
             type="button"
+            disabled={uploadingImages}
           >
-            Dodaj sekciju na blog
+            {uploadingImages ? (
+              <LoadingSpinner />
+            ) : sectionWithoutUpdates.title ? (
+              "Spremi promjene"
+            ) : (
+              "Dodaj sekciju"
+            )}
           </button>
         </div>
       </div>

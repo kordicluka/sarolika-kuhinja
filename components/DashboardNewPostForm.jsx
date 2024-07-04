@@ -15,6 +15,17 @@ export default function DashboardNewPostForm({ post }) {
   const [addNewSectionActive, setAddNewSectionActive] = useState(false);
   const [previewFullScreen, setPreviewFullScreen] = useState(false);
   const [imagesToDelete, setImagesToDelete] = useState([]);
+  const [section, setSection] = useState({
+    title: "",
+    jsxContent: {},
+    index: 0,
+  });
+  const [sectionWithoutUpdates, setSectionWithoutUpdates] = useState({
+    title: "",
+    jsxContent: {},
+    index: 0,
+  });
+
   const [item, setItem] = useState({
     title: "",
     description: "",
@@ -255,30 +266,7 @@ export default function DashboardNewPostForm({ post }) {
         <div className="form-row">
           <h5>Sekcije</h5>
         </div>
-        <div className="form-row">
-          <button
-            className="btn black add-section-btn"
-            onClick={() => setAddNewSectionActive(true)}
-            type="button"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
 
-            <span>Dodaj novu sekciju</span>
-          </button>
-        </div>
         {Array.isArray(item.sections) && item.sections.length > 0 ? (
           <>
             <div className="form-row">
@@ -291,22 +279,7 @@ export default function DashboardNewPostForm({ post }) {
               <div className="form-row-sections">
                 {item.sections.map((section, index) => (
                   <div key={index} className="form-row-section">
-                    <button className="drag-button">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="size-6"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-                        />
-                      </svg>
-                    </button>
+                    <button className="drag-button">{index + 1 + "."}</button>
                     <p className="form-section-title">{section.title}</p>
                     <div className="form-row-section-actions">
                       <div className="dots">
@@ -316,6 +289,24 @@ export default function DashboardNewPostForm({ post }) {
                       </div>
 
                       <div className="dropdowns">
+                        <button
+                          className="btn"
+                          onClick={() => {
+                            setAddNewSectionActive(true);
+                            setSection(section);
+                            setSectionWithoutUpdates(section);
+                            setItem({
+                              ...item,
+                              sections: item.sections.filter(
+                                (s) => s !== section
+                              ),
+                            });
+                          }}
+                          type="button"
+                        >
+                          Uredi
+                        </button>
+
                         <button
                           className="btn"
                           onClick={() => {
@@ -341,6 +332,30 @@ export default function DashboardNewPostForm({ post }) {
             </div>
           </div>
         )}
+        <div className="form-row">
+          <button
+            className="btn black add-section-btn"
+            onClick={() => setAddNewSectionActive(true)}
+            type="button"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
+
+            <span>Dodaj novu sekciju</span>
+          </button>
+        </div>
         <DashboardAddNewSection
           item={item}
           setItem={setItem}
@@ -348,6 +363,10 @@ export default function DashboardNewPostForm({ post }) {
           setActive={setAddNewSectionActive}
           imagesToDelete={imagesToDelete}
           setImagesToDelete={setImagesToDelete}
+          section={section}
+          setSection={setSection}
+          setSectionWithoutUpdates={setSectionWithoutUpdates}
+          sectionWithoutUpdates={sectionWithoutUpdates}
         />
         <div className="form-row">
           <Button
@@ -376,7 +395,7 @@ export default function DashboardNewPostForm({ post }) {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth={1.4}
+              strokeWidth={1.1}
               stroke="currentColor"
               className="size-6"
             >
@@ -405,12 +424,37 @@ export default function DashboardNewPostForm({ post }) {
         </button>
         <h5 className="preview-header">Pretpregled</h5>
         <div className="preview-content">
-          {Array.isArray(item.sections) && item.sections.length > 0 ? (
+          {/* {Array.isArray(item.sections) &&
+            item.sections.length > 0 &&
             item.sections.map((section, index) => (
-              <JSXContentRenderer key={index} content={section.jsxContent} />
-            ))
-          ) : (
-            <p className="preview-content-msg">Nema sekcija za prikaz.</p>
+              <>
+                <JSXContentRenderer key={index} content={section.jsxContent} />
+              </>
+            ))}
+          {section.jsxContent && (
+            <JSXContentRenderer content={section.jsxContent} />
+          )} */}
+
+          {/* make the array of the item.sections and section if the section.title !== ""*/}
+          {/* 
+          order them by the index
+           */}
+
+          {Array.isArray(item.sections) &&
+            item.sections.length > 0 &&
+            item.sections
+              .filter((section) => section.title !== "")
+              .sort((a, b) => a.index - b.index)
+              .map((section, index) => (
+                <>
+                  <JSXContentRenderer
+                    key={index}
+                    content={section.jsxContent}
+                  />
+                </>
+              ))}
+          {section.jsxContent && (
+            <JSXContentRenderer content={section.jsxContent} />
           )}
         </div>
       </section>
