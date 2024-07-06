@@ -45,6 +45,13 @@
       @include flex(row, flex-start, center);
       border-left: 1px solid $gray-13;
 
+      .progress-bar-container {
+        width: 80%;
+        height: 100%;
+        @include flex(row, flex-start, center);
+        gap: 0.6rem;
+      }
+
       .items-table-image-placeholder {
         width: 2.9rem;
         height: 2.9rem;

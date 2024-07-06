@@ -1,5 +1,4 @@
 import { Inter } from "next/font/google";
-import { Caveat } from "next/font/google";
 import "@/styles/globals.scss";
 import { AppWrapper } from "./context";
 

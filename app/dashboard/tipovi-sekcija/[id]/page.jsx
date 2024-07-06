@@ -1,5 +1,5 @@
 // DashboardNewUser.js
-import DashboardNewSectionTypeForm from "@/components/DashboardNewSectionTypeForm";
+import DashboardNewSectionTypeForm from "@/components/dashboard/section-type/DashboardNewSectionTypeForm";
 import "@/styles/DashboardItem.scss";
 import prisma from "@/utils/db";
 

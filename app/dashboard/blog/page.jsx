@@ -1,4 +1,4 @@
-import PostsTable from "@/components/PostsTable";
+import PostsTable from "@/components/dashboard/post/PostsTable";
 
 export default function DashboardSectionTypesPage() {
   return (

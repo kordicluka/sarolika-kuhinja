@@ -1,4 +1,4 @@
-import DashboardPageNavigation from "@/components/DashboardPageNavigation";
+import DashboardPageNavigation from "@/components/dashboard/DashboardPageNavigation";
 import "@/styles/DashboardPage.scss";
 
 export default function DashboardUsersLayout({ children }) {

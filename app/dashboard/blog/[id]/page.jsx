@@ -1,5 +1,5 @@
 // DashboardNewPost.js
-import DashboardNewPostForm from "@/components/DashboardNewPostForm";
+import DashboardNewPostForm from "@/components/dashboard/post/DashboardNewPostForm";
 import "@/styles/DashboardItem.scss";
 import prisma from "@/utils/db";
 

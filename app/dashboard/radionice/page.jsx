@@ -1,5 +1,9 @@
-import React from "react";
+import WorkshopsTable from "@/components/dashboard/workshop/WorkshopsTable";
 
-export default function page() {
-  return <div>page</div>;
+export default function DashboardWorkshopPage() {
+  return (
+    <div className="items">
+      <WorkshopsTable />
+    </div>
+  );
 }

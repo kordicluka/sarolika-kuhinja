@@ -43,15 +43,19 @@ const renderElement = (element) => {
     case "h5":
     case "h6":
     case "p":
-      return React.createElement(type, { style: finalStyle }, data?.text);
+      return React.createElement(
+        type,
+        { style: finalStyle, className },
+        data?.text
+      );
     case "img":
       return (
         <NextImage
           src={"/uploads/" + data?.src}
           alt={data?.alt}
           style={finalStyle}
-          width={500}
-          height={500}
+          width={1500}
+          height={1500}
           className={className ? className : ""}
         />
       );
@@ -80,6 +84,14 @@ const renderElement = (element) => {
             <React.Fragment key={index}>{renderElement(child)}</React.Fragment>
           ))}
         </section>
+      );
+    case "content":
+      return (
+        <div
+          style={finalStyle}
+          className={className ? className : ""}
+          dangerouslySetInnerHTML={{ __html: data?.text }}
+        />
       );
 
     default:

@@ -1,4 +1,4 @@
-import LoginForm from "@/components/LoginForm";
+import LoginForm from "@/components/dashboard/LoginForm";
 import hero from "@/public/images/hero.webp";
 import "@/styles/LoginPage.scss";
 import { getServerSession } from "next-auth";

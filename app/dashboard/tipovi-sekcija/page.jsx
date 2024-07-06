@@ -1,4 +1,4 @@
-import SectionTypesTable from "@/components/SectionTypesTable";
+import SectionTypesTable from "@/components/dashboard/section-type/SectionTypesTable";
 
 export default function DashboardSectionTypesPage() {
   return (

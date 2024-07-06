@@ -1,8 +1,7 @@
 // DashboardNewUser.js
 import "@/styles/DashboardItem.scss";
-import DashboardNewUserForm from "@/components/DashboardNewUserForm";
+import DashboardNewUserForm from "@/components/dashboard/user/DashboardNewUserForm";
 import prisma from "@/utils/db";
-import NextImage from "next/image";
 
 export default async function DashboardNewUser({ params }) {
   const { id } = params;
