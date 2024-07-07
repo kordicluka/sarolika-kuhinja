@@ -1,23 +1,26 @@
 "use client";
 import { deleteUser } from "@/actions/UserActions";
-import React, { useState } from "react";
+import React from "react";
+import { toast } from "react-hot-toast";
+import ToasterComponent from "../ToasterComponent";
 
-export default function DeleteUserButton({ id }) {
-  const [isDeleting, setIsDeleting] = useState(false);
-
+export default function DeleteUserButton({ id, title }) {
   const deleteItem = async (id) => {
-    setIsDeleting(true);
+    const res = await deleteUser(id);
 
-    const { message, ok } = await deleteUser(id);
+    toast((t) => (
+      <ToasterComponent
+        title={"Brisanje korisnika: " + title}
+        t={t}
+        state={res?.ok ? "success" : "error"}
+        message={res?.message}
+      />
+    ));
 
-    if (!ok) {
-      alert(message);
+    if (!res.ok) {
+      alert(res.message);
     }
   };
 
-  return (
-    <button onClick={() => deleteItem(id)} disabled={isDeleting}>
-      {isDeleting ? "Deleting..." : "Obriši"}
-    </button>
-  );
+  return <button onClick={() => deleteItem(id)}>{"Obriši"}</button>;
 }

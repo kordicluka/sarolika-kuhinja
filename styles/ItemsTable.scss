@@ -1,8 +1,56 @@
 @import "./globals.scss";
 
+.items-header {
+  width: 100%;
+  padding: 0 15%;
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+  border-top: 1px solid rgba($color: $black, $alpha: 0.1);
+  @include flex(row, space-between, flex-end);
+  border-bottom: 1px solid $gray-14;
+  margin-bottom: 2rem;
+
+  .items-header-left,
+  .items-header-right {
+    @include flex(column, flex-end, flex-start);
+    gap: 0.5rem;
+
+    p {
+      font-size: 0.84rem;
+      font-weight: 400;
+      color: $gray-1;
+    }
+  }
+
+  .items-header-right {
+    .progress-bar-container {
+      width: 10rem;
+      @include flex(row, flex-start, center);
+      gap: 0.6rem;
+
+      span {
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: $gray-1;
+      }
+    }
+  }
+}
+
+.items-table-container {
+  width: 100%;
+  @include flex(column, flex-start, center);
+
+  .items-table {
+    width: 70%;
+    border-right: 1px solid $gray-14;
+  }
+}
+
 .items-table {
   @include flex(column, flex-start, flex-start);
   background-color: $gray-15;
+  width: 100%;
 
   .items-table-header {
     @include flex(row, flex-start, flex-start);
@@ -16,8 +64,8 @@
       height: 2rem;
       padding-left: 0.5rem;
       @include flex(row, flex-start, center);
-      background-color: $gray-14;
-      border: 1px solid $gray-12;
+      background-color: $gray-15;
+      border: 1px solid $gray-13;
       border-right: none;
 
       span {
@@ -29,7 +77,7 @@
   .items-table-row {
     @include flex(row, flex-start, flex-start);
     width: 100%;
-    border-bottom: 1px solid $gray-13;
+    border-bottom: 1px solid $gray-14;
     background-color: $white;
 
     &:nth-child(odd) {
@@ -43,7 +91,7 @@
       height: 3rem;
       padding-left: 0.5rem;
       @include flex(row, flex-start, center);
-      border-left: 1px solid $gray-13;
+      border-left: 1px solid $gray-14;
 
       .progress-bar-container {
         width: 80%;
@@ -94,7 +142,7 @@
           @include flex(column, flex-start, flex-start);
           display: none;
           border-radius: 0.3rem;
-          border: 1px solid $gray-12;
+          border: 1px solid $gray-13;
           overflow: hidden;
           cursor: pointer;
           z-index: 3;
@@ -112,7 +160,7 @@
             border: none;
             outline: none;
             @include flex(row, center, center);
-            border-bottom: 1px solid $gray-12;
+            border-bottom: 1px solid $gray-13;
             cursor: pointer;
 
             &:hover {

@@ -1,4 +1,3 @@
-// DashboardNewUserForm.js
 "use client";
 import { useRef, useState, useEffect } from "react";
 import { useImageUpload, useImageDelete } from "@/hooks/useImageUpload";
@@ -8,6 +7,8 @@ import "@/styles/DashboardItem.scss";
 import NextImage from "next/image";
 import { createUser, editUser } from "@/actions/UserActions";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
+import ToasterComponent from "../ToasterComponent";
 
 export default function DashboardNewUserForm({ user }) {
   const router = useRouter();
@@ -53,6 +54,17 @@ export default function DashboardNewUserForm({ user }) {
     if (!user?.id) {
       const res = await createUser(item);
 
+      let state = res?.ok ? "success" : "error";
+      let message = res?.message;
+      let title = "Dodavanje korisnika: " + item.name;
+
+      toast((t) => (
+        <ToasterComponent title={title} t={t} state={state} message={message} />
+      ));
+
+      state = res?.ok ? "success" : "error";
+      message = res?.message;
+
       if (res?.ok) {
         setItem({
           name: "",
@@ -60,20 +72,26 @@ export default function DashboardNewUserForm({ user }) {
           password: "",
           image: "",
         });
+
         router.push("/dashboard/korisnici");
-      } else {
-        alert("Error creating user:", res?.message);
       }
     } else {
       const res = await editUser(user.id, item);
+
+      toast((t) => (
+        <ToasterComponent
+          title={"Uređivanje korisnika: " + item.name}
+          t={t}
+          state={res?.ok ? "success" : "error"}
+          message={res?.message}
+        />
+      ));
 
       if (res?.ok) {
         if (imageToDelete) {
           await deleteImage(imageToDelete);
         }
         router.push("/dashboard/korisnici");
-      } else {
-        console.error("Error editing user:", res?.message);
       }
     }
   };

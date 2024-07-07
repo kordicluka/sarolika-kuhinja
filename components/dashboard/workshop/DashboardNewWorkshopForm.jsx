@@ -13,6 +13,8 @@ import DatePicker from "react-datepicker";
 import { format, parseISO, isDate } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import { hr } from "date-fns/locale";
+import { toast } from "react-hot-toast";
+import ToasterComponent from "../ToasterComponent";
 
 export default function DashboardNewWorkshopForm({ workshop }) {
   const router = useRouter();
@@ -107,14 +109,30 @@ export default function DashboardNewWorkshopForm({ workshop }) {
     if (!workshop?.id) {
       const res = await createWorkshop(updatedItem);
 
+      toast((t) => (
+        <ToasterComponent
+          title={"Dodavanje radionice: " + item.title}
+          t={t}
+          state={res?.ok ? "success" : "error"}
+          message={res?.message}
+        />
+      ));
+
       if (res?.ok) {
         deleteImagesThatAreMarkedForDeletion();
         router.push("/dashboard/radionice");
-      } else {
-        alert("Error creating workshop", res?.message);
       }
     } else {
       const res = await update(updatedItem);
+
+      toast((t) => (
+        <ToasterComponent
+          title={"Uređivanje radionice: " + item.title}
+          t={t}
+          state={res?.ok ? "success" : "error"}
+          message={res?.message}
+        />
+      ));
 
       if (res?.ok) {
         deleteImagesThatAreMarkedForDeletion();

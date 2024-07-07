@@ -1,4 +1,3 @@
-// actions/UserActions.js:
 "use server";
 import { hashPassword } from "@/utils/auth";
 import prisma from "@/utils/db";
@@ -8,15 +7,21 @@ export async function createUser(data) {
   try {
     const { name, email, password, image } = data; // Parse the request body
 
-    if (
-      !email ||
-      !email.includes("@") ||
-      !password ||
-      password.trim().length < 6
-    ) {
+    if (!email) {
+      return { message: "E-mail je obavezan.", ok: false };
+    }
+
+    if (!email.includes("@")) {
+      return { message: "E-mail mora sadržavati '@'.", ok: false };
+    }
+
+    if (!password) {
+      return { message: "Lozinka je obavezna.", ok: false };
+    }
+
+    if (password.trim().length < 6) {
       return {
-        message:
-          "Invalid input - password should be at least 6 characters long and email should be valid.",
+        message: "Lozinka mora biti duga najmanje 6 znakova.",
         ok: false,
       };
     }
@@ -24,10 +29,7 @@ export async function createUser(data) {
     const existingUser = await prisma.user.findUnique({ where: { email } });
 
     if (existingUser) {
-      return {
-        message: "User already exists!",
-        ok: false,
-      };
+      return { message: "Korisnik već postoji!", ok: false };
     }
 
     const hashedPassword = await hashPassword(password);
@@ -37,22 +39,27 @@ export async function createUser(data) {
     });
 
     return {
-      message: "Created user!",
+      message: "Korisnik je uspješno stvoren!",
       user,
       ok: true,
     };
   } catch (error) {
-    console.error("Error creating user:", error);
+    console.error("Greška pri stvaranju korisnika:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
 }
 
-// make the delete function
 export async function deleteUser(id) {
   try {
+    const user = await prisma.user.findUnique({ where: { id } });
+
+    if (!user) {
+      return { message: "Korisnik nije pronađen!", ok: false };
+    }
+
     await prisma.user.delete({
       where: {
         id: id,
@@ -62,13 +69,13 @@ export async function deleteUser(id) {
     revalidatePath("/dashboard/auth");
 
     return {
-      message: "User deleted!",
+      message: "Korisnik je uspješno izbrisan!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error deleting user:", error);
+    console.error("Greška pri brisanju korisnika:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -78,27 +85,33 @@ export async function editUser(id, data) {
   // Remove fields that are not valid for update
   const { password, createdAt, updatedAt, ...validData } = data;
 
+  if (!id) {
+    return { message: "ID korisnika je obavezan.", ok: false };
+  }
+
   try {
-    const user = await prisma.user.update({
-      where: {
-        id: id,
-      },
-      data: {
-        ...validData,
-      },
+    const user = await prisma.user.findUnique({ where: { id } });
+
+    if (!user) {
+      return { message: "Korisnik ne postoji!", ok: false };
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { id },
+      data: validData,
     });
 
-    revalidatePath("/dashboard/auth/ " + id);
+    revalidatePath("/dashboard/auth/" + id);
 
     return {
-      message: "User updated!",
-      user,
+      message: "Korisnik je uspješno ažuriran!",
+      user: updatedUser,
       ok: true,
     };
   } catch (error) {
-    console.error("Error updating user:", error);
+    console.error("Greška pri ažuriranju korisnika:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -107,9 +120,7 @@ export async function editUser(id, data) {
 export async function getUser(id) {
   try {
     const user = await prisma.user.findUnique({
-      where: {
-        id: id,
-      },
+      where: { id },
       select: {
         id: true,
         name: true,
@@ -119,21 +130,18 @@ export async function getUser(id) {
     });
 
     if (!user) {
-      return {
-        message: "User not found!",
-        ok: false,
-      };
+      return { message: "Korisnik nije pronađen!", ok: false };
     }
 
     return {
       user,
-      message: "User found!",
+      message: "Korisnik je uspješno pronađen!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error getting user:", error);
+    console.error("Greška pri dobivanju korisnika:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }

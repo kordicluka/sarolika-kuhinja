@@ -3,6 +3,8 @@ import React from "react";
 import { useTogglePostVisibility } from "@/hooks/usePosts";
 import { useToggleMealVisibility } from "@/hooks/useMeals";
 import { useToggleWorkshopVisibility } from "@/hooks/useWorkshops";
+import { toast } from "react-hot-toast";
+import ToasterComponent from "./ToasterComponent";
 
 export default function ToggleItemVisibility({ type, item }) {
   const {
@@ -26,13 +28,37 @@ export default function ToggleItemVisibility({ type, item }) {
   const handleToggle = async () => {
     switch (type) {
       case "post":
-        await togglePostVisibility(item.id);
+        const resPost = await togglePostVisibility(item.id);
+        toast((t) => (
+          <ToasterComponent
+            title={item.title}
+            t={t}
+            state={resPost?.ok ? "success" : "error"}
+            message={resPost?.message}
+          />
+        ));
         break;
       case "meal":
-        await toggleMealVisibility(item.id);
+        const resMeal = await toggleMealVisibility(item.id);
+        toast((t) => (
+          <ToasterComponent
+            title={item.title}
+            t={t}
+            state={resMeal?.ok ? "success" : "error"}
+            message={resMeal?.message}
+          />
+        ));
         break;
       case "workshop":
-        await toggleWorkshopVisibility(item.id);
+        const resWorkshop = await toggleWorkshopVisibility(item.id);
+        toast((t) => (
+          <ToasterComponent
+            title={item.title}
+            t={t}
+            state={resWorkshop?.ok ? "success" : "error"}
+            message={resWorkshop?.message}
+          />
+        ));
         break;
       default:
         break;

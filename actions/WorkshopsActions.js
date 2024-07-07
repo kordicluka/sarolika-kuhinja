@@ -10,8 +10,6 @@ import { unlink } from "fs/promises";
 export async function createWorkshop(data) {
   const session = await getServerSession(authOptions);
 
-  console.log("data", data);
-
   try {
     const {
       title,
@@ -24,20 +22,32 @@ export async function createWorkshop(data) {
       maxApplicant,
     } = data;
 
-    if (
-      !title ||
-      !description ||
-      typeof isVisible !== "boolean" ||
-      !sections ||
-      !image ||
-      !date ||
-      !maxApplicant
-    ) {
-      return {
-        message:
-          "Invalid input - title, image, description, isVisible, sections, maxApplicant and date are required.",
-        ok: false,
-      };
+    if (!title) {
+      return { message: "Naslov je obavezan.", ok: false };
+    }
+
+    if (!description) {
+      return { message: "Opis je obavezan.", ok: false };
+    }
+
+    if (typeof isVisible !== "boolean") {
+      return { message: "Vidljivost je obavezna.", ok: false };
+    }
+
+    if (!sections) {
+      return { message: "Sekcije su obavezne.", ok: false };
+    }
+
+    if (!image) {
+      return { message: "Slika je obavezna.", ok: false };
+    }
+
+    if (!date) {
+      return { message: "Datum je obavezan.", ok: false };
+    }
+
+    if (!maxApplicant) {
+      return { message: "Maksimalan broj prijava je obavezan.", ok: false };
     }
 
     const finalSlug = slug || generateSlug(title);
@@ -60,14 +70,14 @@ export async function createWorkshop(data) {
     revalidatePath("/dashboard/radionice");
 
     return {
-      message: "Created workshop!",
+      message: "Radionica je uspješno stvorena!",
       workshop,
       ok: true,
     };
   } catch (error) {
-    console.error("Error creating workshop:", error);
+    console.error("Greška pri stvaranju radionice:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -79,6 +89,10 @@ export async function deleteWorkshop(id) {
       where: { id },
     });
 
+    if (!workshop) {
+      return { message: "Radionica nije pronađena!", ok: false };
+    }
+
     if (workshop.image) {
       const key = workshop.image;
       const path = join(process.cwd(), "public", "uploads", key);
@@ -86,7 +100,7 @@ export async function deleteWorkshop(id) {
       try {
         await unlink(path);
       } catch (error) {
-        console.error("Error deleting file:", error);
+        console.error("Greška pri brisanju datoteke:", error);
       }
     }
 
@@ -97,13 +111,13 @@ export async function deleteWorkshop(id) {
     revalidatePath("/dashboard/radionice");
 
     return {
-      message: "Deleted workshop!",
+      message: "Radionica je uspješno izbrisana!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error deleting workshop:", error);
+    console.error("Greška pri brisanju radionice:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -124,12 +138,36 @@ export async function updateWorkshop(data) {
       maxApplicant,
     } = data;
 
-    if (!title || !description || typeof isVisible !== "boolean" || !image) {
-      return {
-        message:
-          "Invalid input - title, image, description, and isVisible are required.",
-        ok: false,
-      };
+    if (!id) {
+      return { message: "ID je obavezan.", ok: false };
+    }
+
+    if (!title) {
+      return { message: "Naslov je obavezan.", ok: false };
+    }
+
+    if (!description) {
+      return { message: "Opis je obavezan.", ok: false };
+    }
+
+    if (typeof isVisible !== "boolean") {
+      return { message: "Vidljivost je obavezna.", ok: false };
+    }
+
+    if (!sections) {
+      return { message: "Sekcije su obavezne.", ok: false };
+    }
+
+    if (!image) {
+      return { message: "Slika je obavezna.", ok: false };
+    }
+
+    if (!date) {
+      return { message: "Datum je obavezan.", ok: false };
+    }
+
+    if (!maxApplicant) {
+      return { message: "Maksimalan broj prijava je obavezan.", ok: false };
     }
 
     const existingWorkshop = await prisma.workshop.findUnique({
@@ -137,10 +175,7 @@ export async function updateWorkshop(data) {
     });
 
     if (!existingWorkshop) {
-      return {
-        message: "Workshop does not exist!",
-        ok: false,
-      };
+      return { message: "Radionica ne postoji!", ok: false };
     }
 
     const workshop = await prisma.workshop.update({
@@ -161,14 +196,14 @@ export async function updateWorkshop(data) {
     revalidatePath("/dashboard/radionice");
 
     return {
-      message: "Updated workshop!",
+      message: "Radionica je uspješno ažurirana!",
       workshop,
       ok: true,
     };
   } catch (error) {
-    console.error("Error updating workshop:", error);
+    console.error("Greška pri ažuriranju radionice:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -179,17 +214,17 @@ export async function getWorkshops() {
     const workshops = await prisma.workshop.findMany();
 
     return {
-      workshops: workshops.map((workshop) => ({
+      workshop: workshops.map((workshop) => ({
         ...workshop,
         sections: JSON.parse(workshop.sections),
       })),
-      message: "Got workshops!",
+      message: "Radionice su uspješno dobivene!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error getting workshops:", error);
+    console.error("Greška pri dobivanju radionica:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -202,10 +237,7 @@ export async function getWorkshop(id) {
     });
 
     if (!workshop) {
-      return {
-        message: "Workshop not found!",
-        ok: false,
-      };
+      return { message: "Radionica nije pronađena!", ok: false };
     }
 
     return {
@@ -213,13 +245,13 @@ export async function getWorkshop(id) {
         ...workshop,
         sections: JSON.parse(workshop.sections),
       },
-      message: "Got workshop!",
+      message: "Radionica je uspješno dobivena!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error getting workshop:", error);
+    console.error("Greška pri dobivanju radionice:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -232,10 +264,7 @@ export async function toggleWorkshopVisibility(id) {
     });
 
     if (!workshop) {
-      return {
-        message: "Workshop not found!",
-        ok: false,
-      };
+      return { message: "Radionica nije pronađena!", ok: false };
     }
 
     const isVisible = !workshop.isVisible;
@@ -250,13 +279,40 @@ export async function toggleWorkshopVisibility(id) {
     revalidatePath("/dashboard/radionice");
 
     return {
-      message: "Toggled workshop visibility!",
+      message: "Vidljivost radionice je uspješno promijenjena!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error toggling workshop visibility:", error);
+    console.error("Greška pri promjeni vidljivosti radionice:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
+      ok: false,
+    };
+  }
+}
+
+export async function getWorkshopBySlug(slug) {
+  try {
+    const workshop = await prisma.workshop.findUnique({
+      where: { slug },
+    });
+
+    if (!workshop) {
+      return { message: "Radionica nije pronađena!", ok: false };
+    }
+
+    return {
+      workshop: {
+        ...workshop,
+        sections: JSON.parse(workshop.sections),
+      },
+      message: "Radionica je uspješno dobivena!",
+      ok: true,
+    };
+  } catch (error) {
+    console.error("Greška pri dobivanju radionice:", error);
+    return {
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }

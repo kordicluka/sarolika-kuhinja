@@ -139,6 +139,7 @@ model Application {
   surname            String
   telephone          String
   email              String?
+  childName          String
   childAlergies      String?
   additionalNotes    String?
   workshopId         String

@@ -1,16 +1,26 @@
 "use client";
 import React from "react";
 import { deleteMeal } from "@/actions/MealsActions";
-
-const DeleteMealButton = ({ id }) => {
+import { toast } from "react-hot-toast";
+const DeleteMealButton = ({ id, title }) => {
   const handleDelete = async () => {
-    const response = await deleteMeal(id);
-    if (!response.ok) {
+    const res = await deleteMeal(id);
+
+    toast((t) => (
+      <ToasterComponent
+        title={"Brisanje obroka: " + title}
+        t={t}
+        state={res?.ok ? "success" : "error"}
+        message={res?.message}
+      />
+    ));
+
+    if (!res.ok) {
       alert("Failed to delete section type");
     }
   };
 
-  return <button onClick={handleDelete}>Delete</button>;
+  return <button onClick={handleDelete}>Izbrisi</button>;
 };
 
 export default DeleteMealButton;

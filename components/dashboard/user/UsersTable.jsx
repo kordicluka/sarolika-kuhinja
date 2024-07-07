@@ -55,7 +55,10 @@ export default async function UsersTable() {
 
             <div className="items-table-actions-dropdown">
               <a href={`/dashboard/korisnici/${items[index].id}`}> Uredi </a>
-              <DeleteUserButton id={items[index].id} />
+              <DeleteUserButton
+                id={items[index].id}
+                title={items[index].name}
+              />
             </div>
           </div>
         ),

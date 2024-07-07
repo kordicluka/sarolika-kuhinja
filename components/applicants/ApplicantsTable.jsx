@@ -1,5 +1,8 @@
 import prisma from "@/utils/db";
-import ItemsTable from "../ItemsTable";
+import ItemsTable from "../dashboard/ItemsTable";
+import ProgressBar from "../dashboard/ProgressBar";
+import { formatDate } from "@/utils/formatDate";
+import DeleteApplicationButton from "./DeleteApplicationButton";
 
 export default async function WorkshopApplicantsTable({ id }) {
   // Fetch the workshop and its applicants
@@ -29,6 +32,11 @@ export default async function WorkshopApplicantsTable({ id }) {
         getJSX: (index) => <span>{applications[index].surname}</span>,
       },
       {
+        title: "Ime Djeteta",
+        width: "15%",
+        getJSX: (index) => <span>{applications[index].childName}</span>,
+      },
+      {
         title: "Telefon",
         width: "15%",
         getJSX: (index) => <span>{applications[index].telephone}</span>,
@@ -39,17 +47,12 @@ export default async function WorkshopApplicantsTable({ id }) {
         getJSX: (index) => <span>{applications[index].email || "N/A"}</span>,
       },
       {
-        title: "Alergije Djece",
-        width: "15%",
-        getJSX: (index) => (
-          <span>{applications[index].childAlergies || "N/A"}</span>
-        ),
-      },
-      {
-        title: "Dozvola za Fotografiranje",
+        title: "Fotografiranje",
         width: "10%",
         getJSX: (index) => (
-          <span>{applications[index].photoPermission ? "Da" : "Ne"}</span>
+          <span>
+            {applications[index].photoPermission ? "Dopušteno" : "Nedopušteno"}
+          </span>
         ),
       },
       {
@@ -65,8 +68,9 @@ export default async function WorkshopApplicantsTable({ id }) {
               <a
                 href={`/dashboard/radionice/${id}/prijave/${applications[index].id}`}
               >
-                Pregledaj
+                Uredi
               </a>
+              <DeleteApplicationButton id={applications[index].id} />
             </div>
           </div>
         ),
@@ -74,5 +78,29 @@ export default async function WorkshopApplicantsTable({ id }) {
     ],
   };
 
-  return <ItemsTable items={applications} tableStructure={tableStructure} />;
+  return (
+    <>
+      <div className="items-header">
+        <div className="items-header-left">
+          <span className="back-button">Prijave za radionicu:</span>
+          <h4>{workshop.title}</h4>
+          <p className="date">{formatDate(workshop.createdAt)}</p>
+        </div>
+        <div className="items-header-right">
+          <div className="progress-bar-container">
+            <ProgressBar
+              current={applications.length}
+              total={workshop.maxApplicant}
+            />
+            <span className="progress-bar-text">
+              {applications.length}/{workshop.maxApplicant}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className="items-table-container">
+        <ItemsTable items={applications} tableStructure={tableStructure} />
+      </div>
+    </>
+  );
 }

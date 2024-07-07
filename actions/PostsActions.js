@@ -13,18 +13,24 @@ export async function createPost(data) {
   try {
     const { title, slug, description, isVisible, sections, image } = data;
 
-    if (
-      !title ||
-      !description ||
-      typeof isVisible !== "boolean" ||
-      !sections ||
-      !image
-    ) {
-      return {
-        message:
-          "Invalid input - title, image, description, isVisible, and sections are required.",
-        ok: false,
-      };
+    if (!title) {
+      return { message: "Naslov je obavezan.", ok: false };
+    }
+
+    if (!description) {
+      return { message: "Opis je obavezan.", ok: false };
+    }
+
+    if (typeof isVisible !== "boolean") {
+      return { message: "Vidljivost je obavezna.", ok: false };
+    }
+
+    if (!sections) {
+      return { message: "Sekcije su obavezne.", ok: false };
+    }
+
+    if (!image) {
+      return { message: "Slika je obavezna.", ok: false };
     }
 
     const finalSlug = slug || generateSlug(title);
@@ -45,14 +51,14 @@ export async function createPost(data) {
     revalidatePath("/dashboard/posts");
 
     return {
-      message: "Created post!",
+      message: "Objava je uspješno stvorena!",
       post,
       ok: true,
     };
   } catch (error) {
-    console.error("Error creating post:", error);
+    console.error("Greška pri stvaranju posta:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -64,6 +70,10 @@ export async function deletePost(id) {
       where: { id },
     });
 
+    if (!post) {
+      return { message: "Post nije pronađen!", ok: false };
+    }
+
     if (post.image) {
       const key = post.image;
       const path = join(process.cwd(), "public", "uploads", key);
@@ -71,7 +81,7 @@ export async function deletePost(id) {
       try {
         await unlink(path);
       } catch (error) {
-        console.error("Error deleting file:", error);
+        console.error("Greška pri brisanju datoteke:", error);
       }
     }
 
@@ -82,13 +92,13 @@ export async function deletePost(id) {
     revalidatePath("/dashboard/posts");
 
     return {
-      message: "Deleted post!",
+      message: "Post je uspješno izbrisan!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error deleting post:", error);
+    console.error("Greška pri brisanju posta:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -99,12 +109,28 @@ export async function updatePost(data) {
   try {
     const { id, image, title, slug, description, isVisible, sections } = data;
 
-    if (!title || !description || typeof isVisible !== "boolean" || !image) {
-      return {
-        message:
-          "Invalid input - id, title, image, slug, description, isVisible, sections are required.",
-        ok: false,
-      };
+    if (!id) {
+      return { message: "ID posta je obavezan.", ok: false };
+    }
+
+    if (!title) {
+      return { message: "Naslov je obavezan.", ok: false };
+    }
+
+    if (!description) {
+      return { message: "Opis je obavezan.", ok: false };
+    }
+
+    if (typeof isVisible !== "boolean") {
+      return { message: "Vidljivost je obavezna.", ok: false };
+    }
+
+    if (!sections) {
+      return { message: "Sekcije su obavezne.", ok: false };
+    }
+
+    if (!image) {
+      return { message: "Slika je obavezna.", ok: false };
     }
 
     const existingPost = await prisma.post.findUnique({
@@ -112,10 +138,7 @@ export async function updatePost(data) {
     });
 
     if (!existingPost) {
-      return {
-        message: "Post does not exist!",
-        ok: false,
-      };
+      return { message: "Objava ne postoji!", ok: false };
     }
 
     const post = await prisma.post.update({
@@ -134,14 +157,14 @@ export async function updatePost(data) {
     revalidatePath("/dashboard/posts");
 
     return {
-      message: "Updated post!",
+      message: "Post je uspješno ažuriran!",
       post,
       ok: true,
     };
   } catch (error) {
-    console.error("Error updating post:", error);
+    console.error("Greška pri ažuriranju objave:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -156,13 +179,13 @@ export async function getPosts() {
         ...post,
         sections: JSON.parse(post.sections),
       })),
-      message: "Got posts!",
+      message: "Objave su uspješno dostavljeni!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error getting posts:", error);
+    console.error("Greška pri dobivanju objave:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -175,10 +198,7 @@ export async function getPost(id) {
     });
 
     if (!post) {
-      return {
-        message: "Post not found!",
-        ok: false,
-      };
+      return { message: "Objava nije pronađena!", ok: false };
     }
 
     return {
@@ -186,13 +206,13 @@ export async function getPost(id) {
         ...post,
         sections: JSON.parse(post.sections),
       },
-      message: "Got post!",
+      message: "Post je uspješno dobiven!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error getting post:", error);
+    console.error("Greška pri dobivanju objave:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -205,10 +225,7 @@ export async function togglePostVisibility(id) {
     });
 
     if (!post) {
-      return {
-        message: "Post not found!",
-        ok: false,
-      };
+      return { message: "Objava nije pronađen!", ok: false };
     }
 
     const isVisible = !post.isVisible;
@@ -223,13 +240,39 @@ export async function togglePostVisibility(id) {
     revalidatePath("/dashboard/posts");
 
     return {
-      message: "Toggled post visibility!",
+      message: "Vidljivost objave je uspješno promijenjena!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error toggling post visibility:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
+      ok: false,
+    };
+  }
+}
+
+export async function getPostBySlug(slug) {
+  try {
+    const post = await prisma.post.findFirst({
+      where: { slug },
+    });
+
+    if (!post) {
+      return { message: "Objava nije pronađen!", ok: false };
+    }
+
+    return {
+      post: {
+        ...post,
+        sections: JSON.parse(post.sections),
+      },
+      message: "Objava je uspješno dobiven!",
+      ok: true,
+    };
+  } catch (error) {
+    console.error("Greška pri dobivanju posta:", error);
+    return {
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }

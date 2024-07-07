@@ -1,4 +1,4 @@
-import WorkshopApplicantsTable from "@/components/dashboard/workshop/WorkshopApplicantsTable";
+import WorkshopApplicantsTable from "@/components/applicants/ApplicantsTable";
 
 export default function DashboardWorkshopApplicantsPage({ params }) {
   const { id } = params;

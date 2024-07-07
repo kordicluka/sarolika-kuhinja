@@ -11,6 +11,8 @@ import {
   useUpdateSectionType,
 } from "@/hooks/useSectionTypes";
 import JSXContentRenderer from "@/components/JSXContentRender";
+import { toast } from "react-hot-toast";
+import ToasterComponent from "../ToasterComponent";
 
 export default function DashboardNewSectionTypeForm({ sectionType }) {
   const router = useRouter();
@@ -205,6 +207,15 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
     if (!sectionType?.id) {
       const res = await createSectionType(item);
 
+      toast((t) => (
+        <ToasterComponent
+          title={"Dodavanje tipa sekcije: " + sectionType.title}
+          t={t}
+          state={res?.ok ? "success" : "error"}
+          message={res?.message}
+        />
+      ));
+
       if (res?.ok) {
         setItem({
           title: "",
@@ -217,6 +228,15 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
       }
     } else {
       const res = await update(item);
+
+      toast((t) => (
+        <ToasterComponent
+          title={"Uređivanje tipa sekcije: " + sectionType.title}
+          t={t}
+          state={res?.ok ? "success" : "error"}
+          message={res?.message}
+        />
+      ));
 
       if (res?.ok) {
         if (imageToDelete) {

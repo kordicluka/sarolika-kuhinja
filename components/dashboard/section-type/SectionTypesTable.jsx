@@ -40,7 +40,10 @@ export default async function SectionTypesTable() {
                 {" "}
                 Uredi{" "}
               </a>
-              <DeleteSectionTypeButton id={items[index].id} />
+              <DeleteSectionTypeButton
+                id={items[index].id}
+                title={items[index].title}
+              />
             </div>
           </div>
         ),

@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import { useCreatePost, useUpdatePost } from "@/hooks/usePosts";
 import JSXContentRenderer from "../../JSXContentRender";
 import DashboardAddNewSection from "../sections/DashboardAddNewSection";
+import { toast } from "react-hot-toast";
+import ToasterComponent from "../ToasterComponent";
 
 export default function DashboardNewPostForm({ post }) {
   const router = useRouter();
@@ -87,6 +89,15 @@ export default function DashboardNewPostForm({ post }) {
     if (!post?.id) {
       const res = await createPost(item);
 
+      toast((t) => (
+        <ToasterComponent
+          title={"Dodavanje objave: " + item.title}
+          t={t}
+          state={res?.ok ? "success" : "error"}
+          message={res?.message}
+        />
+      ));
+
       if (res?.ok) {
         deleteImagesThatAreMarkedForDeletion();
         router.push("/dashboard/blog");
@@ -108,6 +119,15 @@ export default function DashboardNewPostForm({ post }) {
       }
 
       const res = await update(item);
+
+      toast((t) => (
+        <ToasterComponent
+          title={"Uređivanje objave: " + item.title}
+          t={t}
+          state={res?.ok ? "success" : "error"}
+          message={res?.message}
+        />
+      ));
 
       if (res?.ok) {
         deleteImagesThatAreMarkedForDeletion();

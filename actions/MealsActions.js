@@ -13,18 +13,24 @@ export async function createMeal(data) {
   try {
     const { title, slug, description, isVisible, sections, image } = data;
 
-    if (
-      !title ||
-      !description ||
-      typeof isVisible !== "boolean" ||
-      !sections ||
-      !image
-    ) {
-      return {
-        message:
-          "Invalid input - title, image, description, isVisible, and sections are required.",
-        ok: false,
-      };
+    if (!title) {
+      return { message: "Naslov je obavezan.", ok: false };
+    }
+
+    if (!description) {
+      return { message: "Opis je obavezan.", ok: false };
+    }
+
+    if (typeof isVisible !== "boolean") {
+      return { message: "Vidljivost je obavezna.", ok: false };
+    }
+
+    if (!sections) {
+      return { message: "Sekcije su obavezne.", ok: false };
+    }
+
+    if (!image) {
+      return { message: "Slika je obavezna.", ok: false };
     }
 
     const finalSlug = slug || generateSlug(title);
@@ -45,14 +51,14 @@ export async function createMeal(data) {
     revalidatePath("/dashboard/jela");
 
     return {
-      message: "Created Meal!",
+      message: "Jelo je uspješno stvoreno!",
       meal,
       ok: true,
     };
   } catch (error) {
-    console.error("Error creating Meal:", error);
+    console.error("Greška pri stvaranju jela:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -64,6 +70,10 @@ export async function deleteMeal(id) {
       where: { id },
     });
 
+    if (!meal) {
+      return { message: "Jelo nije pronađeno!", ok: false };
+    }
+
     if (meal.image) {
       const key = meal.image;
       const path = join(process.cwd(), "public", "uploads", key);
@@ -71,7 +81,7 @@ export async function deleteMeal(id) {
       try {
         await unlink(path);
       } catch (error) {
-        console.error("Error deleting file:", error);
+        console.error("Greška pri brisanju datoteke:", error);
       }
     }
 
@@ -82,13 +92,13 @@ export async function deleteMeal(id) {
     revalidatePath("/dashboard/jela");
 
     return {
-      message: "Deleted Meal!",
+      message: "Jelo je uspješno izbrisano!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error deleting Meal:", error);
+    console.error("Greška pri brisanju jela:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -99,12 +109,28 @@ export async function updateMeal(data) {
   try {
     const { id, image, title, slug, description, isVisible, sections } = data;
 
-    if (!title || !description || typeof isVisible !== "boolean" || !image) {
-      return {
-        message:
-          "Invalid input - id, title, image, slug, description, isVisible, sections are required.",
-        ok: false,
-      };
+    if (!id) {
+      return { message: "ID jela je obavezan.", ok: false };
+    }
+
+    if (!title) {
+      return { message: "Naslov je obavezan.", ok: false };
+    }
+
+    if (!description) {
+      return { message: "Opis je obavezan.", ok: false };
+    }
+
+    if (typeof isVisible !== "boolean") {
+      return { message: "Vidljivost je obavezna.", ok: false };
+    }
+
+    if (!sections) {
+      return { message: "Sekcije su obavezne.", ok: false };
+    }
+
+    if (!image) {
+      return { message: "Slika je obavezna.", ok: false };
     }
 
     const existingMeal = await prisma.meal.findUnique({
@@ -112,10 +138,7 @@ export async function updateMeal(data) {
     });
 
     if (!existingMeal) {
-      return {
-        message: "Meal does not exist!",
-        ok: false,
-      };
+      return { message: "Jelo ne postoji!", ok: false };
     }
 
     const meal = await prisma.meal.update({
@@ -134,14 +157,14 @@ export async function updateMeal(data) {
     revalidatePath("/dashboard/jela");
 
     return {
-      message: "Updated Meal!",
+      message: "Jelo je uspješno ažurirano!",
       meal,
       ok: true,
     };
   } catch (error) {
-    console.error("Error updating Meal:", error);
+    console.error("Greška pri ažuriranju jela:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -156,13 +179,13 @@ export async function getMeals() {
         ...meal,
         sections: JSON.parse(meal.sections),
       })),
-      message: "Got Meals!",
+      message: "Jela su uspješno dobivena!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error getting Meals:", error);
+    console.error("Greška pri dobivanju jela:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -170,15 +193,12 @@ export async function getMeals() {
 
 export async function getMeal(id) {
   try {
-    const meal = await prisma.Meal.findUnique({
+    const meal = await prisma.meal.findUnique({
       where: { id },
     });
 
     if (!meal) {
-      return {
-        message: "Meal not found!",
-        ok: false,
-      };
+      return { message: "Jelo nije pronađeno!", ok: false };
     }
 
     return {
@@ -186,13 +206,13 @@ export async function getMeal(id) {
         ...meal,
         sections: JSON.parse(meal.sections),
       },
-      message: "Got Meal!",
+      message: "Jelo je uspješno dobiveno!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error getting Meal:", error);
+    console.error("Greška pri dobivanju jela:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -205,10 +225,7 @@ export async function toggleMealVisibility(id) {
     });
 
     if (!meal) {
-      return {
-        message: "Meal not found!",
-        ok: false,
-      };
+      return { message: "Jelo nije pronađeno!", ok: false };
     }
 
     const isVisible = !meal.isVisible;
@@ -223,13 +240,40 @@ export async function toggleMealVisibility(id) {
     revalidatePath("/dashboard/jela");
 
     return {
-      message: "Toggled Meal visibility!",
+      message: "Vidljivost jela je uspješno promijenjena!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error toggling Meal visibility:", error);
+    console.error("Greška pri promjeni vidljivosti jela:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
+      ok: false,
+    };
+  }
+}
+
+export async function getMealBySlug(slug) {
+  try {
+    const meal = await prisma.meal.findUnique({
+      where: { slug },
+    });
+
+    if (!meal) {
+      return { message: "Jelo nije pronađeno!", ok: false };
+    }
+
+    return {
+      meal: {
+        ...meal,
+        sections: JSON.parse(meal.sections),
+      },
+      message: "Jelo je uspješno dobiveno!",
+      ok: true,
+    };
+  } catch (error) {
+    console.error("Greška pri dobivanju jela:", error);
+    return {
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }

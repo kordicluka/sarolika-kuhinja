@@ -8,11 +8,16 @@ export async function createSectionType(data) {
   try {
     const { title, jsxContent, image } = data;
 
-    if (!title || !jsxContent || !image) {
-      return {
-        message: "Invalid input - title, image and jsxContent are required.",
-        ok: false,
-      };
+    if (!title) {
+      return { message: "Naslov je obavezan.", ok: false };
+    }
+
+    if (!jsxContent) {
+      return { message: "JSX sadržaj je obavezan.", ok: false };
+    }
+
+    if (!image) {
+      return { message: "Slika je obavezna.", ok: false };
     }
 
     const existingSectionType = await prisma.sectionType.findUnique({
@@ -20,10 +25,7 @@ export async function createSectionType(data) {
     });
 
     if (existingSectionType) {
-      return {
-        message: "Section type already exists!",
-        ok: false,
-      };
+      return { message: "Tip sekcije već postoji!", ok: false };
     }
 
     const sectionType = await prisma.sectionType.create({
@@ -33,14 +35,14 @@ export async function createSectionType(data) {
     revalidatePath("/dashboard/section-types");
 
     return {
-      message: "Created section type!",
+      message: "Tip sekcije je uspješno stvoren!",
       sectionType,
       ok: true,
     };
   } catch (error) {
-    console.error("Error creating section type:", error);
+    console.error("Greška pri stvaranju tipa sekcije:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -48,42 +50,39 @@ export async function createSectionType(data) {
 
 export async function deleteSectionType(id) {
   try {
-    // get the section type
     const sectionType = await prisma.sectionType.findUnique({
       where: { id },
     });
 
-    // if the section type has image
+    if (!sectionType) {
+      return { message: "Tip sekcije nije pronađen!", ok: false };
+    }
+
     if (sectionType.image) {
-      // delete the image
-
       const key = sectionType.image;
-
       const path = join(process.cwd(), "public", "uploads", key);
 
       try {
         await unlink(path);
       } catch (error) {
-        console.error("Error deleting file:", error);
+        console.error("Greška pri brisanju datoteke:", error);
       }
     }
 
     await prisma.sectionType.delete({
-      where: {
-        id: id,
-      },
+      where: { id: id },
     });
 
     revalidatePath("/dashboard/section-types");
 
     return {
-      message: "Deleted section type!",
+      message: "Tip sekcije je uspješno izbrisan!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error deleting section type:", error);
+    console.error("Greška pri brisanju tipa sekcije:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -93,11 +92,20 @@ export async function updateSectionType(data) {
   try {
     const { id, title, jsxContent, image } = data;
 
-    if (!id || !title || !jsxContent || !image) {
-      return {
-        message: "Invalid input - id, title, and jsxContent are required.",
-        ok: false,
-      };
+    if (!id) {
+      return { message: "ID tipa sekcije je obavezan.", ok: false };
+    }
+
+    if (!title) {
+      return { message: "Naslov je obavezan.", ok: false };
+    }
+
+    if (!jsxContent) {
+      return { message: "JSX sadržaj je obavezan.", ok: false };
+    }
+
+    if (!image) {
+      return { message: "Slika je obavezna.", ok: false };
     }
 
     const existingSectionType = await prisma.sectionType.findUnique({
@@ -105,10 +113,7 @@ export async function updateSectionType(data) {
     });
 
     if (!existingSectionType) {
-      return {
-        message: "Section type does not exist!",
-        ok: false,
-      };
+      return { message: "Tip sekcije ne postoji!", ok: false };
     }
 
     const sectionType = await prisma.sectionType.update({
@@ -119,14 +124,14 @@ export async function updateSectionType(data) {
     revalidatePath("/dashboard/section-types");
 
     return {
-      message: "Updated section type!",
+      message: "Tip sekcije je uspješno ažuriran!",
       sectionType,
       ok: true,
     };
   } catch (error) {
-    console.error("Error updating section type:", error);
+    console.error("Greška pri ažuriranju tipa sekcije:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -141,13 +146,13 @@ export async function getSectionTypes() {
         ...type,
         jsxContent: JSON.parse(type.jsxContent),
       })),
-      message: "Got section types!",
+      message: "Tipovi sekcija su uspješno dobiveni!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error getting section types:", error);
+    console.error("Greška pri dobivanju tipova sekcija:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }
@@ -160,10 +165,7 @@ export async function getSectionType(id) {
     });
 
     if (!sectionType) {
-      return {
-        message: "Section type not found!",
-        ok: false,
-      };
+      return { message: "Tip sekcije nije pronađen!", ok: false };
     }
 
     return {
@@ -171,13 +173,13 @@ export async function getSectionType(id) {
         ...sectionType,
         jsxContent: JSON.parse(sectionType.jsxContent),
       },
-      message: "Got section type!",
+      message: "Tip sekcije je uspješno dobiven!",
       ok: true,
     };
   } catch (error) {
-    console.error("Error getting section type:", error);
+    console.error("Greška pri dobivanju tipa sekcije:", error);
     return {
-      message: "Internal server error.",
+      message: "Interna greška poslužitelja.",
       ok: false,
     };
   }

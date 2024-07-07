@@ -4,6 +4,7 @@ import DeleteWorkshopsButton from "./DeleteWorkshopsButton";
 import prisma from "@/utils/db";
 import ToggleItemVisibility from "../ToggleItemVisibility";
 import ProgressBar from "../ProgressBar";
+import { formatDate } from "@/utils/formatDate";
 
 export default async function WorkshopsTable() {
   const items = await prisma.workshop.findMany({
@@ -39,8 +40,13 @@ export default async function WorkshopsTable() {
       },
       {
         title: "Naslov",
-        width: "40%",
+        width: "30%",
         getJSX: (index) => <span>{items[index].title}</span>,
+      },
+      {
+        title: "Datum održavanja",
+        width: "10%",
+        getJSX: (index) => <span>{formatDate(items[index].date)}</span>,
       },
       {
         title: "Broj prijava",
@@ -60,11 +66,7 @@ export default async function WorkshopsTable() {
       {
         title: "Datum kreiranja",
         width: "10%",
-        getJSX: (index) => (
-          <span>
-            {new Date(items[index].createdAt).toLocaleDateString("hr-HR")}
-          </span>
-        ),
+        getJSX: (index) => <span> {formatDate(items[index].createdAt)}</span>,
       },
       {
         title: "Vidljivost",
@@ -89,7 +91,10 @@ export default async function WorkshopsTable() {
               </a>
               <a href={`/dashboard/radionice/${items[index].id}`}> Uredi </a>
 
-              <DeleteWorkshopsButton id={items[index].id} />
+              <DeleteWorkshopsButton
+                id={items[index].id}
+                title={items[index].title}
+              />
             </div>
           </div>
         ),
