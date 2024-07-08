@@ -45,7 +45,6 @@ export default function Hero() {
           Sve radionice
         </a>
       </div>
-      <div className="marquee"></div>
     </section>
   );
 }

@@ -1,12 +1,12 @@
 @import "./globals.scss";
 
-header {
+.dashboard-header {
   width: 100%;
   @include flex(column, center, center);
   position: fixed;
-  top: 0;
+  top: 0rem;
   left: 0;
-  z-index: 5;
+  z-index: 1010;
   border-bottom: 1px solid rgba($color: $white, $alpha: 0.15);
 
   .top-bar {
@@ -54,7 +54,7 @@ header {
     }
   }
 
-  .header {
+  .dashboard-header-header {
     width: 100%;
     @include flex(row, space-between, center);
     background-color: $primary;
@@ -66,6 +66,7 @@ header {
       padding: 0 2rem;
       position: relative;
       gap: 3rem;
+
       .header-left-page-info {
         @include flex(row, flex-end, flex-end);
         height: 100%;

@@ -21,7 +21,7 @@ export default async function DashboardHeader() {
           </div>
         </div>
       </section>
-      <section className="header">
+      <section className="dashboard-header-header">
         <div className="header-left">
           <div className="header-left-page-info">
             {" "}
