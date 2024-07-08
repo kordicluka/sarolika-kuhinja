@@ -22,5 +22,5 @@ export default function DeleteUserButton({ id, title }) {
     }
   };
 
-  return <button onClick={() => deleteItem(id)}>{"Obriši"}</button>;
+  return <button onClick={() => deleteItem(id)}>Obriši</button>;
 }

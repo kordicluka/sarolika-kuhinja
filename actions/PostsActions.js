@@ -92,11 +92,11 @@ export async function deletePost(id) {
     revalidatePath("/dashboard/posts");
 
     return {
-      message: "Post je uspješno izbrisan!",
+      message: "Objava je uspješno izbrisana!",
       ok: true,
     };
   } catch (error) {
-    console.error("Greška pri brisanju posta:", error);
+    console.error("Greška pri brisanju objave:", error);
     return {
       message: "Interna greška poslužitelja.",
       ok: false,
@@ -157,7 +157,7 @@ export async function updatePost(data) {
     revalidatePath("/dashboard/posts");
 
     return {
-      message: "Post je uspješno ažuriran!",
+      message: "Objava je uspješno ažuriran!",
       post,
       ok: true,
     };
@@ -206,7 +206,7 @@ export async function getPost(id) {
         ...post,
         sections: JSON.parse(post.sections),
       },
-      message: "Post je uspješno dobiven!",
+      message: "Objava je uspješno dobivena!",
       ok: true,
     };
   } catch (error) {

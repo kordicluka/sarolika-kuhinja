@@ -8,6 +8,8 @@ export function AppWrapper({ children }) {
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
   const [sectionTypes, setSectionTypes] = useState([]);
+  const [meals, setMeals] = useState([]);
+  const [workshops, setWorkshops] = useState([]);
 
   return (
     <AppContext.Provider
@@ -18,6 +20,12 @@ export function AppWrapper({ children }) {
         setPosts,
         sectionTypes,
         setSectionTypes,
+        meals,
+        setMeals,
+        workshops,
+        setWorkshops,
+        user,
+        setUser,
       }}
     >
       {children}

@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import { useCreateMeal, useUpdateMeal } from "@/hooks/useMeals";
 import JSXContentRenderer from "../../JSXContentRender";
 import DashboardAddNewSection from "../sections/DashboardAddNewSection";
+import { toast } from "react-hot-toast";
+import ToasterComponent from "../ToasterComponent";
 
 export default function DashboardNewMealForm({ meal }) {
   const router = useRouter();
@@ -87,11 +89,18 @@ export default function DashboardNewMealForm({ meal }) {
     if (!meal?.id) {
       const res = await createMeal(item);
 
+      toast((t) => (
+        <ToasterComponent
+          title={"Dodavanje jela: " + item.title}
+          t={t}
+          state={res?.ok ? "success" : "error"}
+          message={res?.message}
+        />
+      ));
+
       if (res?.ok) {
         deleteImagesThatAreMarkedForDeletion();
         router.push("/dashboard/jela");
-      } else {
-        alert("Error creating Meal", res?.message);
       }
     } else {
       if (sectionWithoutUpdates.title !== "") {
@@ -108,6 +117,15 @@ export default function DashboardNewMealForm({ meal }) {
       }
 
       const res = await update(item);
+
+      toast((t) => (
+        <ToasterComponent
+          title={"Uređivanje jela: " + item.title}
+          t={t}
+          state={res?.ok ? "success" : "error"}
+          message={res?.message}
+        />
+      ));
 
       if (res?.ok) {
         deleteImagesThatAreMarkedForDeletion();

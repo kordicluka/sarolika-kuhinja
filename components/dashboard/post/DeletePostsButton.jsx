@@ -16,10 +16,6 @@ const DeletePostsButton = ({ id, title }) => {
         message={res?.message}
       />
     ));
-
-    if (!res.ok) {
-      alert("Failed to delete section type");
-    }
   };
 
   return <button onClick={handleDelete}>Delete</button>;

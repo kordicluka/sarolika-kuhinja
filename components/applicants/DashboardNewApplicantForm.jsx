@@ -9,6 +9,8 @@ import {
   createApplication,
   updateApplication,
 } from "@/actions/ApplicationActions";
+import { toast } from "react-hot-toast";
+import ToasterComponent from "../dashboard/ToasterComponent";
 
 export default function DashboardNewApplicantForm({ application, workshopID }) {
   const router = useRouter();
@@ -41,6 +43,15 @@ export default function DashboardNewApplicantForm({ application, workshopID }) {
     if (!application?.id) {
       const res = await createApplication(formData);
 
+      toast((t) => (
+        <ToasterComponent
+          title={"Dodavanje prijave: " + formData.name}
+          t={t}
+          state={res?.ok ? "success" : "error"}
+          message={res?.message}
+        />
+      ));
+
       if (res?.ok) {
         setFormData({
           name: "",
@@ -53,11 +64,18 @@ export default function DashboardNewApplicantForm({ application, workshopID }) {
           photoPermission: false,
         });
         router.push("/dashboard/radionice/" + workshopID + "/prijave");
-      } else {
-        alert("Error creating application:", res?.message);
       }
     } else {
       const res = await updateApplication({ id: application.id, ...formData });
+
+      toast((t) => (
+        <ToasterComponent
+          title={"Uređivanje prijave: " + formData.name}
+          t={t}
+          state={res?.ok ? "success" : "error"}
+          message={res?.message}
+        />
+      ));
 
       if (res?.ok) {
         if (imageToDelete) {

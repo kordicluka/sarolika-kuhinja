@@ -9,7 +9,7 @@ export default async function DashboardHeader() {
   const session = await getServerSession(authOptions);
 
   return (
-    <header>
+    <header className="dashboard-header">
       <section className="top-bar">
         <DashboardHeaderDropdowns />
         <div className="time-and-made-by">

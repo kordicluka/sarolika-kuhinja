@@ -54,7 +54,10 @@ export default async function SectionTypesTable() {
 
             <div className="items-table-actions-dropdown">
               <a href={`/dashboard/blog/${items[index].id}`}> Uredi </a>
-              <DeletePostsButton id={items[index].id} />
+              <DeletePostsButton
+                id={items[index].id}
+                title={items[index].title}
+              />
             </div>
           </div>
         ),

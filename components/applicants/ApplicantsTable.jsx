@@ -70,7 +70,10 @@ export default async function WorkshopApplicantsTable({ id }) {
               >
                 Uredi
               </a>
-              <DeleteApplicationButton id={applications[index].id} />
+              <DeleteApplicationButton
+                id={applications[index].id}
+                title={applications[index].name}
+              />
             </div>
           </div>
         ),

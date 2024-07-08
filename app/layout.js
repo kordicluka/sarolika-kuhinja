@@ -1,6 +1,8 @@
+// app/layout.js
 import { Inter } from "next/font/google";
 import "@/styles/globals.scss";
 import { AppWrapper } from "./context";
+import { Header } from "@/components/Header";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,7 +15,7 @@ export const metadata = {
     "Radionice za djecu u kojima učimo o hrani i pripremamo zdrave obroke.",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, to }) {
   return (
     <html lang="hr">
       <head>

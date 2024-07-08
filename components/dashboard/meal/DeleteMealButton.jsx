@@ -2,6 +2,7 @@
 import React from "react";
 import { deleteMeal } from "@/actions/MealsActions";
 import { toast } from "react-hot-toast";
+import ToasterComponent from "../ToasterComponent";
 const DeleteMealButton = ({ id, title }) => {
   const handleDelete = async () => {
     const res = await deleteMeal(id);
@@ -14,13 +15,9 @@ const DeleteMealButton = ({ id, title }) => {
         message={res?.message}
       />
     ));
-
-    if (!res.ok) {
-      alert("Failed to delete section type");
-    }
   };
 
-  return <button onClick={handleDelete}>Izbrisi</button>;
+  return <button onClick={handleDelete}>Obriši</button>;
 };
 
 export default DeleteMealButton;

@@ -101,8 +101,6 @@ export default function DashboardNewPostForm({ post }) {
       if (res?.ok) {
         deleteImagesThatAreMarkedForDeletion();
         router.push("/dashboard/blog");
-      } else {
-        alert("Error creating post", res?.message);
       }
     } else {
       if (sectionWithoutUpdates.title !== "") {
@@ -141,8 +139,6 @@ export default function DashboardNewPostForm({ post }) {
   const deleteImagesThatAreMarkedForDeletion = async () => {
     // check if the image is in the item somewhere
     // if it isn't, delete it
-
-    console.log("imagesToDelete:", imagesToDelete);
 
     let allImages = item.sections.reduce((acc, section) => {
       recursivlyIterateOverJSXContent(section.jsxContent, (content) => {

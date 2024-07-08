@@ -16,10 +16,6 @@ const DeleteWorkshopsButton = ({ id, title }) => {
         message={res?.message}
       />
     ));
-
-    if (!res.ok) {
-      alert("Failed to delete workshop");
-    }
   };
 
   return <button onClick={handleDelete}>Obriši</button>;

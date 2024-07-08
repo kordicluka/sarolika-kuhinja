@@ -209,7 +209,7 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
 
       toast((t) => (
         <ToasterComponent
-          title={"Dodavanje tipa sekcije: " + sectionType.title}
+          title={"Dodavanje tipa sekcije: " + item?.title}
           t={t}
           state={res?.ok ? "success" : "error"}
           message={res?.message}
@@ -223,8 +223,6 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
           image: "",
         });
         router.push("/dashboard/tipovi-sekcija");
-      } else {
-        alert("Error creating section type", res?.message);
       }
     } else {
       const res = await update(item);

@@ -4,7 +4,7 @@ import { deleteSectionType } from "@/actions/SectionTypesActions";
 import { toast } from "react-hot-toast";
 import ToasterComponent from "../ToasterComponent";
 
-const DeleteSectionTypeButton = ({ id }) => {
+const DeleteSectionTypeButton = ({ id, title }) => {
   const handleDelete = async () => {
     const res = await deleteSectionType(id);
 
@@ -22,7 +22,7 @@ const DeleteSectionTypeButton = ({ id }) => {
     }
   };
 
-  return <button onClick={handleDelete}>Delete</button>;
+  return <button onClick={handleDelete}>Obriši</button>;
 };
 
 export default DeleteSectionTypeButton;
