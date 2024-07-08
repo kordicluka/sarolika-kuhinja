@@ -1,13 +1,9 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import Hero from "@/components/home/Hero";
 
-export default async function Home() {
-  const session = await getServerSession(authOptions);
-
+export default async function HomePage() {
   return (
-    <main>
-      <h1>Home</h1>
-      <p>Session: {JSON.stringify(session)}</p>
+    <main className="page">
+      <Hero />
     </main>
   );
 }

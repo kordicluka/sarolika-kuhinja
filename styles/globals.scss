@@ -2,6 +2,10 @@ $primary: rgb(34, 83, 155);
 $secondary: rgb(28, 41, 66);
 $primary-dashboard: #000000;
 $primary-light: rgb(60, 108, 179);
+$page-primary: #405b62;
+$page-primary-light: #597c8d;
+$page-primary-ultra-light: #c5f3ff;
+$light-yellow: #f8f7f2;
 $white: #fff;
 $black: #000;
 $gray-1: #111;
@@ -53,15 +57,6 @@ body {
   overflow: hidden;
 }
 
-.page {
-  @include flex(row, flex-start, flex-start);
-  width: 100% !important;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  padding-top: calc(2.2rem + 4.5rem + 3rem);
-  height: 100vh;
-}
-
 button {
   cursor: pointer;
   background-color: transparent;
@@ -101,6 +96,20 @@ button {
 
     &:hover {
       background-color: $primary-light;
+    }
+
+    svg {
+      color: $white;
+    }
+  }
+
+  &.primary {
+    background-color: $page-primary;
+    color: $white;
+    font-weight: 500;
+
+    &:hover {
+      background-color: $page-primary-light;
     }
 
     svg {
@@ -303,7 +312,7 @@ ul {
       font-weight: 500;
       color: $black;
       text-align: left;
-      width: 100%;
+      width: 1000%;
     }
 
     .toast-jsx-container-header-close {
@@ -332,4 +341,11 @@ ul {
     min-height: 2.5rem;
     @include flex(row, flex-start, center);
   }
+}
+
+.page {
+  padding-top: calc(2.5rem + 6rem);
+  background-color: $white;
+  min-height: 130vh;
+  overflow-y: auto;
 }

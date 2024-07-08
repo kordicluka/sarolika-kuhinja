@@ -1,7 +1,6 @@
-import React from "react";
 import prisma from "@/utils/db";
 
-export default async function page() {
+export default async function WorkshopsPage() {
   const workshops = await prisma.workshop.findMany({
     where: {
       isVisible: true,
@@ -14,8 +13,6 @@ export default async function page() {
       date: true,
     },
   });
-
-  console.log(workshops[0].slug);
 
   return <main></main>;
 }

@@ -1,7 +1,6 @@
 // app/layout.js
 import { Inter } from "next/font/google";
 import "@/styles/globals.scss";
-import { AppWrapper } from "./context";
 import { Header } from "@/components/Header";
 
 const inter = Inter({
@@ -15,7 +14,7 @@ export const metadata = {
     "Radionice za djecu u kojima učimo o hrani i pripremamo zdrave obroke.",
 };
 
-export default function RootLayout({ children, to }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="hr">
       <head>
@@ -49,7 +48,8 @@ export default function RootLayout({ children, to }) {
         <link rel="mstile" href="/mstile-150x150.png" />
       </head>
       <body className={inter.className}>
-        <AppWrapper>{children}</AppWrapper>
+        <Header />
+        {children}
       </body>
     </html>
   );
