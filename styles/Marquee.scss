@@ -1,31 +1,33 @@
 @import "./globals.scss";
 
 .marquee {
-  @include flex(row, center, center);
   width: 100%;
   height: 3rem;
   background-color: $page-primary;
-  color: $white;
-  position: relative;
 
-  .marquee-inner {
-    @include flex(row, center, center);
-    gap: 1rem;
-    padding: 0 2rem;
+  .marquee-item {
+    font-size: 1.7rem;
+    font-weight: 700;
     height: 100%;
-    overflow: hidden;
+    display: inline-block;
     white-space: nowrap;
-    position: absolute;
-    animation: marquee 10s linear infinite;
+    font-family: "Caveat", cursive;
+    padding: 0 1.5rem;
+    gap: 2rem;
+    @include flex(row, center, center);
+    color: $white;
 
-    .marquee-item {
-      font-size: 1.7rem;
+    .circle {
+      width: 0.8rem;
+      height: 0.8rem;
+      background-color: $white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
       font-weight: 700;
-      height: 100%;
-      @include flex(row, center, center);
-      font-family: "Caveat", cursive;
-      padding: 0 1.5rem;
-      border-left: 1px solid rgba($color: $white, $alpha: 0.1);
+      color: $page-primary;
     }
   }
 }

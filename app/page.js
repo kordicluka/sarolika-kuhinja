@@ -1,11 +1,11 @@
 import Hero from "@/components/home/Hero";
-import Marquee from "@/components/Marquee";
+import Marque from "@/components/Marque";
 
 export default async function HomePage() {
   return (
     <main className="page">
       <Hero />
-      <Marquee
+      <Marque
         textArray={[
           "Šarolika kuhinja",
           "Učenje od malih nogu",
