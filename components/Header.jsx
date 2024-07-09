@@ -5,6 +5,12 @@ import NextImage from "next/image";
 import "@/styles/Header.scss";
 import { formatDate } from "@/utils/formatDate";
 import { Search } from "./Search";
+import { Caveat } from "next/font/google";
+
+const caveat = new Caveat({
+  display: "swap",
+  weights: [400, 700],
+});
 
 export const Header = () => {
   const pathName = usePathname();
@@ -122,7 +128,7 @@ export const Header = () => {
         </nav>
 
         <div className="next-workshop">
-          <p>Sljedeća radionica:</p>
+          <p className={caveat.className}>Sljedeća radionica:</p>
           <div className="next-workshop-time-to-container">
             <div className="next-workshop-time-to">
               <div className="units">{getTensOf(getDaysToNextWorkshop())}</div>
