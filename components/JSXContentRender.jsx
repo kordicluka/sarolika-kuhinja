@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import NextImage from "next/image";
 
@@ -28,7 +27,7 @@ const applyMediaQueries = (style) => {
   return finalStyle;
 };
 
-const renderElement = (element) => {
+const RenderElement = ({ element }) => {
   const { type, style, data, children, className } = element;
   const [finalStyle, setFinalStyle] = useState(style);
 
@@ -74,7 +73,9 @@ const renderElement = (element) => {
       return (
         <div style={finalStyle} className={className ? className : ""}>
           {children?.map((child, index) => (
-            <React.Fragment key={index}>{renderElement(child)}</React.Fragment>
+            <React.Fragment key={index}>
+              <RenderElement element={child} />
+            </React.Fragment>
           ))}
         </div>
       );
@@ -82,7 +83,9 @@ const renderElement = (element) => {
       return (
         <section style={finalStyle} className={className ? className : ""}>
           {children?.map((child, index) => (
-            <React.Fragment key={index}>{renderElement(child)}</React.Fragment>
+            <React.Fragment key={index}>
+              <RenderElement element={child} />
+            </React.Fragment>
           ))}
         </section>
       );
@@ -102,7 +105,7 @@ const renderElement = (element) => {
 
 const JSXContentRenderer = ({ content }) => {
   if (!content || Object.keys(content).length === 0) return null;
-  return renderElement(content);
+  return <RenderElement element={content} />;
 };
 
 export default JSXContentRenderer;
