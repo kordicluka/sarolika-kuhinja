@@ -1,4 +1,5 @@
 import Hero from "@/components/home/Hero";
+import { ItemsSlider } from "@/components/ItemsSlider";
 import Marque from "@/components/Marque";
 
 export default async function HomePage() {
@@ -18,6 +19,7 @@ export default async function HomePage() {
           "Slatko i slano",
         ]}
       />
+      <ItemsSlider type="workshops" />
     </main>
   );
 }

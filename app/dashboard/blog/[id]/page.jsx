@@ -6,19 +6,23 @@ import prisma from "@/utils/db";
 export default async function DashboardNewPost({ params }) {
   const { id } = params;
 
-  const item = await prisma.post.findUnique({
-    where: {
-      id: id,
-    },
-  });
+  let item;
 
-  // Parse the sections field
-  if (item && item.sections) {
-    try {
-      item.sections = JSON.parse(item.sections);
-    } catch (error) {
-      console.error("Error parsing sections JSON:", error);
-      item.sections = [];
+  if (id !== "nova-objava") {
+    item = await prisma.post.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    // Parse the sections field
+    if (item && item.sections) {
+      try {
+        item.sections = JSON.parse(item.sections);
+      } catch (error) {
+        console.error("Error parsing sections JSON:", error);
+        item.sections = [];
+      }
     }
   }
 

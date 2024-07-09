@@ -7,9 +7,9 @@ import "@/styles/DashboardItem.scss";
 import NextImage from "next/image";
 import { useRouter } from "next/navigation";
 import {
-  useCreateSectionType,
-  useUpdateSectionType,
-} from "@/hooks/useSectionTypes";
+  createSectionType,
+  updateSectionType,
+} from "@/actions/SectionTypesActions";
 import JSXContentRenderer from "@/components/JSXContentRender";
 import { toast } from "react-hot-toast";
 import ToasterComponent from "../ToasterComponent";
@@ -162,16 +162,6 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
     image: "",
   });
   const [imageToDelete, setImageToDelete] = useState(null);
-  const {
-    loading: loadingCreatingSectionType,
-    create: createSectionType,
-    error: errorCreatingSectionType,
-  } = useCreateSectionType();
-  const {
-    loading: loadingUpdatingSectionType,
-    error: errorUpdatingSectionType,
-    update,
-  } = useUpdateSectionType();
 
   useEffect(() => {
     if (sectionType) {
@@ -225,7 +215,7 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
         router.push("/dashboard/tipovi-sekcija");
       }
     } else {
-      const res = await update(item);
+      const res = await updateSectionType(item);
 
       toast((t) => (
         <ToasterComponent
@@ -352,9 +342,7 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
             className="btn black submit"
             disabled={uploadingImages}
             label={
-              uploadingImages ||
-              loadingCreatingSectionType ||
-              loadingUpdatingSectionType ? (
+              uploadingImages ? (
                 <LoadingSpinner />
               ) : sectionType?.id ? (
                 "Uredi tip sekcije"

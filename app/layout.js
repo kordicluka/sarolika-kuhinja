@@ -2,6 +2,7 @@
 import { Inter } from "next/font/google";
 import "@/styles/globals.scss";
 import { Header } from "@/components/Header";
+import { ContextProvider } from "@/context/context";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,7 +50,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className}>
         <Header />
-        {children}
+        <ContextProvider>{children}</ContextProvider>
       </body>
     </html>
   );

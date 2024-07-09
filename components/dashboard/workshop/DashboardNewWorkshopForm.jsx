@@ -6,7 +6,6 @@ import LoadingSpinner from "../LoadingSpinner";
 import "@/styles/DashboardItem.scss";
 import NextImage from "next/image";
 import { useRouter } from "next/navigation";
-import { useCreateWorkshop, useUpdateWorkshop } from "@/hooks/useWorkshops";
 import JSXContentRenderer from "../../JSXContentRender";
 import DashboardAddNewSection from "../sections/DashboardAddNewSection";
 import DatePicker from "react-datepicker";
@@ -15,7 +14,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { hr } from "date-fns/locale";
 import { toast } from "react-hot-toast";
 import ToasterComponent from "../ToasterComponent";
-
+import { createWorkshop, updateWorkshop } from "@/actions/WorkshopsActions";
 export default function DashboardNewWorkshopForm({ workshop }) {
   const router = useRouter();
   const [addNewSectionActive, setAddNewSectionActive] = useState(false);
@@ -41,16 +40,6 @@ export default function DashboardNewWorkshopForm({ workshop }) {
     date: new Date().toISOString(), // Default to ISO format
     maxApplicant: 0,
   });
-  const {
-    loading: loadingCreatingWorkshop,
-    create: createWorkshop,
-    error: errorCreatingWorkshop,
-  } = useCreateWorkshop();
-  const {
-    loading: loadingUpdatingWorkshop,
-    error: errorUpdatingWorkshop,
-    update,
-  } = useUpdateWorkshop();
 
   useEffect(() => {
     if (workshop) {
@@ -123,7 +112,7 @@ export default function DashboardNewWorkshopForm({ workshop }) {
         router.push("/dashboard/radionice");
       }
     } else {
-      const res = await update(updatedItem);
+      const res = await updateWorkshop(updatedItem);
 
       toast((t) => (
         <ToasterComponent

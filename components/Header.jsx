@@ -7,9 +7,10 @@ import { formatDate } from "@/utils/formatDate";
 import { Search } from "./Search";
 import { Caveat } from "next/font/google";
 
-const caveat = new Caveat({
+const caveat = Caveat({
   display: "swap",
   weights: [400, 700],
+  subsets: ["latin"],
 });
 
 export const Header = () => {

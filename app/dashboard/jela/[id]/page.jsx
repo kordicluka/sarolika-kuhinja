@@ -8,7 +8,7 @@ export default async function DashboardNewMeal({ params }) {
 
   let item;
 
-  if (id === "novo-jelo") {
+  if (id !== "novo-jelo") {
     item = await prisma.meal.findUnique({
       where: {
         id: id,

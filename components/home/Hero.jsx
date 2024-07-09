@@ -1,6 +1,13 @@
 import React from "react";
 import "@/styles/Hero.scss";
 import NextImage from "next/image";
+import { Caveat } from "next/font/google";
+
+const caveat = Caveat({
+  display: "swap",
+  weights: [400, 700],
+  subsets: ["latin"],
+});
 
 export default function Hero() {
   return (
@@ -13,7 +20,7 @@ export default function Hero() {
         className="hero-image"
       />
       <div className="hero-content">
-        <h3>Poticanje djece na zdravo!</h3>
+        <h3 className={caveat.className}>Poticanje djece na zdravo!</h3>
         <h1>Radionice kuhanja za djecu.</h1>
         <div className="hero-content-location">
           <svg

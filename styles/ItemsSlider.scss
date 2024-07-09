@@ -1,0 +1,49 @@
+@import "./globals.scss";
+
+.items-slider {
+  width: 100%;
+  @include flex(column, center, center);
+  gap: 1rem;
+  padding: 3rem 12.5%;
+
+  .items-slider-title {
+    @include flex(row, space-between, flex-end);
+    width: 100%;
+
+    .items-slider-title-left,
+    .items-slider-title-right {
+      @include flex(column, flex-end, flex-start);
+      gap: 1rem;
+
+      h3 {
+        font-weight: 700;
+        color: $page-primary;
+      }
+
+      .btn {
+        gap: 0.5rem;
+        padding: 0.7rem 0.8rem;
+        padding-right: 0.3rem;
+        svg {
+          width: 1.2rem;
+          height: 1.2rem;
+        }
+      }
+    }
+  }
+
+  .items-container {
+    @include flex(column, flex-start, center);
+    height: 33rem;
+    width: 100%;
+
+    .items-container-inner {
+      @include flex(row, center, center);
+      gap: 1rem;
+
+      .item-card {
+        width: calc(75vw / 3 - 1rem / 3);
+      }
+    }
+  }
+}

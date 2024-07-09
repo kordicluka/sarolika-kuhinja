@@ -6,11 +6,11 @@ import LoadingSpinner from "../LoadingSpinner";
 import "@/styles/DashboardItem.scss";
 import NextImage from "next/image";
 import { useRouter } from "next/navigation";
-import { useCreateMeal, useUpdateMeal } from "@/hooks/useMeals";
 import JSXContentRenderer from "../../JSXContentRender";
 import DashboardAddNewSection from "../sections/DashboardAddNewSection";
 import { toast } from "react-hot-toast";
 import ToasterComponent from "../ToasterComponent";
+import { createMeal, updateMeal } from "@/actions/MealsActions";
 
 export default function DashboardNewMealForm({ meal }) {
   const router = useRouter();
@@ -35,18 +35,9 @@ export default function DashboardNewMealForm({ meal }) {
     isVisible: true,
     sections: [],
   });
-  const {
-    loading: loadingCreatingMeal,
-    create: createMeal,
-    error: errorCreatingMeal,
-  } = useCreateMeal();
-  const {
-    loading: loadingUpdatingMeal,
-    error: errorUpdatingMeal,
-    update,
-  } = useUpdateMeal();
 
   useEffect(() => {
+    console.log("Meal:", meal);
     if (meal) {
       setItem({
         ...meal,
@@ -116,7 +107,7 @@ export default function DashboardNewMealForm({ meal }) {
         });
       }
 
-      const res = await update(item);
+      const res = await updateMeal(item);
 
       toast((t) => (
         <ToasterComponent

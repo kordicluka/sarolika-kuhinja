@@ -6,11 +6,11 @@ import LoadingSpinner from "../LoadingSpinner";
 import "@/styles/DashboardItem.scss";
 import NextImage from "next/image";
 import { useRouter } from "next/navigation";
-import { useCreatePost, useUpdatePost } from "@/hooks/usePosts";
 import JSXContentRenderer from "../../JSXContentRender";
 import DashboardAddNewSection from "../sections/DashboardAddNewSection";
 import { toast } from "react-hot-toast";
 import ToasterComponent from "../ToasterComponent";
+import { createPost, updatePost } from "@/actions/PostsActions";
 
 export default function DashboardNewPostForm({ post }) {
   const router = useRouter();
@@ -35,16 +35,6 @@ export default function DashboardNewPostForm({ post }) {
     isVisible: true,
     sections: [],
   });
-  const {
-    loading: loadingCreatingPost,
-    create: createPost,
-    error: errorCreatingPost,
-  } = useCreatePost();
-  const {
-    loading: loadingUpdatingPost,
-    error: errorUpdatingPost,
-    update,
-  } = useUpdatePost();
 
   useEffect(() => {
     if (post) {
@@ -116,7 +106,7 @@ export default function DashboardNewPostForm({ post }) {
         });
       }
 
-      const res = await update(item);
+      const res = await updatePost(item);
 
       toast((t) => (
         <ToasterComponent
