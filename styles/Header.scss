@@ -57,6 +57,7 @@
           font-size: 0.9rem;
           cursor: pointer;
           transition: all 0.3s ease;
+          fill: $gray-5;
 
           &:hover {
             background-color: $page-primary;
@@ -79,7 +80,6 @@
     p {
       margin: 0;
       color: $white;
-      font-family: "Caveat", cursive;
       font-size: 1.4rem;
       font-weight: 700;
       margin-right: 1rem;
