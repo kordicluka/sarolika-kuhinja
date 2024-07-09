@@ -16,8 +16,6 @@
     position: relative;
     border-right: 1px solid $gray-13;
     @include flex(row, flex-start, flex-start);
-    z-index: 100;
-    overflow-x: hidden;
 
     form {
       width: 40%;
@@ -25,21 +23,6 @@
       z-index: 2;
       height: calc(100% - 2.5rem);
       overflow-y: auto;
-      z-index: 100;
-      overflow-x: hidden;
-
-      &::-webkit-scrollbar {
-        width: 0.1rem;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: $gray-2;
-        border-radius: 0.2rem;
-      }
-
-      &::-webkit-scrollbar-track {
-        background-color: $gray-15;
-      }
 
       &.full-width {
         width: 100%;
@@ -47,61 +30,15 @@
 
       .dashboard-add-new-section {
         position: absolute;
-        top: 0%;
-        left: 0%;
-        width: 40%;
-        height: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60%;
+        height: 60%;
         background-color: $gray-15;
         border: 1px solid $gray-13;
-        @include flex(column, flex-start, flex-start);
+        @include flex(column, center, center);
         display: none;
-        z-index: 10;
-        transition: all 0.2s ease;
-        animation: slideIn 0.2s ease;
-        overflow-y: auto;
-
-        &::-webkit-scrollbar {
-          width: 0.1rem;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          background-color: $gray-2;
-          border-radius: 0.2rem;
-        }
-
-        &::-webkit-scrollbar-track {
-          background-color: $gray-15;
-        }
-
-        .dashboard-add-new-section-bottom {
-          @include flex(row, flex-end, center);
-          width: 100%;
-          height: 2.5rem;
-          background-color: $gray-14;
-          border-top: 1px solid $gray-13;
-
-          button {
-            width: 100%;
-            height: 100%;
-            background-color: $gray-14;
-            color: $gray-4;
-            border: 1px solid $gray-12;
-            font-size: 0.8rem;
-            height: 2.5rem;
-            font-weight: 500;
-            padding-left: 2rem;
-            text-transform: uppercase;
-
-            &:hover {
-              background-color: $gray-13;
-              color: $gray-1;
-            }
-          }
-        }
-
-        &.active {
-          display: flex;
-        }
       }
 
       .form-row {
@@ -176,27 +113,6 @@
             background-color: $gray-15;
           }
 
-          &.add-section-btn {
-            @include flex(row, flex-start, center);
-            width: 100%;
-            height: 2rem;
-            border-right: none;
-            border-bottom: none;
-            background-color: $gray-15;
-
-            svg {
-              width: 1.2rem;
-              height: 1.2rem;
-              color: $gray-2;
-            }
-
-            span {
-              color: $gray-2;
-              font-size: 0.75rem;
-              font-weight: 500;
-            }
-          }
-
           &.submit {
             background-color: $gray-14;
             color: $gray-4;
@@ -254,128 +170,6 @@
 
             &:hover {
               background-color: $gray-14;
-            }
-          }
-        }
-
-        .form-row-sections {
-          width: 100%;
-          @include flex(column, flex-start, flex-start);
-
-          .form-row-section {
-            width: 100%;
-            @include flex(row, flex-start, flex-start);
-            background-color: $white;
-            border: 1px solid $gray-13;
-            border-bottom: none;
-            border-right: none;
-            height: 2rem;
-
-            &:nth-child(1) {
-              border-top: none;
-            }
-
-            .form-section-title {
-              width: calc(100% - 4rem);
-              padding-left: 0.5rem;
-              font-size: 0.8rem;
-              font-weight: 400;
-              color: $gray-1;
-              height: 100%;
-              @include flex(row, flex-start, center);
-            }
-
-            .form-row-section-actions {
-              width: 2rem;
-              height: 100%;
-              @include flex(row, center, center);
-              cursor: pointer;
-              position: relative;
-              z-index: 2;
-              border-left: 1px solid $gray-13;
-              background-color: $gray-15;
-
-              .dots {
-                @include flex(row, center, center);
-                width: 2rem;
-                height: 100%;
-                gap: 0.2rem;
-
-                .dot {
-                  width: 0.2rem;
-                  height: 0.2rem;
-                  border-radius: 50%;
-                  background-color: $gray-5;
-                }
-              }
-
-              &:hover {
-                z-index: 3;
-                .dropdowns {
-                  display: flex;
-                }
-              }
-
-              .dropdowns {
-                @include flex(column, flex-start, flex-start);
-                position: absolute;
-                background-color: $white;
-                min-width: 10rem;
-                box-shadow: 0 0.5rem 1rem rgba($black, 0.1);
-                z-index: 1;
-                top: 1.5rem;
-                right: -0.5rem;
-                border-radius: 0.2rem;
-                display: none;
-                border: 1px solid $gray-13;
-                overflow: hidden;
-                height: auto;
-
-                &.active {
-                  display: flex;
-                }
-
-                a,
-                button {
-                  color: $gray-3;
-                  text-decoration: none;
-                  border: none;
-                  outline: none;
-                  display: block;
-                  font-size: 0.8rem;
-                  font-weight: 300;
-                  border-bottom: 1px solid $gray-13;
-                  width: 100%;
-                  text-align: left;
-                  color: $black;
-                  font-weight: 400;
-                  height: 2rem;
-
-                  &:last-child {
-                    border-bottom: none;
-                  }
-
-                  &:hover {
-                    background-color: $gray-15;
-                  }
-                }
-              }
-            }
-
-            .drag-button {
-              width: 2rem;
-              height: 100%;
-              padding: 0.3rem;
-              @include flex(row, center, center);
-              background-color: $gray-15;
-              border-left: 1px solid $gray-13;
-              border-right: 1px solid $gray-13;
-
-              svg {
-                width: 1.2rem;
-                height: 1.2rem;
-                color: $gray-5;
-              }
             }
           }
         }
@@ -438,11 +232,6 @@
             color: $gray-1;
             border-bottom: none;
             border-right: none;
-          }
-
-          .tox,
-          .tox-tinymce {
-            width: 100%;
           }
 
           label {
@@ -546,8 +335,6 @@
                 width: 100%;
                 object-fit: contain;
                 transition: all 0.2s ease;
-                height: 7rem;
-                background-color: $white;
               }
 
               span {
@@ -572,8 +359,6 @@
       @include flex(column, flex-start, flex-start);
       border: 1px solid $gray-12;
       height: 100%;
-      z-index: -1;
-      overflow-y: auto;
 
       .preview-header {
         font-size: 1rem;
@@ -602,14 +387,12 @@
         width: 1.9rem;
         height: 1.9rem;
         padding: 0.25rem;
-        background-color: $gray-15;
-        border-radius: 0.2rem;
-        display: none;
+        border: 1px solid $gray-12;
 
         svg {
           width: 100%;
           height: 100%;
-          color: $gray-2;
+          color: $gray-5;
         }
 
         &:hover {
@@ -621,37 +404,9 @@
         width: 100%;
         padding: 1rem;
         height: 100%;
-        @include flex(column, flex-start, flex-start);
+        @include flex(column, center, center);
         overflow-y: auto;
-
-        &::-webkit-scrollbar {
-          width: 0.1rem;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          background-color: $gray-2;
-          border-radius: 0.2rem;
-        }
-
-        &::-webkit-scrollbar-track {
-          background-color: $gray-15;
-        }
-
-        .line {
-          width: 100%;
-          margin: 1rem 0;
-          border-bottom: 1px solid $gray-13;
-        }
       }
     }
-  }
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0%);
   }
 }

@@ -1,11 +1,14 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import NextImage from "next/image";
 import "@/styles/Header.scss";
 import { formatDate } from "@/utils/formatDate";
 import { Search } from "./Search";
 import { Caveat } from "next/font/google";
+import Facebook from "@/components/Facebook";
+import Instagram from "@/components/Instagram";
+import WhatsUpp from "@/components/WhatsUpp";
 
 const caveat = Caveat({
   display: "swap",
@@ -15,6 +18,7 @@ const caveat = Caveat({
 
 export const Header = () => {
   const pathName = usePathname();
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const nextWorkshop = {
     slug: "radionica-za-djecu",
@@ -48,47 +52,69 @@ export const Header = () => {
     console.log(event.target.value);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   if (pathName.includes("/dashboard")) {
     return null;
   } else {
     return (
       <header className="header">
-        <div className="contact-info">
+        <div className={`contact-info ${isScrolled ? "hide" : ""}`}>
           <div className="contact-info-left">
-            <a className="contact-info-left-item" href="tel:+385912345678">
+            <a
+              className="contact-info-left-item"
+              href="tel:+385912345678"
+              target="_blank"
+              rel="noreferrer"
+            >
               Tel: +385 91 2345 678
             </a>
             <a
               className="contact-info-left-item"
               href="mailto:info@sarolika-kuhinja.com"
+              target="_blank"
+              rel="noreferrer"
             >
               E-mail: info@sarolika-kuhinja.com
             </a>
           </div>
           <div className="contact-info-right contact-info-socials">
-            <a className="social-container">
-              <NextImage
-                src="/images/facebook.svg"
-                alt="Facebook"
-                width={20}
-                height={20}
-              />
+            <a
+              className="social-container"
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Facebook />
             </a>
-            <a className="social-container">
-              <NextImage
-                src="/images/instagram.svg"
-                alt="Instagram"
-                width={20}
-                height={20}
-              />
+            <a
+              className="social-container"
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Instagram />
             </a>
-            <a className="social-container" href="https://www.whatsupp.com">
-              <NextImage
-                src="/images/whatsupp.svg"
-                alt="YouTube"
-                width={20}
-                height={20}
-              />
+            <a
+              className="social-container"
+              href="https://www.whatsupp.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <WhatsUpp />
             </a>
           </div>
         </div>
