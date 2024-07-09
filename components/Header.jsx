@@ -58,7 +58,32 @@ export const Header = () => {
               E-mail: info@sarolika-kuhinja.com
             </a>
           </div>
-          <div className="contact-info-right contact-info-socials"></div>
+          <div className="contact-info-right contact-info-socials">
+            <a className="social-container">
+              <NextImage
+                src="/images/facebook.svg"
+                alt="Facebook"
+                width={20}
+                height={20}
+              />
+            </a>
+            <a className="social-container">
+              <NextImage
+                src="/images/instagram.svg"
+                alt="Instagram"
+                width={20}
+                height={20}
+              />
+            </a>
+            <a className="social-container" href="https://www.whatsupp.com">
+              <NextImage
+                src="/images/whatsupp.svg"
+                alt="YouTube"
+                width={20}
+                height={20}
+              />
+            </a>
+          </div>
         </div>
         <nav className="header-nav">
           <div className="header-logo">

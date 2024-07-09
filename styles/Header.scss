@@ -38,6 +38,33 @@
         }
       }
     }
+
+    .contact-info-right {
+      @include flex(row, center, center);
+      gap: 1rem;
+
+      .social-container {
+        @include flex(row, center, center);
+        gap: 1rem;
+
+        .social-icon {
+          width: 1.5rem;
+          height: 1.5rem;
+          background-color: $gray-14;
+          border-radius: 50%;
+          @include flex(row, center, center);
+          color: $gray-5;
+          font-size: 0.9rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background-color: $page-primary;
+            color: $white;
+          }
+        }
+      }
+    }
   }
   .next-workshop {
     background-color: $page-primary;
