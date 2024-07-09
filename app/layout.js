@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "@/styles/globals.scss";
 import { Header } from "@/components/Header";
 import { ContextProvider } from "@/context/context";
+import Footer from "@/components/Footer";
+import Newsletter from "@/components/Newsletter";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,8 +51,13 @@ export default function RootLayout({ children }) {
         <link rel="mstile" href="/mstile-150x150.png" />
       </head>
       <body className={inter.className}>
-        <Header />
-        <ContextProvider>{children}</ContextProvider>
+        <ContextProvider>
+          {" "}
+          <Header />
+          {children}
+          <Newsletter />
+          <Footer />
+        </ContextProvider>
       </body>
     </html>
   );

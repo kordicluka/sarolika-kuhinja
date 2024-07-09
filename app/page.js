@@ -1,6 +1,7 @@
 import Hero from "@/components/home/Hero";
 import { ItemsSlider } from "@/components/ItemsSlider";
 import Marque from "@/components/Marque";
+import WokrshopsSlider from "@/components/WokrshopsSlider";
 
 export default async function HomePage() {
   return (
@@ -19,7 +20,7 @@ export default async function HomePage() {
           "Slatko i slano",
         ]}
       />
-      <ItemsSlider type="workshops" />
+      <WokrshopsSlider />
     </main>
   );
 }

@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import NextImage from "next/image";
 import "@/styles/Header.scss";
 import { formatDate } from "@/utils/formatDate";
+import { formatTime } from "@/utils/formatTime";
 import { Search } from "./Search";
 import { Caveat } from "next/font/google";
 import Facebook from "@/components/Facebook";
@@ -194,10 +195,7 @@ export const Header = () => {
             {" "}
             {formatDate(nextWorkshop.date)}
             {" u "}
-            {nextWorkshop.date.toLocaleTimeString("hr-HR", {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
+            {formatTime(nextWorkshop.date)}
             {" sati"}
           </span>
         </div>

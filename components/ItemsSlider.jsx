@@ -1,6 +1,7 @@
 import React from "react";
 import { Caveat } from "next/font/google";
 import "@/styles/ItemsSlider.scss";
+import ItemCard from "./items/ItemCard";
 
 const caveat = Caveat({
   display: "swap",
@@ -8,7 +9,7 @@ const caveat = Caveat({
   subsets: ["latin"],
 });
 
-export const ItemsSlider = ({ type }) => {
+export const ItemsSlider = ({ type, items }) => {
   return (
     <section className="items-slider">
       <div className="items-slider-title">
@@ -46,7 +47,18 @@ export const ItemsSlider = ({ type }) => {
         </div>
       </div>
       <div className="items-container">
-        <div className="items-container-inner"></div>
+        <div className="items-container-inner">
+          {items?.length > 0 &&
+            items.map((item) => (
+              <ItemCard
+                key={item.id} // Unique key assigned here
+                item={item}
+                link={`/${type === "workshops" ? "radionice" : "blog"}/${
+                  item.slug
+                }`}
+              />
+            ))}
+        </div>
       </div>
     </section>
   );

@@ -1,30 +1,12 @@
 "use client";
 import React from "react";
-import { useTogglePostVisibility } from "@/hooks/usePosts";
-import { useToggleMealVisibility } from "@/hooks/useMeals";
-import { useToggleWorkshopVisibility } from "@/hooks/useWorkshops";
 import { toast } from "react-hot-toast";
 import ToasterComponent from "./ToasterComponent";
+import { toggleMealVisibility } from "@/actions/MealsActions";
+import { toggleWorkshopVisibility } from "@/actions/WorkshopsActions";
+import { togglePostVisibility } from "@/actions/PostsActions";
 
 export default function ToggleItemVisibility({ type, item }) {
-  const {
-    toggleVisibility: togglePostVisibility,
-    loadingPostVisibility,
-    errorPostVisibility,
-  } = useTogglePostVisibility();
-
-  const {
-    toggleVisibility: toggleMealVisibility,
-    loadingMealVisibility,
-    errorMealVisibility,
-  } = useToggleMealVisibility();
-
-  const {
-    toggleVisibility: toggleWorkshopVisibility,
-    loadingWorkshopVisibility,
-    errorWorkshopVisibility,
-  } = useToggleWorkshopVisibility();
-
   const handleToggle = async () => {
     switch (type) {
       case "post":
@@ -68,15 +50,6 @@ export default function ToggleItemVisibility({ type, item }) {
   return (
     <button
       className={`toggle-button ${item.isVisible ? "" : "hidden"}`}
-      disabled={
-        type === "post"
-          ? loadingPostVisibility
-          : type === "meal"
-          ? loadingMealVisibility
-          : type === "workshop"
-          ? loadingWorkshopVisibility
-          : false
-      }
       onClick={handleToggle}
     >
       <div className="toggle-button-dot"></div>

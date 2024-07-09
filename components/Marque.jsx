@@ -11,12 +11,7 @@ const caveat = Caveat({
 
 export default function Marque({ textArray }) {
   return (
-    <Marquee
-      gradient={false}
-      speed={100}
-      pauseOnHover={true}
-      className="marquee"
-    >
+    <Marquee gradient={false} speed={100} className="marquee">
       {textArray.map((text, index) => (
         <div key={index} className="marquee-item">
           <div className="circle"></div>
