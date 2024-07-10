@@ -556,7 +556,7 @@
         width: 100%;
         padding: 1rem;
         height: 100%;
-        @include flex(column, center, center);
+        @include flex(column, flex-start, flex-start);
         overflow-y: auto;
       }
     }

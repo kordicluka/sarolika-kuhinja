@@ -273,61 +273,7 @@ export default function DashboardNewWorkshopForm({ workshop }) {
             />
           </div>
         </div>
-        <div className="form-row">
-          <h5>Slika tipa sekcije</h5>
-        </div>
-        <div className="form-row">
-          <div className="form-row-item single-image">
-            <label htmlFor="single-image">Slika tipa sekcije</label>
-            <input
-              type="file"
-              id="single-image"
-              onChange={handleUploadImages}
-              ref={inputRef}
-            />
-          </div>
-          {item.image && (
-            <div className="form-row-item single-image">
-              <div className="form-row-images">
-                <div className="form-row-image">
-                  <NextImage
-                    src={`/uploads/${item.image}`}
-                    alt="Slika tipa sekcije"
-                    style={{ width: "100%" }}
-                    fill="responsive"
-                  />
-                  <Button
-                    className="delete-image-btn"
-                    onClick={markImageForDeletion}
-                    type="button"
-                    label={
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M6 18 18 6M6 6l12 12"
-                        />
-                      </svg>
-                    }
-                  />
-                </div>
-              </div>
-            </div>
-          )}
 
-          {uploadingImages && (
-            <div className="form-row-item floor-plan">
-              <LoadingSpinner />
-            </div>
-          )}
-        </div>
         <div className="form-row">
           <h5>Sekcije</h5>
         </div>
@@ -422,6 +368,61 @@ export default function DashboardNewWorkshopForm({ workshop }) {
 
             <span>Dodaj novu sekciju</span>
           </button>
+        </div>
+        <div className="form-row">
+          <h5>Slika radionice</h5>
+        </div>
+        <div className="form-row">
+          <div className="form-row-item single-image">
+            <label htmlFor="single-image">Slika radionice</label>
+            <input
+              type="file"
+              id="single-image"
+              onChange={handleUploadImages}
+              ref={inputRef}
+            />
+          </div>
+          {item.image && (
+            <div className="form-row-item single-image">
+              <div className="form-row-images">
+                <div className="form-row-image">
+                  <NextImage
+                    src={`/uploads/${item.image}`}
+                    alt="Slika radionice"
+                    style={{ width: "100%" }}
+                    fill="responsive"
+                  />
+                  <Button
+                    className="delete-image-btn"
+                    onClick={markImageForDeletion}
+                    type="button"
+                    label={
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M6 18 18 6M6 6l12 12"
+                        />
+                      </svg>
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {uploadingImages && (
+            <div className="form-row-item floor-plan">
+              <LoadingSpinner />
+            </div>
+          )}
         </div>
         <DashboardAddNewSection
           item={item}
