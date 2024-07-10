@@ -8,7 +8,7 @@
     padding-left: 12.5%;
     @include flex(column, flex-start, flex-start);
     gap: 0.5rem;
-    padding-right: 3rem;
+    padding-right: 8%;
 
     h3 {
       color: $page-primary;
@@ -19,11 +19,11 @@
     span {
       font-size: 0.95rem;
       color: $gray-3;
-      line-height: 1.5;
-      margin-top: 1rem;
+      line-height: 1.2;
+      margin-top: 1.5rem;
 
       br {
-        margin: 0.5rem 0;
+        margin: 0.2rem 0;
       }
     }
   }
