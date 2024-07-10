@@ -1,0 +1,110 @@
+@import "./globals.scss";
+
+.what-we-try-to-do {
+  width: 100%;
+  @include flex(row, flex-start, flex-start);
+  position: relative;
+  padding: 3rem 12.5%;
+  height: 60rem;
+
+  .what-we-try-to-do-rectangle {
+    position: absolute;
+    height: 40rem;
+    z-index: 0;
+    width: 40%;
+    left: 0;
+    bottom: 0;
+    background-color: $light-yellow;
+  }
+
+  .what-we-try-to-do-image {
+    height: 100%;
+    width: 50%;
+    z-index: 2;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .what-we-try-to-do-content {
+    @include flex(column, center, flex-start);
+    width: 50%;
+    padding: 1rem 0;
+    padding-left: 3rem;
+    z-index: 2;
+    height: 100%;
+
+    h3 {
+      font-weight: 700;
+      color: $page-primary;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    .what-we-try-to-do-content-list {
+      @include flex(column, flex-start, flex-start);
+      gap: 1.5rem;
+      margin-top: 3rem;
+
+      li {
+        @include flex(row, flex-start, flex-start);
+        gap: 1rem;
+        height: 5rem;
+
+        .what-we-try-to-do-content-item-icon {
+          aspect-ratio: 1;
+          height: 100%;
+          background-color: $light-yellow;
+          padding: 1rem;
+
+          svg {
+            width: 100%;
+            height: 100%;
+            color: $gray-3;
+          }
+        }
+
+        &:nth-child(2) {
+          .what-we-try-to-do-content-item-icon {
+            background-color: $light-red;
+          }
+        }
+
+        &:nth-child(3) {
+          .what-we-try-to-do-content-item-icon {
+            background-color: $light-green;
+          }
+        }
+
+        &:nth-child(4) {
+          .what-we-try-to-do-content-item-icon {
+            background-color: $light-blue;
+          }
+        }
+
+        .what-we-try-to-do-content-item-text {
+          @include flex(column, flex-start, flex-start);
+          gap: 0.5rem;
+          padding: 0.5rem;
+
+          h6 {
+            font-weight: 600;
+            font-size: 1.15rem;
+          }
+
+          p {
+            font-size: 0.9rem;
+            color: $gray-4;
+          }
+        }
+      }
+    }
+  }
+}
+
+// WhatWeTryToDo.scss

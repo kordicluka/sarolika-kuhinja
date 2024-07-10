@@ -5,7 +5,10 @@ $primary-light: rgb(60, 108, 179);
 $page-primary: #405b62;
 $page-primary-light: #597c8d;
 $page-primary-ultra-light: #c5f3ff;
-$light-yellow: #f8f7f2;
+$light-yellow: #faf5da;
+$light-red: #f9e1e1;
+$light-green: #e1f9e1;
+$light-blue: #e1e9f9;
 $white: #fff;
 $black: #000;
 $gray-1: #111;
@@ -143,13 +146,13 @@ h1 {
 }
 
 h2 {
-  font-size: 3.5rem;
+  font-size: 3.3rem;
   font-weight: 600;
-  color: $black;
-  line-height: 1.2;
+  color: $gray-2;
+  line-height: 1.1;
 
   @media (max-width: 1600px) {
-    font-size: 3rem;
+    font-size: 2.9rem;
   }
 
   @media (max-width: 1300px) {

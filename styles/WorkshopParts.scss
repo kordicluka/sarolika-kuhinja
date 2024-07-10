@@ -1,0 +1,131 @@
+@import "./globals.scss";
+
+.workshop-parts {
+  @include flex(column, center, flex-start);
+  padding: 7rem 0;
+  background-color: $page-primary;
+  width: 100%;
+  color: $white;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  position: relative;
+
+  h2 {
+    padding-left: 12.5%;
+    text-transform: uppercase;
+    color: $white;
+    font-size: 3.7rem;
+    width: 50%;
+    line-height: 1.2;
+  }
+
+  .btn {
+    position: absolute;
+    top: 14rem;
+    right: 12.5%;
+    z-index: 2;
+  }
+
+  .workshop-parts-container {
+    height: 50rem;
+    background-color: $page-primary;
+    position: relative;
+    width: 100%;
+    color: $white;
+
+    .workshop-parts-line {
+      position: absolute;
+      top: 50%;
+      left: 12.5%;
+      height: 0.2rem;
+      transform: translateY(-50%);
+      width: 75%;
+      background-color: $white;
+    }
+
+    .workshop-parts-circle-last,
+    .workshop-parts-circle-first {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      left: 12.5%;
+      background-color: $white;
+    }
+
+    .workshop-parts-circle-last {
+      left: 87.5%;
+    }
+
+    .workshop-part {
+      height: 20rem;
+      left: 12.5%;
+      top: 50%;
+      width: 30%;
+      transform: translateY(-100%);
+      position: absolute;
+      border-left: 1px dashed $white;
+      @include flex(column, flex-start, flex-start);
+      padding: 1rem 2rem;
+      gap: 0.5rem;
+
+      .circle {
+        position: absolute;
+        top: 100%;
+        transform: translateY(-50%) translateX(-50%);
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        left: 0;
+        background-color: $white;
+      }
+
+      h5 {
+        font-size: 1.7rem;
+        color: $white;
+        font-weight: 600;
+        @include flex(row, center, center);
+        gap: 0.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+        color: rgba($color: $white, $alpha: 0.8);
+        font-weight: 400;
+        margin-top: 1rem;
+        line-height: 1.5;
+      }
+
+      &.workshop-part-2 {
+        left: 30%;
+        transform: translateY(100%);
+        top: auto;
+        bottom: 50%;
+        @include flex(column, flex-end, flex-start);
+        .circle {
+          top: 0%;
+          transform: translateY(-50%) translateX(-50%);
+        }
+      }
+
+      &.workshop-part-3 {
+        left: 47%;
+      }
+
+      &.workshop-part-4 {
+        left: 65%;
+        transform: translateY(100%);
+        top: auto;
+        bottom: 50%;
+        @include flex(column, flex-end, flex-start);
+
+        .circle {
+          top: 0%;
+          transform: translateY(-50%) translateX(-50%);
+        }
+      }
+    }
+  }
+}

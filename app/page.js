@@ -1,7 +1,10 @@
 import Hero from "@/components/home/Hero";
 import { ItemsSlider } from "@/components/ItemsSlider";
 import Marque from "@/components/Marque";
+import WhatWeTryToDo from "@/components/home/WhatWeTryToDo";
 import WokrshopsSlider from "@/components/WokrshopsSlider";
+import WorkshopParts from "@/components/home/WorkshopParts";
+import OurTeam from "@/components/OurTeam";
 
 export default async function HomePage() {
   return (
@@ -12,7 +15,7 @@ export default async function HomePage() {
           "Šarolika kuhinja",
           "Učenje od malih nogu",
           "Radionice za djecu",
-          "Kreativno izražavanje",
+          "Kreativno izrfl13exažavanje",
           "Zdrava prehrana",
           "Kreativne radionice",
           "Kuhanje za djecu",
@@ -21,6 +24,9 @@ export default async function HomePage() {
         ]}
       />
       <WokrshopsSlider />
+      <WhatWeTryToDo />
+      <WorkshopParts />
+      <OurTeam />
     </main>
   );
 }

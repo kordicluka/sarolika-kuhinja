@@ -2,9 +2,10 @@
 
 .items-slider {
   width: 100%;
-  @include flex(column, center, center);
+  @include flex(column, flex-start, center);
   gap: 1rem;
   padding: 3rem 12.5%;
+  aspect-ratio: 1/0.35;
 
   .items-slider-title {
     @include flex(row, space-between, flex-end);
