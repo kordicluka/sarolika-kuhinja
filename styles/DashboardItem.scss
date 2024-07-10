@@ -3,7 +3,7 @@
 .dashboard-item {
   width: 100%;
   @include flex(row, flex-start, flex-start);
-  height: 100vh;
+  height: 100%;
   padding-top: calc(12.1rem);
   overflow: hidden;
   overflow-x: hidden;
@@ -30,15 +30,20 @@
 
       .dashboard-add-new-section {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 60%;
-        height: 60%;
+        top: 0rem;
+        left: 0%;
+        width: 40%;
+        height: 80vh;
         background-color: $gray-15;
         border: 1px solid $gray-13;
         @include flex(column, center, center);
+        overflow-y: auto;
         display: none;
+        z-index: 10000;
+
+        &.active {
+          display: flex;
+        }
       }
 
       .form-row {
@@ -92,7 +97,7 @@
 
               .dropdowns {
                 position: absolute;
-                right: 10%;
+                right: 0%;
                 top: 95%;
                 width: 10rem;
                 background-color: $white;
@@ -103,7 +108,7 @@
                 overflow: hidden;
                 cursor: pointer;
                 z-index: 3;
-                height: 30rem;
+                height: auto;
 
                 button,
                 a {
