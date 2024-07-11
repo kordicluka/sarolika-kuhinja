@@ -12,18 +12,26 @@
     width: 100%;
     height: 45rem;
     position: relative;
+
     .text-container {
       padding-left: 12.5%;
       @include flex(column, center, flex-start);
       gap: 1rem;
       width: 50%;
+      padding-right: 2rem;
 
-      h4 {
+      h3 {
         color: $page-primary;
+        font-size: 3rem;
+      }
+      h2 {
+        margin-bottom: 1rem;
+        font-size: 3rem;
       }
 
-      p {
+      .desc {
         line-height: 1.5;
+        margin-bottom: 1rem;
       }
     }
     .rectangle {
@@ -51,6 +59,25 @@
         object-fit: cover;
         z-index: 3;
       }
+    }
+  }
+
+  .sweet-meals {
+    @include flex(row, flex-end, center);
+
+    .rectangle {
+      left: 0;
+      right: auto;
+    }
+
+    .image-container {
+      left: 5%;
+      right: auto;
+    }
+
+    .text-container {
+      padding-left: 4rem;
+      padding-right: 12.5%;
     }
   }
 }

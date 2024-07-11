@@ -4,7 +4,6 @@ import { Caveat } from "next/font/google";
 import NextImage from "next/image";
 
 const caveat = Caveat({
-  display: "swap",
   weights: [400, 700],
   subsets: ["latin"],
 });

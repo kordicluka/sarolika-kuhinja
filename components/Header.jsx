@@ -12,7 +12,6 @@ import Instagram from "@/components/Instagram";
 import WhatsUpp from "@/components/WhatsUpp";
 
 const caveat = Caveat({
-  display: "swap",
   weights: [400, 700],
   subsets: ["latin"],
 });

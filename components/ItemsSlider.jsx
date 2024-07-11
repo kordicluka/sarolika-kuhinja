@@ -4,7 +4,6 @@ import "@/styles/ItemsSlider.scss";
 import ItemCard from "./items/ItemCard";
 
 const caveat = Caveat({
-  display: "swap",
   weights: [400, 700],
   subsets: ["latin"],
 });

@@ -4,7 +4,6 @@ import NextImage from "next/image";
 import "@/styles/OurTeam.scss";
 
 const caveat = Caveat({
-  display: "swap",
   weights: [400, 700],
   subsets: ["latin"],
 });
