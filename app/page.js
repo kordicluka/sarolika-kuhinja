@@ -6,6 +6,7 @@ import WokrshopsSlider from "@/components/WokrshopsSlider";
 import WorkshopParts from "@/components/home/WorkshopParts";
 import OurTeam from "@/components/OurTeam";
 import { Reviews } from "@/components/Reviews";
+import { MealsWeMake } from "@/components/home/MealsWeMake";
 
 export default async function HomePage() {
   return (
@@ -28,6 +29,7 @@ export default async function HomePage() {
       <WhatWeTryToDo />
       <WorkshopParts />
       <OurTeam />
+      <MealsWeMake />
       <Reviews />
     </main>
   );

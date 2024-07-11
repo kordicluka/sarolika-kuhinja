@@ -1,0 +1,6 @@
+@import "./globals.scss";
+
+.meals-we-make {
+  @include flex(column, center, flex-start);
+  background-color: rgba($color: $page-primary, $alpha: 1);
+}
