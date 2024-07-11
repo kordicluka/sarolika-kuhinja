@@ -5,6 +5,8 @@ export const MealsWeMake = () => {
   return (
     <section className="meals-we-make">
       <div className="salty-meals">
+        {" "}
+        <div className="rectangle"></div>
         <div className="text-container">
           <h3>Salate, ostale slane stvari...</h3>
           <h2>Pogledajte kakva SLANA JELA izrađujemo s djecom.</h2>
@@ -36,20 +38,22 @@ export const MealsWeMake = () => {
         </div>
         <div className="image-container">
           <NextImage
-            src="/images/slana-jela.png"
+            src="/slana-jela.png"
             alt="Slana jela"
-            width={800}
-            height={800}
+            width={1200}
+            height={1200}
           />
         </div>
       </div>
       <div className="sweet-meals">
+        <div className="rectangle"></div>
+
         <div className="image-container">
           <NextImage
-            src="/images/slatka-jela.png"
+            src="/slatka-jela.png"
             alt="Slatka jela"
-            width={800}
-            height={800}
+            width={1200}
+            height={1200}
           />
         </div>
         <div className="text-container">
