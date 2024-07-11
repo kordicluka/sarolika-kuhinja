@@ -15,6 +15,7 @@ export default async function WorkshopsSlider() {
     orderBy: {
       date: "desc",
     },
+    take: 5,
   });
 
   return <ItemsSlider type="workshops" items={items} />;

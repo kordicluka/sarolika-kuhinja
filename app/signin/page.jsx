@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import NextImage from "next/image";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import ToasterProvider from "@/components/dashboard/ToasterProvider";
 
 export default async function SignIn() {
   const session = await getServerSession(authOptions);
@@ -14,9 +15,12 @@ export default async function SignIn() {
   }
 
   return (
-    <main className="login-page">
-      {" "}
-      <LoginForm />
-    </main>
+    <>
+      <main className="login-page">
+        {" "}
+        <LoginForm />
+      </main>
+      <ToasterProvider />
+    </>
   );
 }

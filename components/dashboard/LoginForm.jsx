@@ -5,6 +5,8 @@ import "@/styles/LoginForm.scss";
 import { useRouter } from "next/navigation";
 import logo from "@/public/images/logo.png";
 import NextImage from "next/image";
+import toast from "react-hot-toast";
+import ToasterComponent from "./ToasterComponent";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -38,17 +40,31 @@ export default function LoginForm() {
       return;
     }
 
-    const result = await signIn("credentials", {
+    const res = await signIn("credentials", {
       redirect: false,
       email,
       password,
     });
 
-    if (result?.ok) {
-      console.log(result);
+    if (res?.ok) {
       router.push("/dashboard");
+      toast((t) => (
+        <ToasterComponent
+          title={"Dobro došli u admin aplikaciju!"}
+          t={t}
+          state={res?.ok ? "success" : "error"}
+          message={"Unijeli ste ispravne podatke."}
+        />
+      ));
     } else {
-      alert("Pogrešno korisničko ime ili lozinka.");
+      toast((t) => (
+        <ToasterComponent
+          title={"Uneseni podatci nisu ispravni"}
+          t={t}
+          state={res?.ok ? "success" : "error"}
+          message={"Molimo pokušajte ponovo."}
+        />
+      ));
     }
   };
 

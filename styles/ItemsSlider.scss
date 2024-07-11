@@ -6,6 +6,7 @@
   gap: 1rem;
   padding: 3rem 12.5%;
   aspect-ratio: 1/0.35;
+  position: relative;
 
   .items-slider-title {
     @include flex(row, space-between, flex-end);
@@ -23,13 +24,62 @@
     }
   }
 
+  .arrow-button {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(50%) rotate(180deg);
+    width: 2.8rem;
+    height: 2.8rem;
+    z-index: 3;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.18);
+    padding: 0.45rem;
+    border-radius: 50%;
+    background-color: $white;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      transform: translateX(1px);
+      color: $gray-7;
+    }
+
+    &.right-arrow-button {
+      left: auto;
+      right: calc(10% - 1rem);
+      transform: translateY(50%) rotate(0);
+      svg {
+        transform: translateX(1px);
+      }
+    }
+  }
+
   .items-container {
     @include flex(column, flex-start, center);
-    height: 30rem;
+    height: 33rem;
     width: 100%;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    padding-bottom: 2rem;
+    position: relative;
+
+    // edit the scroll x bar
+    &::-webkit-scrollbar {
+      height: 0.2rem;
+      background-color: $gray-14;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $gray-13;
+      border-radius: 1rem;
+    }
 
     .items-container-inner {
-      @include flex(row, center, center);
+      @include flex(row, flex-start, flex-start);
+      width: auto;
+      position: absolute;
+      left: 0;
+      top: 0;
     }
   }
 }

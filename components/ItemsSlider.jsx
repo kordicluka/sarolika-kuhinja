@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useRef } from "react";
 import { Caveat } from "next/font/google";
 import "@/styles/ItemsSlider.scss";
 import ItemCard from "./items/ItemCard";
@@ -9,8 +10,61 @@ const caveat = Caveat({
 });
 
 export const ItemsSlider = ({ type, items }) => {
+  const scrollAmount = window.innerWidth * 0.33;
+  const containerRef = useRef();
+
+  const scrollRight = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({
+        left: scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollLeft = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({
+        left: -scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <section className="items-slider">
+      <button className="arrow-button" onClick={scrollLeft}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1}
+          stroke="currentColor"
+          className="size-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m8.25 4.5 7.5 7.5-7.5 7.5"
+          />
+        </svg>
+      </button>
+      <button className="arrow-button right-arrow-button" onClick={scrollRight}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1}
+          stroke="currentColor"
+          className="size-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m8.25 4.5 7.5 7.5-7.5 7.5"
+          />
+        </svg>
+      </button>
       <div className="items-slider-title">
         <div className="items-slider-title-left">
           <h3 className={caveat.className}>
@@ -45,7 +99,7 @@ export const ItemsSlider = ({ type, items }) => {
           </a>
         </div>
       </div>
-      <div className="items-container">
+      <div className="items-container" ref={containerRef}>
         <div className="items-container-inner">
           {items?.length > 0 &&
             items.map((item) => (
