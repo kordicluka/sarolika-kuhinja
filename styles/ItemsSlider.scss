@@ -62,16 +62,11 @@
     overflow-x: scroll;
     padding-bottom: 2rem;
     position: relative;
+    margin-top: 0.5rem;
 
-    // edit the scroll x bar
+    // dont display the x scrollbar
     &::-webkit-scrollbar {
-      height: 0.2rem;
-      background-color: $gray-14;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: $gray-13;
-      border-radius: 1rem;
+      display: none;
     }
 
     .items-container-inner {

@@ -317,3 +317,37 @@ export async function getWorkshopBySlug(slug) {
     };
   }
 }
+
+export async function getNextWorkshop() {
+  try {
+    const nextWorkshop = await prisma.workshop.findFirst({
+      where: {
+        date: {
+          gte: new Date(),
+        },
+      },
+      orderBy: {
+        date: "asc",
+      },
+    });
+
+    if (!nextWorkshop) {
+      return { message: "Nema nadolazećih radionica!", ok: false };
+    }
+
+    return {
+      workshop: {
+        ...nextWorkshop,
+        sections: JSON.parse(nextWorkshop.sections),
+      },
+      message: "Nadolazeća radionica je uspješno dobivena!",
+      ok: true,
+    };
+  } catch (error) {
+    console.error("Greška pri dobivanju nadolazeće radionice:", error);
+    return {
+      message: "Interna greška poslužitelja.",
+      ok: false,
+    };
+  }
+}

@@ -1,1 +1,82 @@
 @import "./globals.scss";
+
+footer {
+  @include flex(column, flex-start, flex-start);
+  background-color: $gray-1;
+
+  .footer-content {
+    border-bottom: 1px solid $gray-2;
+    @include flex(row, space-between, flex-start);
+    padding: 4rem 12.5%;
+    width: 100%;
+
+    .footer-content-col {
+      width: 20%;
+      @include flex(column, flex-start, flex-start);
+      gap: 1.2rem;
+
+      &:nth-child(1) {
+        width: 30%;
+      }
+
+      h5 {
+        font-size: 1.3rem;
+        color: $gray-12;
+        font-weight: 400;
+      }
+
+      h4 {
+        font-size: 1.7rem;
+        color: $gray-12;
+        font-weight: 600;
+      }
+
+      p {
+        font-size: 0.9rem;
+        color: $gray-8;
+        font-weight: 200;
+        width: 90%;
+      }
+      .socials {
+        @include flex(row, flex-start, flex-start);
+        gap: 0.7rem;
+        margin-top: 1rem;
+
+        a {
+          text-decoration: none;
+          transition: all 0.3s ease;
+          width: 1.5rem;
+          height: 1.5rem;
+
+          &:hover {
+            color: $gray-4;
+          }
+
+          svg {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+
+      .footer-link {
+        text-decoration: none;
+        color: $gray-8;
+        font-size: 0.9rem;
+        font-weight: 200;
+      }
+    }
+  }
+
+  .footer-bottom {
+    padding: 1rem 12.5%;
+    width: 100%;
+    background-color: $gray-2;
+    @include flex(row, space-between, center);
+
+    .rights {
+      font-size: 0.9rem;
+      color: $gray-10 !important;
+    }
+  }
+}

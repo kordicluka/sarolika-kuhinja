@@ -35,7 +35,10 @@ export default function ItemCard({ item, link }) {
       <div className="item-card-info">
         <h6 className="item-card-info-title">{item.title}</h6>{" "}
         <h6 className="item-card-info-date">
-          {formatDate(item.date) + " - " + formatTime(item.date) + " h"}
+          {/* {formatDate(item.date) + " - " + formatTime(item.date) + " h"} */}
+          {item?.date
+            ? formatDate(item.date) + " - " + formatTime(item.date) + " h"
+            : formatDate(item.createdAt)}
         </h6>
         <p className="item-card-info-desc">
           {limitTextChar(item.description, 100)}

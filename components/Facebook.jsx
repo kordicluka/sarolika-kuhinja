@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Facebook() {
+export default function Facebook({ color }) {
   return (
     <>
       {/* Removing XML declaration since it's not needed in JSX */}
@@ -14,7 +14,7 @@ export default function Facebook() {
         <defs>
           <style>
             {`.cls-1 {
-              fill: #405b62;
+              fill: #${color};
               fill-rule: evenodd;
               stroke-width: 0px;
             }`}

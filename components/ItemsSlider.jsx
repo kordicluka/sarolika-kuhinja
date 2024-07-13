@@ -10,13 +10,11 @@ const caveat = Caveat({
 });
 
 export const ItemsSlider = ({ type, items }) => {
-  const scrollAmount = window.innerWidth * 0.33;
   const containerRef = useRef();
-
   const scrollRight = () => {
     if (containerRef.current) {
       containerRef.current.scrollBy({
-        left: scrollAmount,
+        left: containerRef.current.offsetWidth / items.length,
         behavior: "smooth",
       });
     }
@@ -25,7 +23,7 @@ export const ItemsSlider = ({ type, items }) => {
   const scrollLeft = () => {
     if (containerRef.current) {
       containerRef.current.scrollBy({
-        left: -scrollAmount,
+        left: -containerRef.current.offsetWidth / (items.length - 1),
         behavior: "smooth",
       });
     }

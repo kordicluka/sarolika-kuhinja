@@ -7,6 +7,7 @@ import WorkshopParts from "@/components/home/WorkshopParts";
 import OurTeam from "@/components/OurTeam";
 import { Reviews } from "@/components/Reviews";
 import { MealsWeMake } from "@/components/home/MealsWeMake";
+import PostsSlider from "@/components/PostsSlider";
 
 export default async function HomePage() {
   return (
@@ -30,6 +31,7 @@ export default async function HomePage() {
       <WorkshopParts />
       <OurTeam />
       <MealsWeMake />
+      <PostsSlider />
       <Reviews />
     </main>
   );

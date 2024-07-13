@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function WhatsApp() {
+export default function WhatsApp({ color }) {
   return (
     <>
       {/* Removing XML declaration since it's not needed in JSX */}
@@ -14,7 +14,7 @@ export default function WhatsApp() {
         <defs>
           <style>
             {`.cls-1 {
-              fill: #405b62;
+              fill: #${color};
               stroke-width: 0px;
             }`}
           </style>

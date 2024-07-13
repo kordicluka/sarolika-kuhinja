@@ -10,6 +10,7 @@ import { Caveat } from "next/font/google";
 import Facebook from "@/components/Facebook";
 import Instagram from "@/components/Instagram";
 import WhatsUpp from "@/components/WhatsUpp";
+import { getNextWorkshop } from "@/actions/WorkshopsActions";
 
 const caveat = Caveat({
   weights: [400, 700],
@@ -19,38 +20,20 @@ const caveat = Caveat({
 export const Header = () => {
   const pathName = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [nextWorkshop, setNextWorkshop] = useState(null);
+  const [timeDiff, setTimeDiff] = useState(null);
 
-  const nextWorkshop = {
-    slug: "radionica-za-djecu",
-    title: "Radionica za djecu",
-    date: new Date("2024-08-15T15:00:00"),
-  };
+  useEffect(() => {
+    const fetchNextWorkshop = async () => {
+      const response = await getNextWorkshop();
+      if (response.ok) {
+        setNextWorkshop(response.workshop);
+        setTimeDiff(new Date(response.workshop.date) - new Date());
+      }
+    };
 
-  const diff = nextWorkshop.date - new Date();
-
-  const getDaysToNextWorkshop = () => {
-    return Math.floor(diff / (1000 * 60 * 60 * 24));
-  };
-
-  const getHoursToNextWorkshop = () => {
-    return Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  };
-
-  const getMinutesToNextWorkshop = () => {
-    return Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  };
-
-  const getTensOf = (number) => {
-    return Math.floor(number / 10);
-  };
-
-  const getUnitsOf = (number) => {
-    return number % 10;
-  };
-
-  const onChangeSearch = (event) => {
-    console.log(event.target.value);
-  };
+    fetchNextWorkshop();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,6 +49,30 @@ export const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const getDaysToNextWorkshop = () => {
+    return Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+  };
+
+  const getHoursToNextWorkshop = () => {
+    return Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  };
+
+  const getMinutesToNextWorkshop = () => {
+    return Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+  };
+
+  const getTensOf = (number) => {
+    return Math.floor(number / 10);
+  };
+
+  const getUnitsOf = (number) => {
+    return number % 10;
+  };
+
+  const onChangeSearch = (event) => {
+    console.log(event.target.value);
+  };
 
   if (pathName.includes("/dashboard") || pathName.includes("/signin")) {
     return null;
@@ -98,7 +105,7 @@ export const Header = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <Facebook />
+              <Facebook color="#405b62" />
             </a>
             <a
               className="social-container"
@@ -106,7 +113,7 @@ export const Header = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <Instagram />
+              <Instagram color="#405b62" />
             </a>
             <a
               className="social-container"
@@ -114,7 +121,7 @@ export const Header = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <WhatsUpp />
+              <WhatsUpp color="#405b62" />
             </a>
           </div>
         </div>
@@ -154,50 +161,54 @@ export const Header = () => {
           </div>
         </nav>
 
-        <div className="next-workshop">
-          <p className={caveat.className}>Sljedeća radionica:</p>
-          <div className="next-workshop-time-to-container">
-            <div className="next-workshop-time-to">
-              <div className="units">{getTensOf(getDaysToNextWorkshop())}</div>
-              <div className="units">{getUnitsOf(getDaysToNextWorkshop())}</div>
-            </div>
-            <div className="next-workshop-time-to-label">dana</div>
-          </div>
-
-          <div className="next-workshop-time-to-container">
-            <div className="next-workshop-time-to">
-              <div className="units">{getTensOf(getHoursToNextWorkshop())}</div>
-              <div className="units">
-                {getUnitsOf(getHoursToNextWorkshop())}
+        {nextWorkshop && (
+          <a className="next-workshop" href={`/radionice/${nextWorkshop.slug}`}>
+            <p className={caveat.className}>Sljedeća radionica:</p>
+            <div className="next-workshop-time-to-container">
+              <div className="next-workshop-time-to">
+                <div className="units">
+                  {getTensOf(getDaysToNextWorkshop())}
+                </div>
+                <div className="units">
+                  {getUnitsOf(getDaysToNextWorkshop())}
+                </div>
               </div>
+              <div className="next-workshop-time-to-label">dana</div>
             </div>
-            <div className="next-workshop-time-to-label">sati</div>
-          </div>
 
-          <div className="next-workshop-time-to-container">
-            <div className="next-workshop-time-to">
-              <div className="units">
-                {getTensOf(getMinutesToNextWorkshop())}
+            <div className="next-workshop-time-to-container">
+              <div className="next-workshop-time-to">
+                <div className="units">
+                  {getTensOf(getHoursToNextWorkshop())}
+                </div>
+                <div className="units">
+                  {getUnitsOf(getHoursToNextWorkshop())}
+                </div>
               </div>
-              <div className="units">
-                {getUnitsOf(getMinutesToNextWorkshop())}
-              </div>
+              <div className="next-workshop-time-to-label">sati</div>
             </div>
-            <div className="next-workshop-time-to-label">minuta</div>
-          </div>
 
-          <span className="next-workshop-title">
-            {" "}
-            {nextWorkshop.title + ": "}
-          </span>
-          <span className="next-workshop-date-and-time">
-            {" "}
-            {formatDate(nextWorkshop.date)}
-            {" u "}
-            {formatTime(nextWorkshop.date)}
-            {" sati"}
-          </span>
-        </div>
+            <div className="next-workshop-time-to-container">
+              <div className="next-workshop-time-to">
+                <div className="units">
+                  {getTensOf(getMinutesToNextWorkshop())}
+                </div>
+                <div className="units">
+                  {getUnitsOf(getMinutesToNextWorkshop())}
+                </div>
+              </div>
+              <div className="next-workshop-time-to-label">minuta</div>
+            </div>
+
+            <span className="next-workshop-title">
+              {nextWorkshop.title + ": "}
+            </span>
+            <span className="next-workshop-date-and-time">
+              {formatDate(nextWorkshop.date)} u {formatTime(nextWorkshop.date)}{" "}
+              sati
+            </span>
+          </a>
+        )}
       </header>
     );
   }

@@ -1,1 +1,86 @@
 @import "./globals.scss";
+
+.newsletter {
+  padding: 3rem 12.5%;
+  @include flex(column, center, center);
+  background-color: $page-primary;
+
+  .newsletter-form {
+    width: 100%;
+    @include flex(column, flex-start, flex-start);
+    color: $gray-11;
+    padding: 0 0%;
+    position: relative;
+    gap: 0.5rem;
+
+    h6 {
+      color: $white;
+      font-weight: 200;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      text-transform: uppercase;
+      color: $white;
+      font-size: 3.3rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 0.85rem;
+      font-weight: 300;
+      margin-bottom: 2rem;
+      color: $gray-14;
+      width: 80%;
+      text-align: center;
+    }
+
+    .form-row {
+      @include flex(row, flex-start, flex-end);
+      gap: 1rem;
+    }
+
+    .form-col {
+      @include flex(column, center, flex-start);
+      margin-bottom: 0.5rem;
+      .btn {
+        text-transform: uppercase;
+        padding: 0.6rem 1.1rem;
+        font-weight: 500;
+      }
+
+      label {
+        font-size: 0.7rem;
+        font-weight: 400;
+        color: $gray-13;
+      }
+
+      .btn {
+        font-size: 0.85rem;
+      }
+
+      input {
+        width: 20rem;
+        padding: 0.5rem 1rem;
+        border: none;
+        font-size: 0.9rem;
+        border-bottom: 1px solid $gray-13;
+        color: $gray-13;
+        background-color: transparent;
+
+        &.small {
+          width: 15rem;
+        }
+
+        &::placeholder {
+          color: rgba($color: $white, $alpha: 0.9);
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}
