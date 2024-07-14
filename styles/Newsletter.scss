@@ -1,7 +1,7 @@
 @import "./globals.scss";
 
 .newsletter {
-  padding: 3rem 12.5%;
+  padding: 4rem 12.5%;
   @include flex(column, center, center);
   background-color: $page-primary;
 
@@ -23,7 +23,7 @@
     h3 {
       text-transform: uppercase;
       color: $white;
-      font-size: 3.3rem;
+      font-size: 2.8rem;
       margin-bottom: 1rem;
     }
 
@@ -31,9 +31,9 @@
       font-size: 0.85rem;
       font-weight: 300;
       margin-bottom: 2rem;
-      color: $gray-14;
+      color: $gray-15;
       width: 80%;
-      text-align: center;
+      text-align: left;
     }
 
     .form-row {

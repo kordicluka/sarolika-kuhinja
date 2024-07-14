@@ -11,6 +11,7 @@ const caveat = Caveat({
 
 export const ItemsSlider = ({ type, items }) => {
   const containerRef = useRef();
+
   const scrollRight = () => {
     if (containerRef.current) {
       containerRef.current.scrollBy({
@@ -28,6 +29,31 @@ export const ItemsSlider = ({ type, items }) => {
       });
     }
   };
+
+  const getTitleText = () => {
+    switch (type) {
+      case "workshops":
+        return {
+          subtitle: "Kliknite na radionicu kako bi saznali više",
+          title: "Sljedeće i prethodne radionice",
+          link: "/radionice",
+        };
+      case "posts":
+        return {
+          subtitle: "Zanimljive objave o nutricionizmu",
+          title: "Naš blog",
+          link: "/blog",
+        };
+      default:
+        return {
+          subtitle: "Kliknite na jelo kako bi saznali više.",
+          title: "Neka od jela koje pripremamo",
+          link: "/jela",
+        };
+    }
+  };
+
+  const { subtitle, title, link } = getTitleText();
 
   return (
     <section className="items-slider">
@@ -65,21 +91,12 @@ export const ItemsSlider = ({ type, items }) => {
       </button>
       <div className="items-slider-title">
         <div className="items-slider-title-left">
-          <h3 className={caveat.className}>
-            {type === "workshops"
-              ? "Kliknite na radionicu kako bi saznali više"
-              : "Zanimljive objave o nutricionizmu"}
-          </h3>
-          <h2>
-            {" "}
-            {type === "workshops"
-              ? "Sljedeće i prethodne radionice"
-              : "Pogledajte naš blog"}{" "}
-          </h2>
+          <h3 className={caveat.className}>{subtitle}</h3>
+          <h2>{title}</h2>
         </div>
         <div className="items-slider-title-right">
-          <a href="/radionice" className="btn primary">
-            <span>Sve radionice</span>
+          <a href={link} className="btn primary">
+            <span>Pogledajte sve</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

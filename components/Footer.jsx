@@ -33,7 +33,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <Facebook color="eee" />
+                <Facebook />
               </a>
               <a
                 className="social-container"
@@ -41,7 +41,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <Instagram color="eee" />
+                <Instagram />
               </a>
               <a
                 className="social-container"
@@ -49,7 +49,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <WhatsUpp color="eee" />
+                <WhatsUpp />
               </a>
             </div>
           </div>

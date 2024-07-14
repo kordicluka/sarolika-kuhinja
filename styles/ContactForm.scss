@@ -1,0 +1,7 @@
+@import "./globals.scss";
+
+.contact-form {
+  padding: 1rem;
+  @include flex(column, flex-start, flex-start);
+  gap: 0.3rem;
+}

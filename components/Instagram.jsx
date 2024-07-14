@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Instagram({ color }) {
+export default function Instagram() {
   return (
     <>
       {/* Removing XML declaration since it's not needed in JSX */}
@@ -11,14 +11,6 @@ export default function Instagram({ color }) {
         viewBox="0 0 247.49 247.49"
         className="social-icon"
       >
-        <defs>
-          <style>
-            {`.cls-1 {
-              fill: #${color};
-              stroke-width: 0px;
-            }`}
-          </style>
-        </defs>
         <path
           className="cls-1"
           d="m123.74,95.29h-.43c-15.52.22-28.24,12.72-28.24,28.24s12.5,28.46,28.24,28.67h.43c15.74-.22,28.24-12.93,28.24-28.67s-12.5-28.03-28.24-28.24Z"

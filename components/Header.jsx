@@ -105,7 +105,7 @@ export const Header = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <Facebook color="#405b62" />
+              <Facebook color="405b62" />
             </a>
             <a
               className="social-container"
@@ -113,7 +113,7 @@ export const Header = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <Instagram color="#405b62" />
+              <Instagram color="405b62" />
             </a>
             <a
               className="social-container"
@@ -121,7 +121,7 @@ export const Header = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <WhatsUpp color="#405b62" />
+              <WhatsUpp color="405b62" />
             </a>
           </div>
         </div>

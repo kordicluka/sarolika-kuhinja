@@ -6,14 +6,14 @@
   gap: 1rem;
   padding: 1rem;
   text-decoration: none;
-  aspect-ratio: 1/1;
+  height: 35rem;
 
   .item-card-image {
     width: 100%;
-    aspect-ratio: 1/0.75;
     overflow: hidden;
     position: relative;
     box-shadow: 0 0 0.3rem rgba($black, 0.15);
+    height: 23rem;
 
     img {
       width: 100%;
@@ -60,8 +60,7 @@
     gap: 0.8rem;
     overflow: hidden;
     width: 100%;
-    aspect-ratio: 1/0.3;
-
+    height: 12rem;
     .item-card-info-date {
       font-size: 1rem;
       font-weight: 600;

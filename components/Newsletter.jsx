@@ -12,8 +12,12 @@ export default function Newsletter() {
     return (
       <section className="newsletter">
         <form className="newsletter-form">
-          <h6>Prijavite se na naš</h6>
-          <h3>Newsletter</h3>
+          <h3>Prijavite se na naš Newsletter</h3>
+
+          <p>
+            Prijavite se na naš newsletter kako biste dobili najnovije vijesti i
+            informacije o našim radionicama.
+          </p>
 
           <div className="form-row">
             <div className="form-col">
