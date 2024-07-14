@@ -156,14 +156,13 @@
           transition: all 0.3s ease;
           height: 100%;
           @include flex(row, center, center);
-          text-transform: uppercase;
           &:nth-last-child(1) {
             margin-right: 0;
           }
 
           a {
             text-decoration: none;
-            color: $gray-3;
+            color: $gray-5;
             font-size: 1.05rem;
             font-weight: 400;
             height: 100%;

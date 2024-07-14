@@ -14,5 +14,5 @@ export default async function WorkshopsPage() {
     },
   });
 
-  return <main></main>;
+  return <main className="page"></main>;
 }

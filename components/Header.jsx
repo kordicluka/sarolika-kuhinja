@@ -13,7 +13,7 @@ import WhatsUpp from "@/components/WhatsUpp";
 import { getNextWorkshop } from "@/actions/WorkshopsActions";
 
 const caveat = Caveat({
-  weights: [400, 700],
+  weights: [400, 500, 600, 700],
   subsets: ["latin"],
 });
 

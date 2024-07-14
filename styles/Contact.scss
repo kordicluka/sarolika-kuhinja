@@ -1,0 +1,39 @@
+@import "./globals.scss";
+
+.contact-container {
+  @include flex(row, flex-start, flex-start);
+  position: relative;
+  min-height: 20vh;
+  padding: 3rem 12.5%;
+  gap: 10%;
+
+  .contact-info {
+    @include flex(column, flex-start, flex-start);
+    width: 40%;
+
+    p {
+      margin: 1rem 0;
+      margin-bottom: 2rem;
+    }
+
+    .contact-row {
+      @include flex(row, flex-start center);
+      gap: 0.5rem;
+      padding: 1rem 0.5rem;
+      width: 100%;
+      border-bottom: 1px solid $gray-14;
+
+      span {
+        font-size: 0.9rem;
+        color: $gray-5;
+        font-weight: 600;
+        width: 30%;
+
+        &:nth-child(2) {
+          width: 70%;
+          font-weight: 300;
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { ContactForm } from "@/components/contact/ContactForm";
+import Contact from "@/components/contact/Contact";
 import { PageTitle } from "@/components/PageTitle";
 import React from "react";
 
@@ -9,7 +9,7 @@ export default function ContactUsPage() {
         title="Kontaktirajte nas."
         shortDesc="Možete nas kontaktirati ispunjavanjem formu ili putem kontakt informacija."
       />
-      <ContactForm />
+      <Contact />
     </div>
   );
 }
