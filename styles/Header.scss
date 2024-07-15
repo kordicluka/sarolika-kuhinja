@@ -152,6 +152,7 @@
           font-size: 0.85rem;
           font-weight: 500;
           color: $gray-13;
+          text-transform: uppercase;
           cursor: pointer;
           transition: all 0.3s ease;
           height: 100%;
@@ -202,27 +203,32 @@
         height: 2.4rem;
         @include flex(row, space-between, center);
         overflow: hidden;
+        border-radius: 3rem;
+        background-color: $gray-15;
+        border: 1px solid $gray-13;
 
         input {
           height: 100%;
           width: 13rem;
           padding: 0 1rem;
           border: none;
-          font-size: 0.9rem;
+          font-size: 0.83 rem;
           font-weight: 400;
           color: $gray-7;
           outline: none;
           transition: all 0.1s ease-in-out;
-          border-bottom: 1px solid $gray-12;
+          background-color: transparent;
+          border-right: 1px solid $gray-13;
+          margin-right: 0.5rem;
 
           &:focus {
             &::placeholder {
-              color: $gray-10;
+              color: $gray-7;
             }
           }
 
           &::placeholder {
-            color: $gray-7;
+            color: $gray-6;
             font-weight: 400;
           }
         }
@@ -233,7 +239,6 @@
           color: $gray-10;
           padding: 0.2rem;
           padding-right: 0.5rem;
-          border-bottom: 1px solid $gray-12;
         }
       }
 
