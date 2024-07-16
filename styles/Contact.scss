@@ -7,6 +7,10 @@
   padding: 3rem 12.5%;
   gap: 10%;
 
+  @media (min-width: 2500px) {
+    padding: 3rem 20%;
+  }
+
   .contact-info {
     @include flex(column, flex-start, flex-start);
     width: 40%;

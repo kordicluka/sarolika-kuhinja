@@ -8,6 +8,10 @@
   background-color: $page-primary;
   border-bottom: 1px solid rgba($color: $white, $alpha: 0.2);
 
+  @media (min-width: 2500px) {
+    padding: 5rem 20%;
+  }
+
   h3 {
     color: $page-primary-ultra-light;
   }

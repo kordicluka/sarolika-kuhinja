@@ -19,7 +19,7 @@
     transition: all 0.3s ease;
     overflow: hidden;
 
-    @media (min-width: 2200px) {
+    @media (min-width: 2500px) {
       padding: 0 20%;
       padding-left: calc(20% + 10rem);
     }
@@ -81,7 +81,7 @@
     animation: slide-in 0.3s ease;
     text-decoration: none;
 
-    @media (min-width: 2200px) {
+    @media (min-width: 2500px) {
       padding: 0.3rem 20%;
     }
 
@@ -142,7 +142,7 @@
     z-index: 2;
     position: relative;
 
-    @media (min-width: 2200px) {
+    @media (min-width: 2500px) {
       padding: 0.5rem 20%;
     }
 
@@ -202,7 +202,7 @@
       box-shadow: 0 0.1rem 0.2rem rgba($black, 0.1);
       padding: 0.5rem;
 
-      @media (min-width: 2200px) {
+      @media (min-width: 2500px) {
         left: 20%;
       }
 

@@ -10,6 +10,10 @@ footer {
     padding: 4rem 12.5%;
     width: 100%;
 
+    @media (min-width: 2500px) {
+      padding: 4rem 20%;
+    }
+
     .footer-content-col {
       width: 20%;
       @include flex(column, flex-start, flex-start);
@@ -77,6 +81,10 @@ footer {
     width: 100%;
     background-color: $gray-1;
     @include flex(row, space-between, center);
+
+    @media (min-width: 2500px) {
+      padding: 1rem 20%;
+    }
 
     .rights {
       font-size: 0.9rem;

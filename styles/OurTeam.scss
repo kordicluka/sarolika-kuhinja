@@ -11,6 +11,10 @@
     padding-right: 8%;
     height: 100%;
 
+    @media (min-width: 2500px) {
+      padding-left: 20%;
+    }
+
     h3 {
       color: $page-primary;
       font-weight: 700;

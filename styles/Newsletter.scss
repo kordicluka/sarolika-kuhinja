@@ -5,6 +5,10 @@
   @include flex(column, center, center);
   background-color: $page-primary;
 
+  @media (min-width: 2500px) {
+    padding: 4rem 20%;
+  }
+
   .newsletter-form {
     width: 100%;
     @include flex(column, flex-start, flex-start);

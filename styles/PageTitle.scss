@@ -8,6 +8,12 @@
   gap: 1rem;
   background-color: $gray-15;
   border-bottom: 1px solid $gray-14;
+
+  @media (min-width: 2500px) {
+    padding: 8rem 20%;
+    padding-bottom: 6rem;
+  }
+
   h2 {
     font-weight: 300;
     width: 40%;
