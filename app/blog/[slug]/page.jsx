@@ -2,6 +2,7 @@ import React from "react";
 import prisma from "@/utils/db";
 import "@/styles/ItemPage.scss";
 import NextImage from "next/image";
+import { formatDate } from "@/utils/formatDate";
 
 export default async function BlogPage({ params }) {
   const { slug } = params;
@@ -34,39 +35,43 @@ export default async function BlogPage({ params }) {
   return (
     <main className="page">
       <section className="post-header">
-        <h5>Blog</h5>
-        <h3>{item?.title}</h3>
-        <div className="author-and-date">
-          <div className="author-info">
-            <p>Created by: {item?.createdBy?.name}</p>
-            {item?.createdBy?.image ? (
-              <div className="author-image">
+        <h5> </h5>
+        <h3>{item?.title}</h3>{" "}
+        <p className="description">{item?.description}</p>
+        <div className="author-share">
+          <div className="author">
+            {" "}
+            <div className="author-image">
+              {item?.createdBy?.image ? (
                 <NextImage
                   src={"/uploads/" + item.createdBy.image}
                   alt={item.createdBy.name}
-                  width={50}
-                  height={50}
+                  width={100}
+                  height={100}
                 />
-              </div>
-            ) : (
-              <span className="author-image-placeholder">
-                {item.createdBy.name.charAt(0).toUpperCase()}
-                {item.createdBy.name.split(" ")[1]
-                  ? item.createdBy.name.split(" ")[1].charAt(0).toUpperCase()
-                  : null}
-              </span>
-            )}
+              ) : (
+                <span className="author-image-placeholder">
+                  {item.createdBy.name.charAt(0).toUpperCase()}
+                  {item.createdBy.name.split(" ")[1]
+                    ? item.createdBy.name.split(" ")[1].charAt(0).toUpperCase()
+                    : null}
+                </span>
+              )}{" "}
+            </div>
+            <div className="author-name">
+              <p>{item?.createdBy?.name}</p>
+              <span>{formatDate(item?.createdAt)} </span>
+            </div>
           </div>
         </div>
-
-        <div className="image-container">
-          <NextImage
-            src={"/uploads/" + item?.image}
-            alt={item?.title}
-            width={1000}
-            height={1000}
-          />
-        </div>
+      </section>
+      <section className="image-container">
+        <NextImage
+          src={"/uploads/" + item?.image}
+          alt={item?.title}
+          width={1000}
+          height={1000}
+        />
       </section>
     </main>
   );
