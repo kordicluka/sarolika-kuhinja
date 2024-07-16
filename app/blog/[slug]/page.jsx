@@ -6,7 +6,7 @@ import { formatDate } from "@/utils/formatDate";
 import Facebook from "@/components/Facebook";
 import Instagram from "@/components/Instagram";
 import WhatsApp from "@/components/WhatsUpp";
-import JSXContentRenderer from "@/components/JSXContentRender";
+import ItemContent from "@/components/ItemContent";
 
 export default async function BlogPage({ params }) {
   const { slug } = params;
@@ -110,11 +110,7 @@ export default async function BlogPage({ params }) {
         />
       </section>
 
-      <div className="item-content">
-        {item?.sections.map((section, index) => (
-          <JSXContentRenderer content={section.jsxContent} />
-        ))}
-      </div>
+      <ItemContent sections={item.sections} />
     </main>
   );
 }

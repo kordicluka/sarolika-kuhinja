@@ -23,7 +23,7 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
       type: "section",
       style: {
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
         justifyContent: "space-between",
         alignItems: "center",
         padding: "3rem 0",
@@ -31,7 +31,6 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
         width: "100%",
         gap: "1rem",
         "(max-width: 768px)": {
-          flexDirection: "column",
           gap: "1rem",
         },
       },
@@ -44,28 +43,26 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
             justifyContent: "center",
             alignItems: "flex-start",
             height: "100%",
-            width: "calc(50% - 1rem)",
-            "(max-width: 768px)": {
-              width: "100%",
-              height: "auto",
-            },
+            width: "100%",
+            height: "auto",
           },
           children: [
             {
               type: "h5",
               className: "caveat",
               style: {
-                marginBottom: ".3rem",
-                fontSize: "2.3rem",
-                color: "#405B62",
                 fontFamily: "'Caveat', cursive",
+                fontSize: "1.7rem",
+                fontWeight: "600",
+                color: "#000",
+                marginBottom: ".5rem",
+                color: "#405b62",
                 lineHeight: "1.2",
-                fontWeight: "700",
                 "(max-width: 1600px)": {
                   fontSize: "1.6rem",
                 },
                 "(max-width: 1300px)": {
-                  fontSize: "2rem",
+                  fontSize: "1.4rem",
                 },
               },
               data: {
@@ -74,16 +71,17 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
               },
             },
             {
-              type: "h2",
+              type: "h3",
               style: {
-                marginBottom: ".7rem",
-                fontSize: "3.5rem",
-                color: "black",
+                marginBottom: ".5rem",
+                fontSize: "2.3rem",
+                lineHeight: "1.2",
+                fontWeight: "600",
                 "(max-width: 1600px)": {
-                  fontSize: "3rem",
+                  fontSize: "2rem",
                 },
                 "(max-width: 1300px)": {
-                  fontSize: "2.5rem",
+                  fontSize: "1.8rem",
                 },
               },
               data: {
@@ -92,7 +90,6 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
               },
             },
             {
-              // this will be edited with: npm install tinymce @tinymce/tinymce-react
               type: "content",
               style: {
                 fontSize: ".9rem",
@@ -134,8 +131,8 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: "gray",
-            width: "calc(50% - 1rem)",
-            height: "40rem",
+            width: "100%",
+            height: "32rem",
             "(max-width: 768px)": {
               height: "30rem",
               width: "100%",

@@ -121,7 +121,43 @@
   }
 }
 
-.item-content {
-  @include flex(column, flex-start, center);
-  padding: 1rem 20%;
+.item-content-container {
+  @include flex(row, space-between, flex-start);
+  padding: 0 17%;
+  position: relative;
+
+  .item-content {
+    @include flex(column, flex-start, center);
+    width: 70%;
+
+    section {
+      border-bottom: 1px solid $gray-13;
+    }
+  }
+
+  .item-sidebar {
+    position: sticky;
+    width: 28%;
+    top: 15vh;
+    right: 0;
+    padding: 1rem;
+    margin-top: 4rem;
+    border-left: 1px solid $gray-13;
+    @include flex(column, flex-start, center);
+    gap: 1rem;
+    z-index: 0;
+
+    button {
+      width: 100%;
+      text-align: left;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: $gray-6;
+
+      &.active {
+        font-weight: 600;
+        color: $gray-4;
+      }
+    }
+  }
 }
