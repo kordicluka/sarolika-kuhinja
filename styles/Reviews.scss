@@ -18,7 +18,7 @@
 
   h2 {
     color: $white;
-    font-weight: 400;
+    text-transform: uppercase;
   }
 
   p {
@@ -39,7 +39,6 @@
       padding: 1.5rem;
       height: 17rem;
       border: 1px solid rgba($color: $white, $alpha: 0.1);
-      border-radius: 0.5rem;
       background-color: rgba($color: $white, $alpha: 0.05);
       position: relative;
 
