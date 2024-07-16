@@ -3,6 +3,10 @@ import prisma from "@/utils/db";
 import "@/styles/ItemPage.scss";
 import NextImage from "next/image";
 import { formatDate } from "@/utils/formatDate";
+import Facebook from "@/components/Facebook";
+import Instagram from "@/components/Instagram";
+import WhatsApp from "@/components/WhatsUpp";
+import JSXContentRenderer from "@/components/JSXContentRender";
 
 export default async function BlogPage({ params }) {
   const { slug } = params;
@@ -31,6 +35,8 @@ export default async function BlogPage({ params }) {
       item.sections = [];
     }
   }
+
+  console.log("Item,sections:", item.sections);
 
   return (
     <main className="page">
@@ -63,16 +69,52 @@ export default async function BlogPage({ params }) {
               <span>{formatDate(item?.createdAt)} </span>
             </div>
           </div>
+          <div className="share">
+            {" "}
+            <a href="#" className="social">
+              <Facebook />
+            </a>
+            <a href="#" className="social">
+              <Instagram />
+            </a>
+            <a href="#" className="social">
+              <WhatsApp />
+            </a>
+            <button className="share-button">
+              {" "}
+              <span>Podijeli</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </section>
       <section className="image-container">
         <NextImage
           src={"/uploads/" + item?.image}
           alt={item?.title}
-          width={1000}
-          height={1000}
+          width={1500}
+          height={1500}
         />
       </section>
+
+      <div className="item-content">
+        {item?.sections.map((section, index) => (
+          <JSXContentRenderer content={section.jsxContent} />
+        ))}
+      </div>
     </main>
   );
 }

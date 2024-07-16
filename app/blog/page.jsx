@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function BlogPage() {
+export default function BlogsPage() {
   return <main className="page"></main>;
 }
