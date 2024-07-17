@@ -9,6 +9,7 @@ import { Reviews } from "@/components/Reviews";
 import { MealsWeMake } from "@/components/home/MealsWeMake";
 import PostsSlider from "@/components/PostsSlider";
 import MealsSlider from "@/components/MealsSlider";
+import Location from "@/components/Location";
 
 export default async function HomePage() {
   return (
@@ -33,6 +34,7 @@ export default async function HomePage() {
       <OurTeam />
       <MealsWeMake />
       <MealsSlider />
+      <Location />
       <PostsSlider />
       <Reviews />
     </main>

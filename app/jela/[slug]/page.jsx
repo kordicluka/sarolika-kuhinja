@@ -36,8 +36,6 @@ export default async function MealPage({ params }) {
     }
   }
 
-  console.log("Item,sections:", item.sections);
-
   return (
     <main className="page">
       <section className="post-header">
