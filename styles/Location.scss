@@ -26,10 +26,11 @@
   }
 
   .location-title {
-    @include flex(column, center, center);
+    @include flex(column, center, flex-start);
     gap: 0.5rem;
     width: 100%;
     z-index: 2;
+    position: relative;
 
     h3 {
       color: $page-primary-ultra-light;
@@ -44,6 +45,12 @@
     p {
       color: $gray-14;
     }
+
+    .btn {
+      position: absolute;
+      right: 0;
+      bottom: 0rem;
+    }
   }
 
   .location-container {
@@ -55,11 +62,14 @@
       width: 67%;
       height: 100%;
       z-index: 2;
+      box-shadow: 0 0 0.5rem rgba($color: $black, $alpha: 0.2);
     }
 
     video {
       width: 30%;
       z-index: 10;
+      box-shadow: 0 0 0.5rem rgba($color: $black, $alpha: 0.2);
+      cursor: pointer;
     }
   }
 }
