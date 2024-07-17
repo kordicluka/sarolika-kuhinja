@@ -2,43 +2,98 @@
 
 footer {
   @include flex(column, flex-start, flex-start);
-  background-color: $gray-1;
 
-  .footer-content {
-    border-bottom: 1px solid $gray-2;
-    @include flex(row, space-between, flex-start);
-    padding: 4rem 12.5%;
+  .footer-top {
+    @include flex(row, space-between, center);
+    padding: 1.6rem 12.5%;
     width: 100%;
+    padding-top: 3rem;
 
     @media (min-width: 2500px) {
-      padding: 4rem 20%;
+      padding: 2rem 20%;
+      padding-top: 3rem;
+    }
+
+    .footer-top-left {
+      @include flex(row, flex-start, center);
+
+      h6 {
+        font-size: 1.7rem;
+        color: $black;
+        font-weight: 600;
+      }
+    }
+
+    .footer-top-right {
+      @include flex(row, flex-start, center);
+      gap: 0.7rem;
+
+      h6 {
+        font-size: 1.1rem;
+        color: $black;
+        font-weight: 500;
+        margin-right: 0.5rem;
+      }
+
+      a {
+        text-decoration: none;
+        transition: all 0.3s ease;
+        width: 1.5rem;
+        height: 1.5rem;
+
+        &:hover {
+          color: $gray-4;
+        }
+
+        svg {
+          width: 100%;
+          height: 100%;
+          color: $page-primary;
+
+          path {
+            color: $page-primary;
+          }
+        }
+      }
+    }
+  }
+
+  .footer-content {
+    border-bottom: 1px solid $gray-14;
+    @include flex(row, flex-start, flex-start);
+    margin: 0rem 12.5%;
+    width: calc(100% - 12.5% * 2);
+    padding: 4rem 0;
+    padding-top: 3rem;
+    border-bottom: 1px solid $gray-13;
+    border-top: 1px solid $gray-13;
+
+    @media (min-width: 2500px) {
+      margin: 0rem 20%;
+      width: calc(100% - 20% * 2);
     }
 
     .footer-content-col {
-      width: 20%;
+      width: 25%;
       @include flex(column, flex-start, flex-start);
-      gap: 1.2rem;
-
-      &:nth-child(1) {
-        width: 30%;
-      }
+      gap: 1.6rem;
 
       h5 {
-        font-size: 1.3rem;
-        color: $gray-12;
-        font-weight: 400;
+        font-size: 1.4rem;
+        color: $gray-3;
+        font-weight: 600;
       }
 
       h4 {
         font-size: 1.7rem;
-        color: $gray-12;
+        color: $gray-3;
         font-weight: 600;
       }
 
       p {
         font-size: 0.9rem;
-        color: $gray-10;
-        font-weight: 200;
+        color: $gray-5;
+        font-weight: 500;
         width: 90%;
       }
       .socials {
@@ -61,7 +116,7 @@ footer {
             height: 100%;
 
             path {
-              fill: $gray-12;
+              color: $gray-4;
             }
           }
         }
@@ -69,26 +124,25 @@ footer {
 
       .footer-link {
         text-decoration: none;
-        color: $gray-10;
-        font-size: 0.9rem;
-        font-weight: 200;
+        color: $gray-5;
+        font-size: 1rem;
+        font-weight: 500;
       }
     }
   }
 
   .footer-bottom {
-    padding: 1rem 12.5%;
+    padding: 1.5rem 12.5%;
     width: 100%;
-    background-color: $gray-1;
     @include flex(row, space-between, center);
 
     @media (min-width: 2500px) {
-      padding: 1rem 20%;
+      padding: 1.5rem 20%;
     }
 
     .rights {
-      font-size: 0.9rem;
-      color: $gray-10 !important;
+      font-size: 0.95rem;
+      color: $gray-5 !important;
     }
   }
 }

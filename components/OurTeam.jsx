@@ -19,20 +19,20 @@ export default function OurTeam() {
           magistra ranog i predškolskog odgoja i obrazovanja - Dora.
           <br />
           <br />
-          Ema i Ana su trenutno na diplomskom studiju nutricionizma, a Dora ima
-          svoj obrt (@poligon.kids).
+          <strong>Ema i Ana</strong> su trenutno na diplomskom studiju
+          nutricionizma, a Dora ima svoj obrt (@poligon.kids).
           <br /> <br />
           Sve tri imamo već nekoliko godina iskustva u radu s djecom i povezuje
           nas želja da djeci pomognemo stvoriti kvalitetne životne navike kroz
           igru i kuhanje. Uživamo raditi skupa i savršeno se nadopunjujemo.{" "}
           <br /> <br />
-          Upravo je iz naše ljubavi prema radu s djecom nastala ideja o
-          Šarolikoj kuhinji, mjestu gdje spajamo nutricionizam s odgojem i
-          obrazovanjem djece.
+          Upravo je iz <strong> naše ljubavi prema radu s djecom</strong>{" "}
+          nastala ideja o Šarolikoj kuhinji, mjestu gdje spajamo nutricionizam s
+          odgojem i obrazovanjem djece.
           <br /> <br />
-          Dora se brine za pedagoški pristup s naglaskom na principe pozitivne
-          discipline, a Ema i Ana za upoznavanje sa zdravom prehranom na
-          uravnotežen način.
+          <strong>Dora</strong> se brine za pedagoški pristup s naglaskom na
+          principe pozitivne discipline, a Ema i Ana za upoznavanje sa zdravom
+          prehranom na uravnotežen način.
           <br /> <br />
           Veselimo se upoznati Vašu djecu i kuhati s njima.
         </span>

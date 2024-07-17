@@ -37,7 +37,7 @@ export default async function MealPage({ params }) {
   }
 
   return (
-    <main className="page">
+    <main className="page item-page">
       <section className="post-header">
         <h5> </h5>
         <h3>{item?.title}</h3>{" "}

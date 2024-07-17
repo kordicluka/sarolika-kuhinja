@@ -9,6 +9,7 @@
   position: relative;
   margin: 2rem 0;
   background-color: rgba($color: $light-green, $alpha: 0.5);
+  margin-bottom: 0;
 
   @media (min-width: 2500px) {
     padding: 2rem 20%;
@@ -59,7 +60,7 @@
     aspect-ratio: 1.87;
 
     .map-container {
-      width: 67%;
+      width: 69%;
       height: 100%;
       z-index: 2;
     }

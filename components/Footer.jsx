@@ -14,45 +14,39 @@ export default function Footer() {
   } else {
     return (
       <footer className="footer">
-        <div className="footer-content">
-          {" "}
-          <div className="footer-content-col">
-            <h4>Šarolika kuhinja</h4>
-            <p>
-              Mi smo tvrtka koja se bavi organiziranjem edukativnih radionica za
-              djecu.
-            </p>
-            <p>
-              Naša misija je pružiti djeci kvalitetno obrazovanje kroz zabavne i
-              interaktivne aktivnosti.
-            </p>
-            <div className="socials">
-              <a
-                className="social-container"
-                href="https://www.facebook.com"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Facebook />
-              </a>
-              <a
-                className="social-container"
-                href="https://www.instagram.com"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Instagram />
-              </a>
-              <a
-                className="social-container"
-                href="https://www.whatsupp.com"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <WhatsUpp />
-              </a>
-            </div>
+        <div className="footer-top">
+          <div className="footer-top-left">
+            <h6>Šarolika kuhinja</h6>
           </div>
+          <div className="footer-top-right">
+            <h6>Zapratite nas:</h6>
+            <a
+              className="social-container"
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Facebook />
+            </a>
+            <a
+              className="social-container"
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Instagram />
+            </a>
+            <a
+              className="social-container"
+              href="https://www.whatsupp.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <WhatsUpp />
+            </a>
+          </div>
+        </div>
+        <div className="footer-content">
           <div className="footer-content-col">
             <h5>Menu</h5>
             <a href="/" className="footer-link">
@@ -80,6 +74,30 @@ export default function Footer() {
             <p>Telefon: +123 456 789</p>
             <p>Email: info@primjer.com</p>
           </div>
+          <div className="footer-content-col">
+            <h5>Podrška</h5>
+            <a href="/faq" className="footer-link">
+              Česta pitanja
+            </a>
+            <a href="/terms" className="footer-link">
+              Uslovi korištenja
+            </a>
+            <a href="/privacy" className="footer-link">
+              Privatnost
+            </a>
+          </div>{" "}
+          <div className="footer-content-col">
+            <h5>Podrška</h5>
+            <a href="/faq" className="footer-link">
+              Česta pitanja
+            </a>
+            <a href="/terms" className="footer-link">
+              Uslovi korištenja
+            </a>
+            <a href="/privacy" className="footer-link">
+              Privatnost
+            </a>
+          </div>{" "}
           <div className="footer-content-col">
             <h5>Podrška</h5>
             <a href="/faq" className="footer-link">

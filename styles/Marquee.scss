@@ -2,24 +2,24 @@
 
 .marquee {
   width: 100%;
-  height: 3rem;
+  height: 5rem;
   background-color: $page-primary;
 
   .marquee-item {
-    font-size: 1.7rem;
+    font-size: 2.5rem;
     font-weight: 700;
     height: 100%;
     display: inline-block;
     white-space: nowrap;
     font-family: "Caveat", cursive;
-    padding: 0 1.5rem;
-    gap: 2rem;
+    padding: 0 2.3rem;
+    gap: 3rem;
     @include flex(row, center, center);
     color: $white;
 
     .circle {
-      width: 0.8rem;
-      height: 0.8rem;
+      width: 1rem;
+      height: 1rem;
       background-color: $white;
       border-radius: 50%;
       display: flex;

@@ -4,9 +4,10 @@
   width: calc(75vw / 3);
   @include flex(column, flex-start, flex-start);
   gap: 1rem;
-  padding: 0.3rem;
+  padding: 0.5rem;
   text-decoration: none;
   height: 35rem;
+  overflow: hidden;
 
   @media (min-width: 2200px) {
     width: calc(60vw / 3);
@@ -16,8 +17,9 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 0 0.3rem rgba($black, 0.15);
+    box-shadow: 0 0 0.3rem rgba($black, 0.05);
     height: 23rem;
+    border-radius: 0.5rem;
 
     img {
       width: 100%;
@@ -73,6 +75,7 @@
         rgba($color: $black, $alpha: 0.7) 100%
       );
       z-index: 3;
+      border-radius: 0.5rem;
     }
 
     .item-card-image {

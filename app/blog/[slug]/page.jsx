@@ -39,7 +39,7 @@ export default async function BlogPage({ params }) {
   console.log("Item,sections:", item.sections);
 
   return (
-    <main className="page">
+    <main className="page item-page">
       <section className="post-header">
         <h5> </h5>
         <h3>{item?.title}</h3>{" "}

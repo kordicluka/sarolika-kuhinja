@@ -4,11 +4,11 @@
   width: 100%;
   @include flex(column, flex-start, center);
   gap: 1rem;
-  padding: 3rem 12.5%;
+  padding: 5rem 12.5%;
   position: relative;
 
   @media (min-width: 2500px) {
-    padding: 3rem 20%;
+    padding: 5rem 20%;
   }
 
   .items-slider-title {
@@ -44,9 +44,10 @@
     padding: 0.45rem;
     border-radius: 50%;
     background-color: $white;
+    z-index: 15;
 
     @media (min-width: 2500px) {
-      left: 20%;
+      left: calc(20% - 1rem);
     }
 
     svg {

@@ -30,13 +30,12 @@ export default async function HomePage() {
       />
       <WokrshopsSlider />
       <WhatWeTryToDo />
-      <WorkshopParts />
-      <OurTeam />
+      <WorkshopParts /> <OurTeam />
       <MealsWeMake />
+      <Reviews />
       <MealsSlider />
       <Location />
       <PostsSlider />
-      <Reviews />
     </main>
   );
 }
