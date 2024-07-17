@@ -121,13 +121,7 @@ export const ItemsSlider = ({ type, items }) => {
               <ItemCard
                 key={item.id} // Unique key assigned here
                 item={item}
-                link={`/${
-                  type === "workshops"
-                    ? "radionice"
-                    : type === "posts"
-                    ? "blog"
-                    : "jela"
-                }/${item.slug}`}
+                type={type}
               />
             ))}
         </div>

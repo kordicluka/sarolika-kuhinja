@@ -5,9 +5,14 @@ import "@/styles/ItemCard.scss";
 import { formatDate } from "@/utils/formatDate";
 import { formatTime } from "@/utils/formatTime";
 
-export default function ItemCard({ item, link }) {
+export default function ItemCard({ item, type }) {
   return (
-    <a href={link} className="item-card">
+    <a
+      href={`/${
+        type === "workshops" ? "radionice" : type === "posts" ? "blog" : "jela"
+      }/${item.slug}`}
+      className={type === "meals" ? "item-card meal" : "item-card"}
+    >
       <div className="item-card-image">
         <NextImage
           src={`/uploads/${item.image}`}
@@ -19,7 +24,6 @@ export default function ItemCard({ item, link }) {
       <div className="item-card-info">
         <h6 className="item-card-info-title">{item.title}</h6>{" "}
         <h6 className="item-card-info-date">
-          {/* {formatDate(item.date) + " - " + formatTime(item.date) + " h"} */}
           {item?.date
             ? formatDate(item.date) + " - " + formatTime(item.date) + " h"
             : formatDate(item.createdAt)}
