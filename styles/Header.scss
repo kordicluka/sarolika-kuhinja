@@ -30,10 +30,6 @@
       display: none;
     }
 
-    @media (min-width: 2500px) {
-      padding: 0.3rem 20%;
-    }
-
     p {
       margin: 0;
       color: $white;
@@ -79,6 +75,34 @@
     .next-workshop-date-and-time {
       font-size: 0.8rem;
       font-weight: 500;
+    }
+
+    @media (min-width: 2500px) {
+      padding: 0.3rem 20%;
+
+      p {
+        font-size: 1.4rem;
+      }
+
+      .next-workshop-time-to-container {
+        .next-workshop-time-to {
+          .units {
+            font-size: 0.8rem;
+          }
+        }
+
+        .next-workshop-time-to-label {
+          font-size: 0.8rem;
+        }
+      }
+
+      .next-workshop-title {
+        font-size: 0.9rem;
+      }
+
+      .next-workshop-date-and-time {
+        font-size: 0.9rem;
+      }
     }
   }
 
