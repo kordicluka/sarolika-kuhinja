@@ -7,6 +7,12 @@
   top: 0;
   left: 0;
   z-index: 100;
+  border-bottom: 1px solid $gray-14;
+
+  &.scrolled {
+    box-shadow: 0 0.1rem 0.3rem rgba($color: $black, $alpha: 0.1);
+    border-bottom: none;
+  }
 
   .next-workshop {
     background-color: $page-primary;
@@ -171,6 +177,7 @@
         padding: 0;
         @include flex(row, center, center);
         height: 100%;
+
         li {
           margin: 0;
           padding: 0;
@@ -192,7 +199,7 @@
             font-weight: 400;
             height: 100%;
             @include flex(row, center, center);
-            color: $black;
+            color: $gray-5;
 
             &:hover {
               color: $page-primary;

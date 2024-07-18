@@ -6,19 +6,42 @@ export const ContactForm = () => {
     <form className="contact-form">
       <div className="form-col">
         <label htmlFor="name">Ime i prezime</label>
-        <input type="text" id="name" name="name" required />
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          placeholder="Josip Horvat"
+        />
       </div>
       <div className="form-col">
         <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" required />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          placeholder="josip.horvat@domena.com"
+        />
       </div>
       <div className="form-col">
         <label htmlFor="phone">Telefon</label>
-        <input type="tel" id="phone" name="phone" required />
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          required
+          placeholder="01 2345 678"
+        />
       </div>
       <div className="form-col">
         <label htmlFor="message">Poruka</label>
-        <textarea id="message" name="message" required></textarea>
+        <textarea
+          id="message"
+          name="message"
+          required
+          placeholder="Unesite poruku"
+        ></textarea>
       </div>
       <div className="form-row">
         <input type="checkbox" id="terms" name="terms" required />

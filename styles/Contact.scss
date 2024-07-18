@@ -41,3 +41,50 @@
     }
   }
 }
+
+.contact-page {
+  .location {
+    background-color: $white;
+    margin-top: 0;
+    padding-top: 0;
+    transform: translateY(-5rem);
+
+    .location-title {
+      h3 {
+        color: $page-primary;
+      }
+
+      h2 {
+        margin-bottom: 0.3rem;
+        text-transform: uppercase;
+        color: $gray-1;
+      }
+
+      p {
+        color: $gray-4;
+      }
+
+      .btn {
+        background-color: $page-primary;
+        color: $white;
+      }
+    }
+
+    &::before {
+      background-color: $white;
+    }
+
+    .location-container {
+      .map-container {
+        box-shadow: 0 0 0.3rem rgba($color: $black, $alpha: 0.2);
+      }
+
+      video {
+        width: 30%;
+        z-index: 10;
+        box-shadow: 0 0 0.5rem rgba($color: $black, $alpha: 0.2);
+        cursor: pointer;
+      }
+    }
+  }
+}

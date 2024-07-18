@@ -5,6 +5,8 @@
   padding: 0;
   margin: 0;
   z-index: 2;
+  position: relative;
+
   .salty-meals,
   .sweet-meals {
     @include flex(row, flex-start, center);
@@ -29,8 +31,6 @@
       }
       h2 {
         margin-bottom: 1rem;
-        font-size: 2.8rem;
-        text-transform: uppercase;
       }
 
       .desc {

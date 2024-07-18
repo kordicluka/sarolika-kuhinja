@@ -20,7 +20,7 @@ export default async function HomePage() {
           "Šarolika kuhinja",
           "Učenje od malih nogu",
           "Radionice za djecu",
-          "Kreativno izrfl13exažavanje",
+          "Kreativno izražavanje",
           "Zdrava prehrana",
           "Kreativne radionice",
           "Kuhanje za djecu",

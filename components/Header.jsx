@@ -78,7 +78,7 @@ export const Header = () => {
     return null;
   } else {
     return (
-      <header className="header">
+      <header className={isScrolled ? "header scrolled" : "header"}>
         {nextWorkshop && (
           <a
             className={isScrolled ? "next-workshop hide" : "next-workshop "}
@@ -136,14 +136,14 @@ export const Header = () => {
         <nav className="header-nav">
           <div className="header-nav-left">
             {" "}
-            <div className="header-logo">
+            <a className="header-logo" href="/">
               <NextImage
                 src="/images/logo.png"
                 alt="Logo"
                 width={100}
                 height={100}
               />
-            </div>
+            </a>
             <ul className="links">
               <li>
                 <a href="/">Početna</a>

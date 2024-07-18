@@ -1,6 +1,7 @@
 import React from "react";
 import prisma from "@/utils/db";
 import "@/styles/ItemPage.scss";
+import "@/styles/globals.scss";
 import NextImage from "next/image";
 import { formatDate } from "@/utils/formatDate";
 import Facebook from "@/components/Facebook";
@@ -78,9 +79,8 @@ export default async function MealPage({ params }) {
             <a href="#" className="social">
               <WhatsApp />
             </a>
-            <button className="share-button">
+            <button className="btn">
               {" "}
-              <span>Podijeli</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

@@ -2,27 +2,34 @@
 
 .our-team {
   @include flex(row, space-between, center);
-  height: 45rem;
+  height: 60rem;
+  padding: 0 12.5%;
+  position: relative;
+
+  @media (min-width: 2500px) {
+    padding: 0 20%;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+    background-color: rgba($color: $page-primary, $alpha: 1);
+    z-index: 1;
+    z-index: 0;
+  }
   .our-team-text {
-    width: 55%;
-    padding-left: 12.5%;
+    width: 40%;
     @include flex(column, center, flex-start);
     gap: 0.5rem;
-    padding-right: 8%;
     height: 100%;
-
-    @media (min-width: 2500px) {
-      padding-left: 20%;
-    }
 
     h3 {
       color: $page-primary;
-      font-weight: 700;
-      font-size: 2.8rem;
-    }
-
-    h2 {
-      text-transform: uppercase;
+      font-size: 3rem;
     }
 
     span {
@@ -38,15 +45,20 @@
   }
 
   .our-team-image-container {
-    width: 45%;
+    width: 50%;
     height: 100%;
     border-radius: 0 0 0 1rem;
     overflow: hidden;
+    padding: 5rem;
+    padding-right: 0;
+    z-index: 2;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      box-shadow: 0 0 2rem rgba(0, 0, 0, 0.15);
+      border-radius: 0.5rem;
     }
   }
 }

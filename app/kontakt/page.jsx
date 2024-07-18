@@ -4,7 +4,7 @@ import React from "react";
 
 export default function ContactUsPage() {
   return (
-    <div className="page">
+    <div className="page contact-page">
       <PageTitle
         title="Kontaktirajte nas."
         shortDesc="Možete nas kontaktirati ispunjavanjem formu ili putem kontakt informacija."

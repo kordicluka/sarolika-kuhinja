@@ -16,7 +16,9 @@ export const MealsWeMake = () => {
         <div className="rectangle"></div>
         <div className="text-container">
           <h3 className={caveat.className}>Salate, ostale slane stvari...</h3>
-          <h2>Pogledajte kakva SLANA JELA izrađujemo s djecom.</h2>
+          <h2>
+            Pogledajte kakva <span>slana jela</span> izrađujemo s djecom.
+          </h2>
           <span className="desc">
             Na našim radionicama djeca će naučiti pripremati razna slana jela
             poput ukusnih salata, domaćih sendviča, mini pizze i raznih vrsta
@@ -67,7 +69,9 @@ export const MealsWeMake = () => {
         </div>
         <div className="text-container">
           <h3 className={caveat.className}>Slatko je omiljeno djeci!</h3>
-          <h2>Potičemo djecu da jela mogu biti slatka i ZDRAVA.</h2>
+          <h2>
+            Potičemo djecu da jela mogu biti slatka i <span> zdrava.</span>
+          </h2>
           <span className="desc">
             Djeca obožavaju slatko, ali mi im pokazujemo kako slastice mogu biti
             i zdrave!

@@ -2,7 +2,7 @@ $primary: rgb(34, 83, 155);
 $secondary: rgb(28, 41, 66);
 $primary-dashboard: #000000;
 $primary-light: rgb(60, 108, 179);
-$page-primary: #405b62;
+$page-primary: #597c8d;
 $page-primary-light: #597c8d;
 $page-primary-ultra-light: #c5f3ff;
 $light-yellow: #faf5da;
@@ -27,6 +27,9 @@ $gray-13: #ddd;
 $gray-14: #eee;
 $gray-15: #f6f6f6;
 $yellow: #ffc700;
+$red: #e63427;
+$green: #22df22;
+$blue: #2265f5;
 
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap");
 
@@ -41,11 +44,6 @@ $yellow: #ffc700;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-:root {
-  font-family: Inter, sans-serif;
-  font-feature-settings: "liga" 1, "calt" 1; /* fix for Chrome */
 }
 
 @supports (font-variation-settings: normal) {
@@ -146,9 +144,9 @@ h1 {
 }
 
 h2 {
-  font-size: 2.8rem;
-  font-weight: 600;
-  color: $gray-2;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: $gray-3;
   line-height: 1.1;
 
   @media (max-width: 1600px) {
@@ -162,7 +160,7 @@ h2 {
 
 h3 {
   font-size: 2.3rem;
-  font-weight: 600;
+  font-weight: 700;
   color: $black;
   line-height: 1.2;
 
@@ -349,4 +347,9 @@ ul {
   padding-top: 4.8rem;
   background-color: $white;
   min-height: 80vh;
+
+  .btn {
+    border-radius: 0.3rem;
+    box-shadow: 0 0 0.5rem rgba($color: $black, $alpha: 0.2);
+  }
 }

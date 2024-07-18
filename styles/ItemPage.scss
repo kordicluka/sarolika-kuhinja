@@ -8,14 +8,29 @@
     @include flex(column, flex-start, flex-start);
     gap: 0.85rem;
 
+    @media (min-width: 2500px) {
+      padding: 1rem 20%;
+      padding-top: 6rem;
+    }
+
     h5 {
       font-size: 1.3rem;
       text-transform: uppercase;
     }
 
     h3 {
-      font-weight: 600;
-      font-size: 3rem;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: $gray-3;
+      line-height: 1.1;
+
+      @media (max-width: 1600px) {
+        font-size: 2.9rem;
+      }
+
+      @media (max-width: 1300px) {
+        font-size: 2.5rem;
+      }
     }
 
     .description {
@@ -31,8 +46,8 @@
         @include flex(row, flex-start, flex-start);
 
         .author-image {
-          height: 2rem;
-          width: 2rem;
+          height: 2.8rem;
+          width: 2.8rem;
           border-radius: 50%;
           background-color: $page-primary;
           @include flex(row, center, center);
@@ -46,7 +61,8 @@
 
           span {
             color: $white;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            font-weight: 600;
           }
         }
 
@@ -57,12 +73,12 @@
 
           p {
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             color: $gray-1;
           }
 
           span {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 500;
             color: $gray-4;
           }
@@ -71,40 +87,29 @@
 
       .share {
         @include flex(row, flex-end, center);
-        gap: 0.5rem;
+        gap: 0.8rem;
 
         a,
         button {
+          padding: 0.4rem;
+          background-color: $gray-14;
+          border: none;
+          border-radius: 0;
+          border-radius: 0.3rem;
           @include flex(row, center, center);
-          gap: 0.5rem;
-          padding: 0.3rem 0.7rem;
-          border-radius: 4rem;
-          background-color: $gray-15;
-          border: 1px solid $gray-12;
-
-          span {
-            font-size: 0.8rem;
-            color: $black;
-          }
-
-          &.social {
-            padding: 0;
-            background-color: transparent;
-            border: none;
-
-            svg {
-              width: 1.45rem;
-              height: 1.45rem;
-            }
-          }
 
           svg {
-            width: 1.2rem;
-            height: 1.2rem;
+            width: 1.65rem;
+            height: 1.65rem;
+          }
+        }
+
+        svg {
+          width: 1.2rem;
+          height: 1.2rem;
+          color: $black;
+          path {
             color: $black;
-            path {
-              color: $black;
-            }
           }
         }
       }
@@ -114,6 +119,11 @@
     margin: 0.5rem 12.5%;
     aspect-ratio: 16 / 8;
     width: calc(100% - 12.5% * 2);
+
+    @media (min-width: 2500px) {
+      margin: 0.5rem 20%;
+      width: calc(100% - 20% * 2);
+    }
 
     img {
       width: 100%;
@@ -127,6 +137,11 @@
     position: relative;
     width: 100%;
     padding: 1rem 12.5%;
+    margin-bottom: 6rem;
+
+    @media (min-width: 2500px) {
+      padding: 1rem 20%;
+    }
 
     .item-content {
       @include flex(column, flex-start, center);

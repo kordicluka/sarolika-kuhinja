@@ -12,7 +12,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 70%;
+    height: 30rem;
     position: absolute;
     background-color: $page-primary;
     z-index: 0;
@@ -25,11 +25,11 @@
   h3 {
     color: $page-primary-ultra-light;
     z-index: 2;
+    font-size: 2.7rem;
   }
 
   h2 {
     color: $white;
-    text-transform: uppercase;
     z-index: 2;
   }
 
@@ -45,6 +45,7 @@
     @include flex(row, center, center);
     gap: 1rem;
     padding-top: 1rem;
+    flex-wrap: wrap;
 
     .review {
       width: calc(100% / 4 - 1rem);
@@ -53,7 +54,6 @@
       height: 17rem;
       position: relative;
       background-color: $white;
-
       padding-top: 2rem;
       box-shadow: 0 0 0.5rem rgba($color: $black, $alpha: 0.1);
 
