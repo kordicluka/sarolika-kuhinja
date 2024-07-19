@@ -1,0 +1,49 @@
+@import "./globals.scss";
+
+.verify-newsletter-user-email-page {
+  padding-top: 10rem;
+  @include flex(column, flex-start, center);
+
+  .success-icon {
+    width: 10rem;
+    height: 10rem;
+    color: $white;
+    background-color: rgba($color: $green, $alpha: 0.9);
+    border-radius: 50%;
+    margin-bottom: 2rem;
+    padding: 1rem;
+  }
+
+  .error-icon {
+    width: 10rem;
+    height: 10rem;
+    color: $white;
+    background-color: rgba($color: $red, $alpha: 0.9);
+    border-radius: 50%;
+    margin-bottom: 2rem;
+    padding: 1rem;
+  }
+
+  h3 {
+    margin-bottom: 1rem;
+  }
+
+  .sign-out-newsletter {
+    margin-top: 1rem;
+    color: $gray-5;
+    font-size: 0.8rem;
+
+    button {
+      background-color: transparent;
+      border: none;
+      color: $gray-3;
+      border-bottom: 1px solid $gray-3;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+  }
+
+  a {
+    margin-top: 1.5rem;
+  }
+}

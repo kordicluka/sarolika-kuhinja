@@ -2,6 +2,7 @@ import prisma from "@/utils/db";
 import ItemsTable from "../ItemsTable";
 import { formatDate } from "@/utils/formatDate";
 import DeleteNewsletterUserButton from "./DeleteNewsletterUserButton";
+import SignOutFromNewsletterButton from "@/components/SignOutFromNewsletterButton";
 
 export default async function NewsletterUsersTable() {
   // Fetch the workshop and its applicants
@@ -39,14 +40,9 @@ export default async function NewsletterUsersTable() {
             <div className="items-table-actions-dot"></div>
 
             <div className="items-table-actions-dropdown">
-              <a
-                href={`/dashboard/radionice/${id}/prijave/${newsletterUsers[index].id}`}
-              >
-                Uredi
-              </a>
-              <DeleteNewsletterUserButton
-                id={newsletterUsers[index].id}
-                title={newsletterUsers[index].name}
+              <SignOutFromNewsletterButton
+                email={newsletterUsers[index].email}
+                text="Odjavi korisnika"
               />
             </div>
           </div>

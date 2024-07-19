@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import NextImage from "next/image";
 import { Inter } from "next/font/google";
 import "@/styles/NewsletterPopUp.scss";
+import { createNewsletterUser } from "@/actions/NewsletterUsersActions";
 
 const inter = Inter({
   weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
@@ -11,25 +12,61 @@ const inter = Inter({
 
 export default function NewsletterPopUp() {
   const [active, setActive] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    terms: false,
+  });
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
-  // get from the local storage
   useEffect(() => {
     const isSubscribed = localStorage.getItem("isSubscribed");
-    // make this down bellow but add a timeout
-    // if (!isSubscribed) {
-    //   setActive(true);
-    // }
 
     setTimeout(() => {
       if (!isSubscribed) {
         setActive(true);
       }
-    }, 1);
+    }, 5000); // Adjust the timeout duration as needed
   }, []);
+
+  const handleChange = (e) => {
+    const { name, value, checked, type } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { name, email, terms } = formData;
+
+    if (!terms) {
+      setError("Morate pristati na uvjete korištenja.");
+      return;
+    }
+
+    try {
+      const response = await createNewsletterUser({ name, email });
+      if (response.ok) {
+        setMessage(response.message);
+        setError("");
+        setFormData({ name: "", email: "", terms: false });
+        localStorage.setItem("isSubscribed", true);
+        setActive(false);
+      } else {
+        setError(response.message);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setError("Došlo je do pogreške. Molimo pokušajte ponovno kasnije.");
+    }
+  };
 
   return (
     <section className={`newsletter-popup ${active ? "active" : ""}`}>
-      <form className={inter.className}>
+      <form className={inter.className} onSubmit={handleSubmit}>
         <button
           className="close"
           onClick={() => {
@@ -60,28 +97,52 @@ export default function NewsletterPopUp() {
           height={400}
           alt="Newsletter popup"
           className="newsletter-popup-image"
-        />{" "}
+        />
         <div className="form-row">
           <div className="form-col">
             <label htmlFor="name">Ime*</label>
-            <input className="small" type="name" placeholder="Josip Horvat" />
+            <input
+              className="small"
+              type="text"
+              name="name"
+              placeholder="Josip Horvat"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className="form-col">
             <label htmlFor="email">Email*</label>
-            <input type="email" placeholder="josip.horvat@domena.com" />
-          </div>{" "}
-        </div>{" "}
+            <input
+              type="email"
+              name="email"
+              placeholder="josip.horvat@domena.com"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
         <div className="form-row terms-checkbox">
-          <input type="checkbox" id="terms" name="terms" />
+          <input
+            type="checkbox"
+            id="terms"
+            name="terms"
+            checked={formData.terms}
+            onChange={handleChange}
+            required
+          />
           <label htmlFor="terms">Pristajem na uvjete korištenja</label>
         </div>
-        <div className="form-row ">
+        <div className="form-row">
           <div className="form-col">
             <button className="btn" type="submit">
               <span className={inter.className}>Pošalji prijavu </span>
             </button>
           </div>
         </div>
+        {message && <p className="success">{message}</p>}
+        {error && <p className="error">{error}</p>}
       </form>
     </section>
   );
