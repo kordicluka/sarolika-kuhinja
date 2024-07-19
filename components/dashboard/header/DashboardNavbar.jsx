@@ -6,92 +6,28 @@ export default function DashboardNavbar() {
   const [activeLinkHover, setActiveLinkHover] = useState(3);
   const location = usePathname();
 
-  const reactangleBackground = [
-    { width: "4.2rem", left: "1.7rem" },
-    { width: "6.4rem", left: "6rem" },
-    { width: "3.8rem", left: "12.5rem" },
-    { width: "5.4rem", left: "16.45rem" },
-    { width: "3.85rem", left: "22rem" },
-    { width: "7.5rem", left: "26rem" },
-    { display: "none" },
-  ];
-  const getActiveIndex = (path) => {
-    const thirdPart = path.split("/")[2];
-
-    switch (thirdPart) {
-      case undefined:
-        return 0;
-      case "radionice":
-        return 1;
-      case "blog":
-        return 2;
-      case "korisnici":
-        return 3;
-      case "jela":
-        return 4;
-      case "tipovi-sekcija":
-        return 5;
-      default:
-        return 6;
-    }
-  };
-
-  useEffect(() => {
-    setActiveLinkHover(6);
-  }, [location]);
-  const activeIndex = getActiveIndex(location);
-
   return (
-    <nav onMouseLeave={() => setActiveLinkHover(6)}>
-      <div
-        className="rectangle-background"
-        style={reactangleBackground[activeIndex]}
-      ></div>
-      <div
-        className="rectangle-background-active"
-        style={reactangleBackground[activeLinkHover]}
-      ></div>
-      <a
-        onMouseEnter={() => setActiveLinkHover(0)}
-        href="/dashboard"
-        className={activeIndex === 0 ? "active" : ""}
-      >
+    <nav>
+      <a href="/dashboard">
         <span>Home</span>
       </a>
-      <a
-        onMouseEnter={() => setActiveLinkHover(1)}
-        href="/dashboard/radionice"
-        className={activeIndex === 1 ? "active" : ""}
-      >
+      <a href="/dashboard/radionice">
         <span>Radionice</span>
       </a>
-      <a
-        onMouseEnter={() => setActiveLinkHover(2)}
-        href="/dashboard/blog"
-        className={activeIndex === 2 ? "active" : ""}
-      >
+      <a href="/dashboard/blog">
         <span>Blog</span>
       </a>
-      <a
-        onMouseEnter={() => setActiveLinkHover(3)}
-        href="/dashboard/korisnici"
-        className={activeIndex === 3 ? "active" : ""}
-      >
+      <a href="/dashboard/korisnici">
         <span>Korisnici</span>
       </a>
 
-      <a
-        onMouseEnter={() => setActiveLinkHover(4)}
-        href="/dashboard/jela"
-        className={activeIndex === 4 ? "active" : ""}
-      >
+      <a href="/dashboard/jela">
         <span>Jela</span>
       </a>
-      <a
-        onMouseEnter={() => setActiveLinkHover(5)}
-        href="/dashboard/tipovi-sekcija"
-        className={activeIndex === 5 ? "active" : ""}
-      >
+      <a href="/dashboard/newsletter-korisnici">
+        <span>Newsletter</span>
+      </a>
+      <a href="/dashboard/tipovi-sekcija">
         <span>Tipovi sekcija</span>
       </a>
     </nav>

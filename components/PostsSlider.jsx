@@ -4,6 +4,9 @@ import prisma from "@/utils/db";
 
 export default async function PostsSlider() {
   const items = await prisma.post.findMany({
+    where: {
+      isVisible: true,
+    },
     select: {
       id: true,
       title: true,

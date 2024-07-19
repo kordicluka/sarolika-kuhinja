@@ -4,6 +4,9 @@ import prisma from "@/utils/db";
 
 export default async function WorkshopsSlider() {
   const items = await prisma.workshop.findMany({
+    where: {
+      isVisible: true,
+    },
     select: {
       id: true,
       title: true,

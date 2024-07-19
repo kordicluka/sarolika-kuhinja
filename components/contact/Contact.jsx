@@ -2,6 +2,9 @@ import React from "react";
 import { ContactForm } from "./ContactForm";
 import "@/styles/Contact.scss";
 import Location from "@/components/Location";
+import Instagram from "../Instagram";
+import Facebook from "../Facebook";
+import WhatsUpp from "../WhatsUpp";
 
 export default function Contact() {
   return (
@@ -24,6 +27,32 @@ export default function Contact() {
           <div className="contact-row">
             <span>Email:</span>
             <span>luka.kordic@msk.hr</span>
+          </div>
+          <div className="socials">
+            <a
+              className="social-container"
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Facebook />
+            </a>
+            <a
+              className="social-container"
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Instagram />
+            </a>
+            <a
+              className="social-container"
+              href="https://www.whatsupp.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <WhatsUpp />
+            </a>
           </div>
         </div>
         <ContactForm />

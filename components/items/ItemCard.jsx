@@ -22,12 +22,12 @@ export default function ItemCard({ item, type }) {
         />
       </div>
       <div className="item-card-info">
-        <h6 className="item-card-info-title">{item.title}</h6>{" "}
         <h6 className="item-card-info-date">
           {item?.date
             ? formatDate(item.date) + " - " + formatTime(item.date) + " h"
             : formatDate(item.createdAt)}
         </h6>
+        <h6 className="item-card-info-title">{item.title}</h6>{" "}
         <p className="item-card-info-desc">
           {limitTextChar(item.description, 100)}
         </p>
