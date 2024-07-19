@@ -1,15 +1,18 @@
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-  service: "gmail", // You can use your email service
+  // EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASSWORD, EMAIL_TLS are environment variables
+  host: process.env.EMAIL_HOST,
+  port: process.env.EMAIL_PORT,
+  secure: process.env.EMAIL_TLS === "true",
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
 export async function sendVerificationEmail(email, token) {
-  const verificationUrl = `https://yourdomain.com/verify?token=${token}`;
+  const verificationUrl = `https://localhost:3000/verify-email?token=${token}`;
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
