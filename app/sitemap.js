@@ -15,19 +15,25 @@ export default function sitemap() {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/radionice`,
+      url: `${baseUrl}/blog`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/radionice`,
+      url: `${baseUrl}/jela`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/radionice`,
+      url: `${baseUrl}/o-nama`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/kontakt`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,

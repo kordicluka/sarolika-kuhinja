@@ -1,5 +1,4 @@
 import React from "react";
-import Head from "next/head";
 import prisma from "@/utils/db";
 import "@/styles/ItemPage.scss";
 import "@/styles/globals.scss";
@@ -40,77 +39,61 @@ export default async function MealPage({ params }) {
   }
 
   return (
-    <>
-      <Head>
-        <title>{item?.title} - Meal Details</title>
-        <meta name="description" content={item?.description} />
-        <meta property="og:title" content={item?.title} />
-        <meta property="og:description" content={item?.description} />
-        <meta property="og:image" content={`/uploads/${item?.image}`} />
-        <meta property="og:type" content="article" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={item?.title} />
-        <meta name="twitter:description" content={item?.description} />
-        <meta name="twitter:image" content={`/uploads/${item?.image}`} />
-      </Head>
-      <main className="page item-page">
-        <article>
-          <header className="post-header">
-            <h1>{item?.title}</h1>
-            <p className="description">{item?.description}</p>
-            <div className="author-share">
-              <div className="author">
-                <div className="author-image">
-                  {item?.createdBy?.image ? (
-                    <NextImage
-                      src={`/uploads/${item.createdBy.image}`}
-                      alt={item.createdBy.name}
-                      width={100}
-                      height={100}
-                    />
-                  ) : (
-                    <span className="author-image-placeholder">
-                      {item.createdBy.name.charAt(0).toUpperCase()}
-                      {item.createdBy.name.split(" ")[1]
-                        ? item.createdBy.name
-                            .split(" ")[1]
-                            .charAt(0)
-                            .toUpperCase()
-                        : null}
-                    </span>
-                  )}
-                </div>
-                <div className="author-name">
-                  <p>{item?.createdBy?.name}</p>
-                  <span>{formatDate(item?.createdAt)}</span>
-                </div>
-              </div>
-              <div className="share">
-                <a href="#" className="social" aria-label="Share on Facebook">
-                  <Facebook />
-                </a>
-                <a href="#" className="social" aria-label="Share on Instagram">
-                  <Instagram />
-                </a>
-                <a href="#" className="social" aria-label="Share on WhatsApp">
-                  <WhatsApp />
-                </a>
-                <CopyToClipboard />
-              </div>
+    <main className="page item-page">
+      <section className="post-header">
+        <h5> </h5>
+        <h3>{item?.title}</h3>{" "}
+        <p className="description">{item?.description}</p>
+        <div className="author-share">
+          <div className="author">
+            {" "}
+            <div className="author-image">
+              {item?.createdBy?.image ? (
+                <NextImage
+                  src={"/uploads/" + item.createdBy.image}
+                  alt={item.createdBy.name}
+                  width={100}
+                  height={100}
+                />
+              ) : (
+                <span className="author-image-placeholder">
+                  {item.createdBy.name.charAt(0).toUpperCase()}
+                  {item.createdBy.name.split(" ")[1]
+                    ? item.createdBy.name.split(" ")[1].charAt(0).toUpperCase()
+                    : null}
+                </span>
+              )}{" "}
             </div>
-          </header>
-          <section className="image-container">
-            <NextImage
-              src={`/uploads/${item?.image}`}
-              alt={`Image of ${item?.title}`}
-              width={1500}
-              height={1500}
-              priority
-            />
-          </section>
-          <ItemContent sections={item.sections} />
-        </article>
-      </main>
-    </>
+            <div className="author-name">
+              <p>{item?.createdBy?.name}</p>
+              <span>{formatDate(item?.createdAt)} </span>
+            </div>
+          </div>
+          <div className="share">
+            {" "}
+            <a href="#" className="social">
+              <Facebook />
+            </a>
+            <a href="#" className="social">
+              <Instagram />
+            </a>
+            <a href="#" className="social">
+              <WhatsApp />
+            </a>
+            <CopyToClipboard />
+          </div>
+        </div>
+      </section>
+      <section className="image-container">
+        <NextImage
+          src={"/uploads/" + item?.image}
+          alt={item?.title}
+          width={1500}
+          height={1500}
+        />
+      </section>
+
+      <ItemContent sections={item.sections} />
+    </main>
   );
 }
