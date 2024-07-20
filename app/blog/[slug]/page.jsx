@@ -27,12 +27,12 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: `${item?.title} - Blog Post`,
+    title: `Šarolika Kuhinja - ${item?.title} - Blog`,
     description: item?.description,
     keywords: item?.sections?.map((section) => section.title).join(", "), // Assuming sections have titles
     author: item?.createdBy?.name,
     openGraph: {
-      title: item?.title,
+      title: `Šarolika Kuhinja - ${item?.title} - Blog`,
       description: item?.description,
       url: `${baseUrl}/blog/${slug}`,
       images: [
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: "summary_large_image",
-      title: item?.title,
+      title: `Šarolika Kuhinja - ${item?.title} - Blog`,
       description: item?.description,
       image: `${baseUrl}/uploads/${item?.image}`,
     },

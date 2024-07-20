@@ -1,7 +1,5 @@
 import React from "react";
 import prisma from "@/utils/db";
-import "@/styles/ItemPage.scss";
-import "@/styles/globals.scss";
 import NextImage from "next/image";
 import { formatDate } from "@/utils/formatDate";
 import Facebook from "@/components/Facebook";
@@ -9,26 +7,67 @@ import Instagram from "@/components/Instagram";
 import WhatsApp from "@/components/WhatsUpp";
 import ItemContent from "@/components/ItemContent";
 import CopyToClipboard from "@/components/CopyToClipboard";
+import "@/styles/ItemPage.scss";
+import { baseUrl } from "@/utils/baseUrl";
+
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+  const item = await prisma.meal.findUnique({
+    where: { slug },
+    include: { createdBy: { select: { id: true, name: true, image: true } } },
+  });
+
+  if (item && item.sections) {
+    try {
+      item.sections = JSON.parse(item.sections);
+    } catch (error) {
+      console.error("Error parsing sections JSON:", error);
+      item.sections = [];
+    }
+  }
+
+  return {
+    title: `Šarolika Kuhinja - ${item?.title} - Jelo`,
+    description: item?.description,
+    keywords: item?.sections?.map((section) => section.title).join(", "), // Assuming sections have titles
+    author: item?.createdBy?.name,
+    openGraph: {
+      title: `Šarolika Kuhinja - ${item?.title} - Jelo`,
+      description: item?.description,
+      url: `${baseUrl}/jela/${slug}`,
+      images: [
+        {
+          url: `${baseUrl}/uploads/${item?.image}`,
+          width: 800,
+          height: 600,
+          alt: item?.title,
+        },
+      ],
+      type: "article",
+      article: {
+        publishedTime: item?.createdAt,
+        modifiedTime: item?.updatedAt,
+        author: item?.createdBy?.name,
+        section: "Meals",
+        tags: item?.sections?.map((section) => section.title), // Assuming sections have titles
+      },
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Šarolika Kuhinja - ${item?.title} - Jelo`,
+      description: item?.description,
+      image: `${baseUrl}/uploads/${item?.image}`,
+    },
+  };
+}
 
 export default async function MealPage({ params }) {
   const { slug } = params;
-
   const item = await prisma.meal.findUnique({
-    where: {
-      slug: slug,
-    },
-    include: {
-      createdBy: {
-        select: {
-          id: true,
-          name: true,
-          image: true,
-        },
-      },
-    },
+    where: { slug },
+    include: { createdBy: { select: { id: true, name: true, image: true } } },
   });
 
-  // Parse the sections field
   if (item && item.sections) {
     try {
       item.sections = JSON.parse(item.sections);
@@ -41,16 +80,14 @@ export default async function MealPage({ params }) {
   return (
     <main className="page item-page">
       <section className="post-header">
-        <h5> </h5>
-        <h3>{item?.title}</h3>{" "}
+        <h1>{item?.title}</h1>
         <p className="description">{item?.description}</p>
         <div className="author-share">
           <div className="author">
-            {" "}
             <div className="author-image">
               {item?.createdBy?.image ? (
                 <NextImage
-                  src={"/uploads/" + item.createdBy.image}
+                  src={`/uploads/${item.createdBy.image}`}
                   alt={item.createdBy.name}
                   width={100}
                   height={100}
@@ -58,26 +95,23 @@ export default async function MealPage({ params }) {
               ) : (
                 <span className="author-image-placeholder">
                   {item.createdBy.name.charAt(0).toUpperCase()}
-                  {item.createdBy.name.split(" ")[1]
-                    ? item.createdBy.name.split(" ")[1].charAt(0).toUpperCase()
-                    : null}
+                  {item.createdBy.name.split(" ")[1]?.charAt(0).toUpperCase()}
                 </span>
-              )}{" "}
+              )}
             </div>
             <div className="author-name">
               <p>{item?.createdBy?.name}</p>
-              <span>{formatDate(item?.createdAt)} </span>
+              <span>{formatDate(item?.createdAt)}</span>
             </div>
           </div>
           <div className="share">
-            {" "}
-            <a href="#" className="social">
+            <a href="#" className="social" aria-label="Share on Facebook">
               <Facebook />
             </a>
-            <a href="#" className="social">
+            <a href="#" className="social" aria-label="Share on Instagram">
               <Instagram />
             </a>
-            <a href="#" className="social">
+            <a href="#" className="social" aria-label="Share on WhatsApp">
               <WhatsApp />
             </a>
             <CopyToClipboard />
@@ -86,13 +120,13 @@ export default async function MealPage({ params }) {
       </section>
       <section className="image-container">
         <NextImage
-          src={"/uploads/" + item?.image}
-          alt={item?.title}
+          src={`/uploads/${item?.image}`}
+          alt={`Image of ${item?.title}`}
           width={1500}
           height={1500}
+          priority
         />
       </section>
-
       <ItemContent sections={item.sections} />
     </main>
   );

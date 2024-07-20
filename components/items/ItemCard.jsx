@@ -32,7 +32,10 @@ export default function ItemCard({ item, type }) {
           {limitTextChar(item.description, 100)}
         </p>
         {type === "workshops" && item?.date > new Date() ? (
-          <div className="workshop-avilability active">Prijave dostupne</div>
+          <div className="workshop-avilability active">
+            {" "}
+            Kliknite za prijavu
+          </div>
         ) : type === "workshops" && item?.date < new Date() ? (
           <div className="workshop-avilability unactive">
             Prošla radionica - pogledajte kako je bilo!
