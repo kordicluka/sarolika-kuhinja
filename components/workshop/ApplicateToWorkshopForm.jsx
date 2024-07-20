@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { createApplication } from "@/actions/ApplicationActions";
+import "@/styles/ApplicateToWorkshopForm.scss";
+import NextImage from "next/image";
 
 const ApplicateToWorkshopForm = ({ workshop }) => {
   const [formData, setFormData] = useState({
@@ -14,11 +16,14 @@ const ApplicateToWorkshopForm = ({ workshop }) => {
     photoPermission: false,
   });
 
-  const id = workshop.id;
+  const handleToggle = () => {
+    setFormData((prevData) => ({
+      ...prevData,
+      photoPermission: !prevData.photoPermission,
+    }));
+  };
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
+  const id = workshop.id;
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -30,16 +35,12 @@ const ApplicateToWorkshopForm = ({ workshop }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
-    setSuccess(null);
 
     const data = { ...formData, workshopId: id };
 
     try {
       const response = await createApplication(data);
       if (response.ok) {
-        setSuccess("Application submitted successfully!");
         setFormData({
           name: "",
           surname: "",
@@ -51,113 +52,129 @@ const ApplicateToWorkshopForm = ({ workshop }) => {
           photoPermission: false,
         });
       } else {
-        setError(response.message);
       }
-    } catch (err) {
-      setError("An error occurred while submitting the application.");
-    } finally {
-      setLoading(false);
-    }
+    } catch (err) {}
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Apply to Workshop</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>{success}</p>}
-      <div>
+    <form onSubmit={handleSubmit} className="applicate-to-workshop-form">
+      <h3>Prijavite dijete na radionicu</h3>
+      <p>
+        Ukoliko želite prijaviti dijete na radionicu, molimo Vas da popunite
+        ovaj obrazac. <br />
+        <br /> Cijena radionice je 40€ po djetetu.
+      </p>
+      <div className="applicate-to-workshop-form-input">
         <label>
-          Name:
+          Vaše ime
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
+            placeholder="Unesite Vaše ime"
             required
           />
         </label>
       </div>
-      <div>
+      <div className="applicate-to-workshop-form-input">
         <label>
-          Surname:
+          Vaše prezime
           <input
             type="text"
             name="surname"
             value={formData.surname}
             onChange={handleChange}
+            placeholder="Unesite Vaše prezime"
             required
           />
         </label>
       </div>
-      <div>
+      <div className="applicate-to-workshop-form-input">
         <label>
-          Child Name:
+          Ime djeteta
           <input
             type="text"
             name="childName"
             value={formData.childName}
             onChange={handleChange}
+            placeholder="Unesite ime djeteta"
             required
           />
         </label>
       </div>
-      <div>
+      <div className="applicate-to-workshop-form-input">
         <label>
-          Telephone:
+          Broj telefona
           <input
             type="tel"
             name="telephone"
             value={formData.telephone}
             onChange={handleChange}
+            placeholder="Unesite broj telefona"
             required
           />
         </label>
       </div>
-      <div>
+      <div className="applicate-to-workshop-form-input">
         <label>
-          Email:
+          E-mail
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
+            placeholder="Unesite e-mail adresu"
           />
         </label>
       </div>
-      <div>
+      <div className="applicate-to-workshop-form-input">
         <label>
-          Child Allergies:
+          Djetetove alergije
           <textarea
             name="childAlergies"
             value={formData.childAlergies}
             onChange={handleChange}
+            placeholder="Unesite djetetove alergije"
           />
         </label>
       </div>
-      <div>
+      <div className="applicate-to-workshop-form-input">
         <label>
-          Additional Notes:
+          Dodatne napomene
           <textarea
             name="additionalNotes"
             value={formData.additionalNotes}
             onChange={handleChange}
+            placeholder="Unesite dodatne napomene"
           />
         </label>
       </div>
-      <div>
+      <div className="applicate-to-workshop-form-input">
         <label>
-          Photo Permission:
-          <input
-            type="checkbox"
-            name="photoPermission"
-            checked={formData.photoPermission}
-            onChange={handleChange}
-          />
+          Dozvola za fotografiranje
+          <button
+            type="button"
+            className={`toggle-button ${
+              formData.photoPermission ? "" : "hidden"
+            }`}
+            onClick={handleToggle}
+          >
+            <div className="toggle-button-dot"></div>
+          </button>
         </label>
       </div>
-      <button type="submit" disabled={loading}>
-        {loading ? "Submitting..." : "Submit Application"}
+
+      <button type="submit" className="btn primary">
+        Pošalji prijavu
       </button>
+      <NextImage
+        src={`/uploads/${workshop.image}`}
+        alt="Workshop image"
+        height={1500}
+        width={1500}
+        priority
+      />
     </form>
   );
 };

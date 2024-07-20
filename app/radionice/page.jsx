@@ -3,11 +3,11 @@ import prisma from "@/utils/db";
 import "@/styles/ItemPage.scss";
 import { baseUrl } from "@/utils/baseUrl";
 import { formatDate } from "@/utils/formatDate";
+import { formatTime } from "@/utils/formatTime";
 import "@/styles/ItemsPage.scss";
 import NextImage from "next/image";
 import limitTextChar from "@/utils/limitTextChar";
 import { PageTitle } from "@/components/PageTitle";
-import { formatTime } from "@/utils/formatTime";
 
 export const metadata = {
   title: "Šarolika Kuhinja - Radionice",
@@ -40,7 +40,7 @@ export default async function WorkshopsPage() {
       isVisible: true,
     },
     orderBy: {
-      date: "desc",
+      date: "asc",
     },
     select: {
       id: true,
@@ -53,6 +53,10 @@ export default async function WorkshopsPage() {
     },
   });
 
+  const now = new Date();
+  const upcomingWorkshops = items.filter((item) => item.date >= now);
+  const pastWorkshops = items.filter((item) => item.date < now);
+
   return (
     <main className="page workshops-page">
       <PageTitle
@@ -60,39 +64,38 @@ export default async function WorkshopsPage() {
         shortDesc="Lorem ipsum dolor sit amet consectetur adipisicing elit. A laborum dolorem illo necessitatibus facere corrupti incidunt animi consequatur inventore hic accusantium molestias suscipit reiciendis tempora mis iure?"
       />
       <section className="newest-workshops">
-        <article className="newest-workshop-item">
-          <a href={`/radionice/${items[0].slug}`} className="workshop-link">
-            <div className="image-container">
-              <NextImage
-                src={`/uploads/${items[0].image}`}
-                alt={items[0].title}
-                width={1200}
-                height={800}
-              />
-            </div>
-            <div className="info">
-              <time>
-                {formatDate(items[0].date) +
-                  " - " +
-                  formatTime(items[0].date) +
-                  " h"}
-              </time>
-              <h2>{items[0].title}</h2>
-              <p>{limitTextChar(items[0].description, 100)}</p>
-              {items[0]?.date > new Date() ? (
+        {upcomingWorkshops.length > 0 && (
+          <article className="newest-workshop-item">
+            <a
+              href={`/radionice/${upcomingWorkshops[0].slug}`}
+              className="workshop-link"
+            >
+              <div className="image-container">
+                <NextImage
+                  src={`/uploads/${upcomingWorkshops[0].image}`}
+                  alt={upcomingWorkshops[0].title}
+                  width={1200}
+                  height={800}
+                />
+              </div>
+              <div className="info">
+                <time>
+                  {formatDate(upcomingWorkshops[0].date) +
+                    " - " +
+                    formatTime(upcomingWorkshops[0].date) +
+                    " h"}
+                </time>
+                <h2>{upcomingWorkshops[0].title}</h2>
+                <p>{limitTextChar(upcomingWorkshops[0].description, 150)}</p>
                 <div className="workshop-availability active">
                   Kliknite za prijavu
                 </div>
-              ) : (
-                <div className="workshop-availability unactive">
-                  Prošla radionica - pogledajte kako je bilo!
-                </div>
-              )}
-            </div>
-          </a>
-        </article>
+              </div>
+            </a>
+          </article>
+        )}
         <div className="newest-workshops-list">
-          {items.slice(1, 5).map((item) => (
+          {upcomingWorkshops.slice(1, 5).map((item) => (
             <article key={item.id} className="workshop-item">
               <a href={`/radionice/${item.slug}`} className="workshop-link">
                 <div className="image-container">
@@ -105,23 +108,16 @@ export default async function WorkshopsPage() {
                 </div>
                 <div className="info">
                   <time>
-                    {" "}
                     {formatDate(item.date) +
                       " - " +
                       formatTime(item.date) +
                       " h"}
                   </time>
                   <h6>{item.title}</h6>
-                  <p>{limitTextChar(item.description, 100)}</p>
-                  {item?.date > new Date() ? (
-                    <div className="workshop-availability active">
-                      Kliknite za prijavu
-                    </div>
-                  ) : (
-                    <div className="workshop-availability unactive">
-                      Prošla radionica - pogledajte kako je bilo!
-                    </div>
-                  )}
+                  <p>{limitTextChar(item.description, 150)}</p>
+                  <div className="workshop-availability active">
+                    Kliknite za prijavu
+                  </div>
                 </div>
               </a>
             </article>
@@ -129,7 +125,7 @@ export default async function WorkshopsPage() {
         </div>
       </section>
       <section className="workshops-list">
-        {items.slice(4).map((item) => (
+        {pastWorkshops.map((item) => (
           <article key={item.id} className="workshop-item">
             <a href={`/radionice/${item.slug}`} className="workshop-link">
               <div className="image-container">
@@ -145,16 +141,10 @@ export default async function WorkshopsPage() {
                   {formatDate(item.date) + " - " + formatTime(item.date) + " h"}
                 </time>
                 <h6>{item.title}</h6>
-                <p>{limitTextChar(item.description, 100)}</p>
-                {item?.date > new Date() ? (
-                  <div className="workshop-availability active">
-                    Kliknite za prijavu
-                  </div>
-                ) : (
-                  <div className="workshop-availability unactive">
-                    Prošla radionica - pogledajte kako je bilo!
-                  </div>
-                )}
+                <p>{limitTextChar(item.description, 150)}</p>
+                <div className="workshop-availability unactive">
+                  Prošla radionica - pogledajte kako je bilo!
+                </div>
               </div>
             </a>
           </article>

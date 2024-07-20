@@ -119,21 +119,9 @@ export default async function WorkshopPage({ params }) {
           </div>
         </div>
       </section>
-      <section className="image-container">
-        <NextImage
-          src={`/uploads/${item?.image}`}
-          alt={`Image of ${item?.title}`}
-          width={1500}
-          height={1500}
-          priority
-        />
-      </section>
+
+      <ApplicateToWorkshopForm workshop={item} />
       <ItemContent sections={item.sections} />
-      <section className="application-section">
-        <h2>Prijavite se za radionicu</h2>
-        <p>Broj prijavljenih: {item._count.applications}</p>
-        <ApplicateToWorkshopForm workshop={item} />
-      </section>
     </main>
   );
 }

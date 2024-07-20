@@ -60,7 +60,7 @@ export default async function MealsPage() {
       />
       <section className="newest-meals">
         <article className="newest-meal-item">
-          <a href={`/meals/${items[0].slug}`} className="meal-link">
+          <a href={`/jela/${items[0].slug}`} className="meal-link">
             <div className="image-container">
               <NextImage
                 src={`/uploads/${items[0].image}`}
@@ -101,7 +101,7 @@ export default async function MealsPage() {
       <section className="meals-list">
         {items.slice(4).map((item) => (
           <article key={item.id} className="meal-item">
-            <a href={`/meals/${item.slug}`} className="meal-link">
+            <a href={`/jela/${item.slug}`} className="meal-link">
               <div className="image-container">
                 <NextImage
                   src={`/uploads/${item.image}`}
