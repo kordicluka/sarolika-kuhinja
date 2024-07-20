@@ -10,10 +10,10 @@ import WhatsApp from "@/components/WhatsUpp";
 import ItemContent from "@/components/ItemContent";
 import CopyToClipboard from "@/components/CopyToClipboard";
 
-export const metadata = {
-  title: "Blog Post",
-  description: "Blog post details",
-};
+// export const metadata = {
+//   title: "Blog Post",
+//   description: "Blog post details",
+// };
 
 export default async function BlogPage({ params }) {
   const { slug } = params;
