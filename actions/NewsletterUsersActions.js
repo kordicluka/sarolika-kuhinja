@@ -57,7 +57,8 @@ export async function createNewsletterUser(data) {
     await sendVerificationEmail(email, token);
 
     return {
-      message: "Verifikacijski email je poslan!",
+      message:
+        "Na vašu email adresu poslana je verifikacijska poruka s kojom morate potvrditi pretplatu na newsletter.",
       ok: true,
     };
   } catch (error) {

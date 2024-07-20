@@ -18,8 +18,6 @@ export default function Newsletter() {
     email: "",
     terms: false,
   });
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
 
   if (pathName.includes("/dashboard") || pathName.includes("/signin")) {
     return null;
@@ -38,22 +36,20 @@ export default function Newsletter() {
     const { name, email, terms } = formData;
 
     if (!terms) {
-      setError("Morate pristati na uvjete korištenja.");
+      alert("Morate pristati na uvjete korištenja.");
       return;
     }
 
     try {
       const response = await createNewsletterUser({ name, email });
       if (response.ok) {
-        setMessage(response.message);
-        setError("");
+        alert(response.message);
         setFormData({ name: "", email: "", terms: false });
       } else {
-        setError(response.message);
+        alert(response.message);
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setError("Došlo je do pogreške. Molimo pokušajte ponovno kasnije.");
     }
   };
 
@@ -74,7 +70,7 @@ export default function Newsletter() {
               className="small"
               type="text"
               name="name"
-              placeholder="Josip Horvat"
+              placeholder="Josip"
               value={formData.name}
               onChange={handleChange}
               required
@@ -124,8 +120,6 @@ export default function Newsletter() {
             </button>
           </div>
         </div>
-        {message && <p className="success">{message}</p>}
-        {error && <p className="error">{error}</p>}
       </form>
       <div className="image-container">
         <NextImage

@@ -15,12 +15,6 @@ export default async function BlogsPage() {
       slug: true,
       image: true,
       createdAt: true,
-      createdBy: {
-        select: {
-          name: true,
-          image: true,
-        },
-      },
     },
   });
 

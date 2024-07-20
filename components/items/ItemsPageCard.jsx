@@ -5,7 +5,7 @@ import "@/styles/ItemCard.scss";
 import { formatDate } from "@/utils/formatDate";
 import { formatTime } from "@/utils/formatTime";
 
-export default function ItemCard({ item, type }) {
+export default function ItemsPageCard({ item, type }) {
   return (
     <a
       href={`/${

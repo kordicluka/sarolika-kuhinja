@@ -1,9 +1,26 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import "@/styles/ContactForm.scss";
+import { sendContactFormEmail } from "@/actions/ContactActions";
 
 export const ContactForm = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+
+    const response = await sendContactFormEmail(data);
+
+    if (response.ok) {
+      alert(response.message);
+      e.target.reset();
+    } else {
+      alert(response.message);
+    }
+  };
+
   return (
-    <form className="contact-form">
+    <form className="contact-form" onSubmit={handleSubmit}>
       <div className="form-col">
         <label htmlFor="name">Ime i prezime</label>
         <input
