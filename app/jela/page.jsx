@@ -8,6 +8,7 @@ import NextImage from "next/image";
 import limitTextChar from "@/utils/limitTextChar";
 import { PageTitle } from "@/components/PageTitle";
 import "@/styles/ItemsPage.scss";
+import Link from "next/link";
 
 export const metadata = {
   title: "Šarolika Kuhinja - Jela",
@@ -60,7 +61,7 @@ export default async function MealsPage() {
       />
       <section className="newest-meals">
         <article className="newest-meal-item">
-          <a href={`/jela/${items[0].slug}`} className="meal-link">
+          <Link href={`/jela/${items[0].slug}`} className="meal-link">
             <div className="image-container">
               <NextImage
                 src={`/uploads/${items[0].image}`}
@@ -74,12 +75,12 @@ export default async function MealsPage() {
               <h2>{items[0].title}</h2>
               <p>{limitTextChar(items[0].description, 150)}</p>
             </div>
-          </a>
+          </Link>
         </article>
         <div className="newest-meals-list">
           {items.slice(1, 5).map((item) => (
             <article key={item.id} className="meal-item">
-              <a href={`/jela/${item.slug}`} className="meal-link">
+              <Link href={`/jela/${item.slug}`} className="meal-link">
                 <div className="image-container">
                   <NextImage
                     src={`/uploads/${item.image}`}
@@ -93,7 +94,7 @@ export default async function MealsPage() {
                   <h6>{item.title}</h6>
                   <p>{limitTextChar(item.description, 150)}</p>
                 </div>
-              </a>
+              </Link>
             </article>
           ))}
         </div>
@@ -101,7 +102,7 @@ export default async function MealsPage() {
       <section className="meals-list">
         {items.slice(4).map((item) => (
           <article key={item.id} className="meal-item">
-            <a href={`/jela/${item.slug}`} className="meal-link">
+            <Link href={`/jela/${item.slug}`} className="meal-link">
               <div className="image-container">
                 <NextImage
                   src={`/uploads/${item.image}`}
@@ -115,7 +116,7 @@ export default async function MealsPage() {
                 <h6>{item.title}</h6>
                 <p>{limitTextChar(item.description, 100)}</p>
               </div>
-            </a>
+            </Link>
           </article>
         ))}
       </section>

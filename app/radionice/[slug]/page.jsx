@@ -10,6 +10,7 @@ import CopyToClipboard from "@/components/CopyToClipboard";
 import ApplicateToWorkshopForm from "@/components/workshop/ApplicateToWorkshopForm";
 import "@/styles/ItemPage.scss";
 import { baseUrl } from "@/utils/baseUrl";
+import Link from "next/link";
 
 export async function generateMetadata({ params }) {
   const { slug } = params;
@@ -106,15 +107,15 @@ export default async function WorkshopPage({ params }) {
             </div>
           </div>
           <div className="share">
-            <a href="#" className="social" aria-label="Share on Facebook">
+            <Link href="#" className="social" aria-label="Share on Facebook">
               <Facebook />
-            </a>
-            <a href="#" className="social" aria-label="Share on Instagram">
+            </Link>
+            <Link href="#" className="social" aria-label="Share on Instagram">
               <Instagram />
-            </a>
-            <a href="#" className="social" aria-label="Share on WhatsApp">
+            </Link>
+            <Link href="#" className="social" aria-label="Share on WhatsApp">
               <WhatsApp />
-            </a>
+            </Link>
             <CopyToClipboard />
           </div>
         </div>

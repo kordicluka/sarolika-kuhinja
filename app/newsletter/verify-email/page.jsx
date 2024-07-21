@@ -1,8 +1,8 @@
-import prisma from "@/utils/db";
 import React from "react";
 import "@/styles/VerifyNewsletterUserEmailPage.scss";
 import SignOutFromNewsletterButton from "@/components/SignOutFromNewsletterButton";
 import { verifyNewsletterUser } from "@/actions/NewsletterUsersActions";
+import Link from "next/link";
 
 export default async function VerifyNewsletterUserEmailPage({ searchParams }) {
   const { token } = searchParams;
@@ -35,7 +35,7 @@ export default async function VerifyNewsletterUserEmailPage({ searchParams }) {
 
         <h3>Došlo je do pogreške prilikom verifikacije vašeg emaila.</h3>
         <p>Molimo pokušajte ponovno ili kontaktirajte podršku.</p>
-        <a href="/kontakt" className="btn primary">
+        <Link href="/kontakt" className="btn primary">
           Kontaktirajte nas
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@ export default async function VerifyNewsletterUserEmailPage({ searchParams }) {
               d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
             />
           </svg>
-        </a>
+        </Link>
       </main>
     );
   }

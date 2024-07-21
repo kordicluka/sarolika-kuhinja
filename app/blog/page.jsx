@@ -7,6 +7,7 @@ import "@/styles/ItemsPage.scss";
 import NextImage from "next/image";
 import limitTextChar from "@/utils/limitTextChar";
 import { PageTitle } from "@/components/PageTitle";
+import Link from "next/link";
 
 export const metadata = {
   title: "Šarolika Kuhinja - Blog",
@@ -62,7 +63,7 @@ export default async function BlogsPage() {
       />
       <section className="newest-blogs">
         <article className="newest-blog-item">
-          <a href={`/blog/${items[0].slug}`} className="blog-link">
+          <Link href={`/blog/${items[0].slug}`} className="blog-link">
             <div className="image-container">
               <NextImage
                 src={`/uploads/${items[0].image}`}
@@ -77,12 +78,12 @@ export default async function BlogsPage() {
               <h2>{items[0].title}</h2>
               <p>{limitTextChar(items[0].description, 150)}</p>
             </div>
-          </a>
+          </Link>
         </article>
         <div className="newest-blogs-list">
           {items.slice(1, 5).map((item) => (
             <article key={item.id} className="blog-item">
-              <a href={`/blog/${item.slug}`} className="blog-link">
+              <Link href={`/blog/${item.slug}`} className="blog-link">
                 {" "}
                 <div className="image-container">
                   <NextImage
@@ -98,7 +99,7 @@ export default async function BlogsPage() {
                   <h6>{item.title}</h6>
                   <p>{limitTextChar(item.description, 150)}</p>
                 </div>
-              </a>
+              </Link>
             </article>
           ))}
         </div>
@@ -106,7 +107,7 @@ export default async function BlogsPage() {
       <section className="blogs-list">
         {items.slice(4).map((item) => (
           <article key={item.id} className="blog-item">
-            <a href={`/blog/${item.slug}`} className="blog-link">
+            <Link href={`/blog/${item.slug}`} className="blog-link">
               {" "}
               <div className="image-container">
                 <NextImage
@@ -121,7 +122,7 @@ export default async function BlogsPage() {
                 <h6>{item.title}</h6>
                 <p>{limitTextChar(item.description, 150)}</p>
               </div>
-            </a>
+            </Link>
           </article>
         ))}
       </section>

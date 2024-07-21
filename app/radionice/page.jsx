@@ -8,6 +8,7 @@ import "@/styles/ItemsPage.scss";
 import NextImage from "next/image";
 import limitTextChar from "@/utils/limitTextChar";
 import { PageTitle } from "@/components/PageTitle";
+import Link from "next/link";
 
 export const metadata = {
   title: "Šarolika Kuhinja - Radionice",
@@ -66,7 +67,7 @@ export default async function WorkshopsPage() {
       <section className="newest-workshops">
         {upcomingWorkshops.length > 0 && (
           <article className="newest-workshop-item">
-            <a
+            <Link
               href={`/radionice/${upcomingWorkshops[0].slug}`}
               className="workshop-link"
             >
@@ -91,13 +92,13 @@ export default async function WorkshopsPage() {
                   Kliknite za prijavu
                 </div>
               </div>
-            </a>
+            </Link>
           </article>
         )}
         <div className="newest-workshops-list">
           {upcomingWorkshops.slice(1, 5).map((item) => (
             <article key={item.id} className="workshop-item">
-              <a href={`/radionice/${item.slug}`} className="workshop-link">
+              <Link href={`/radionice/${item.slug}`} className="workshop-link">
                 <div className="image-container">
                   <NextImage
                     src={`/uploads/${item.image}`}
@@ -119,7 +120,7 @@ export default async function WorkshopsPage() {
                     Kliknite za prijavu
                   </div>
                 </div>
-              </a>
+              </Link>
             </article>
           ))}
         </div>
@@ -127,7 +128,7 @@ export default async function WorkshopsPage() {
       <section className="workshops-list">
         {pastWorkshops.map((item) => (
           <article key={item.id} className="workshop-item">
-            <a href={`/radionice/${item.slug}`} className="workshop-link">
+            <Link href={`/radionice/${item.slug}`} className="workshop-link">
               <div className="image-container">
                 <NextImage
                   src={`/uploads/${item.image}`}
@@ -146,7 +147,7 @@ export default async function WorkshopsPage() {
                   Prošla radionica - pogledajte kako je bilo!
                 </div>
               </div>
-            </a>
+            </Link>
           </article>
         ))}
       </section>
