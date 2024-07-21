@@ -3,6 +3,7 @@ import ItemsTable from "../dashboard/ItemsTable";
 import ProgressBar from "../dashboard/ProgressBar";
 import { formatDate } from "@/utils/formatDate";
 import DeleteApplicationButton from "./DeleteApplicationButton";
+import Link from "next/link";
 
 export default async function WorkshopApplicantsTable({ id }) {
   // Fetch the workshop and its applicants
@@ -65,11 +66,11 @@ export default async function WorkshopApplicantsTable({ id }) {
             <div className="items-table-actions-dot"></div>
 
             <div className="items-table-actions-dropdown">
-              <a
+              <Link
                 href={`/dashboard/radionice/${id}/prijave/${applications[index].id}`}
               >
                 Uredi
-              </a>
+              </Link>
               <DeleteApplicationButton
                 id={applications[index].id}
                 title={applications[index].name}

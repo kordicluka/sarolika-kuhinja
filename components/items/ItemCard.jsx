@@ -4,10 +4,11 @@ import limitTextChar from "@/utils/limitTextChar";
 import "@/styles/ItemCard.scss";
 import { formatDate } from "@/utils/formatDate";
 import { formatTime } from "@/utils/formatTime";
+import Link from "next/link";
 
 export default function ItemCard({ item, type }) {
   return (
-    <a
+    <Link
       href={`/${
         type === "workshops" ? "radionice" : type === "posts" ? "blog" : "jela"
       }/${item.slug}`}
@@ -42,6 +43,6 @@ export default function ItemCard({ item, type }) {
           </div>
         ) : null}
       </div>
-    </a>
+    </Link>
   );
 }

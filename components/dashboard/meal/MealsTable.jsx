@@ -3,6 +3,7 @@ import ItemsTable from "../ItemsTable";
 import DeletePostsButton from "./DeleteMealButton";
 import prisma from "@/utils/db";
 import ToggleItemVisibility from "../ToggleItemVisibility";
+import Link from "next/link";
 
 export default async function MealsTable() {
   const items = await prisma.meal.findMany();
@@ -53,7 +54,7 @@ export default async function MealsTable() {
             <div className="items-table-actions-dot"></div>
 
             <div className="items-table-actions-dropdown">
-              <a href={`/dashboard/jela/${items[index].id}`}> Uredi </a>
+              <Link href={`/dashboard/jela/${items[index].id}`}> Uredi </Link>
               <DeletePostsButton id={items[index].id} />
             </div>
           </div>

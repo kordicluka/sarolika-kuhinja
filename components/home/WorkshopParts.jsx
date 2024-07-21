@@ -1,11 +1,12 @@
 import React from "react";
 import "@/styles/WorkshopParts.scss";
+import Link from "next/link";
 
 export default function WorkshopParts() {
   return (
     <section className="workshop-parts">
       <h2>Kako izgledaju naše radionice?</h2>
-      <a href="/radionice" className="btn">
+      <Link href="/radionice" className="btn">
         Saznajte više
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +22,7 @@ export default function WorkshopParts() {
             d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
           />
         </svg>
-      </a>
+      </Link>
 
       <div className="workshop-parts-container">
         <div className="workshop-parts-line"></div>

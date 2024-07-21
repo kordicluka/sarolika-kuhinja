@@ -2,6 +2,7 @@ import React from "react";
 import "@/styles/Hero.scss";
 import NextImage from "next/image";
 import { Caveat } from "next/font/google";
+import Link from "next/link";
 
 const caveat = Caveat({
   weights: [400, 700],
@@ -44,7 +45,7 @@ export default function Hero() {
           reprehenderit culpa non recusandae pariatur molestias.
         </p>
         <div className="links">
-          <a href="/radionice" className="btn primary">
+          <Link href="/radionice" className="btn primary">
             <span> Sve radionice</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -60,8 +61,8 @@ export default function Hero() {
                 d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
               />
             </svg>
-          </a>{" "}
-          <a href="/radionice" className="btn primary">
+          </Link>{" "}
+          <Link href="/radionice" className="btn primary">
             <span> Pročitajte blog</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +78,7 @@ export default function Hero() {
                 d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
       <NextImage

@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import { Caveat } from "next/font/google";
 import "@/styles/ItemsSlider.scss";
 import ItemCard from "./items/ItemCard";
+import Link from "next/link";
 
 const caveat = Caveat({
   weights: [400, 700],
@@ -95,7 +96,7 @@ export const ItemsSlider = ({ type, items }) => {
           <h2>{title}</h2>
         </div>
         <div className="items-slider-title-right">
-          <a href={link} className="btn primary">
+          <Link href={link} className="btn primary">
             <span>Pogledajte sve</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +112,7 @@ export const ItemsSlider = ({ type, items }) => {
                 d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="items-container" ref={containerRef}>

@@ -2,6 +2,7 @@ import NextImage from "next/image";
 import ItemsTable from "../ItemsTable";
 import DeleteUserButton from "./DeleteUserButton";
 import prisma from "@/utils/db";
+import Link from "next/link";
 
 export default async function UsersTable() {
   const items = await prisma.user.findMany();
@@ -54,7 +55,10 @@ export default async function UsersTable() {
             <div className="items-table-actions-dot"></div>
 
             <div className="items-table-actions-dropdown">
-              <a href={`/dashboard/korisnici/${items[index].id}`}> Uredi </a>
+              <Link href={`/dashboard/korisnici/${items[index].id}`}>
+                {" "}
+                Uredi{" "}
+              </Link>
               <DeleteUserButton
                 id={items[index].id}
                 title={items[index].name}

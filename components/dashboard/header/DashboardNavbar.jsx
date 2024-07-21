@@ -2,34 +2,36 @@
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import "@/styles/DashboardNavbar.scss";
+import Link from "next/link";
+
 export default function DashboardNavbar() {
   const [activeLinkHover, setActiveLinkHover] = useState(3);
   const location = usePathname();
 
   return (
     <nav>
-      <a href="/dashboard">
+      <Link href="/dashboard">
         <span>Home</span>
-      </a>
-      <a href="/dashboard/radionice">
+      </Link>
+      <Link href="/dashboard/radionice">
         <span>Radionice</span>
-      </a>
-      <a href="/dashboard/blog">
+      </Link>
+      <Link href="/dashboard/blog">
         <span>Blog</span>
-      </a>
-      <a href="/dashboard/korisnici">
+      </Link>
+      <Link href="/dashboard/korisnici">
         <span>Korisnici</span>
-      </a>
+      </Link>
 
-      <a href="/dashboard/jela">
+      <Link href="/dashboard/jela">
         <span>Jela</span>
-      </a>
-      <a href="/dashboard/newsletter-korisnici">
+      </Link>
+      <Link href="/dashboard/newsletter-korisnici">
         <span>Newsletter</span>
-      </a>
-      <a href="/dashboard/tipovi-sekcija">
+      </Link>
+      <Link href="/dashboard/tipovi-sekcija">
         <span>Tipovi sekcija</span>
-      </a>
+      </Link>
     </nav>
   );
 }

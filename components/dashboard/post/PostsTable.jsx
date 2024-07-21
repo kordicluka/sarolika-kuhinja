@@ -3,6 +3,7 @@ import ItemsTable from "../ItemsTable";
 import DeletePostsButton from "./DeletePostsButton";
 import prisma from "@/utils/db";
 import ToggleItemVisibility from "../ToggleItemVisibility";
+import Link from "next/link";
 
 export default async function SectionTypesTable() {
   const items = await prisma.post.findMany();
@@ -53,7 +54,7 @@ export default async function SectionTypesTable() {
             <div className="items-table-actions-dot"></div>
 
             <div className="items-table-actions-dropdown">
-              <a href={`/dashboard/blog/${items[index].id}`}> Uredi </a>
+              <Link href={`/dashboard/blog/${items[index].id}`}> Uredi </Link>
               <DeletePostsButton
                 id={items[index].id}
                 title={items[index].title}

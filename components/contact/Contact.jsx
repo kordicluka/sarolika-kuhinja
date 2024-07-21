@@ -5,6 +5,7 @@ import Location from "@/components/Location";
 import Instagram from "../Instagram";
 import Facebook from "../Facebook";
 import WhatsUpp from "../WhatsUpp";
+import Link from "next/link";
 
 export default function Contact() {
   return (
@@ -29,30 +30,30 @@ export default function Contact() {
             <span>luka.kordic@msk.hr</span>
           </div>
           <div className="socials">
-            <a
+            <Link
               className="social-container"
               href="https://www.facebook.com"
               target="_blank"
               rel="noreferrer"
             >
               <Facebook />
-            </a>
-            <a
+            </Link>
+            <Link
               className="social-container"
               href="https://www.instagram.com"
               target="_blank"
               rel="noreferrer"
             >
               <Instagram />
-            </a>
-            <a
+            </Link>
+            <Link
               className="social-container"
               href="https://www.whatsupp.com"
               target="_blank"
               rel="noreferrer"
             >
               <WhatsUpp />
-            </a>
+            </Link>
           </div>
         </div>
         <ContactForm />

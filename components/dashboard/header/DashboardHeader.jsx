@@ -4,6 +4,7 @@ import DashboardHeaderDropdowns from "./DashboardHeaderDropdowns";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import DashboardHeaderUser from "./DashboardHeaderUser";
+import Link from "next/link";
 
 export default async function DashboardHeader() {
   const session = await getServerSession(authOptions);
@@ -15,9 +16,9 @@ export default async function DashboardHeader() {
         <div className="time-and-made-by">
           <div className="made-by">
             <p>Created by: </p>
-            <a href="https://msk.hr/" target="_blank" rel="noreferrer">
+            <Link href="https://msk.hr/" target="_blank" rel="noreferrer">
               msk.hr
-            </a>
+            </Link>
           </div>
         </div>
       </section>

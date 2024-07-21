@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "@/styles/DashboardHeaderUser.scss";
 import { signOut } from "next-auth/react";
 import NextImage from "next/image";
+import Link from "next/link";
 
 function DashboardHeaderUser({ session }) {
   const [activeDropdown, setActiveDropdown] = useState(false);
@@ -37,7 +38,7 @@ function DashboardHeaderUser({ session }) {
       <div
         className={activeDropdown ? "user-dropdown active" : "user-dropdown"}
       >
-        <a href="/dashboard/auth/profile-settings">Postavke</a>
+        <Link href="/dashboard/auth/profile-settings">Postavke</Link>
         <button onClick={() => signOut()} className="logout">
           Odjavi se
         </button>

@@ -2,6 +2,7 @@ import React from "react";
 import NextImage from "next/image"; // Assuming you are using Next.js for image optimization
 import "@/styles/MealsWeMake.scss";
 import { Caveat } from "next/font/google";
+import Link from "next/link";
 
 const caveat = Caveat({
   weights: [400, 700],
@@ -29,7 +30,7 @@ export const MealsWeMake = () => {
             tako usvojiti osnovne kulinarske vještine dok se zabavljaju i uče o
             važnosti uravnotežene prehrane.
           </span>
-          <a href="/jela" className="btn primary">
+          <Link href="/jela" className="btn primary">
             <span>Istražite jela</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +46,7 @@ export const MealsWeMake = () => {
                 d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
               />
             </svg>
-          </a>
+          </Link>
         </div>
         <div className="image-container">
           <NextImage
@@ -83,7 +84,7 @@ export const MealsWeMake = () => {
             <br /> Kroz ove aktivnosti djeca će razviti ljubav prema zdravim
             namirnicama i steći navike koje će ih pratiti cijeli život.
           </span>
-          <a href="/jela" className="btn primary">
+          <Link href="/jela" className="btn primary">
             <span>Istražite jela</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +100,7 @@ export const MealsWeMake = () => {
                 d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

@@ -7,10 +7,8 @@ import { formatDate } from "@/utils/formatDate";
 import { formatTime } from "@/utils/formatTime";
 import { Search } from "./Search";
 import { Caveat } from "next/font/google";
-import Facebook from "@/components/Facebook";
-import Instagram from "@/components/Instagram";
-import WhatsUpp from "@/components/WhatsUpp";
 import { getNextWorkshop } from "@/actions/WorkshopsActions";
+import Link from "next/link";
 
 const caveat = Caveat({
   weights: [400, 500, 600, 700],
@@ -80,7 +78,7 @@ export const Header = () => {
     return (
       <header className={isScrolled ? "header scrolled" : "header"}>
         {nextWorkshop && (
-          <a
+          <Link
             className={isScrolled ? "next-workshop hide" : "next-workshop "}
             href={`/radionice/${nextWorkshop.slug}`}
           >
@@ -128,7 +126,7 @@ export const Header = () => {
               {formatDate(nextWorkshop.date)} u {formatTime(nextWorkshop.date)}{" "}
               sati
             </span>
-          </a>
+          </Link>
         )}
         {/* <div className={`contact-info ${isScrolled ? "hide" : ""}`}>
          
@@ -136,29 +134,29 @@ export const Header = () => {
         <nav className="header-nav">
           <div className="header-nav-left">
             {" "}
-            <a className="header-logo" href="/">
+            <Link className="header-logo" href="/">
               <NextImage
                 src="/images/logo.png"
                 alt="Logo"
                 width={100}
                 height={100}
               />
-            </a>
+            </Link>
             <ul className="links">
               <li>
-                <a href="/">Početna</a>
+                <Link href="/">Početna</Link>
               </li>
               <li>
-                <a href="/radionice">Radionice</a>
+                <Link href="/radionice">Radionice</Link>
               </li>
               <li>
-                <a href="/blog">Blog</a>
+                <Link href="/blog">Blog</Link>
               </li>
               <li>
-                <a href="/jela">Jela</a>
+                <Link href="/jela">Jela</Link>
               </li>
               <li>
-                <a href="/o-nama">O nama</a>
+                <Link href="/o-nama">O nama</Link>
               </li>
             </ul>{" "}
             <Search onChange={onChangeSearch} />
@@ -166,7 +164,7 @@ export const Header = () => {
           <div className="header-nav-right">
             {" "}
             <div className="contact-info-left">
-              <a
+              <Link
                 className="contact-info-left-item"
                 href="tel:+385912345678"
                 target="_blank"
@@ -188,8 +186,8 @@ export const Header = () => {
                 </svg>
 
                 <span>+385 91 2345 678</span>
-              </a>
-              <a
+              </Link>
+              <Link
                 className="contact-info-left-item"
                 href="mailto:info@sarolika-kuhinja.com"
                 target="_blank"
@@ -211,11 +209,11 @@ export const Header = () => {
                 </svg>
 
                 <span> info@sarolika-kuhinja.com</span>
-              </a>
+              </Link>
             </div>
-            <a className="btn primary" href="/kontakt">
+            <Link className="btn primary" href="/kontakt">
               Kontakt
-            </a>{" "}
+            </Link>{" "}
           </div>
         </nav>
       </header>

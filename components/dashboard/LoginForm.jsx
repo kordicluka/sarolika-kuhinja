@@ -7,6 +7,7 @@ import logo from "@/public/images/logo.png";
 import NextImage from "next/image";
 import toast from "react-hot-toast";
 import ToasterComponent from "./ToasterComponent";
+import Link from "next/link";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -104,7 +105,7 @@ export default function LoginForm() {
       </form>
       <div className="note"></div>
       <div className="forgot-password">
-        <a href="/forgot-password">Zaboravili ste lozinku?</a>
+        <Link href="/forgot-password">Zaboravili ste lozinku?</Link>
       </div>
       <div className="bottom-login-form">
         <p>© 2024. Sva prava zadržana.</p>

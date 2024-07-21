@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import "@/styles/ContactForm.scss";
 import { sendContactFormEmail } from "@/actions/ContactActions";
+import Link from "next/link";
 
 export const ContactForm = () => {
   const handleSubmit = async (e) => {
@@ -69,7 +70,7 @@ export const ContactForm = () => {
         <span className="form-info">
           *Ove informacije mogu biti prepisane, korištene i pohranjene od strane
           trećih osoba stranke u skladu s našom
-          <a href="/politika-privatnosti">Politikom privatnosti</a>.
+          <Link href="/politika-privatnosti">Politikom privatnosti</Link>.
         </span>
       </div>
     </form>

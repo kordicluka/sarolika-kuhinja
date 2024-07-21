@@ -2,6 +2,7 @@ import NextImage from "next/image";
 import ItemsTable from "../ItemsTable";
 import DeleteSectionTypeButton from "./DeleteSectionTypeButton";
 import prisma from "@/utils/db";
+import Link from "next/link";
 
 export default async function SectionTypesTable() {
   const items = await prisma.sectionType.findMany();
@@ -36,10 +37,10 @@ export default async function SectionTypesTable() {
             <div className="items-table-actions-dot"></div>
 
             <div className="items-table-actions-dropdown">
-              <a href={`/dashboard/tipovi-sekcija/${items[index].id}`}>
+              <Link href={`/dashboard/tipovi-sekcija/${items[index].id}`}>
                 {" "}
                 Uredi{" "}
-              </a>
+              </Link>
               <DeleteSectionTypeButton
                 id={items[index].id}
                 title={items[index].title}

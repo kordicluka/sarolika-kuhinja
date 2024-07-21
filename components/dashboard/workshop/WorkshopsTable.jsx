@@ -5,6 +5,7 @@ import prisma from "@/utils/db";
 import ToggleItemVisibility from "../ToggleItemVisibility";
 import ProgressBar from "../ProgressBar";
 import { formatDate } from "@/utils/formatDate";
+import Link from "next/link";
 
 export default async function WorkshopsTable() {
   const items = await prisma.workshop.findMany({
@@ -85,11 +86,16 @@ export default async function WorkshopsTable() {
             <div className="items-table-actions-dot"></div>
 
             <div className="items-table-actions-dropdown">
-              <a href={`/dashboard/radionice/${items[index].id + "/prijave"}`}>
+              <Link
+                href={`/dashboard/radionice/${items[index].id + "/prijave"}`}
+              >
                 {" "}
                 Prijave
-              </a>
-              <a href={`/dashboard/radionice/${items[index].id}`}> Uredi </a>
+              </Link>
+              <Link href={`/dashboard/radionice/${items[index].id}`}>
+                {" "}
+                Uredi{" "}
+              </Link>
 
               <DeleteWorkshopsButton
                 id={items[index].id}

@@ -1,6 +1,7 @@
 "use client";
 import "@/styles/DashboardHeaderDropdowns.scss";
 import React, { useState } from "react";
+import Link from "next/link";
 
 export default function DashboardHeaderDropdowns() {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -42,9 +43,9 @@ export default function DashboardHeaderDropdowns() {
               : "dropdown-content"
           }
         >
-          <a href="#">Kontakt</a>
-          <a href="#">O nama</a>
-          <a href="#">FAQ</a>
+          <Link href="#">Kontakt</Link>
+          <Link href="#">O nama</Link>
+          <Link href="#">FAQ</Link>
         </div>
         <button
           className={activeDropdown === 1 ? "close active" : "close"}
@@ -65,27 +66,27 @@ export default function DashboardHeaderDropdowns() {
               : "dropdown-content"
           }
         >
-          <a
+          <Link
             href="https://www.youtube.com/watch?v=2iwUAwxch94"
             target="_blank"
             rel="noreferrer"
           >
             Kako koristiti aplikaciju
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://www.youtube.com/watch?v=2iwUAwxch94"
             target="_blank"
             rel="noreferrer"
           >
             Kako dodati novu nekretninu
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://www.youtube.com/watch?v=2iwUAwxch94"
             target="_blank"
             rel="noreferrer"
           >
             Kako dodati novost
-          </a>
+          </Link>
         </div>
         <button
           className={activeDropdown === 2 ? "close active" : "close"}

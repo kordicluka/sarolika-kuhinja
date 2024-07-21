@@ -13,7 +13,7 @@ const ApplicateToWorkshopForm = ({ workshop }) => {
     email: "",
     childAlergies: "",
     additionalNotes: "",
-    photoPermission: false,
+    photoPermission: true,
   });
 
   const handleToggle = () => {
@@ -41,6 +41,7 @@ const ApplicateToWorkshopForm = ({ workshop }) => {
     try {
       const response = await createApplication(data);
       if (response.ok) {
+        alert("Uspješno ste prijavili dijete na radionicu!");
         setFormData({
           name: "",
           surname: "",
@@ -52,8 +53,12 @@ const ApplicateToWorkshopForm = ({ workshop }) => {
           photoPermission: false,
         });
       } else {
+        alert("Došlo je do greške prilikom prijave djeteta na radionicu.");
       }
-    } catch (err) {}
+    } catch (err) {
+      console.error(err);
+      alert("Došlo je do greške prilikom prijave djeteta na radionicu.");
+    }
   };
 
   return (

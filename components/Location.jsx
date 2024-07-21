@@ -2,6 +2,7 @@ import React from "react";
 import MapContainer from "./MapContainer";
 import "@/styles/Location.scss";
 import { Caveat } from "next/font/google";
+import Link from "next/link";
 
 const caveat = Caveat({
   weights: [400, 700],
@@ -22,7 +23,7 @@ export default function Location() {
           Ulica: Nova Ves 17, Kaptol Centar 10 000 Zagreb <br />
         </p>
 
-        <a className="btn" href="https://goo.gl/maps/" target="_blank">
+        <Link className="btn" href="https://goo.gl/maps/" target="_blank">
           <span>Upute do nas</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +39,7 @@ export default function Location() {
               d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
             />
           </svg>
-        </a>
+        </Link>
       </div>
       <div className="location-container">
         <MapContainer />
