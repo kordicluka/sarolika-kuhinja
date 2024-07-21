@@ -6,9 +6,9 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import "@/styles/DashboardItem.scss";
 import NextImage from "next/image";
 import { useRouter } from "next/navigation";
-import { useCreatePost, useUpdatePost } from "@/hooks/usePosts";
 import JSXContentRenderer from "./JSXContentRender";
 import DashboardAddNewSection from "./DashboardAddNewSection";
+import { createPost, updatePost } from "@/actions/PostsActions";
 
 export default function DashboardNewPostForm({ post }) {
   const router = useRouter();
@@ -22,16 +22,6 @@ export default function DashboardNewPostForm({ post }) {
     sections: [],
   });
   const [imageToDelete, setImageToDelete] = useState(null);
-  const {
-    loading: loadingCreatingPost,
-    create: createPost,
-    error: errorCreatingPost,
-  } = useCreatePost();
-  const {
-    loading: loadingUpdatingPost,
-    error: errorUpdatingPost,
-    update,
-  } = useUpdatePost();
 
   useEffect(() => {
     if (post) {
@@ -76,7 +66,7 @@ export default function DashboardNewPostForm({ post }) {
         alert("Error creating post", res?.message);
       }
     } else {
-      const res = await update(item);
+      const res = await updatePost(item);
 
       if (res?.ok) {
         if (imageToDelete) {
