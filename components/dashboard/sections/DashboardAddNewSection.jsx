@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSectionTypes } from "@/hooks/useSectionTypes";
+import { getSectionTypes } from "@/actions/SectionTypesActions";
 import LoadingSpinner from "../LoadingSpinner";
 import NextImage from "next/image";
 import { useImageUpload } from "@/hooks/useImageUpload";
@@ -21,8 +21,19 @@ export default function DashboardAddNewSection({
   sectionWithoutUpdates,
   setSectionWithoutUpdates,
 }) {
-  const { data: sectionTypes, loading: loadingSectionTypes } =
-    useSectionTypes();
+  // const { data: sectionTypes, loading: loadingSectionTypes } =
+  //   useSectionTypes();
+
+  const [sectionTypes, setSectionTypes] = useState([]);
+  const [loadingSectionTypes, setLoadingSectionTypes] = useState(true);
+
+  useEffect(() => {
+    getSectionTypes().then((data) => {
+      setSectionTypes(data.sectionTypes);
+      setLoadingSectionTypes(false);
+    });
+  }, []);
+
   const [choosenSectionType, setChoosenSectionType] = useState(null);
   const { uploadImages, uploadingImages } = useImageUpload();
 
