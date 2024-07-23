@@ -1,73 +1,73 @@
-"use client";
-import { signIn } from "next-auth/react";
-import { useState } from "react";
-import "@/styles/LoginForm.scss";
-import { useRouter } from "next/navigation";
-import logo from "@/public/images/logo.png";
-import NextImage from "next/image";
-import toast from "react-hot-toast";
-import ToasterComponent from "./ToasterComponent";
-import Link from "next/link";
+'use client'
+import { signIn } from 'next-auth/react'
+import { useState } from 'react'
+import '@/styles/LoginForm.scss'
+import { useRouter } from 'next/navigation'
+import logo from '@/public/images/logo.png'
+import NextImage from 'next/image'
+import toast from 'react-hot-toast'
+import ToasterComponent from './ToasterComponent'
+import Link from 'next/link'
 
 export default function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
-  const router = useRouter();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState({})
+  const router = useRouter()
 
   const validate = () => {
-    const newErrors = {};
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const newErrors = {}
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
     if (!email) {
-      newErrors.email = "Email je obavezan.";
+      newErrors.email = 'Email je obavezan.'
     } else if (!emailRegex.test(email)) {
-      newErrors.email = "Unesite važeću email adresu.";
+      newErrors.email = 'Unesite važeću email adresu.'
     }
 
     if (!password) {
-      newErrors.password = "Lozinka je obavezna.";
+      newErrors.password = 'Lozinka je obavezna.'
     } else if (password.length < 6) {
-      newErrors.password = "Lozinka mora imati najmanje 6 karaktera.";
+      newErrors.password = 'Lozinka mora imati najmanje 6 karaktera.'
     }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (!validate()) {
-      return;
+      return
     }
 
-    const res = await signIn("credentials", {
+    const res = await signIn('credentials', {
       redirect: false,
       email,
       password,
-    });
+    })
 
     if (res?.ok) {
-      router.push("/dashboard");
+      router.push('/dashboard')
       toast((t) => (
         <ToasterComponent
-          title={"Dobro došli u admin aplikaciju!"}
+          title={'Dobro došli u admin aplikaciju!'}
           t={t}
-          state={res?.ok ? "success" : "error"}
-          message={"Unijeli ste ispravne podatke."}
+          state={res?.ok ? 'success' : 'error'}
+          message={'Unijeli ste ispravne podatke.'}
         />
-      ));
+      ))
     } else {
       toast((t) => (
         <ToasterComponent
-          title={"Uneseni podatci nisu ispravni"}
+          title={'Uneseni podatci nisu ispravni'}
           t={t}
-          state={res?.ok ? "success" : "error"}
-          message={"Molimo pokušajte ponovo."}
+          state={res?.ok ? 'success' : 'error'}
+          message={'Molimo pokušajte ponovo.'}
         />
-      ));
+      ))
     }
-  };
+  }
 
   return (
     <div className="login-form">
@@ -111,5 +111,5 @@ export default function LoginForm() {
         <p>© 2024. Sva prava zadržana.</p>
       </div>
     </div>
-  );
+  )
 }
