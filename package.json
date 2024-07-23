@@ -2,11 +2,17 @@
   "name": "sarolika-kuhinja-ana",
   "version": "0.1.0",
   "private": true,
+  "prettier": {
+    "singleQuote": true,
+    "semi": false
+  },
   "scripts": {
     "dev": "node server.js",
     "build": "prisma generate && next build",
     "start": "NODE_ENV=production node server.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "deploy": "npm run build && npm start"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
@@ -26,6 +32,7 @@
     "react-hot-toast": "^2.4.1",
     "react-loader-spinner": "^6.1.6",
     "react-quill": "^2.0.0",
+    "sharp": "^0.33.4",
     "slugify": "^1.6.6",
     "styled-components": "^6.1.11"
   },
