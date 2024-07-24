@@ -51,6 +51,12 @@ export default function DashboardNewPostForm({ post }) {
 
   const handleUploadImages = async (e) => {
     const files = e.target.files
+
+    // If there is an image already, delete it
+    if (item.image) {
+      setImagesToDelete((old) => [...old, item.image])
+    }
+
     uploadImages(files).then((urls) => {
       setItem({
         ...item,

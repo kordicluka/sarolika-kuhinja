@@ -50,7 +50,11 @@ const RenderElement = ({ element }) => {
     case 'img':
       return (
         <NextImage
-          src={data?.src}
+          src={
+            data?.src === 'placeholder-image.svg'
+              ? '/uploads/placeholder-image.svg'
+              : data?.src
+          }
           alt={data?.alt}
           style={finalStyle}
           width={1500}

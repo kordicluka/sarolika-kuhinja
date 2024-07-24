@@ -172,6 +172,11 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
 
   const handleUploadImages = async (e) => {
     const files = e.target.files
+
+    if (item.image) {
+      setImageToDelete(item.image)
+    }
+
     uploadImages(files).then((urls) => {
       setItem({
         ...item,

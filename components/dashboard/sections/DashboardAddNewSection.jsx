@@ -75,7 +75,16 @@ export default function DashboardAddNewSection({
 
   const handleUploadImages = async (e, path) => {
     const files = e.target.files
-    const imageKey = await uploadImages(files)
+    // uploadImages(files).then((urls) => {
+    //   setItem({
+    //     ...item,
+    //     image: urls[0],
+    //   })
+    // })
+
+    const urls = await uploadImages(files)
+
+    const imageKey = urls[0]
 
     const oldKey = path.reduce((acc, index, i) => {
       if (i === path.length - 1) {

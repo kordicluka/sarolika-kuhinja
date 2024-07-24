@@ -65,11 +65,11 @@ export default function DashboardNewWorkshopForm({ workshop }) {
       setImagesToDelete((old) => [...old, item.image])
     }
 
-    const imageKey = await uploadImages(files)
-
-    setItem({
-      ...item,
-      image: imageKey,
+    uploadImages(files).then((urls) => {
+      setItem({
+        ...item,
+        image: urls[0],
+      })
     })
   }
 

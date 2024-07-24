@@ -1,131 +1,131 @@
-"use client";
-import React, { useState, useEffect, useRef } from "react";
-import { useImageUpload, useImageDelete } from "@/hooks/useImageUpload";
-import Button from "@/components/Button";
-import LoadingSpinner from "../LoadingSpinner";
-import "@/styles/DashboardItem.scss";
-import NextImage from "next/image";
-import { useRouter } from "next/navigation";
-import JSXContentRenderer from "../../JSXContentRender";
-import DashboardAddNewSection from "../sections/DashboardAddNewSection";
-import { toast } from "react-hot-toast";
-import ToasterComponent from "../ToasterComponent";
-import { createMeal, updateMeal } from "@/actions/MealsActions";
+'use client'
+import React, { useState, useEffect, useRef } from 'react'
+import { useImageUpload, useImageDelete } from '@/hooks/useImageUpload'
+import Button from '@/components/Button'
+import LoadingSpinner from '../LoadingSpinner'
+import '@/styles/DashboardItem.scss'
+import NextImage from 'next/image'
+import { useRouter } from 'next/navigation'
+import JSXContentRenderer from '../../JSXContentRender'
+import DashboardAddNewSection from '../sections/DashboardAddNewSection'
+import { toast } from 'react-hot-toast'
+import ToasterComponent from '../ToasterComponent'
+import { createMeal, updateMeal } from '@/actions/MealsActions'
 
 export default function DashboardNewMealForm({ meal }) {
-  const router = useRouter();
-  const [addNewSectionActive, setAddNewSectionActive] = useState(false);
-  const [previewFullScreen, setPreviewFullScreen] = useState(false);
-  const [imagesToDelete, setImagesToDelete] = useState([]);
+  const router = useRouter()
+  const [addNewSectionActive, setAddNewSectionActive] = useState(false)
+  const [previewFullScreen, setPreviewFullScreen] = useState(false)
+  const [imagesToDelete, setImagesToDelete] = useState([])
   const [section, setSection] = useState({
-    title: "",
+    title: '',
     jsxContent: {},
     index: 0,
-  });
+  })
   const [sectionWithoutUpdates, setSectionWithoutUpdates] = useState({
-    title: "",
+    title: '',
     jsxContent: {},
     index: 0,
-  });
+  })
 
   const [item, setItem] = useState({
-    title: "",
-    description: "",
-    image: "",
+    title: '',
+    description: '',
+    image: '',
     isVisible: true,
     sections: [],
-  });
+  })
 
   useEffect(() => {
-    console.log("Meal:", meal);
+    console.log('Meal:', meal)
     if (meal) {
       setItem({
         ...meal,
         sections: meal.sections || [], // Ensure sections is always an array
-      });
+      })
     }
-  }, [meal]);
+  }, [meal])
 
-  const { uploadImages, uploadingImages } = useImageUpload();
-  const { deleteImage } = useImageDelete();
-  const inputRef = useRef(null);
+  const { uploadImages, uploadingImages } = useImageUpload()
+  const { deleteImage } = useImageDelete()
+  const inputRef = useRef(null)
 
   const handleUploadImages = async (e) => {
-    const files = e.target.files;
+    const files = e.target.files
 
     // If there is an image already, delete it
     if (item.image) {
-      setImagesToDelete((old) => [...old, item.image]);
+      setImagesToDelete((old) => [...old, item.image])
     }
 
-    const imageKey = await uploadImages(files);
-
-    setItem({
-      ...item,
-      image: imageKey,
-    });
-  };
+    uploadImages(files).then((urls) => {
+      setItem({
+        ...item,
+        image: urls[0],
+      })
+    })
+  }
 
   const markImageForDeletion = () => {
-    setImagesToDelete((old) => [...old, item.image]);
+    setImagesToDelete((old) => [...old, item.image])
     setItem({
       ...item,
-      image: "",
-    });
-  };
+      image: '',
+    })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!meal?.id) {
-      const res = await createMeal(item);
+      const res = await createMeal(item)
 
       toast((t) => (
         <ToasterComponent
-          title={"Dodavanje jela: " + item.title}
+          title={'Dodavanje jela: ' + item.title}
           t={t}
-          state={res?.ok ? "success" : "error"}
+          state={res?.ok ? 'success' : 'error'}
           message={res?.message}
         />
-      ));
+      ))
 
       if (res?.ok) {
-        deleteImagesThatAreMarkedForDeletion();
-        router.push("/dashboard/jela");
+        deleteImagesThatAreMarkedForDeletion()
+        router.push('/dashboard/jela')
       }
     } else {
-      if (sectionWithoutUpdates.title !== "") {
+      if (sectionWithoutUpdates.title !== '') {
         setItem({
           ...item,
           sections: [...item.sections, sectionWithoutUpdates],
-        });
+        })
 
         setSectionWithoutUpdates({
-          title: "",
+          title: '',
           jsxContent: {},
           index: 0,
-        });
+        })
       }
 
-      const res = await updateMeal(item);
+      const res = await updateMeal(item)
 
       toast((t) => (
         <ToasterComponent
-          title={"Uređivanje jela: " + item.title}
+          title={'Uređivanje jela: ' + item.title}
           t={t}
-          state={res?.ok ? "success" : "error"}
+          state={res?.ok ? 'success' : 'error'}
           message={res?.message}
         />
-      ));
+      ))
 
       if (res?.ok) {
-        deleteImagesThatAreMarkedForDeletion();
-        router.push("/dashboard/jela");
+        deleteImagesThatAreMarkedForDeletion()
+        router.push('/dashboard/jela')
       } else {
-        console.error("Error editing Meal:", res?.message);
+        console.error('Error editing Meal:', res?.message)
       }
     }
-  };
+  }
 
   const deleteImagesThatAreMarkedForDeletion = async () => {
     // check if the image is in the item somewhere
@@ -133,55 +133,55 @@ export default function DashboardNewMealForm({ meal }) {
 
     let allImages = item.sections.reduce((acc, section) => {
       recursivlyIterateOverJSXContent(section.jsxContent, (content) => {
-        if (content.type === "img") {
-          acc.push(content.data.src);
+        if (content.type === 'img') {
+          acc.push(content.data.src)
         }
-      });
+      })
 
-      return acc;
-    }, []);
+      return acc
+    }, [])
 
-    allImages.push(item.image);
+    allImages.push(item.image)
 
     if (imagesToDelete.length > 0) {
       imagesToDelete.forEach(async (image) => {
-        if (!allImages.includes(image) && image !== "placeholder-image.svg") {
-          const res = await deleteImage(image);
+        if (!allImages.includes(image) && image !== 'placeholder-image.svg') {
+          const res = await deleteImage(image)
         }
-      });
+      })
     }
-  };
+  }
 
   const recursivlyIterateOverJSXContent = (content, callback, imageKey) => {
-    if (content.type === "img" && content.data.src === imageKey) {
-      callback(content);
+    if (content.type === 'img' && content.data.src === imageKey) {
+      callback(content)
     }
 
     if (content.children) {
       content.children.forEach((child) => {
-        recursivlyIterateOverJSXContent(child, callback, imageKey);
-      });
+        recursivlyIterateOverJSXContent(child, callback, imageKey)
+      })
     }
 
-    callback(content);
-  };
+    callback(content)
+  }
 
   const deleteSection = (s) => {
     item.sections.forEach((section) => {
       if (section === s) {
         recursivlyIterateOverJSXContent(section.jsxContent, (content) => {
-          if (content.type === "img") {
-            setImagesToDelete((old) => [...old, content.data.src]);
+          if (content.type === 'img') {
+            setImagesToDelete((old) => [...old, content.data.src])
           }
-        });
+        })
       }
-    }, []);
+    }, [])
 
     setItem({
       ...item,
       sections: item.sections.filter((section) => section !== s),
-    });
-  };
+    })
+  }
 
   return (
     <>
@@ -242,7 +242,7 @@ export default function DashboardNewMealForm({ meal }) {
                 {item.sections.map((section, index) => (
                   <div key={index} className="form-row-section">
                     <button className="drag-button">
-                      {section.index + 1 + "."}
+                      {section.index + 1 + '.'}
                     </button>
                     <p className="form-section-title">{section.title}</p>
                     <div className="form-row-section-actions">
@@ -256,15 +256,15 @@ export default function DashboardNewMealForm({ meal }) {
                         <button
                           className="btn"
                           onClick={() => {
-                            setAddNewSectionActive(true);
-                            setSection(section);
-                            setSectionWithoutUpdates(section);
+                            setAddNewSectionActive(true)
+                            setSection(section)
+                            setSectionWithoutUpdates(section)
                             setItem({
                               ...item,
                               sections: item.sections.filter(
                                 (s) => s !== section
                               ),
-                            });
+                            })
                           }}
                           type="button"
                         >
@@ -274,7 +274,7 @@ export default function DashboardNewMealForm({ meal }) {
                         <button
                           className="btn"
                           onClick={() => {
-                            deleteSection(section);
+                            deleteSection(section)
                           }}
                           type="button"
                         >
@@ -283,7 +283,7 @@ export default function DashboardNewMealForm({ meal }) {
                       </div>
                     </div>
                   </div>
-                ))}{" "}
+                ))}{' '}
               </div>
             </div>
           </>
@@ -340,7 +340,7 @@ export default function DashboardNewMealForm({ meal }) {
                   <NextImage
                     src={`/uploads/${item.image}`}
                     alt="Slika tipa sekcije"
-                    style={{ width: "100%" }}
+                    style={{ width: '100%' }}
                     fill="responsive"
                   />
                   <Button
@@ -396,9 +396,9 @@ export default function DashboardNewMealForm({ meal }) {
               uploadingImages ? (
                 <LoadingSpinner />
               ) : item?.id ? (
-                "Uredi objavu"
+                'Uredi objavu'
               ) : (
-                "Dodaj objavu"
+                'Dodaj objavu'
               )
             }
           />
@@ -446,7 +446,7 @@ export default function DashboardNewMealForm({ meal }) {
           {Array.isArray(item.sections) &&
             item.sections.length > 0 &&
             item.sections
-              .filter((section) => section.title !== "")
+              .filter((section) => section.title !== '')
               .sort((a, b) => a.index - b.index)
               .map((section, index) => (
                 <>
@@ -462,5 +462,5 @@ export default function DashboardNewMealForm({ meal }) {
         </div>
       </section>
     </>
-  );
+  )
 }
