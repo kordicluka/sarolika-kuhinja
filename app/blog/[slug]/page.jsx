@@ -1,36 +1,36 @@
-import React from "react";
-import prisma from "@/utils/db";
-import NextImage from "next/image";
-import { formatDate } from "@/utils/formatDate";
-import Facebook from "@/components/Facebook";
-import Instagram from "@/components/Instagram";
-import WhatsApp from "@/components/WhatsUpp";
-import ItemContent from "@/components/ItemContent";
-import CopyToClipboard from "@/components/CopyToClipboard";
-import "@/styles/ItemPage.scss";
-import { baseUrl } from "@/utils/baseUrl";
-import Link from "next/link";
+import React from 'react'
+import prisma from '@/utils/db'
+import NextImage from 'next/image'
+import { formatDate } from '@/utils/formatDate'
+import Facebook from '@/components/Facebook'
+import Instagram from '@/components/Instagram'
+import WhatsApp from '@/components/WhatsUpp'
+import ItemContent from '@/components/ItemContent'
+import CopyToClipboard from '@/components/CopyToClipboard'
+import '@/styles/ItemPage.scss'
+import { baseUrl } from '@/utils/baseUrl'
+import Link from 'next/link'
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug } = params
   const item = await prisma.post.findUnique({
     where: { slug },
     include: { createdBy: { select: { id: true, name: true, image: true } } },
-  });
+  })
 
   if (item && item.sections) {
     try {
-      item.sections = JSON.parse(item.sections);
+      item.sections = JSON.parse(item.sections)
     } catch (error) {
-      console.error("Error parsing sections JSON:", error);
-      item.sections = [];
+      console.error('Error parsing sections JSON:', error)
+      item.sections = []
     }
   }
 
   return {
     title: `Šarolika Kuhinja - ${item?.title} - Blog`,
     description: item?.description,
-    keywords: item?.sections?.map((section) => section.title).join(", "), // Assuming sections have titles
+    keywords: item?.sections?.map((section) => section.title).join(', '), // Assuming sections have titles
     author: item?.createdBy?.name,
     openGraph: {
       title: `Šarolika Kuhinja - ${item?.title} - Blog`,
@@ -44,37 +44,37 @@ export async function generateMetadata({ params }) {
           alt: item?.title,
         },
       ],
-      type: "article",
+      type: 'article',
       article: {
         publishedTime: item?.createdAt,
         modifiedTime: item?.updatedAt,
         author: item?.createdBy?.name,
-        section: "Blog",
+        section: 'Blog',
         tags: item?.sections?.map((section) => section.title), // Assuming sections have titles
       },
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: `Šarolika Kuhinja - ${item?.title} - Blog`,
       description: item?.description,
       image: `${baseUrl}/uploads/${item?.image}`,
     },
-  };
+  }
 }
 
 export default async function BlogPage({ params }) {
-  const { slug } = params;
+  const { slug } = params
   const item = await prisma.post.findUnique({
     where: { slug },
     include: { createdBy: { select: { id: true, name: true, image: true } } },
-  });
+  })
 
   if (item && item.sections) {
     try {
-      item.sections = JSON.parse(item.sections);
+      item.sections = JSON.parse(item.sections)
     } catch (error) {
-      console.error("Error parsing sections JSON:", error);
-      item.sections = [];
+      console.error('Error parsing sections JSON:', error)
+      item.sections = []
     }
   }
 
@@ -88,7 +88,7 @@ export default async function BlogPage({ params }) {
             <div className="author-image">
               {item?.createdBy?.image ? (
                 <NextImage
-                  src={`/uploads/${item.createdBy.image}`}
+                  src={`${item.createdBy.image}`}
                   alt={item.createdBy.name}
                   width={100}
                   height={100}
@@ -96,7 +96,7 @@ export default async function BlogPage({ params }) {
               ) : (
                 <span className="author-image-placeholder">
                   {item.createdBy.name.charAt(0).toUpperCase()}
-                  {item.createdBy.name.split(" ")[1]?.charAt(0).toUpperCase()}
+                  {item.createdBy.name.split(' ')[1]?.charAt(0).toUpperCase()}
                 </span>
               )}
             </div>
@@ -121,7 +121,7 @@ export default async function BlogPage({ params }) {
       </section>
       <section className="image-container">
         <NextImage
-          src={`/uploads/${item?.image}`}
+          src={`${item?.image}`}
           alt={`Image of ${item?.title}`}
           width={1500}
           height={1500}
@@ -130,5 +130,5 @@ export default async function BlogPage({ params }) {
       </section>
       <ItemContent sections={item.sections} />
     </main>
-  );
+  )
 }

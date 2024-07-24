@@ -1,6 +1,6 @@
-import React from "react";
-import "@/styles/DashboardPageNavigation.scss";
-import Link from "next/link";
+import React from 'react'
+import '@/styles/DashboardPageNavigation.scss'
+import Link from 'next/link'
 
 export default function DashboardPageNavigation({ links }) {
   return (
@@ -18,5 +18,5 @@ export default function DashboardPageNavigation({ links }) {
       </div>
       <div className="dashboard-page-navigation-right"> </div>
     </div>
-  );
+  )
 }

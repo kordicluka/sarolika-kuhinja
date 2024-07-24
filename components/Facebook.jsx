@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 export default function Facebook() {
   return (
@@ -20,11 +20,11 @@ export default function Facebook() {
           >
             <stop
               offset="0%"
-              style={{ stopColor: "#1877F2", stopOpacity: 1 }}
+              style={{ stopColor: '#1877F2', stopOpacity: 1 }}
             />
             <stop
               offset="100%"
-              style={{ stopColor: "#1877F2", stopOpacity: 1 }}
+              style={{ stopColor: '#1877F2', stopOpacity: 1 }}
             />
           </linearGradient>
         </defs>
@@ -35,5 +35,5 @@ export default function Facebook() {
         />
       </svg>
     </>
-  );
+  )
 }

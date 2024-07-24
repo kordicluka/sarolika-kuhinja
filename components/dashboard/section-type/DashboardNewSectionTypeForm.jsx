@@ -1,103 +1,103 @@
-"use client";
-import React, { useState, useEffect, useRef } from "react";
-import { useImageUpload, useImageDelete } from "@/hooks/useImageUpload";
-import Button from "@/components/Button";
-import LoadingSpinner from "../LoadingSpinner";
-import "@/styles/DashboardItem.scss";
-import NextImage from "next/image";
-import { useRouter } from "next/navigation";
+'use client'
+import React, { useState, useEffect, useRef } from 'react'
+import { useImageUpload, useImageDelete } from '@/hooks/useImageUpload'
+import Button from '@/components/Button'
+import LoadingSpinner from '../LoadingSpinner'
+import '@/styles/DashboardItem.scss'
+import NextImage from 'next/image'
+import { useRouter } from 'next/navigation'
 import {
   createSectionType,
   updateSectionType,
-} from "@/actions/SectionTypesActions";
-import JSXContentRenderer from "@/components/JSXContentRender";
-import { toast } from "react-hot-toast";
-import ToasterComponent from "../ToasterComponent";
+} from '@/actions/SectionTypesActions'
+import JSXContentRenderer from '@/components/JSXContentRender'
+import { toast } from 'react-hot-toast'
+import ToasterComponent from '../ToasterComponent'
 
 export default function DashboardNewSectionTypeForm({ sectionType }) {
-  const router = useRouter();
-  const [previewFullScreen, setPreviewFullScreen] = useState(false);
+  const router = useRouter()
+  const [previewFullScreen, setPreviewFullScreen] = useState(false)
   const [item, setItem] = useState({
-    title: "",
+    title: '',
     jsxContent: {
-      type: "section",
+      type: 'section',
       style: {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "3rem 0",
-        margin: "0 auto",
-        width: "100%",
-        gap: "1rem",
-        "(max-width: 768px)": {
-          gap: "1rem",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '3rem 0',
+        margin: '0 auto',
+        width: '100%',
+        gap: '1rem',
+        '(max-width: 768px)': {
+          gap: '1rem',
         },
       },
       children: [
         {
-          type: "div",
+          type: 'div',
           style: {
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "flex-start",
-            height: "100%",
-            width: "100%",
-            height: "auto",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+            height: '100%',
+            width: '100%',
+            height: 'auto',
           },
           children: [
             {
-              type: "h5",
-              className: "caveat",
+              type: 'h5',
+              className: 'caveat',
               style: {
                 fontFamily: "'Caveat', cursive",
-                fontSize: "1.7rem",
-                fontWeight: "600",
-                color: "#000",
-                marginBottom: ".5rem",
-                color: "#405b62",
-                lineHeight: "1.2",
-                "(max-width: 1600px)": {
-                  fontSize: "1.6rem",
+                fontSize: '1.7rem',
+                fontWeight: '600',
+                color: '#000',
+                marginBottom: '.5rem',
+                color: '#405b62',
+                lineHeight: '1.2',
+                '(max-width: 1600px)': {
+                  fontSize: '1.6rem',
                 },
-                "(max-width: 1300px)": {
-                  fontSize: "1.4rem",
-                },
-              },
-              data: {
-                text: "Subtitle Here",
-                msg: "Podnaslov",
-              },
-            },
-            {
-              type: "h3",
-              style: {
-                marginBottom: ".5rem",
-                fontSize: "2.3rem",
-                lineHeight: "1.2",
-                fontWeight: "600",
-                "(max-width: 1600px)": {
-                  fontSize: "2rem",
-                },
-                "(max-width: 1300px)": {
-                  fontSize: "1.8rem",
+                '(max-width: 1300px)': {
+                  fontSize: '1.4rem',
                 },
               },
               data: {
-                text: "Main Title Here",
-                msg: "Naslov",
+                text: 'Subtitle Here',
+                msg: 'Podnaslov',
               },
             },
             {
-              type: "content",
+              type: 'h3',
               style: {
-                fontSize: ".9rem",
-                lineHeight: "1.8",
-                color: "#333",
-                "(max-width: 768px)": {
-                  fontSize: ".8rem",
-                  lineHeight: "1.6",
+                marginBottom: '.5rem',
+                fontSize: '2.3rem',
+                lineHeight: '1.2',
+                fontWeight: '600',
+                '(max-width: 1600px)': {
+                  fontSize: '2rem',
+                },
+                '(max-width: 1300px)': {
+                  fontSize: '1.8rem',
+                },
+              },
+              data: {
+                text: 'Main Title Here',
+                msg: 'Naslov',
+              },
+            },
+            {
+              type: 'content',
+              style: {
+                fontSize: '.9rem',
+                lineHeight: '1.8',
+                color: '#333',
+                '(max-width: 768px)': {
+                  fontSize: '.8rem',
+                  lineHeight: '1.6',
                 },
               },
               data: {
@@ -118,121 +118,121 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
                         </ul>
                       </div>
                 `,
-                msg: "Opis",
+                msg: 'Opis',
               },
             },
           ],
         },
         {
-          type: "div",
+          type: 'div',
           style: {
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "gray",
-            width: "100%",
-            height: "32rem",
-            "(max-width: 768px)": {
-              height: "30rem",
-              width: "100%",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'gray',
+            width: '100%',
+            height: '32rem',
+            '(max-width: 768px)': {
+              height: '30rem',
+              width: '100%',
             },
           },
           children: [
             {
-              type: "img",
+              type: 'img',
               style: {
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
               },
               data: {
-                src: "placeholder-image.svg",
-                alt: "Example image",
-                msg: "Slika",
+                src: 'placeholder-image.svg',
+                alt: 'Example image',
+                msg: 'Slika',
               },
             },
           ],
         },
       ],
     },
-    image: "",
-  });
-  const [imageToDelete, setImageToDelete] = useState(null);
+    image: '',
+  })
+  const [imageToDelete, setImageToDelete] = useState(null)
 
   useEffect(() => {
     if (sectionType) {
-      setItem(sectionType);
+      setItem(sectionType)
     }
-  }, [sectionType]);
+  }, [sectionType])
 
-  const { uploadImages, uploadingImages } = useImageUpload();
-  const { deleteImage } = useImageDelete();
-  const inputRef = useRef(null);
+  const { uploadImages, uploadingImages } = useImageUpload()
+  const { deleteImage } = useImageDelete()
+  const inputRef = useRef(null)
 
   const handleUploadImages = async (e) => {
-    const files = e.target.files;
-    const imageKey = await uploadImages(files);
-
-    setItem({
-      ...item,
-      image: imageKey,
-    });
-  };
+    const files = e.target.files
+    uploadImages(files).then((urls) => {
+      setItem({
+        ...item,
+        image: urls[0],
+      })
+    })
+  }
 
   const markImageForDeletion = () => {
-    setImageToDelete(item.image);
+    setImageToDelete(item.image)
     setItem({
       ...item,
-      image: "",
-    });
-  };
+      image: '',
+    })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!sectionType?.id) {
-      const res = await createSectionType(item);
+      const res = await createSectionType(item)
 
       toast((t) => (
         <ToasterComponent
-          title={"Dodavanje tipa sekcije: " + item?.title}
+          title={'Dodavanje tipa sekcije: ' + item?.title}
           t={t}
-          state={res?.ok ? "success" : "error"}
+          state={res?.ok ? 'success' : 'error'}
           message={res?.message}
         />
-      ));
+      ))
 
       if (res?.ok) {
         setItem({
-          title: "",
+          title: '',
           jsxContent: [],
-          image: "",
-        });
-        router.push("/dashboard/tipovi-sekcija");
+          image: '',
+        })
+        router.push('/dashboard/tipovi-sekcija')
       }
     } else {
-      const res = await updateSectionType(item);
+      const res = await updateSectionType(item)
 
       toast((t) => (
         <ToasterComponent
-          title={"Uređivanje tipa sekcije: " + sectionType.title}
+          title={'Uređivanje tipa sekcije: ' + sectionType.title}
           t={t}
-          state={res?.ok ? "success" : "error"}
+          state={res?.ok ? 'success' : 'error'}
           message={res?.message}
         />
-      ));
+      ))
 
       if (res?.ok) {
         if (imageToDelete) {
-          await deleteImage(imageToDelete);
+          await deleteImage(imageToDelete)
         }
-        router.push("/dashboard/tipovi-sekcija");
+        router.push('/dashboard/tipovi-sekcija')
       } else {
-        console.error("Error editing section type:", res?.message);
+        console.error('Error editing section type:', res?.message)
       }
     }
-  };
+  }
 
   return (
     <>
@@ -277,9 +277,9 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
               <div className="form-row-images">
                 <div className="form-row-image">
                   <NextImage
-                    src={"/uploads/" + item.image}
+                    src={item.image}
                     alt="Slika tipa sekcije"
-                    style={{ width: "100%" }}
+                    style={{ width: '100%' }}
                     fill="responsive"
                   />
                   <Button
@@ -342,9 +342,9 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
               uploadingImages ? (
                 <LoadingSpinner />
               ) : sectionType?.id ? (
-                "Uredi tip sekcije"
+                'Uredi tip sekcije'
               ) : (
-                "Dodaj tip sekcije"
+                'Dodaj tip sekcije'
               )
             }
           />
@@ -389,10 +389,10 @@ export default function DashboardNewSectionTypeForm({ sectionType }) {
         </button>
         <h5 className="preview-header">Pretpregled</h5>
         <div className="preview-content">
-          {" "}
-          <JSXContentRenderer content={item.jsxContent} />{" "}
+          {' '}
+          <JSXContentRenderer content={item.jsxContent} />{' '}
         </div>
       </section>
     </>
-  );
+  )
 }

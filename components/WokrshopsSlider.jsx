@@ -1,6 +1,6 @@
-import React from "react";
-import { ItemsSlider } from "./ItemsSlider";
-import prisma from "@/utils/db";
+import React from 'react'
+import { ItemsSlider } from './ItemsSlider'
+import prisma from '@/utils/db'
 
 export default async function WorkshopsSlider() {
   const items = await prisma.workshop.findMany({
@@ -16,10 +16,10 @@ export default async function WorkshopsSlider() {
       description: true,
     },
     orderBy: {
-      date: "desc",
+      date: 'desc',
     },
     take: 5,
-  });
+  })
 
-  return <ItemsSlider type="workshops" items={items} />;
+  return <ItemsSlider type="workshops" items={items} />
 }

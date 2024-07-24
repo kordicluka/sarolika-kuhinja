@@ -1,20 +1,20 @@
-import NextImage from "next/image";
-import ItemsTable from "../ItemsTable";
-import DeleteSectionTypeButton from "./DeleteSectionTypeButton";
-import prisma from "@/utils/db";
-import Link from "next/link";
+import NextImage from 'next/image'
+import ItemsTable from '../ItemsTable'
+import DeleteSectionTypeButton from './DeleteSectionTypeButton'
+import prisma from '@/utils/db'
+import Link from 'next/link'
 
 export default async function SectionTypesTable() {
-  const items = await prisma.sectionType.findMany();
+  const items = await prisma.sectionType.findMany()
 
   const tableStructure = {
     columns: [
       {
-        title: "Slika",
-        width: "20%",
+        title: 'Slika',
+        width: '20%',
         getJSX: (index) => (
           <NextImage
-            src={"/uploads/" + items[index].image}
+            src={items[index].image}
             alt={items[index].image}
             className="items-table-image"
             width={200}
@@ -23,13 +23,13 @@ export default async function SectionTypesTable() {
         ),
       },
       {
-        title: "Naslov",
-        width: "70%",
+        title: 'Naslov',
+        width: '70%',
         getJSX: (index) => <span>{items[index].title}</span>,
       },
       {
-        title: "Akcije",
-        width: "10%",
+        title: 'Akcije',
+        width: '10%',
         getJSX: (index) => (
           <div className="items-table-actions-button">
             <div className="items-table-actions-dot"></div>
@@ -38,8 +38,8 @@ export default async function SectionTypesTable() {
 
             <div className="items-table-actions-dropdown">
               <Link href={`/dashboard/tipovi-sekcija/${items[index].id}`}>
-                {" "}
-                Uredi{" "}
+                {' '}
+                Uredi{' '}
               </Link>
               <DeleteSectionTypeButton
                 id={items[index].id}
@@ -50,7 +50,7 @@ export default async function SectionTypesTable() {
         ),
       },
     ],
-  };
+  }
 
-  return <ItemsTable items={items} tableStructure={tableStructure} />;
+  return <ItemsTable items={items} tableStructure={tableStructure} />
 }

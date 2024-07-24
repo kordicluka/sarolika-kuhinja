@@ -1,65 +1,65 @@
-"use client";
-import React, { useState } from "react";
-import { createApplication } from "@/actions/ApplicationActions";
-import "@/styles/ApplicateToWorkshopForm.scss";
-import NextImage from "next/image";
+'use client'
+import React, { useState } from 'react'
+import { createApplication } from '@/actions/ApplicationActions'
+import '@/styles/ApplicateToWorkshopForm.scss'
+import NextImage from 'next/image'
 
 const ApplicateToWorkshopForm = ({ workshop }) => {
   const [formData, setFormData] = useState({
-    name: "",
-    surname: "",
-    childName: "",
-    telephone: "",
-    email: "",
-    childAlergies: "",
-    additionalNotes: "",
+    name: '',
+    surname: '',
+    childName: '',
+    telephone: '',
+    email: '',
+    childAlergies: '',
+    additionalNotes: '',
     photoPermission: true,
-  });
+  })
 
   const handleToggle = () => {
     setFormData((prevData) => ({
       ...prevData,
       photoPermission: !prevData.photoPermission,
-    }));
-  };
+    }))
+  }
 
-  const id = workshop.id;
+  const id = workshop.id
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type, checked } = e.target
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
+      [name]: type === 'checkbox' ? checked : value,
+    }))
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const data = { ...formData, workshopId: id };
+    const data = { ...formData, workshopId: id }
 
     try {
-      const response = await createApplication(data);
+      const response = await createApplication(data)
       if (response.ok) {
-        alert("Uspješno ste prijavili dijete na radionicu!");
+        alert('Uspješno ste prijavili dijete na radionicu!')
         setFormData({
-          name: "",
-          surname: "",
-          childName: "",
-          telephone: "",
-          email: "",
-          childAlergies: "",
-          additionalNotes: "",
+          name: '',
+          surname: '',
+          childName: '',
+          telephone: '',
+          email: '',
+          childAlergies: '',
+          additionalNotes: '',
           photoPermission: false,
-        });
+        })
       } else {
-        alert("Došlo je do greške prilikom prijave djeteta na radionicu.");
+        alert('Došlo je do greške prilikom prijave djeteta na radionicu.')
       }
     } catch (err) {
-      console.error(err);
-      alert("Došlo je do greške prilikom prijave djeteta na radionicu.");
+      console.error(err)
+      alert('Došlo je do greške prilikom prijave djeteta na radionicu.')
     }
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit} className="applicate-to-workshop-form">
@@ -161,7 +161,7 @@ const ApplicateToWorkshopForm = ({ workshop }) => {
           <button
             type="button"
             className={`toggle-button ${
-              formData.photoPermission ? "" : "hidden"
+              formData.photoPermission ? '' : 'hidden'
             }`}
             onClick={handleToggle}
           >
@@ -174,14 +174,14 @@ const ApplicateToWorkshopForm = ({ workshop }) => {
         Pošalji prijavu
       </button>
       <NextImage
-        src={`/uploads/${workshop.image}`}
+        src={workshop.image}
         alt="Workshop image"
         height={1500}
         width={1500}
         priority
       />
     </form>
-  );
-};
+  )
+}
 
-export default ApplicateToWorkshopForm;
+export default ApplicateToWorkshopForm

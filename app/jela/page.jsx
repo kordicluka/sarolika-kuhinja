@@ -1,39 +1,39 @@
-import React from "react";
-import prisma from "@/utils/db";
-import "@/styles/ItemPage.scss";
-import { baseUrl } from "@/utils/baseUrl";
-import { formatDate } from "@/utils/formatDate";
-import "@/styles/ItemsPage.scss";
-import NextImage from "next/image";
-import limitTextChar from "@/utils/limitTextChar";
-import { PageTitle } from "@/components/PageTitle";
-import "@/styles/ItemsPage.scss";
-import Link from "next/link";
+import React from 'react'
+import prisma from '@/utils/db'
+import '@/styles/ItemPage.scss'
+import { baseUrl } from '@/utils/baseUrl'
+import { formatDate } from '@/utils/formatDate'
+import '@/styles/ItemsPage.scss'
+import NextImage from 'next/image'
+import limitTextChar from '@/utils/limitTextChar'
+import { PageTitle } from '@/components/PageTitle'
+import '@/styles/ItemsPage.scss'
+import Link from 'next/link'
 
 export const metadata = {
-  title: "Šarolika Kuhinja - Jela",
-  description: "Budite u toku s našim najnovijim objavama jela i receptima.",
+  title: 'Šarolika Kuhinja - Jela',
+  description: 'Budite u toku s našim najnovijim objavama jela i receptima.',
   openGraph: {
-    title: "Šarolika Kuhinja - Jela",
-    description: "Budite u toku s našim najnovijim objavama jela i receptima.",
+    title: 'Šarolika Kuhinja - Jela',
+    description: 'Budite u toku s našim najnovijim objavama jela i receptima.',
     url: `${baseUrl}/jela`,
     images: [
       {
         url: `${baseUrl}/images/logo.png`,
         width: 800,
         height: 600,
-        alt: "Logo",
+        alt: 'Logo',
       },
     ],
-    type: "website",
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Šarolika Kuhinja - Jela",
-    description: "Budite u toku s našim najnovijim objavama jela i receptima.",
+    card: 'summary_large_image',
+    title: 'Šarolika Kuhinja - Jela',
+    description: 'Budite u toku s našim najnovijim objavama jela i receptima.',
     image: `${baseUrl}/images/logo.png`,
   },
-};
+}
 
 export default async function MealsPage() {
   const items = await prisma.meal.findMany({
@@ -41,7 +41,7 @@ export default async function MealsPage() {
       isVisible: true,
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
     select: {
       id: true,
@@ -51,7 +51,7 @@ export default async function MealsPage() {
       image: true,
       createdAt: true,
     },
-  });
+  })
 
   return (
     <main className="page meals-page">
@@ -64,7 +64,7 @@ export default async function MealsPage() {
           <Link href={`/jela/${items[0].slug}`} className="meal-link">
             <div className="image-container">
               <NextImage
-                src={`/uploads/${items[0].image}`}
+                src={`${items[0].image}`}
                 alt={items[0].title}
                 width={1200}
                 height={800}
@@ -83,7 +83,7 @@ export default async function MealsPage() {
               <Link href={`/jela/${item.slug}`} className="meal-link">
                 <div className="image-container">
                   <NextImage
-                    src={`/uploads/${item.image}`}
+                    src={`${item.image}`}
                     alt={item.title}
                     width={400}
                     height={300}
@@ -105,7 +105,7 @@ export default async function MealsPage() {
             <Link href={`/jela/${item.slug}`} className="meal-link">
               <div className="image-container">
                 <NextImage
-                  src={`/uploads/${item.image}`}
+                  src={`${item.image}`}
                   alt={item.title}
                   width={400}
                   height={300}
@@ -121,5 +121,5 @@ export default async function MealsPage() {
         ))}
       </section>
     </main>
-  );
+  )
 }

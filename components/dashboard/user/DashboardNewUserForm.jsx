@@ -1,100 +1,100 @@
-"use client";
-import { useRef, useState, useEffect } from "react";
-import { useImageUpload, useImageDelete } from "@/hooks/useImageUpload";
-import Button from "@/components/Button";
-import LoadingSpinner from "../LoadingSpinner";
-import "@/styles/DashboardItem.scss";
-import NextImage from "next/image";
-import { createUser, editUser } from "@/actions/UserActions";
-import { useRouter } from "next/navigation";
-import { toast } from "react-hot-toast";
-import ToasterComponent from "../ToasterComponent";
+'use client'
+import { useRef, useState, useEffect } from 'react'
+import { useImageUpload, useImageDelete } from '@/hooks/useImageUpload'
+import Button from '@/components/Button'
+import LoadingSpinner from '../LoadingSpinner'
+import '@/styles/DashboardItem.scss'
+import NextImage from 'next/image'
+import { createUser, editUser } from '@/actions/UserActions'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-hot-toast'
+import ToasterComponent from '../ToasterComponent'
 
 export default function DashboardNewUserForm({ user }) {
-  const router = useRouter();
+  const router = useRouter()
   const [item, setItem] = useState({
-    name: "",
-    email: "",
-    password: "",
-    image: "",
-  });
-  const [imageToDelete, setImageToDelete] = useState(null);
+    name: '',
+    email: '',
+    password: '',
+    image: '',
+  })
+  const [imageToDelete, setImageToDelete] = useState(null)
 
   useEffect(() => {
     if (user) {
-      setItem(user);
+      setItem(user)
     }
-  }, [user]);
+  }, [user])
 
-  const { uploadImages, uploadingImages } = useImageUpload();
-  const { deleteImage } = useImageDelete();
-  const inputRef = useRef(null);
+  const { uploadImages, uploadingImages } = useImageUpload()
+  const { deleteImage } = useImageDelete()
+  const inputRef = useRef(null)
 
   const handleUploadImages = async (e) => {
-    const files = e.target.files;
-    const imageKey = await uploadImages(files);
-
-    setItem({
-      ...item,
-      image: imageKey,
-    });
-  };
+    const files = e.target.files
+    uploadImages(files).then((urls) => {
+      setItem({
+        ...item,
+        image: urls[0],
+      })
+    })
+  }
 
   const markImageForDeletion = () => {
-    setImageToDelete(item.image);
+    setImageToDelete(item.image)
     setItem({
       ...item,
-      image: "",
-    });
-  };
+      image: '',
+    })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!user?.id) {
-      const res = await createUser(item);
+      const res = await createUser(item)
 
-      let state = res?.ok ? "success" : "error";
-      let message = res?.message;
-      let title = "Dodavanje korisnika: " + item.name;
+      let state = res?.ok ? 'success' : 'error'
+      let message = res?.message
+      let title = 'Dodavanje korisnika: ' + item.name
 
       toast((t) => (
         <ToasterComponent title={title} t={t} state={state} message={message} />
-      ));
+      ))
 
-      state = res?.ok ? "success" : "error";
-      message = res?.message;
+      state = res?.ok ? 'success' : 'error'
+      message = res?.message
 
       if (res?.ok) {
         setItem({
-          name: "",
-          email: "",
-          password: "",
-          image: "",
-        });
+          name: '',
+          email: '',
+          password: '',
+          image: '',
+        })
 
-        router.push("/dashboard/korisnici");
+        router.push('/dashboard/korisnici')
       }
     } else {
-      const res = await editUser(user.id, item);
+      const res = await editUser(user.id, item)
 
       toast((t) => (
         <ToasterComponent
-          title={"Uređivanje korisnika: " + item.name}
+          title={'Uređivanje korisnika: ' + item.name}
           t={t}
-          state={res?.ok ? "success" : "error"}
+          state={res?.ok ? 'success' : 'error'}
           message={res?.message}
         />
-      ));
+      ))
 
       if (res?.ok) {
         if (imageToDelete) {
-          await deleteImage(imageToDelete);
+          await deleteImage(imageToDelete)
         }
-        router.push("/dashboard/korisnici");
+        router.push('/dashboard/korisnici')
       }
     }
-  };
+  }
 
   return (
     <form className="dashboard-item-form full-width" onSubmit={handleSubmit}>
@@ -169,9 +169,9 @@ export default function DashboardNewUserForm({ user }) {
             <div className="form-row-images">
               <div className="form-row-image">
                 <NextImage
-                  src={`/uploads/${item.image}`}
+                  src={item.image}
                   alt="Slika korisnika"
-                  style={{ width: "100%" }}
+                  style={{ width: '100%' }}
                   fill="responsive"
                 />
                 <Button
@@ -216,13 +216,13 @@ export default function DashboardNewUserForm({ user }) {
             uploadingImages ? (
               <LoadingSpinner />
             ) : user?.id ? (
-              "Uredi korisnika"
+              'Uredi korisnika'
             ) : (
-              "Dodaj korisnika"
+              'Dodaj korisnika'
             )
           }
         />
       </div>
     </form>
-  );
+  )
 }

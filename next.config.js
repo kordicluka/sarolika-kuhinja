@@ -1,7 +1,17 @@
-const path = require("path");
+const path = require('path')
 
 module.exports = {
   sassOptions: {
-    includePaths: [path.join(__dirname, "styles")],
+    includePaths: [path.join(__dirname, 'styles')],
   },
-};
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'zcsfl7azvlpbipdy.public.blob.vercel-storage.com',
+        port: '',
+        pathname: '/uploads/**',
+      },
+    ],
+  },
+}

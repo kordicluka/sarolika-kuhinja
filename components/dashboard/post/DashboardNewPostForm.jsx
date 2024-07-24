@@ -1,130 +1,124 @@
-"use client";
-import React, { useState, useEffect, useRef } from "react";
-import { useImageUpload, useImageDelete } from "@/hooks/useImageUpload";
-import Button from "@/components/Button";
-import LoadingSpinner from "../LoadingSpinner";
-import "@/styles/DashboardItem.scss";
-import NextImage from "next/image";
-import { useRouter } from "next/navigation";
-import JSXContentRenderer from "../../JSXContentRender";
-import DashboardAddNewSection from "../sections/DashboardAddNewSection";
-import { toast } from "react-hot-toast";
-import ToasterComponent from "../ToasterComponent";
-import { createPost, updatePost } from "@/actions/PostsActions";
+'use client'
+import React, { useState, useEffect, useRef } from 'react'
+import { useImageUpload, useImageDelete } from '@/hooks/useImageUpload'
+import Button from '@/components/Button'
+import LoadingSpinner from '../LoadingSpinner'
+import '@/styles/DashboardItem.scss'
+import NextImage from 'next/image'
+import { useRouter } from 'next/navigation'
+import JSXContentRenderer from '../../JSXContentRender'
+import DashboardAddNewSection from '../sections/DashboardAddNewSection'
+import { toast } from 'react-hot-toast'
+import ToasterComponent from '../ToasterComponent'
+import { createPost, updatePost } from '@/actions/PostsActions'
 
 export default function DashboardNewPostForm({ post }) {
-  const router = useRouter();
-  const [addNewSectionActive, setAddNewSectionActive] = useState(false);
-  const [previewFullScreen, setPreviewFullScreen] = useState(false);
-  const [imagesToDelete, setImagesToDelete] = useState([]);
+  const router = useRouter()
+  const [addNewSectionActive, setAddNewSectionActive] = useState(false)
+  const [previewFullScreen, setPreviewFullScreen] = useState(false)
+  const [imagesToDelete, setImagesToDelete] = useState([])
   const [section, setSection] = useState({
-    title: "",
+    title: '',
     jsxContent: {},
     index: 0,
-  });
+  })
   const [sectionWithoutUpdates, setSectionWithoutUpdates] = useState({
-    title: "",
+    title: '',
     jsxContent: {},
     index: 0,
-  });
+  })
 
   const [item, setItem] = useState({
-    title: "",
-    description: "",
-    image: "",
+    title: '',
+    description: '',
+    image: '',
     isVisible: true,
     sections: [],
-  });
+  })
 
   useEffect(() => {
     if (post) {
       setItem({
         ...post,
         sections: post.sections || [], // Ensure sections is always an array
-      });
+      })
     }
-  }, [post]);
+  }, [post])
 
-  const { uploadImages, uploadingImages } = useImageUpload();
-  const { deleteImage } = useImageDelete();
-  const inputRef = useRef(null);
+  const { uploadImages, uploadingImages } = useImageUpload()
+  const { deleteImage } = useImageDelete()
+  const inputRef = useRef(null)
 
   const handleUploadImages = async (e) => {
-    const files = e.target.files;
-
-    // If there is an image already, delete it
-    if (item.image) {
-      setImagesToDelete((old) => [...old, item.image]);
-    }
-
-    const imageKey = await uploadImages(files);
-
-    setItem({
-      ...item,
-      image: imageKey,
-    });
-  };
+    const files = e.target.files
+    uploadImages(files).then((urls) => {
+      setItem({
+        ...item,
+        image: urls[0],
+      })
+    })
+  }
 
   const markImageForDeletion = () => {
-    setImagesToDelete((old) => [...old, item.image]);
+    setImagesToDelete((old) => [...old, item.image])
     setItem({
       ...item,
-      image: "",
-    });
-  };
+      image: '',
+    })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!post?.id) {
-      const res = await createPost(item);
+      const res = await createPost(item)
 
       toast((t) => (
         <ToasterComponent
-          title={"Dodavanje objave: " + item.title}
+          title={'Dodavanje objave: ' + item.title}
           t={t}
-          state={res?.ok ? "success" : "error"}
+          state={res?.ok ? 'success' : 'error'}
           message={res?.message}
         />
-      ));
+      ))
 
       if (res?.ok) {
-        deleteImagesThatAreMarkedForDeletion();
-        router.push("/dashboard/blog");
+        deleteImagesThatAreMarkedForDeletion()
+        router.push('/dashboard/blog')
       }
     } else {
-      if (sectionWithoutUpdates.title !== "") {
+      if (sectionWithoutUpdates.title !== '') {
         setItem({
           ...item,
           sections: [...item.sections, sectionWithoutUpdates],
-        });
+        })
 
         setSectionWithoutUpdates({
-          title: "",
+          title: '',
           jsxContent: {},
           index: 0,
-        });
+        })
       }
 
-      const res = await updatePost(item);
+      const res = await updatePost(item)
 
       toast((t) => (
         <ToasterComponent
-          title={"Uređivanje objave: " + item.title}
+          title={'Uređivanje objave: ' + item.title}
           t={t}
-          state={res?.ok ? "success" : "error"}
+          state={res?.ok ? 'success' : 'error'}
           message={res?.message}
         />
-      ));
+      ))
 
       if (res?.ok) {
-        deleteImagesThatAreMarkedForDeletion();
-        router.push("/dashboard/blog");
+        deleteImagesThatAreMarkedForDeletion()
+        router.push('/dashboard/blog')
       } else {
-        console.error("Error editing post:", res?.message);
+        console.error('Error editing post:', res?.message)
       }
     }
-  };
+  }
 
   const deleteImagesThatAreMarkedForDeletion = async () => {
     // check if the image is in the item somewhere
@@ -132,59 +126,59 @@ export default function DashboardNewPostForm({ post }) {
 
     let allImages = item.sections.reduce((acc, section) => {
       recursivlyIterateOverJSXContent(section.jsxContent, (content) => {
-        if (content.type === "img") {
-          acc.push(content.data.src);
+        if (content.type === 'img') {
+          acc.push(content.data.src)
         }
-      });
+      })
 
-      return acc;
-    }, []);
+      return acc
+    }, [])
 
-    allImages.push(item.image);
+    allImages.push(item.image)
 
-    console.log("allImages:", allImages);
+    console.log('allImages:', allImages)
 
     if (imagesToDelete.length > 0) {
       imagesToDelete.forEach(async (image) => {
-        if (!allImages.includes(image) && image !== "placeholder-image.svg") {
-          console.log("deleting image:", image);
-          const res = await deleteImage(image);
-          console.log("res:", res);
+        if (!allImages.includes(image) && image !== 'placeholder-image.svg') {
+          console.log('deleting image:', image)
+          const res = await deleteImage(image)
+          console.log('res:', res)
         }
-      });
+      })
     }
-  };
+  }
 
   const recursivlyIterateOverJSXContent = (content, callback, imageKey) => {
-    if (content.type === "img" && content.data.src === imageKey) {
-      callback(content);
+    if (content.type === 'img' && content.data.src === imageKey) {
+      callback(content)
     }
 
     if (content.children) {
       content.children.forEach((child) => {
-        recursivlyIterateOverJSXContent(child, callback, imageKey);
-      });
+        recursivlyIterateOverJSXContent(child, callback, imageKey)
+      })
     }
 
-    callback(content);
-  };
+    callback(content)
+  }
 
   const deleteSection = (s) => {
     item.sections.forEach((section) => {
       if (section === s) {
         recursivlyIterateOverJSXContent(section.jsxContent, (content) => {
-          if (content.type === "img") {
-            setImagesToDelete((old) => [...old, content.data.src]);
+          if (content.type === 'img') {
+            setImagesToDelete((old) => [...old, content.data.src])
           }
-        });
+        })
       }
-    }, []);
+    }, [])
 
     setItem({
       ...item,
       sections: item.sections.filter((section) => section !== s),
-    });
-  };
+    })
+  }
 
   return (
     <>
@@ -243,7 +237,7 @@ export default function DashboardNewPostForm({ post }) {
                 {item.sections.map((section, index) => (
                   <div key={index} className="form-row-section">
                     <button className="drag-button">
-                      {section.index + 1 + "."}
+                      {section.index + 1 + '.'}
                     </button>
                     <p className="form-section-title">{section.title}</p>
                     <div className="form-row-section-actions">
@@ -257,15 +251,15 @@ export default function DashboardNewPostForm({ post }) {
                         <button
                           className="btn"
                           onClick={() => {
-                            setAddNewSectionActive(true);
-                            setSection(section);
-                            setSectionWithoutUpdates(section);
+                            setAddNewSectionActive(true)
+                            setSection(section)
+                            setSectionWithoutUpdates(section)
                             setItem({
                               ...item,
                               sections: item.sections.filter(
                                 (s) => s !== section
                               ),
-                            });
+                            })
                           }}
                           type="button"
                         >
@@ -275,7 +269,7 @@ export default function DashboardNewPostForm({ post }) {
                         <button
                           className="btn"
                           onClick={() => {
-                            deleteSection(section);
+                            deleteSection(section)
                           }}
                           type="button"
                         >
@@ -284,7 +278,7 @@ export default function DashboardNewPostForm({ post }) {
                       </div>
                     </div>
                   </div>
-                ))}{" "}
+                ))}{' '}
               </div>
             </div>
           </>
@@ -320,7 +314,7 @@ export default function DashboardNewPostForm({ post }) {
 
             <span>Dodaj novu sekciju</span>
           </button>
-        </div>{" "}
+        </div>{' '}
         <div className="form-row">
           <h5>Slika objave</h5>
         </div>
@@ -339,9 +333,9 @@ export default function DashboardNewPostForm({ post }) {
               <div className="form-row-images">
                 <div className="form-row-image">
                   <NextImage
-                    src={`/uploads/${item.image}`}
+                    src={item.image}
                     alt="Slika tipa sekcije"
-                    style={{ width: "100%" }}
+                    style={{ width: '100%' }}
                     fill="responsive"
                   />
                   <Button
@@ -397,9 +391,9 @@ export default function DashboardNewPostForm({ post }) {
               uploadingImages ? (
                 <LoadingSpinner />
               ) : item?.id ? (
-                "Uredi objavu"
+                'Uredi objavu'
               ) : (
-                "Dodaj objavu"
+                'Dodaj objavu'
               )
             }
           />
@@ -447,7 +441,7 @@ export default function DashboardNewPostForm({ post }) {
           {Array.isArray(item.sections) &&
             item.sections.length > 0 &&
             item.sections
-              .filter((section) => section.title !== "")
+              .filter((section) => section.title !== '')
               .sort((a, b) => a.index - b.index)
               .map((section, index) => (
                 <>
@@ -463,5 +457,5 @@ export default function DashboardNewPostForm({ post }) {
         </div>
       </section>
     </>
-  );
+  )
 }

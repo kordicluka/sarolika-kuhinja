@@ -1,11 +1,11 @@
-import NextImage from "next/image";
-import ItemsTable from "../ItemsTable";
-import DeleteWorkshopsButton from "./DeleteWorkshopsButton";
-import prisma from "@/utils/db";
-import ToggleItemVisibility from "../ToggleItemVisibility";
-import ProgressBar from "../ProgressBar";
-import { formatDate } from "@/utils/formatDate";
-import Link from "next/link";
+import NextImage from 'next/image'
+import ItemsTable from '../ItemsTable'
+import DeleteWorkshopsButton from './DeleteWorkshopsButton'
+import prisma from '@/utils/db'
+import ToggleItemVisibility from '../ToggleItemVisibility'
+import ProgressBar from '../ProgressBar'
+import { formatDate } from '@/utils/formatDate'
+import Link from 'next/link'
 
 export default async function WorkshopsTable() {
   const items = await prisma.workshop.findMany({
@@ -14,17 +14,17 @@ export default async function WorkshopsTable() {
         select: { applications: true },
       },
     },
-  });
+  })
 
   const tableStructure = {
     columns: [
       {
-        title: "Slika",
-        width: "20%",
+        title: 'Slika',
+        width: '20%',
         getJSX: (index) =>
           items[index].image ? (
             <NextImage
-              src={"/uploads/" + items[index].image}
+              src={items[index].image}
               alt={items[index].image}
               className="items-table-image"
               width={200}
@@ -33,25 +33,25 @@ export default async function WorkshopsTable() {
           ) : (
             <span className="items-table-image-placeholder">
               {items[index].image?.charAt(0).toUpperCase()}
-              {items[index].image?.split(" ")[1]
-                ? items[index].image?.split(" ")[1].charAt(0).toUpperCase()
+              {items[index].image?.split(' ')[1]
+                ? items[index].image?.split(' ')[1].charAt(0).toUpperCase()
                 : null}
             </span>
           ),
       },
       {
-        title: "Naslov",
-        width: "30%",
+        title: 'Naslov',
+        width: '30%',
         getJSX: (index) => <span>{items[index].title}</span>,
       },
       {
-        title: "Datum održavanja",
-        width: "10%",
+        title: 'Datum održavanja',
+        width: '10%',
         getJSX: (index) => <span>{formatDate(items[index].date)}</span>,
       },
       {
-        title: "Broj prijava",
-        width: "10%",
+        title: 'Broj prijava',
+        width: '10%',
         getJSX: (index) => (
           <div className="progress-bar-container">
             <ProgressBar
@@ -65,20 +65,20 @@ export default async function WorkshopsTable() {
         ),
       },
       {
-        title: "Datum kreiranja",
-        width: "10%",
+        title: 'Datum kreiranja',
+        width: '10%',
         getJSX: (index) => <span> {formatDate(items[index].createdAt)}</span>,
       },
       {
-        title: "Vidljivost",
-        width: "10%",
+        title: 'Vidljivost',
+        width: '10%',
         getJSX: (index) => (
           <ToggleItemVisibility item={items[index]} type="workshop" />
         ),
       },
       {
-        title: "Akcije",
-        width: "10%",
+        title: 'Akcije',
+        width: '10%',
         getJSX: (index) => (
           <div className="items-table-actions-button">
             <div className="items-table-actions-dot"></div>
@@ -87,14 +87,14 @@ export default async function WorkshopsTable() {
 
             <div className="items-table-actions-dropdown">
               <Link
-                href={`/dashboard/radionice/${items[index].id + "/prijave"}`}
+                href={`/dashboard/radionice/${items[index].id + '/prijave'}`}
               >
-                {" "}
+                {' '}
                 Prijave
               </Link>
               <Link href={`/dashboard/radionice/${items[index].id}`}>
-                {" "}
-                Uredi{" "}
+                {' '}
+                Uredi{' '}
               </Link>
 
               <DeleteWorkshopsButton
@@ -106,7 +106,7 @@ export default async function WorkshopsTable() {
         ),
       },
     ],
-  };
+  }
 
-  return <ItemsTable items={items} tableStructure={tableStructure} />;
+  return <ItemsTable items={items} tableStructure={tableStructure} />
 }

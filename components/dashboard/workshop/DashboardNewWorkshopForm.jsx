@@ -1,45 +1,45 @@
-"use client";
-import React, { useState, useEffect, useRef } from "react";
-import { useImageUpload, useImageDelete } from "@/hooks/useImageUpload";
-import Button from "@/components/Button";
-import LoadingSpinner from "../LoadingSpinner";
-import "@/styles/DashboardItem.scss";
-import NextImage from "next/image";
-import { useRouter } from "next/navigation";
-import JSXContentRenderer from "../../JSXContentRender";
-import DashboardAddNewSection from "../sections/DashboardAddNewSection";
-import DatePicker from "react-datepicker";
-import { format, parseISO, isDate } from "date-fns";
-import "react-datepicker/dist/react-datepicker.css";
-import { hr } from "date-fns/locale";
-import { toast } from "react-hot-toast";
-import ToasterComponent from "../ToasterComponent";
-import { createWorkshop, updateWorkshop } from "@/actions/WorkshopsActions";
+'use client'
+import React, { useState, useEffect, useRef } from 'react'
+import { useImageUpload, useImageDelete } from '@/hooks/useImageUpload'
+import Button from '@/components/Button'
+import LoadingSpinner from '../LoadingSpinner'
+import '@/styles/DashboardItem.scss'
+import NextImage from 'next/image'
+import { useRouter } from 'next/navigation'
+import JSXContentRenderer from '../../JSXContentRender'
+import DashboardAddNewSection from '../sections/DashboardAddNewSection'
+import DatePicker from 'react-datepicker'
+import { format, parseISO, isDate } from 'date-fns'
+import 'react-datepicker/dist/react-datepicker.css'
+import { hr } from 'date-fns/locale'
+import { toast } from 'react-hot-toast'
+import ToasterComponent from '../ToasterComponent'
+import { createWorkshop, updateWorkshop } from '@/actions/WorkshopsActions'
 export default function DashboardNewWorkshopForm({ workshop }) {
-  const router = useRouter();
-  const [addNewSectionActive, setAddNewSectionActive] = useState(false);
-  const [previewFullScreen, setPreviewFullScreen] = useState(false);
-  const [imagesToDelete, setImagesToDelete] = useState([]);
+  const router = useRouter()
+  const [addNewSectionActive, setAddNewSectionActive] = useState(false)
+  const [previewFullScreen, setPreviewFullScreen] = useState(false)
+  const [imagesToDelete, setImagesToDelete] = useState([])
   const [section, setSection] = useState({
-    title: "",
+    title: '',
     jsxContent: {},
     index: 0,
-  });
+  })
   const [sectionWithoutUpdates, setSectionWithoutUpdates] = useState({
-    title: "",
+    title: '',
     jsxContent: {},
     index: 0,
-  });
+  })
 
   const [item, setItem] = useState({
-    title: "",
-    description: "",
-    image: "",
+    title: '',
+    description: '',
+    image: '',
     isVisible: true,
     sections: [],
     date: new Date().toISOString(), // Default to ISO format
     maxApplicant: 0,
-  });
+  })
 
   useEffect(() => {
     if (workshop) {
@@ -49,88 +49,88 @@ export default function DashboardNewWorkshopForm({ workshop }) {
         date: isDate(workshop.date)
           ? workshop.date.toISOString()
           : parseISO(workshop.date).toISOString(), // Ensure correct date format
-      });
+      })
     }
-  }, [workshop]);
+  }, [workshop])
 
-  const { uploadImages, uploadingImages } = useImageUpload();
-  const { deleteImage } = useImageDelete();
-  const inputRef = useRef(null);
+  const { uploadImages, uploadingImages } = useImageUpload()
+  const { deleteImage } = useImageDelete()
+  const inputRef = useRef(null)
 
   const handleUploadImages = async (e) => {
-    const files = e.target.files;
+    const files = e.target.files
 
     // If there is an image already, delete it
     if (item.image) {
-      setImagesToDelete((old) => [...old, item.image]);
+      setImagesToDelete((old) => [...old, item.image])
     }
 
-    const imageKey = await uploadImages(files);
+    const imageKey = await uploadImages(files)
 
     setItem({
       ...item,
       image: imageKey,
-    });
-  };
+    })
+  }
 
   const markImageForDeletion = () => {
-    setImagesToDelete((old) => [...old, item.image]);
+    setImagesToDelete((old) => [...old, item.image])
     setItem({
       ...item,
-      image: "",
-    });
-  };
+      image: '',
+    })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    if (sectionWithoutUpdates.title !== "") {
-      console.log("sectionWithoutUpdates:", sectionWithoutUpdates);
-      return;
+    if (sectionWithoutUpdates.title !== '') {
+      console.log('sectionWithoutUpdates:', sectionWithoutUpdates)
+      return
     }
 
     const updatedItem = {
       ...item,
       maxApplicant: Number(item.maxApplicant), // Convert maxApplicant to a number
       date: new Date(item.date).toISOString(), // Ensure date is in ISO format
-    };
+    }
 
     if (!workshop?.id) {
-      const res = await createWorkshop(updatedItem);
+      const res = await createWorkshop(updatedItem)
 
       toast((t) => (
         <ToasterComponent
-          title={"Dodavanje radionice: " + item.title}
+          title={'Dodavanje radionice: ' + item.title}
           t={t}
-          state={res?.ok ? "success" : "error"}
+          state={res?.ok ? 'success' : 'error'}
           message={res?.message}
         />
-      ));
+      ))
 
       if (res?.ok) {
-        deleteImagesThatAreMarkedForDeletion();
-        router.push("/dashboard/radionice");
+        deleteImagesThatAreMarkedForDeletion()
+        router.push('/dashboard/radionice')
       }
     } else {
-      const res = await updateWorkshop(updatedItem);
+      const res = await updateWorkshop(updatedItem)
 
       toast((t) => (
         <ToasterComponent
-          title={"Uređivanje radionice: " + item.title}
+          title={'Uređivanje radionice: ' + item.title}
           t={t}
-          state={res?.ok ? "success" : "error"}
+          state={res?.ok ? 'success' : 'error'}
           message={res?.message}
         />
-      ));
+      ))
 
       if (res?.ok) {
-        deleteImagesThatAreMarkedForDeletion();
-        router.push("/dashboard/radionice");
+        deleteImagesThatAreMarkedForDeletion()
+        router.push('/dashboard/radionice')
       } else {
-        console.error("Error editing workshop:", res?.message);
+        console.error('Error editing workshop:', res?.message)
       }
     }
-  };
+  }
 
   const deleteImagesThatAreMarkedForDeletion = async () => {
     // check if the image is in the item somewhere
@@ -138,57 +138,57 @@ export default function DashboardNewWorkshopForm({ workshop }) {
 
     let allImages = item.sections.reduce((acc, section) => {
       recursivlyIterateOverJSXContent(section.jsxContent, (content) => {
-        if (content.type === "img") {
-          acc.push(content.data.src);
+        if (content.type === 'img') {
+          acc.push(content.data.src)
         }
-      });
+      })
 
-      return acc;
-    }, []);
+      return acc
+    }, [])
 
-    allImages.push(item.image);
+    allImages.push(item.image)
 
     if (imagesToDelete.length > 0) {
       imagesToDelete.forEach(async (image) => {
-        if (!allImages.includes(image) && image !== "placeholder-image.svg") {
-          console.log("deleting image:", image);
-          const res = await deleteImage(image);
-          console.log("res:", res);
+        if (!allImages.includes(image) && image !== 'placeholder-image.svg') {
+          console.log('deleting image:', image)
+          const res = await deleteImage(image)
+          console.log('res:', res)
         }
-      });
+      })
     }
-  };
+  }
 
   const recursivlyIterateOverJSXContent = (content, callback, imageKey) => {
-    if (content.type === "img" && content.data.src === imageKey) {
-      callback(content);
+    if (content.type === 'img' && content.data.src === imageKey) {
+      callback(content)
     }
 
     if (content.children) {
       content.children.forEach((child) => {
-        recursivlyIterateOverJSXContent(child, callback, imageKey);
-      });
+        recursivlyIterateOverJSXContent(child, callback, imageKey)
+      })
     }
 
-    callback(content);
-  };
+    callback(content)
+  }
 
   const deleteSection = (s) => {
     item.sections.forEach((section) => {
       if (section === s) {
         recursivlyIterateOverJSXContent(section.jsxContent, (content) => {
-          if (content.type === "img") {
-            setImagesToDelete((old) => [...old, content.data.src]);
+          if (content.type === 'img') {
+            setImagesToDelete((old) => [...old, content.data.src])
           }
-        });
+        })
       }
-    }, []);
+    }, [])
 
     setItem({
       ...item,
       sections: item.sections.filter((section) => section !== s),
-    });
-  };
+    })
+  }
 
   return (
     <>
@@ -291,7 +291,7 @@ export default function DashboardNewWorkshopForm({ workshop }) {
                 {item.sections.map((section, index) => (
                   <div key={index} className="form-row-section">
                     <button className="drag-button">
-                      {section.index + 1 + "."}
+                      {section.index + 1 + '.'}
                     </button>
                     <p className="form-section-title">{section.title}</p>
                     <div className="form-row-section-actions">
@@ -305,15 +305,15 @@ export default function DashboardNewWorkshopForm({ workshop }) {
                         <button
                           className="btn"
                           onClick={() => {
-                            setAddNewSectionActive(true);
-                            setSection(section);
-                            setSectionWithoutUpdates(section);
+                            setAddNewSectionActive(true)
+                            setSection(section)
+                            setSectionWithoutUpdates(section)
                             setItem({
                               ...item,
                               sections: item.sections.filter(
                                 (s) => s !== section
                               ),
-                            });
+                            })
                           }}
                           type="button"
                         >
@@ -323,7 +323,7 @@ export default function DashboardNewWorkshopForm({ workshop }) {
                         <button
                           className="btn"
                           onClick={() => {
-                            deleteSection(section);
+                            deleteSection(section)
                           }}
                           type="button"
                         >
@@ -332,7 +332,7 @@ export default function DashboardNewWorkshopForm({ workshop }) {
                       </div>
                     </div>
                   </div>
-                ))}{" "}
+                ))}{' '}
               </div>
             </div>
           </>
@@ -387,9 +387,9 @@ export default function DashboardNewWorkshopForm({ workshop }) {
               <div className="form-row-images">
                 <div className="form-row-image">
                   <NextImage
-                    src={`/uploads/${item.image}`}
+                    src={item.image}
                     alt="Slika radionice"
-                    style={{ width: "100%" }}
+                    style={{ width: '100%' }}
                     fill="responsive"
                   />
                   <Button
@@ -445,9 +445,9 @@ export default function DashboardNewWorkshopForm({ workshop }) {
               uploadingImages ? (
                 <LoadingSpinner />
               ) : item?.id ? (
-                "Uredi objavu"
+                'Uredi objavu'
               ) : (
-                "Dodaj objavu"
+                'Dodaj objavu'
               )
             }
           />
@@ -495,7 +495,7 @@ export default function DashboardNewWorkshopForm({ workshop }) {
           {Array.isArray(item.sections) &&
             item.sections.length > 0 &&
             item.sections
-              .filter((section) => section.title !== "")
+              .filter((section) => section.title !== '')
               .sort((a, b) => a.index - b.index)
               .map((section, index) => (
                 <>
@@ -512,5 +512,5 @@ export default function DashboardNewWorkshopForm({ workshop }) {
         </div>
       </section>
     </>
-  );
+  )
 }
