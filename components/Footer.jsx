@@ -1,18 +1,18 @@
-"use client";
-import React from "react";
-import { usePathname } from "next/navigation";
-import Facebook from "./Facebook";
-import Instagram from "./Instagram";
-import WhatsUpp from "./WhatsUpp";
-import "@/styles/Footer.scss";
-import NextImage from "next/image";
-import Link from "next/link";
+'use client'
+import React from 'react'
+import { usePathname } from 'next/navigation'
+import Facebook from './Facebook'
+import Instagram from './Instagram'
+import WhatsUpp from './WhatsUpp'
+import '@/styles/Footer.scss'
+import NextImage from 'next/image'
+import Link from 'next/link'
 
 export default function Footer() {
-  const pathName = usePathname();
+  const pathName = usePathname()
 
-  if (pathName.includes("/dashboard") || pathName.includes("/signin")) {
-    return null;
+  if (pathName.includes('/dashboard') || pathName.includes('/signin')) {
+    return null
   } else {
     return (
       <footer className="footer">
@@ -91,7 +91,7 @@ export default function Footer() {
             <Link href="/privacy" className="footer-link">
               Privatnost
             </Link>
-          </div>{" "}
+          </div>{' '}
           <div className="footer-content-col">
             <h5>Podrška</h5>
             <Link href="/faq" className="footer-link">
@@ -103,12 +103,12 @@ export default function Footer() {
             <Link href="/privacy" className="footer-link">
               Privatnost
             </Link>
-          </div>{" "}
+          </div>{' '}
         </div>
         <div className="footer-bottom">
           <div className="rights">© 2024. All rights reserved</div>
         </div>
       </footer>
-    );
+    )
   }
 }

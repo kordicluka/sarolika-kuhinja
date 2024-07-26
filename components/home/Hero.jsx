@@ -1,13 +1,13 @@
-import React from "react";
-import "@/styles/Hero.scss";
-import NextImage from "next/image";
-import { Caveat } from "next/font/google";
-import Link from "next/link";
+import React from 'react'
+import '@/styles/Hero.scss'
+import NextImage from 'next/image'
+import { Caveat } from 'next/font/google'
+import Link from 'next/link'
 
 const caveat = Caveat({
   weights: [400, 700],
-  subsets: ["latin"],
-});
+  subsets: ['latin'],
+})
 
 export default function Hero() {
   return (
@@ -61,7 +61,7 @@ export default function Hero() {
                 d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
               />
             </svg>
-          </Link>{" "}
+          </Link>{' '}
           <Link href="/radionice" className="btn primary">
             <span> Pročitajte blog</span>
             <svg
@@ -89,5 +89,5 @@ export default function Hero() {
         height={1200}
       />
     </section>
-  );
+  )
 }

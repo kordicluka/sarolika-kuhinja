@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 export default function WhatsApp() {
   return (
@@ -20,11 +20,11 @@ export default function WhatsApp() {
           >
             <stop
               offset="0%"
-              style={{ stopColor: "#25D366", stopOpacity: 1 }}
+              style={{ stopColor: '#25D366', stopOpacity: 1 }}
             />
             <stop
               offset="100%"
-              style={{ stopColor: "#25D366", stopOpacity: 1 }}
+              style={{ stopColor: '#25D366', stopOpacity: 1 }}
             />
           </linearGradient>
         </defs>
@@ -40,5 +40,5 @@ export default function WhatsApp() {
         />
       </svg>
     </>
-  );
+  )
 }

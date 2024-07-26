@@ -1,42 +1,42 @@
-import { baseUrl } from "@/utils/baseUrl";
+import { baseUrl } from '@/utils/baseUrl'
 
 export default function sitemap() {
   return [
     {
       url: `${baseUrl}`,
       lastModified: new Date(),
-      changeFrequency: "yearly",
+      changeFrequency: 'always',
       priority: 1,
     },
     {
       url: `${baseUrl}/radionice`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
+      changeFrequency: 'always',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/blog`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
+      changeFrequency: 'always',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/jela`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
+      changeFrequency: 'always',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/o-nama`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
+      changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/kontakt`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
+      changeFrequency: 'yearly',
       priority: 0.8,
     },
-  ];
+  ]
 }

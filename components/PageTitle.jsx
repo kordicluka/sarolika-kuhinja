@@ -1,5 +1,5 @@
-import React from "react";
-import "@/styles/PageTitle.scss";
+import React from 'react'
+import '@/styles/PageTitle.scss'
 
 export const PageTitle = ({ title, shortDesc }) => {
   return (
@@ -7,5 +7,5 @@ export const PageTitle = ({ title, shortDesc }) => {
       <h2>{title}</h2>
       <p>{shortDesc}</p>
     </section>
-  );
-};
+  )
+}
