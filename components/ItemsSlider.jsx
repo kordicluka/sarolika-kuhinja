@@ -1,60 +1,60 @@
-"use client";
-import React, { useRef } from "react";
-import { Caveat } from "next/font/google";
-import "@/styles/ItemsSlider.scss";
-import ItemCard from "./items/ItemCard";
-import Link from "next/link";
+'use client'
+import React, { useRef } from 'react'
+import { Caveat } from 'next/font/google'
+import '@/styles/ItemsSlider.scss'
+import ItemCard from './items/ItemCard'
+import Link from 'next/link'
 
 const caveat = Caveat({
   weights: [400, 700],
-  subsets: ["latin"],
-});
+  subsets: ['latin'],
+})
 
 export const ItemsSlider = ({ type, items }) => {
-  const containerRef = useRef();
+  const containerRef = useRef()
 
   const scrollRight = () => {
     if (containerRef.current) {
       containerRef.current.scrollBy({
         left: containerRef.current.offsetWidth / items.length,
-        behavior: "smooth",
-      });
+        behavior: 'smooth',
+      })
     }
-  };
+  }
 
   const scrollLeft = () => {
     if (containerRef.current) {
       containerRef.current.scrollBy({
         left: -containerRef.current.offsetWidth / (items.length - 1),
-        behavior: "smooth",
-      });
+        behavior: 'smooth',
+      })
     }
-  };
+  }
 
   const getTitleText = () => {
     switch (type) {
-      case "workshops":
+      case 'workshops':
         return {
-          subtitle: "Kliknite na radionicu kako bi saznali više",
-          title: "Sljedeće i prethodne radionice",
-          link: "/radionice",
-        };
-      case "posts":
+          subtitle: 'Kliknite na radionicu kako bi saznali više',
+          title: 'Sljedeće i prethodne radionice',
+          link: '/radionice',
+        }
+      case 'posts':
         return {
-          subtitle: "Zanimljive objave o nutricionizmu",
-          title: "Naš blog",
-          link: "/blog",
-        };
+          subtitle: 'Zanimljive objave o nutricionizmu',
+          title: 'Naš blog',
+          link: '/blog',
+        }
       default:
         return {
-          subtitle: "Kliknite na jelo kako bi saznali više.",
-          title: "Neka od jela koje pripremamo",
-          link: "/jela",
-        };
+          subtitle: 'Kliknite na jelo kako bi saznali više.',
+          title: 'Neka od jela koje pripremamo',
+          link: '/jela',
+        }
     }
-  };
+  }
 
-  const { subtitle, title, link } = getTitleText();
+  const { subtitle, title, link } = getTitleText()
 
   return (
     <section className="items-slider">
@@ -128,5 +128,5 @@ export const ItemsSlider = ({ type, items }) => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
