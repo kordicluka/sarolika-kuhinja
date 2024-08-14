@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
-    "start": "NODE_ENV=production  next start",
+    "start": "NODE_ENV=production  next start - 3001",
     "lint": "next lint"
   },
   "dependencies": {
