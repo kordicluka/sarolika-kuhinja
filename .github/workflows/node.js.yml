@@ -1,6 +1,3 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
 name: Node.js CI
 
 on:
@@ -16,28 +13,35 @@ jobs:
     strategy:
       matrix:
         node-version: [20.16.0]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     env:
-      NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
-      GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID}}
-      GOOGLE_CLIENT_SECRET: ${{secrets.GOOGLE_CLIENT_SECRET}}
-      NEXTAUTH_URL: ${{secrets.NEXTAUTH_URL}}
-      NEXT_PUBLIC_TINYMCE_API_KEY: ${{secrets.NEXT_PUBLIC_TINYMCE_API_KEY}}
-      GOOGLE_MAPS_API_KEY: ${{secrets.GOOGLE_MAPS_API_KEY}}
-      DATABASE_URL: ${{secrets.DATABASE_URL}}
-
+      NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+      NEXT_PUBLIC_TINYMCE_API_KEY: ${{ secrets.NEXT_PUBLIC_TINYMCE_API_KEY }}
+      GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: npm ci
-      - run: npm run build --if-present
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the application
+        run: npm run build --if-present
+
+      # Change directory if needed - Ensure this path is correct
       - name: Change Directory
-        run: cd /home/kordicluka/actions-runner/_work/eter/eter
+        run: cd /home/kordicluka/actions-runner-1/_work/sarolika-kuhinja/sarolika-kuhinja
+
       - name: Deploy the app
         run: pm2 restart sarolika-kuhinja || pm2 start npm --name "sarolika-kuhinja" -- start
