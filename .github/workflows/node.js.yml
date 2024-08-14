@@ -43,4 +43,4 @@ jobs:
         run: cd /home/kordicluka/actions-runner-1/_work/sarolika-kuhinja/sarolika-kuhinja
 
       - name: Deploy the app
-      - run: pm2 restart 0
+        run: pm2 restart 1
