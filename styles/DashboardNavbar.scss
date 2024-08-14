@@ -1,0 +1,28 @@
+@import "./globals.scss";
+
+nav {
+  position: relative;
+  @include flex(row, flex-start, flex-start);
+  height: 2.9rem;
+  width: 100%;
+  background-color: $primary;
+  padding-left: 2rem;
+  border-top: 1px solid rgba($color: $white, $alpha: 0.15);
+
+  a {
+    color: $white;
+    font-size: 0.93rem;
+    font-weight: 400;
+    text-decoration: none;
+    padding: 0.9rem 1.3rem;
+    border-bottom: 1px solid transparent;
+    z-index: 2;
+    @include flex(row, center, center);
+    text-align: center;
+    height: 100%;
+
+    &:hover {
+      background-color: rgba($color: $white, $alpha: 0.1);
+    }
+  }
+}

@@ -1,0 +1,184 @@
+@import "./globals.scss";
+
+.items-header {
+  width: 100%;
+  padding: 0 15%;
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+  border-top: 1px solid rgba($color: $black, $alpha: 0.1);
+  @include flex(row, space-between, flex-end);
+  border-bottom: 1px solid $gray-14;
+  margin-bottom: 2rem;
+
+  .items-header-left,
+  .items-header-right {
+    @include flex(column, flex-end, flex-start);
+    gap: 0.5rem;
+
+    p {
+      font-size: 0.84rem;
+      font-weight: 400;
+      color: $gray-1;
+    }
+  }
+
+  .items-header-right {
+    .progress-bar-container {
+      width: 10rem;
+      @include flex(row, flex-start, center);
+      gap: 0.6rem;
+
+      span {
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: $gray-1;
+      }
+    }
+  }
+}
+
+.items-table-container {
+  width: 100%;
+  @include flex(column, flex-start, center);
+
+  .items-table {
+    width: 70%;
+    border-right: 1px solid $gray-14;
+  }
+}
+
+.items-table {
+  @include flex(column, flex-start, flex-start);
+  background-color: $gray-15;
+  width: 100%;
+
+  .items-table-header {
+    @include flex(row, flex-start, flex-start);
+    width: 100%;
+    background-color: $gray-15;
+
+    .items-table-header-item {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: $gray-1;
+      height: 2rem;
+      padding-left: 0.5rem;
+      @include flex(row, flex-start, center);
+      background-color: $gray-15;
+      border: 1px solid $gray-13;
+      border-right: none;
+
+      span {
+        font-weight: 500;
+      }
+    }
+  }
+
+  .items-table-row {
+    @include flex(row, flex-start, flex-start);
+    width: 100%;
+    border-bottom: 1px solid $gray-14;
+    background-color: $white;
+
+    &:nth-child(odd) {
+      background-color: $gray-15;
+    }
+
+    .items-table-row-item {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: $gray-1;
+      height: 3rem;
+      padding-left: 0.5rem;
+      @include flex(row, flex-start, center);
+      border-left: 1px solid $gray-14;
+
+      .progress-bar-container {
+        width: 80%;
+        height: 100%;
+        @include flex(row, flex-start, center);
+        gap: 0.6rem;
+      }
+
+      .items-table-image-placeholder {
+        width: 2.9rem;
+        height: 2.9rem;
+        background-color: $gray-14;
+        @include flex(row, center, center);
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      img {
+        width: 100%;
+        height: 2.9rem;
+        object-fit: contain;
+        background-color: $gray-14;
+      }
+
+      .items-table-actions-button {
+        width: 100%;
+        height: 100%;
+        @include flex(row, center, center);
+        gap: 0.2rem;
+        position: relative;
+        cursor: pointer;
+
+        .items-table-actions-dot {
+          width: 5px;
+          height: 5px;
+          background-color: $gray-4;
+          border-radius: 100%;
+          cursor: pointer;
+        }
+
+        .items-table-actions-dropdown {
+          position: absolute;
+          left: 50%;
+          top: 95%;
+          transform: translateX(-50%);
+          width: 10rem;
+          background-color: $white;
+          @include flex(column, flex-start, flex-start);
+          display: none;
+          border-radius: 0.3rem;
+          border: 1px solid $gray-13;
+          overflow: hidden;
+          cursor: pointer;
+          z-index: 3;
+
+          button,
+          a {
+            text-decoration: none;
+            width: 100%;
+            height: 2rem;
+            padding-left: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: $gray-1;
+            background-color: $white;
+            border: none;
+            outline: none;
+            @include flex(row, center, center);
+            border-bottom: 1px solid $gray-13;
+            cursor: pointer;
+
+            &:hover {
+              background-color: $gray-14;
+            }
+
+            &:last-child {
+              border-bottom: none;
+            }
+          }
+        }
+
+        &:hover {
+          .items-table-actions-dropdown {
+            display: flex;
+          }
+        }
+      }
+    }
+  }
+}

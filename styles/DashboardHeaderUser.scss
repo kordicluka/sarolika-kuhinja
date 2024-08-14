@@ -1,0 +1,100 @@
+@import "./globals.scss";
+
+.user {
+  @include flex(row, center, center);
+  gap: 1rem;
+  cursor: pointer;
+  position: relative;
+  height: 100%;
+
+  .user-info {
+    gap: 0.7rem;
+    @include flex(row, center, center);
+
+    .user-image {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: rgba($color: $white, $alpha: 0.9);
+      @include flex(row, center, center);
+      img {
+        width: 110%;
+        height: 110%;
+        object-fit: cover;
+      }
+
+      span {
+        font-weight: 600;
+        font-size: 1rem;
+        color: $primary;
+      }
+    }
+
+    .user-name {
+      color: $white;
+      font-size: 0.85rem;
+      font-weight: 300;
+    }
+
+    .user-role {
+      color: $white;
+      font-size: 0.8rem;
+      font-weight: 500;
+      background-color: rgba($color: $white, $alpha: 0.2);
+      padding: 0.35rem 0.8rem;
+      border-radius: 0.2rem;
+    }
+  }
+
+  .user-dropdown {
+    position: absolute;
+    background-color: $white;
+    border-radius: 0.3rem;
+    border: 1px solid $gray-12;
+    @include flex(column, flex-start, flex-start);
+    top: 85%;
+    right: 0%;
+
+    display: none;
+    width: 10rem;
+    box-shadow: 0 0.3rem 0.5rem rgba($black, 0.1);
+    z-index: 10000;
+    overflow: hidden;
+    &.active {
+      display: flex;
+    }
+
+    a {
+      color: $gray-1;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      width: 100%;
+      text-align: left;
+      border-bottom: 1px solid $gray-12;
+
+      &:hover {
+        background-color: $gray-13;
+      }
+    }
+
+    button {
+      color: $gray-1;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      width: 100%;
+      text-align: left;
+      border: none;
+      outline: none;
+      background-color: transparent;
+
+      &:hover {
+        background-color: $gray-14;
+      }
+    }
+  }
+}

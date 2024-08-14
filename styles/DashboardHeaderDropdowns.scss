@@ -1,0 +1,100 @@
+@import "./globals.scss";
+
+.dropdowns {
+  @include flex(row, center, center);
+  height: 100%;
+  transform: translateX(-0.75rem);
+
+  .dropdown {
+    position: relative;
+    @include flex(row, center, center);
+
+    .dropdown-button {
+      background-color: transparent;
+      text-decoration: none;
+      border: none;
+      outline: none;
+      color: rgba($color: $white, $alpha: 0.9);
+      font-size: 0.78rem;
+      font-weight: 400;
+      cursor: pointer;
+      padding: 0.34rem 0.7rem;
+      display: block;
+      border-radius: 0.2rem;
+      z-index: 2;
+
+      &:hover {
+        background-color: rgba($color: $white, $alpha: 0.2);
+      }
+    }
+
+    .dropdown-content {
+      @include flex(column, flex-start, flex-start);
+      position: absolute;
+      background-color: $white;
+      min-width: 10rem;
+      box-shadow: 0 0.5rem 1rem rgba($black, 0.1);
+      z-index: 1;
+      top: 2.3rem;
+      left: 0;
+      border-radius: 0.2rem;
+      display: none;
+      z-index: 2;
+      border: 1px solid $gray-13;
+
+      &.active {
+        display: flex;
+      }
+
+      a,
+      button {
+        color: $gray-3;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        border: none;
+        outline: none;
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 300;
+        border-bottom: 1px solid $gray-13;
+        width: 100%;
+        text-align: left;
+        color: $black;
+        font-weight: 400;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &:hover {
+          background-color: $gray-15;
+        }
+      }
+    }
+
+    .close {
+      position: absolute;
+      top: 2.5rem;
+      left: -10vw;
+      width: 130vw;
+      height: 130vh;
+      display: none;
+      z-index: 0;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+}
+
+@keyframes dropDown {
+  from {
+    opacity: 0;
+    transform: translateY(0rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0.5rem);
+  }
+}

@@ -1,0 +1,213 @@
+@import './globals.scss';
+
+.what-we-try-to-do {
+  width: 100%;
+  @include flex(column, center, flex-start);
+  position: relative;
+  padding: 3rem 12.5%;
+  gap: 2.5rem;
+
+  @media (min-width: 2200px) {
+    padding: 3rem 20%;
+  }
+
+  @media (max-width: 1300px) {
+    padding: 3rem 5%;
+  }
+
+  @media (max-width: 1100px) {
+    padding-top: 0rem;
+  }
+
+  .what-we-try-to-do-title {
+    @include flex(column, center, center);
+    width: 100%;
+
+    @media (max-width: 768px) {
+      @include flex(column, center, flex-start);
+    }
+
+    h3 {
+      font-weight: 700;
+      color: $page-primary;
+      margin-bottom: 0.5rem;
+      text-align: center;
+      font-size: 3rem;
+
+      @media (max-width: 1500px) {
+        font-size: 2.5rem;
+      }
+
+      @media (max-width: 1000px) {
+        font-size: 1.7rem;
+      }
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    p {
+      text-align: center;
+      width: 70%;
+    }
+  }
+
+  .what-we-try-to-do-container {
+    @include flex(row, space-between, flex-start);
+    height: 55rem;
+
+    @media (max-width: 1300px) {
+      @include flex(column, center, center);
+      height: auto;
+    }
+
+    .what-we-try-to-do-image {
+      height: 95%;
+      width: 45%;
+      z-index: 2;
+
+      @media (max-width: 1300px) {
+        width: 100%;
+        height: 40rem;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 1rem;
+        box-shadow: 0 0 2rem rgba($color: $black, $alpha: 0.2);
+      }
+    }
+
+    .what-we-try-to-do-content {
+      @include flex(column, flex-start, flex-start);
+      width: 53%;
+      padding: 1rem 0;
+      padding-left: 3rem;
+      z-index: 2;
+      height: 100%;
+
+      @media (max-width: 1300px) {
+        width: 100%;
+        padding: 4rem 0;
+        padding-left: 0;
+      }
+
+      h6 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: $gray-1;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: $gray-6;
+      }
+
+      .what-we-try-to-do-content-list {
+        @include flex(column, flex-start, flex-start);
+        gap: 1.5rem;
+        margin-top: 3rem;
+        width: 100%;
+
+        li {
+          @include flex(row, flex-start, center);
+          gap: 1rem;
+          background-color: $light-yellow;
+          padding: 1rem 2rem;
+          border-radius: 1rem;
+          width: 90%;
+          transition: all 0.3s ease-in-out;
+
+          @media (max-width: 1300px) {
+            padding: 1rem 1.5rem;
+          }
+
+          &:hover {
+            transform: translateX(1rem);
+          }
+
+          &:nth-child(even) {
+            transform: translateX(3rem);
+
+            &:hover {
+              transform: translateX(4rem);
+            }
+          }
+
+          .what-we-try-to-do-content-item-icon {
+            aspect-ratio: 1;
+            padding: 0.8rem;
+            background-color: $yellow;
+            border-radius: 100%;
+            @include flex(row, center, center);
+
+            svg {
+              width: 2.2rem;
+              height: 2.2rem;
+              color: $white;
+            }
+          }
+
+          &:nth-child(2) {
+            background-color: $light-red;
+
+            .what-we-try-to-do-content-item-icon {
+              background-color: $red;
+            }
+          }
+
+          &:nth-child(3) {
+            background-color: $light-green;
+
+            .what-we-try-to-do-content-item-icon {
+              background-color: $green;
+            }
+          }
+
+          &:nth-child(4) {
+            background-color: $light-blue;
+
+            .what-we-try-to-do-content-item-icon {
+              background-color: $blue;
+            }
+          }
+
+          .what-we-try-to-do-content-item-text {
+            @include flex(column, flex-start, flex-start);
+            gap: 0.5rem;
+            padding: 0.5rem;
+
+            h6 {
+              font-weight: 700;
+              font-size: 1.5rem;
+              color: $gray-1;
+              margin-bottom: 0;
+
+              @media (max-width: 1300px) {
+                font-size: 1.3rem;
+              }
+            }
+
+            p {
+              font-size: 0.97rem;
+              color: $gray-4;
+              @media (max-width: 1300px) {
+                font-size: 0.9rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// WhatWeTryToDo.scss

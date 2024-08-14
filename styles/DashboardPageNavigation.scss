@@ -1,0 +1,43 @@
+@import "./globals.scss";
+
+.dashboard-page-navigation {
+  width: 100%;
+  @include flex(row, space-between, center);
+  background-color: $gray-14;
+  height: 2.4rem;
+  z-index: 2;
+
+  .dashboard-page-navigation-left {
+    @include flex(row, flex-end, flex-end);
+    height: 100%;
+
+    .dashboard-page-navigation-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: $gray-3;
+      padding: 0.5rem 1rem;
+      background-color: rgba($color: $black, $alpha: 0.02);
+      border: 1px solid rgba($color: $black, $alpha: 0.15);
+      transform: translateY(2px);
+      text-decoration: none;
+      height: 100%;
+      @include flex(row, center, center);
+      border-right: none;
+
+      &:nth-last-child(1) {
+        border: 1px solid rgba($color: $black, $alpha: 0.15);
+      }
+
+      &:hover,
+      &.active {
+        background-color: rgba($color: $black, $alpha: 0.05);
+      }
+    }
+  }
+
+  .dashboard-page-navigation-right {
+    @include flex(row, flex-end, flex-end);
+    gap: 1rem;
+    height: 100%;
+  }
+}

@@ -1,0 +1,146 @@
+@import './globals.scss';
+
+.hero {
+  height: 55rem;
+  width: 100%;
+  background-color: $white;
+  position: relative;
+  overflow: hidden;
+  background-color: $gray-15;
+  @include flex(row, flex-start, center);
+
+  @media (max-width: 1100px) {
+    @include flex(column, flex-start, center);
+    height: auto;
+  }
+
+  .hero-image {
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.8);
+    width: 50%;
+
+    @media (max-width: 1100px) {
+      width: 100%;
+      height: 30rem;
+    }
+  }
+
+  .hero-content {
+    padding-left: 12.5%;
+    @include flex(column, center, flex-start);
+    width: 50%;
+    height: 100%;
+
+    @media (min-width: 2500px) {
+      padding-left: 20%;
+    }
+
+    @media (max-width: 1300px) {
+      padding-left: 5%;
+    }
+
+    @media (max-width: 1100px) {
+      width: 90%;
+      padding: 4rem 0;
+      padding-bottom: 2rem;
+    }
+
+    h3 {
+      color: $page-primary;
+      margin-bottom: 0.7rem;
+      font-size: 3rem;
+      font-weight: 600;
+
+      @media (max-width: 1100px) {
+        font-size: 2.5rem;
+      }
+    }
+
+    h1 {
+      color: $gray-3;
+      line-height: 1.1;
+      font-weight: 700;
+      font-size: 5rem;
+      width: 90%;
+      margin-bottom: 0.3rem;
+
+      @media (max-width: 1100px) {
+        font-size: 3.5rem;
+        width: 100%;
+      }
+    }
+
+    .hero-content-location {
+      @include flex(row, flex-start, center);
+      gap: 1rem;
+      margin-top: 1rem;
+
+      svg {
+        color: $gray-4;
+        width: 3rem;
+        height: 3rem;
+        padding: 0.5rem;
+        background-color: $gray-15;
+        border-radius: 1rem;
+        box-shadow: 0 0 1rem rgba($color: $black, $alpha: 0.15);
+
+        @media (max-width: 1100px) {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+      }
+
+      span {
+        color: $gray-3;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+
+        @media (min-width: 2500px) {
+          font-size: 1.3rem;
+        }
+
+        @media (max-width: 1100px) {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .links {
+      @include flex(row, flex-start, center);
+      gap: 1rem;
+      margin-top: 1rem;
+
+      @media (max-width: 1100px) {
+        margin-top: 0.5rem;
+      }
+
+      .btn {
+        font-weight: 600;
+        border: 2px solid $page-primary;
+
+        &:nth-last-child(1) {
+          background-color: $gray-15;
+          color: $black;
+          border: 2px solid $gray-4;
+
+          svg {
+            color: $black;
+          }
+        }
+      }
+    }
+
+    p {
+      color: $gray-4;
+      margin: 1rem 0;
+      width: 90%;
+      line-height: 1.5;
+
+      @media (max-width: 1100px) {
+        width: 100%;
+      }
+    }
+  }
+}

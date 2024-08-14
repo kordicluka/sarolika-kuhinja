@@ -1,0 +1,94 @@
+@import "./globals.scss";
+
+.dashboard-header {
+  width: 100%;
+  @include flex(column, center, center);
+  position: fixed;
+  top: 0rem;
+  left: 0;
+  z-index: 1010;
+  border-bottom: 1px solid rgba($color: $white, $alpha: 0.15);
+
+  .top-bar {
+    @include flex(row, space-between, center);
+    width: 100%;
+    height: 2.2rem;
+    background-color: $primary;
+    border-bottom: 1px solid rgba($color: $white, $alpha: 0.1);
+    padding: 0 2rem;
+    z-index: 3;
+
+    .time-and-made-by {
+      @include flex(row, center, center);
+      gap: 1rem;
+      height: 100%;
+
+      .time {
+        color: $white;
+        font-size: 0.78rem;
+        font-weight: 300;
+      }
+
+      .made-by {
+        @include flex(row, flex-start, flex-start);
+        height: 100%;
+        gap: 0.5rem;
+        padding-left: 1rem;
+        border-left: 1px solid rgba($color: $white, $alpha: 0.15);
+        p {
+          color: $white;
+          font-size: 0.78rem;
+          font-weight: 300;
+          height: 100%;
+          @include flex(row, center, center);
+        }
+
+        a {
+          color: $white;
+          font-size: 0.8rem;
+          font-weight: 500;
+          height: 100%;
+          @include flex(row, center, center);
+        }
+      }
+    }
+  }
+
+  .dashboard-header-header {
+    width: 100%;
+    @include flex(row, space-between, center);
+    background-color: $primary;
+    height: 4.7rem;
+
+    .header-left {
+      @include flex(row, space-between, center);
+      height: 100%;
+      padding: 0 2rem;
+      position: relative;
+      gap: 3rem;
+
+      .header-left-page-info {
+        @include flex(row, flex-end, flex-end);
+        height: 100%;
+        gap: 1rem;
+        padding: 0.75rem 0;
+
+        p {
+          color: $white;
+          padding-bottom: 0.4rem;
+          font-weight: 300;
+        }
+
+        h3 {
+          color: $white;
+        }
+      }
+    }
+
+    .header-right {
+      padding: 0 2rem;
+      @include flex(column, flex-end, flex-end);
+      height: 100%;
+    }
+  }
+}

@@ -1,0 +1,45 @@
+@import './globals.scss';
+
+.page-title {
+  width: 100%;
+  padding: 4rem 12.5%;
+  padding-top: 8rem;
+  @include flex(column, flex-start, flex-start);
+  gap: 1rem;
+  background-color: $gray-15;
+  border-bottom: 1px solid $gray-14;
+
+  @media (min-width: 2500px) {
+    padding: 8rem 20%;
+    padding-bottom: 6rem;
+  }
+
+  @media (max-width: 1300px) {
+    padding: 5rem 5%;
+    padding-bottom: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 5rem 5%;
+    padding-bottom: 3rem;
+  }
+
+  h2 {
+    width: 40%;
+
+    @media (max-width: 1300px) {
+      width: 100%;
+    }
+  }
+
+  p {
+    font-weight: 300;
+    width: 40%;
+    font-size: 1rem;
+    line-height: 1.8;
+
+    @media (max-width: 1300px) {
+      width: 100%;
+    }
+  }
+}
